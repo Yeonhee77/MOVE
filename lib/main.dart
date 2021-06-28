@@ -284,36 +284,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       title: Text(widget.title),
-      actions: [
-        IconButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Connected()));
-          },
-          icon: Icon(Icons.arrow_forward_rounded),
-        ),
-      ]
     ),
     body: _buildView(),
   );
-}
-
-class Connected extends StatefulWidget {
-  @override
-  _ConnectedState createState() => _ConnectedState();
-
-  final gesture = '';
-}
-
-class _ConnectedState extends State<Connected> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('test'),
-      ),
-      body: Container(
-        child: Text(widget.gesture),
-      ),
-    );
-  }
 }
