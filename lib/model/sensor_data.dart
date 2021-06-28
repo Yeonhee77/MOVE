@@ -5,8 +5,8 @@ class SensorData {
 
   SensorData(
       {
-        this.result,
-        //this.pressure,
-        DateTime lastTime})
+      this.result,
+      //this.pressure,
+      DateTime lastTime})
       : this.lastTime = lastTime ?? DateTime.now();
 }

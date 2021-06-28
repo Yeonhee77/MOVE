@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:move_app/model/sensor_data.dart';
+import 'package:arduino_ble_sensor/model/sensor_data.dart';
 import 'package:flutter/material.dart';
 
 class SensorView extends StatefulWidget {
   final SensorData sensorData;
-  SensorView(this.sensorData, {Key? key}) : super(key: key);
+  SensorView(this.sensorData, {Key key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -15,7 +15,7 @@ class SensorView extends StatefulWidget {
 
 class _SensorViewState extends State<SensorView> {
   String _lastTime = "now";
-  Timer? _timeUpdater;
+  Timer _timeUpdater;
 
   @override
   void initState() {
@@ -26,7 +26,7 @@ class _SensorViewState extends State<SensorView> {
 
   @override
   void dispose() {
-    _timeUpdater!.cancel();
+    _timeUpdater.cancel();
     super.dispose();
   }
 

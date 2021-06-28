@@ -1,4 +1,4 @@
-import 'sensor_list_screen.dart';
+import 'package:arduino_ble_sensor/sensor_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
@@ -27,8 +27,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// final t1 = FlutterBlue.instance.scanResults.first.toString();
-// final t2 = FlutterBlue.instance.connectedDevices.toString();
-// print('t1: $t1');
-// print('t2: $t2');

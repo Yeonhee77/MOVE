@@ -1,9 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
-    package="com.example.bluetooth_test">
-=======
     package="com.example.arduino_ble_sensor">
->>>>>>> d88abf488b45edf21707850f3fd24c6cf17c7354
     <!-- Flutter needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->
