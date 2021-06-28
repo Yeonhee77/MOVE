@@ -38,12 +38,7 @@ class _SensorViewState extends State<SensorView> {
           ListTile(
             leading: Image.asset('assets/images/temp.png'),
             title: Text(
-                'Left : ${widget.sensorData.left.toStringAsFixed(2)} %'),
-          ),
-          ListTile(
-            leading: Image.asset('assets/images/humm.png'),
-            title: Text(
-                'Jump : ${widget.sensorData.jump.toStringAsFixed(2)} %'),
+                'result : ${widget.sensorData.result.toStringAsFixed(2)} %'),
           ),
 
         ],

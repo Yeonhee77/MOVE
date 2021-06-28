@@ -21,12 +21,13 @@ class _SensorListScreenState extends State<SensorListScreen> {
     super.dispose();
   }
 
-  static const String _title = 'Arduino Sensor Code Sample';
+  static const String _title = 'Move!';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(title: const Text(_title)),
         body: StreamBuilder(
@@ -34,10 +35,10 @@ class _SensorListScreenState extends State<SensorListScreen> {
           builder: (context, data) {
             if (data.data == null) {
               return Center(
-                child: Text("No sensor found yet"),
+                child: Text("Sensor x"),
               );
             }
-            return SensorView(data.data);
+            return SensorView(data.data); //if data is not found
           },
         ),
       ),

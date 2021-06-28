@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:arduino_ble_sensor/model/sensor_data.dart';
 import 'package:flutter_blue/flutter_blue.dart';
@@ -25,20 +26,23 @@ class DeviceScanner {
   void _subscribeToScanEvents() {
     FlutterBlue.instance.scanResults.listen((scanResults) {
       for (ScanResult scanResult in scanResults) {
-        if (scanResult.device.name.toString() == "nrf52840.ru") {
-          final double leftside = scanResult.advertisementData.manufacturerData[256]
+        if (scanResult.device.name.toString() == "Move! - 2405") {
+          print('Device : ' + scanResult.device.name.toString());
+          print('Bluetooth found');
+          final double result_value = scanResult.advertisementData.manufacturerData[256]
                   [0] +
               scanResult.advertisementData.manufacturerData[256][1] * 0.01;
-          final double jumpping = scanResult.advertisementData.manufacturerData[256]
-                  [2] +
-              scanResult.advertisementData.manufacturerData[256][3] * 0.01;
           final SensorData sensorData = new SensorData(
-              left: leftside,
-              jump: jumpping,);
+              result: result_value);
+
           _streamController.add(sensorData);
           print(
-              'Manufacturer data ${scanResult.advertisementData.manufacturerData}');
+              'Value from Arduino :  ${scanResult.advertisementData.manufacturerData}');
           FlutterBlue.instance.stopScan();
+        }
+        else {
+          print(
+              'Nothing found..');
         }
 
         //print(
