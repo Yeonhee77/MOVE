@@ -12,7 +12,7 @@ class Move extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MOVE',
+      title: 'MOVE!',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
