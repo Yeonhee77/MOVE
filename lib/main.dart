@@ -62,6 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
     widget.flutterBlue.startScan();
+    final t1 = FlutterBlue.instance.scanResults.first.toString();
+    final t2 = FlutterBlue.instance.connectedDevices.toString();
+    print('t1: $t1');
+    print('t2: $t2');
   }
 
   ListView _buildListViewOfDevices() {
@@ -287,7 +291,7 @@ class _MyHomePageState extends State<MyHomePage> {
       actions: [
         IconButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Connected()));
+            //Navigator.push(context, MaterialPageRoute(builder: (context) => Connected(gesture)));
           },
           icon: Icon(Icons.arrow_forward_rounded),
           //예에ㅔ
@@ -297,24 +301,26 @@ class _MyHomePageState extends State<MyHomePage> {
     body: _buildView(),
   );
 }
-
-class Connected extends StatefulWidget {
-  @override
-  _ConnectedState createState() => _ConnectedState();
-
-  final gesture = '';
-}
-
-class _ConnectedState extends State<Connected> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('test'),
-      ),
-      body: Container(
-        child: Text(widget.gesture),
-      ),
-    );
-  }
-}
+//
+// class Connected extends StatefulWidget {
+//   Connected(gesture);
+//
+//   @override
+//   _ConnectedState createState() => _ConnectedState();
+//
+//   final gest = gesture;
+// }
+//
+// class _ConnectedState extends State<Connected> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('test'),
+//       ),
+//       body: Container(
+//         child: Text(widget.gesture),
+//       ),
+//     );
+//   }
+// }
