@@ -2,6 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
+<<<<<<< HEAD
       location = "self:">
+=======
+      location = "group:Runner.xcodeproj">
+>>>>>>> d88abf488b45edf21707850f3fd24c6cf17c7354
    </FileRef>
 </Workspace>

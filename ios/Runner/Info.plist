@@ -11,7 +11,11 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
+<<<<<<< HEAD
 	<string>bluetooth_test</string>
+=======
+	<string>arduino_ble_sensor</string>
+>>>>>>> d88abf488b45edf21707850f3fd24c6cf17c7354
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

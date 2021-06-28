@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "name": "bluetooth_test",
     "short_name": "bluetooth_test",
     "start_url": ".",
@@ -6,6 +7,15 @@
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
     "description": "A new Flutter application.",
+=======
+    "name": "arduino_ble_sensor",
+    "short_name": "arduino_ble_sensor",
+    "start_url": ".",
+    "display": "minimal-ui",
+    "background_color": "#0175C2",
+    "theme_color": "#0175C2",
+    "description": "A new Flutter project.",
+>>>>>>> d88abf488b45edf21707850f3fd24c6cf17c7354
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
