@@ -210,6 +210,10 @@ void setup()
 
   // Start up the service itself.
   BLE.addService(service);
+  
+//  byte data[3] = { 0x01, 0x02, 0x03 };
+//  BLE.setManufacturerData(data, 3);
+  
   BLE.advertise();
 
   Serial.println("Bluetooth device active, waiting for connections...");
@@ -257,6 +261,7 @@ void loop()
   // Make sure we're connected and not busy file-transfering
   if (BLE.connected())
   {
+    
      Serial.println("BLE connected");
   
      // Variables to hold IMU data
@@ -320,21 +325,29 @@ void loop()
           int maxIndex = 0;
           float maxValue = 0;
           
-          float result = 0;
           for (int i = 0; i < NUM_GESTURES; i++) {
             float _value = tflOutputTensor->data.f[i];
-            result += _value*(10^i);
-            
+
             if(_value > maxValue){
               maxValue = _value;
               maxIndex = i;
             }
+            
             Serial.print(GESTURES[i]);
             Serial.print(": ");
             Serial.println(tflOutputTensor->data.f[i], 6);
           }
+              
+          Serial.print("Gesture: ");
+          Serial.println(GESTURES[maxIndex]);
 
+          float left = (tflOutputTensor->data.f[0]) * 100.0;
+          float jump = (tflOutputTensor->data.f[1]) * 100.0;
           
+          int result = 0;
+          
+           // If the gestures is "left" print 1, else "jump" print 2
+          String(GESTURES[maxIndex]).equals("LEFT") ? result = 1 : result = 2;
           String ges1 = "";
           String ges2 = "";
 
@@ -346,24 +359,15 @@ void loop()
           Serial.println(ges1 + "."+ ges2);
           byte g1 = ges1.toInt();
           byte g2 = ges2.toInt();
-                  
-          
-          Serial.print("Gesture: ");
-          Serial.println(GESTURES[maxIndex]);
-          Serial.println(result);
-
-          Serial.println();
-  
           byte data[4] = { 0x00, 0x01, g1, g2};
           BLE.setManufacturerData(data, 4);
           BLE.advertise();
 
           // Add delay to not double trigger
-          delay(2000);
+          delay(100);
         }
       }
     }
   }
-  else Serial.println("BLE disconnected");
-  
+
 }
