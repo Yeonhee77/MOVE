@@ -22,7 +22,9 @@ class MyApp extends StatelessWidget {
             if (state == BluetoothState.on) {
               return SensorListScreen();
             }
-            return BluetoothOffScreen(state: state);
+            else {
+              return BluetoothOffScreen(state:state);
+            }
           }),
     );
   }

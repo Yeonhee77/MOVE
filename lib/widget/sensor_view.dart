@@ -4,29 +4,25 @@ import 'package:arduino_ble_sensor/model/sensor_data.dart';
 import 'package:flutter/material.dart';
 
 class SensorView extends StatefulWidget {
+  const SensorView({Key? key, required this.sensorData}) : super(key: key);
   final SensorData sensorData;
-  SensorView(this.sensorData, {Key key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    return _SensorViewState();
-  }
+  _SensorViewState createState() => _SensorViewState();
 }
 
 class _SensorViewState extends State<SensorView> {
   String _lastTime = "now";
-  Timer _timeUpdater;
+  Timer ? _timeUpdater;
 
   @override
   void initState() {
-    _timeUpdater =
-        new Timer.periodic(const Duration(seconds: 1), _updateLastTime);
     super.initState();
   }
 
   @override
   void dispose() {
-    _timeUpdater.cancel();
+    _timeUpdater!.cancel();
     super.dispose();
   }
 
@@ -44,14 +40,5 @@ class _SensorViewState extends State<SensorView> {
         ],
       ),
     );
-  }
-
-  void _updateLastTime(Timer timer) {
-    setState(() {
-      _lastTime = DateTime.now()
-          .difference(widget.sensorData.lastTime)
-          .inSeconds
-          .toString();
-    });
   }
 }

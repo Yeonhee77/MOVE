@@ -1,12 +1,11 @@
 class SensorData {
   final double result;
-  //final double pressure;
   final DateTime lastTime;
 
   SensorData(
       {
-      this.result,
+      required this.result,
       //this.pressure,
-      DateTime lastTime})
+      DateTime? lastTime})
       : this.lastTime = lastTime ?? DateTime.now();
 }
