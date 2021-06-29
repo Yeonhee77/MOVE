@@ -1,13 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.arduino_ble_sensor">
-    <!-- io.flutter.app.FlutterApplication is an android.app.Application that
-         calls FlutterMain.startInitialization(this); in its onCreate method.
-         In most cases you can leave this as-is, but you if you want to provide
-         additional functionality it is fine to subclass or reimplement
-         FlutterApplication and put your custom class here. -->
-    <application
-        android:name="io.flutter.app.FlutterApplication"
-        android:label="arduino_ble_sensor"
+    package="com.example.bluetooth_test">
+   <application
+        android:label="bluetooth_test"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -319,11 +319,8 @@ void loop()
           // Loop through the output tensor values from the model
           int maxIndex = 0;
           float maxValue = 0;
-          
-          float result = 0;
           for (int i = 0; i < NUM_GESTURES; i++) {
             float _value = tflOutputTensor->data.f[i];
-            result += _value*(10^i);
             if(_value > maxValue){
               maxValue = _value;
               maxIndex = i;
@@ -332,23 +329,19 @@ void loop()
             Serial.print(": ");
             Serial.println(tflOutputTensor->data.f[i], 6);
           }
-          String g1s = "";
-          g1s =String(result);
-          byte g1 = g1s.toInt();
-
-      
           
           Serial.print("Gesture: ");
           Serial.println(GESTURES[maxIndex]);
-          Serial.println(g1s);
   
+          String gesture = String(GESTURES[maxIndex]);
+  
+          byte g1 = gesture.toInt();
+          Serial.println(g1);
+          
+          Serial.println();
   
           byte data[3] = { 0x00, 0x01, g1};
          BLE.setManufacturerData(data, 3);
-         Serial.println(BLE.setManufacturerData(data, 0));
-         Serial.println(BLE.setManufacturerData(data, 1));
-         Serial.println(BLE.setManufacturerData(data, 2));
-         Serial.println(BLE.setManufacturerData(data, 3));
          BLE.advertise();
 
         // Add delay to not double trigger

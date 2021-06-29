@@ -34,11 +34,6 @@
 # Web related
 lib/generated_plugin_registrant.dart
 
-pubspec.lock
-pubspec.yaml
-
-# Exceptions to above rules.
-!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 # Symbolication related
 app.*.symbols
 
@@ -49,3 +44,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+pubspec.lock
+pubspec.yaml
+
+# Exceptions to above rules.
+!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages

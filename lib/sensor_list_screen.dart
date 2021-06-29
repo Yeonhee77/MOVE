@@ -1,5 +1,7 @@
-import 'package:arduino_ble_sensor/controller/device_scanner.dart';
-import 'package:arduino_ble_sensor/widget/sensor_view.dart';
+import 'package:move_app/model/sensor_data.dart';
+
+import 'controller/device_scanner.dart';
+import 'widget/sensor_view.dart';
 import 'package:flutter/material.dart';
 
 class SensorListScreen extends StatefulWidget {
@@ -38,7 +40,7 @@ class _SensorListScreenState extends State<SensorListScreen> {
                 child: Text("Sensor x"),
               );
             }
-            return SensorView(data.data); //if data is not found
+            return SensorView(data.data as SensorData);
           },
         ),
       ),

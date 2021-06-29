@@ -1,11 +1,10 @@
 import 'dart:async';
-import 'dart:developer';
 
-import 'package:arduino_ble_sensor/model/sensor_data.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:move_app/model/sensor_data.dart';
 
 class DeviceScanner {
-  Timer _timer;
+  Timer? _timer;
   StreamController<SensorData> _streamController = new StreamController();
   Stream<SensorData> get sensorData => _streamController.stream;
 
@@ -19,20 +18,18 @@ class DeviceScanner {
   }
 
   void dispose() {
-    _timer.cancel();
+    _timer!.cancel();
     _streamController.close();
   }
 
   void _subscribeToScanEvents() {
     FlutterBlue.instance.scanResults.listen((scanResults) {
       for (ScanResult scanResult in scanResults) {
-        //device name is bluetooth device name (ex. Move! -1FB7)
-        if (scanResult.device.name.toString() == "Move! - 1FB7") {
+        if (scanResult.device.name.toString() == "Move! - 2405") {
           print('Device : ' + scanResult.device.name.toString());
           print('Bluetooth found');
-          final double result_value = scanResult.advertisementData.manufacturerData[8]
-                  [0] +
-              scanResult.advertisementData.manufacturerData[8][1] * 0.01;
+          final double result_value = scanResult.advertisementData.manufacturerData[256]![0] +
+              scanResult.advertisementData.manufacturerData[256]![1] * 0.01;
           final SensorData sensorData = new SensorData(
               result: result_value);
 
