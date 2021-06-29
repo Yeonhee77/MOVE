@@ -324,6 +324,7 @@ void loop()
           for (int i = 0; i < NUM_GESTURES; i++) {
             float _value = tflOutputTensor->data.f[i];
             result += _value*(10^i);
+            
             if(_value > maxValue){
               maxValue = _value;
               maxIndex = i;
@@ -332,8 +333,8 @@ void loop()
             Serial.print(": ");
             Serial.println(tflOutputTensor->data.f[i], 6);
           }
-<<<<<<< HEAD:move_arduino/move_ble/move_ble.ino
 
+          
           String ges1 = "";
           String ges2 = "";
 
@@ -355,10 +356,6 @@ void loop()
   
           byte data[4] = { 0x00, 0x01, g1, g2};
           BLE.setManufacturerData(data, 4);
-           Serial.println(BLE.setManufacturerData(data, 0));
-           Serial.println(BLE.setManufacturerData(data, 1));
-           Serial.println(BLE.setManufacturerData(data, 2));
-           Serial.println(BLE.setManufacturerData(data, 3));
           BLE.advertise();
 
           // Add delay to not double trigger
