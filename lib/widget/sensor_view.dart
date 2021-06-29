@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:move/model/sensor_data.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +19,7 @@ class _SensorViewState extends State<SensorView> {
   @override
   void initState() {
     _timeUpdater =
-        new Timer.periodic(const Duration(seconds: 1), _updateLastTime);
+        new Timer.periodic(const Duration(milliseconds: 100), _updateLastTime);
     super.initState();
   }
 
@@ -36,7 +35,6 @@ class _SensorViewState extends State<SensorView> {
       child: Column(
         children: <Widget>[
           ListTile(
-            leading: Image.asset('assets/images/temp.png'),
             title: Text(
                 'result : ${widget.sensorData.result.toStringAsFixed(2)} %'),
           ),

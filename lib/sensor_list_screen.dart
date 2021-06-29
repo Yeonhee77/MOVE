@@ -1,7 +1,6 @@
+import 'package:move/controller/device_scanner.dart';
+import 'package:move/widget/sensor_view.dart';
 import 'package:move/model/sensor_data.dart';
-
-import 'controller/device_scanner.dart';
-import 'widget/sensor_view.dart';
 import 'package:flutter/material.dart';
 
 class SensorListScreen extends StatefulWidget {

@@ -1,7 +1,6 @@
 import 'dart:async';
-
-import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/model/sensor_data.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
 class DeviceScanner {
   Timer? _timer;
@@ -10,7 +9,7 @@ class DeviceScanner {
 
   DeviceScanner() {
     _subscribeToScanEvents();
-    _timer = new Timer.periodic(const Duration(seconds: 10), startScan);
+    _timer = new Timer.periodic(const Duration(seconds: 1), startScan);
   }
 
   void startScan(Timer timer) {
@@ -28,8 +27,7 @@ class DeviceScanner {
         if (scanResult.device.name.toString() == "Move! - 2405") {
           print('Device : ' + scanResult.device.name.toString());
           print('Bluetooth found');
-          final double result_value = scanResult.advertisementData.manufacturerData[256]![0] +
-              scanResult.advertisementData.manufacturerData[256]![1] * 0.01;
+          final double result_value = scanResult.advertisementData.manufacturerData[256]![0]*1.00;
           final SensorData sensorData = new SensorData(
               result: result_value);
 

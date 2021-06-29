@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/sensor_list_screen.dart';
@@ -101,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                   setState(() {
                     _connectedDevice = device;
+
                   });
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SensorListScreen()));
                 },
