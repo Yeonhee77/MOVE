@@ -26,12 +26,13 @@ class DeviceScanner {
   void _subscribeToScanEvents() {
     FlutterBlue.instance.scanResults.listen((scanResults) {
       for (ScanResult scanResult in scanResults) {
-        if (scanResult.device.name.toString() == "Move! - 2405") {
+        //device name is bluetooth device name (ex. Move! -1FB7)
+        if (scanResult.device.name.toString() == "Move! - 1FB7") {
           print('Device : ' + scanResult.device.name.toString());
           print('Bluetooth found');
-          final double result_value = scanResult.advertisementData.manufacturerData[256]
+          final double result_value = scanResult.advertisementData.manufacturerData[8]
                   [0] +
-              scanResult.advertisementData.manufacturerData[256][1] * 0.01;
+              scanResult.advertisementData.manufacturerData[8][1] * 0.01;
           final SensorData sensorData = new SensorData(
               result: result_value);
 
