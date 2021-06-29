@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:move_app/model/sensor_data.dart';
+import 'package:move/model/sensor_data.dart';
 import 'package:flutter/material.dart';
 
 class SensorView extends StatefulWidget {

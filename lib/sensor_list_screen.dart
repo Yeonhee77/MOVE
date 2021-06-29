@@ -1,4 +1,4 @@
-import 'package:move_app/model/sensor_data.dart';
+import 'package:move/model/sensor_data.dart';
 
 import 'controller/device_scanner.dart';
 import 'widget/sensor_view.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move_app/model/sensor_data.dart';
+import 'package:move/model/sensor_data.dart';
 
 class DeviceScanner {
   Timer? _timer;
