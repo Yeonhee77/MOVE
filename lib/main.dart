@@ -1,4 +1,4 @@
-import 'package:arduino_ble_sensor/sensor_list_screen.dart';
+import 'package:move/sensor_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 

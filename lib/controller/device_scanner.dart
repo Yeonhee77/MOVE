@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:arduino_ble_sensor/model/sensor_data.dart';
+import 'package:move/model/sensor_data.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
 class DeviceScanner {
@@ -29,9 +29,11 @@ class DeviceScanner {
         if (scanResult.device.name.toString() == "Move! - 2405") {
           print('Device : ' + scanResult.device.name.toString());
           print('Bluetooth found');
-          final double result_value = scanResult.advertisementData.manufacturerData[256]
+          final double result_value = scanResult.advertisementData.manufacturerData[8]
                   [0] +
-              scanResult.advertisementData.manufacturerData[256][1] * 0.01;
+              scanResult.advertisementData.manufacturerData[8][1] * 0.01;
+
+          print('result value : ${result_value}');
           final SensorData sensorData = new SensorData(
               result: result_value);
 

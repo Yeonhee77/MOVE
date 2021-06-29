@@ -1,5 +1,5 @@
-import 'package:arduino_ble_sensor/controller/device_scanner.dart';
-import 'package:arduino_ble_sensor/widget/sensor_view.dart';
+import 'package:move/controller/device_scanner.dart';
+import 'package:move/widget/sensor_view.dart';
 import 'package:flutter/material.dart';
 
 class SensorListScreen extends StatefulWidget {
