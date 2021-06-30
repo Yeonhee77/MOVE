@@ -15,6 +15,7 @@ class SensorView extends StatefulWidget {
 class _SensorViewState extends State<SensorView> {
   String _lastTime = "now";
   Timer? _timeUpdater;
+  String result_string = "";
 
   @override
   void initState() {
@@ -31,17 +32,31 @@ class _SensorViewState extends State<SensorView> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: <Widget>[
-          ListTile(
-            title: Text(
-                'result : ${widget.sensorData.result.toStringAsFixed(2)} %'),
+    return Scaffold(
+        body: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+          Text(
+                'result : ${widget.sensorData.result.toStringAsFixed(2)} ',
+                  style: TextStyle(fontSize: 30)
           ),
-
-        ],
-      ),
+          Text('result_value : ' + calculate(), style: TextStyle(fontSize: 30)),
+            ]
+    ),
     );
+  }
+
+  String calculate () {
+    double result_value = widget.sensorData.result;
+    String result_string;
+
+    if (result_value == 1.0)
+      result_string = "LEFT";
+    else
+      result_string = "JUMP";
+
+    return result_string;
+    //return result_value;
   }
 
   void _updateLastTime(Timer timer) {

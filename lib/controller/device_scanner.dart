@@ -14,7 +14,7 @@ class DeviceScanner {
   }
 
   void startScan(Timer timer) {
-    FlutterBlue.instance.startScan(timeout: Duration(seconds: 2));
+    FlutterBlue.instance.startScan(timeout: Duration(seconds: 1));
   }
 
   void dispose() {
