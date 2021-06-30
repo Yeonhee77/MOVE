@@ -40,7 +40,8 @@ class _SensorViewState extends State<SensorView> {
                 'result : ${widget.sensorData.result.toStringAsFixed(2)} ',
                   style: TextStyle(fontSize: 30)
           ),
-          Text('result_value : ' + calculate(), style: TextStyle(fontSize: 30)),
+          Text('result_value : ' + calculate(), style: TextStyle(fontSize: 30)
+          ),
             ]
     ),
     );
