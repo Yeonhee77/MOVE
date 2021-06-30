@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
 import 'bluetooth_off_screen.dart';
-
+//main page
 int sec = 0;
 
 void main() => runApp(MyApp());
@@ -22,9 +22,7 @@ class MyApp extends StatelessWidget {
             if (state == BluetoothState.on) {
               return SensorListScreen();
             }
-            else {
-              return BluetoothOffScreen(state:state);
-            }
+            return BluetoothOffScreen(state: state);
           }),
     );
   }

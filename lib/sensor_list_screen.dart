@@ -2,9 +2,6 @@ import 'package:arduino_ble_sensor/controller/device_scanner.dart';
 import 'package:arduino_ble_sensor/widget/sensor_view.dart';
 import 'package:flutter/material.dart';
 
-import 'model/sensor_data.dart';
-
-
 class SensorListScreen extends StatefulWidget {
   @override
   _SensorListScreenState createState() => _SensorListScreenState();
@@ -35,16 +32,13 @@ class _SensorListScreenState extends State<SensorListScreen> {
         appBar: AppBar(title: const Text(_title)),
         body: StreamBuilder(
           stream: deviceScanner.sensorData,
-          builder: (c, snapshot) {
-            final sensorData = snapshot.data;
-            if (sensorData == null) {
+          builder: (context, data) {
+            if (data.data == null) {
               return Center(
                 child: Text("Sensor x"),
               );
             }
-            else {
-              return SensorView(sensorData: sensorData as SensorData,);
-            }
+            return SensorView(data.data); //if data is not found
           },
         ),
       ),
