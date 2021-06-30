@@ -194,7 +194,26 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
         title: Text(widget.title),
+      actions: [
+        IconButton(onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Temp()));
+        }, icon: Icon(Icons.arrow_forward))
+      ],
     ),
     body: _buildView(),
   );
+}
+
+class Temp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('임시'),
+      ),
+      body: Container(
+
+      ),
+    );
+  }
 }
