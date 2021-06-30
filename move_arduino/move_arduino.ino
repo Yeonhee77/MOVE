@@ -340,23 +340,22 @@ void loop()
               
           Serial.print("Gesture: ");
           Serial.println(GESTURES[maxIndex]);
-
-          float left = (tflOutputTensor->data.f[0]) * 100.0;
-          float jump = (tflOutputTensor->data.f[1]) * 100.0;
-          
+                    
           int result = 0;
           
            // If the gestures is "left" print 1, else "jump" print 2
           String(GESTURES[maxIndex]).equals("LEFT") ? result = 1 : result = 2;
+
+          Serial.println(result);
+          Serial.println();
+
           String ges1 = "";
           String ges2 = "";
-
           ges1 = String(result);
           ges2 = String(result);
           int dotInTemp = ges1.indexOf('.');
           ges1.remove(dotInTemp);
           ges2.remove(0, dotInTemp+1);
-          Serial.println(ges1 + "."+ ges2);
           byte g1 = ges1.toInt();
           byte g2 = ges2.toInt();
           byte data[4] = { 0x00, 0x01, g1, g2};
