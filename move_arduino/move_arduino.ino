@@ -1,11 +1,8 @@
 /* Copyright 2021 Google LLC
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
     https://www.apache.org/licenses/LICENSE-2.0
-
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -94,7 +91,7 @@ bool useMagnetometer = false; // Can be toggled with BLE (disableMagnetometerRx)
 * BLE Characteristic / Service UUIDs
 ************************************************************************/
 
-#define LOCAL_NAME "Move!"
+#define LOCAL_NAME "YJ!"
 
 #define UUID_GEN(val) ("81c30e5c-" val "-4f7d-a886-de3e90749161")
 
@@ -182,11 +179,6 @@ void setup()
   address.toUpperCase();
 
   static String deviceName = LOCAL_NAME;
-  deviceName += " - ";
-  deviceName += address[address.length() - 5];
-  deviceName += address[address.length() - 4];
-  deviceName += address[address.length() - 2];
-  deviceName += address[address.length() - 1];
 
   Serial.print("deviceName = ");
   Serial.println(deviceName);
@@ -210,6 +202,10 @@ void setup()
 
   // Start up the service itself.
   BLE.addService(service);
+  
+//  byte data[3] = { 0x01, 0x02, 0x03 };
+//  BLE.setManufacturerData(data, 3);
+  
   BLE.advertise();
 
   Serial.println("Bluetooth device active, waiting for connections...");
@@ -257,6 +253,7 @@ void loop()
   // Make sure we're connected and not busy file-transfering
   if (BLE.connected())
   {
+    
      Serial.println("BLE connected");
   
      // Variables to hold IMU data
@@ -320,43 +317,47 @@ void loop()
           int maxIndex = 0;
           float maxValue = 0;
           
-          float result = 0;
           for (int i = 0; i < NUM_GESTURES; i++) {
             float _value = tflOutputTensor->data.f[i];
-            result += _value*(10^i);
+
             if(_value > maxValue){
               maxValue = _value;
               maxIndex = i;
             }
+            
             Serial.print(GESTURES[i]);
             Serial.print(": ");
             Serial.println(tflOutputTensor->data.f[i], 6);
           }
-          String g1s = "";
-          g1s =String(result);
-          byte g1 = g1s.toInt();
-
-      
-          
+              
           Serial.print("Gesture: ");
           Serial.println(GESTURES[maxIndex]);
-          Serial.println(g1s);
-  
-  
-          byte data[3] = { 0x00, 0x01, g1};
-         BLE.setManufacturerData(data, 3);
-         Serial.println(BLE.setManufacturerData(data, 0));
-         Serial.println(BLE.setManufacturerData(data, 1));
-         Serial.println(BLE.setManufacturerData(data, 2));
-         Serial.println(BLE.setManufacturerData(data, 3));
-         BLE.advertise();
 
-        // Add delay to not double trigger
-        delay(2000);
+          float left = (tflOutputTensor->data.f[0]) * 100.0;
+          float jump = (tflOutputTensor->data.f[1]) * 100.0;
+          
+          int result = 0;
+          
+           // If the gestures is "left" print 1, else "jump" print 2
+          String(GESTURES[maxIndex]).equals("LEFT") ? result = 1 : result = 2;
+          String ges1 = "";
+          String ges2 = "";
+
+          ges1 = String(result);
+          ges2 = String(result);
+          int dotInTemp = ges1.indexOf('.');
+          ges1.remove(dotInTemp);
+          ges2.remove(0, dotInTemp+1);
+          Serial.println(ges1);
+          byte g1 = ges1.toInt();
+          byte data[3] = { 0x00, 0x01, g1 };
+          BLE.setManufacturerData(data, 3);
+          BLE.advertise();
+
+          // Add delay to not double trigger
+          delay(1000);
         }
       }
     }
   }
-  else Serial.println("BLE disconnected");
-  
 }
