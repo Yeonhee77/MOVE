@@ -10,11 +10,11 @@ class DeviceScanner {
 
   DeviceScanner() {
     _subscribeToScanEvents();
-    _timer = new Timer.periodic(const Duration(seconds: 1), startScan);
+    _timer = new Timer.periodic(const Duration(seconds: 3), startScan);
   }
 
   void startScan(Timer timer) {
-    FlutterBlue.instance.startScan(timeout: Duration(seconds: 2));
+    FlutterBlue.instance.startScan(timeout: Duration(seconds: 3));
   }
 
   void dispose() {

@@ -19,7 +19,7 @@ class _SensorViewState extends State<SensorView> {
   @override
   void initState() {
     _timeUpdater =
-        new Timer.periodic(const Duration(milliseconds: 100), _updateLastTime);
+        new Timer.periodic(const Duration(seconds: 3), _updateLastTime);
     super.initState();
   }
 
