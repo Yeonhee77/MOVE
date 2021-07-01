@@ -211,8 +211,10 @@ class Temp extends StatelessWidget {
       appBar: AppBar(
         title: Text('임시'),
       ),
-      body: Container(
-
+      body: Column(
+        children: [
+          Container(),
+        ],
       ),
     );
   }
