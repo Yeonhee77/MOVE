@@ -211,9 +211,6 @@ void setup()
   // Start up the service itself.
   BLE.addService(service);
   
-//  byte data[3] = { 0x01, 0x02, 0x03 };
-//  BLE.setManufacturerData(data, 3);
-  
   BLE.advertise();
 
   Serial.println("Bluetooth device active, waiting for connections...");
