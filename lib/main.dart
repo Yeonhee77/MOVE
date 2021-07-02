@@ -322,30 +322,3 @@ class _ConnectedState extends State<Connected> {
     );
   }
 }
-
-// class Blue_List extends StatefulWidget {
-//   @override
-//   _Blue_ListState createState() => _Blue_ListState();
-// }
-//
-// class _Blue_ListState extends State<Blue_List> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Bluetooth List'),
-//       ),
-//       body: StreamBuilder<BluetoothState>(
-//           stream: FlutterBlue.instance.state,
-//           initialData: BluetoothState.unknown,
-//           builder: (c, snapshot) {
-//             final state = snapshot.data;
-//             if (state == BluetoothState.on) {
-//               return SensorListScreen();
-//             }
-//             return BluetoothOffScreen(state: state);
-//           }
-//       ),
-//     );
-//   }
-// }
