@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/sensor_list_screen.dart';
@@ -19,6 +18,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -32,9 +32,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _writeController = TextEditingController();
-  BluetoothDevice? _connectedDevice;
-  List<BluetoothService>? _services;
 
   _addDeviceTolist(final BluetoothDevice device) {
     if (!widget.devicesList.contains(device)) {
@@ -78,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
+              // ignore: deprecated_member_use
               FlatButton(
                 color: Colors.blue,
                 child: Text(
@@ -93,10 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       throw e;
                     }
                   } finally {
-                    _services = await device.discoverServices();
                   }
                   setState(() {
-                    _connectedDevice = device;
 
                   });
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SensorListScreen()));

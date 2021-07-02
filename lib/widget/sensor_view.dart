@@ -13,13 +13,12 @@ class SensorView extends StatefulWidget {
 }
 
 class _SensorViewState extends State<SensorView> {
-  String _lastTime = "now";
   Timer? _timeUpdater;
 
   @override
   void initState() {
     _timeUpdater =
-        new Timer.periodic(const Duration(milliseconds: 500), _updateLastTime);
+        new Timer.periodic(const Duration(seconds: 1), _updateLastTime);
     super.initState();
   }
 
@@ -51,10 +50,6 @@ class _SensorViewState extends State<SensorView> {
 
   void _updateLastTime(Timer timer) {
     setState(() {
-      _lastTime = DateTime.now()
-          .difference(widget.sensorData.lastTime)
-          .inSeconds
-          .toString();
     });
   }
 }
