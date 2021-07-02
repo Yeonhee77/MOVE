@@ -340,7 +340,8 @@ void loop()
                     
           int result = 0;
           
-           // If the gestures is "left" print 1, else "jump" print 2
+           // If the gestures is "left" print 1,
+           //               else "jump" print 2
           String(GESTURES[maxIndex]).equals("LEFT") ? result = 1 : result = 2;
 
           Serial.println(result);
