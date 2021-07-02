@@ -9,4 +9,4 @@ class SensorData {
         //this.pressure,
         DateTime? lastTime})
       : this.lastTime = lastTime ?? DateTime.now();
-}
+}//sensor data
