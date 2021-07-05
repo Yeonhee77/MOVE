@@ -2,7 +2,7 @@ import 'package:move/controller/device_scanner.dart';
 import 'package:move/widget/sensor_view.dart';
 import 'package:move/model/sensor_data.dart';
 import 'package:flutter/material.dart';
-
+int flag = 0;
 class SensorListScreen extends StatefulWidget {
   @override
   _SensorListScreenState createState() => _SensorListScreenState();
@@ -39,8 +39,12 @@ class _SensorListScreenState extends State<SensorListScreen> {
                 child: Text("Sensor x"),
               );
             }
-            return SensorView(data.data as SensorData);
-          },
+            else {
+              flag ++;
+              print("success sensorview");
+              return SensorView(data.data as SensorData);
+            }
+            },
         ),
       ),
     );

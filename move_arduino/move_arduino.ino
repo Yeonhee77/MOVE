@@ -350,12 +350,14 @@ void loop()
           ges2.remove(0, dotInTemp+1);
           Serial.println(ges1);
           byte g1 = ges1.toInt();
+          Serial.println(g1);
           byte data[3] = { 0x00, 0x01, g1 };
           BLE.setManufacturerData(data, 3);
+          Serial.println(BLE.setManufacturerData(data, 3));
           BLE.advertise();
 
           // Add delay to not double trigger
-          delay(1000);
+          delay(100);
         }
       }
     }
