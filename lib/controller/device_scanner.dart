@@ -28,22 +28,54 @@ class DeviceScanner {
           print('Device : ' + scanResult.device.name.toString());
           print('Bluetooth found');
           final double result_value = scanResult.advertisementData.manufacturerData[256]![0]*1.00;
-          final SensorData sensorData = new SensorData(
-              result: result_value);
+          final SensorData sensorData = new SensorData(result: result_value);
 
           _streamController.add(sensorData);
-          print(
-              'Value from Arduino :  ${scanResult.advertisementData.manufacturerData}');
+          print('Value from Arduino :  ${scanResult.advertisementData.manufacturerData}');
           FlutterBlue.instance.stopScan();
         }
         else {
           print(
               'Nothing found..');
         }
-
-        //print(
-            //'${scanResult.device.name} found! mac: ${scanResult.device.id} rssi: ${scanResult.rssi}');
       }
     });
+    // FlutterBlue.instance.scanResults.listen((scanResults) {
+    //   for (ScanResult scanResult in scanResults) {
+    //     if (scanResult.device.name.toString() == "Move! - 5267") {
+    //       print('Device : ' + scanResult.device.name.toString());
+    //       print('Bluetooth found');
+    //       final double result_value = scanResult.advertisementData.manufacturerData[256]![0]*1.00;
+    //       final SensorData sensorData = new SensorData(result: result_value);
+    //
+    //       _streamController.add(sensorData);
+    //       print('Value from Arduino :  ${scanResult.advertisementData.manufacturerData}');
+    //       FlutterBlue.instance.stopScan();
+    //     }
+    //     else {
+    //       print(
+    //           'Nothing found..');
+    //     }
+    //   }
+    // });
+
+    // FlutterBlue.instance.scanResults.listen((scanResults) {
+    //   for (ScanResult scanResult in scanResults) {
+    //     if (scanResult.device.name.toString() == "Move! - 5267") {
+    //       print('Device : ' + scanResult.device.name.toString());
+    //       print('Bluetooth found');
+    //       final double result_value = scanResult.advertisementData.manufacturerData[256]![0]*1.00;
+    //       final SensorData sensorData = new SensorData(result: result_value);
+    //
+    //       _streamController.add(sensorData);
+    //       print('Value from Arduino :  ${scanResult.advertisementData.manufacturerData}');
+    //       FlutterBlue.instance.stopScan();
+    //     }
+    //     else {
+    //       print(
+    //           'Nothing found..');
+    //     }
+    //   }
+    // });
   }
 }

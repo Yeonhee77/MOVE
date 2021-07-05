@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/sensor_list_screen.dart';
+import 'package:move/widget/sensor_view.dart';
 
 import 'bluetooth_off_screen.dart';
+import 'model/sensor_data.dart';
 
 int sec = 0;
 
@@ -38,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _writeController = TextEditingController();
   BluetoothDevice? _connectedDevice;
   List<BluetoothService>? _services;
+  StreamSubscription? scanSubScription;
 
   _addDeviceTolist(final BluetoothDevice device) {
     if (!widget.devicesList.contains(device)) {
@@ -50,19 +54,28 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    widget.flutterBlue.connectedDevices
-        .asStream()
-        .listen((List<BluetoothDevice> devices) {
-      for (BluetoothDevice device in devices) {
-        _addDeviceTolist(device);
-      }
-    });
+    scanSubScription = widget.flutterBlue.scan().listen((scanResult) async {
+      _addDeviceTolist(scanResult.device);
+    }, onDone: () => stopScan());
+
+    // widget.flutterBlue.connectedDevices
+    //     .asStream()
+    //     .listen((List<BluetoothDevice> devices) {
+    //   for (BluetoothDevice device in devices) {
+    //     _addDeviceTolist(device);
+    //   }
+    // });
     widget.flutterBlue.scanResults.listen((List<ScanResult> results) {
       for (ScanResult result in results) {
         _addDeviceTolist(result.device);
       }
     });
     widget.flutterBlue.startScan();
+  }
+
+  stopScan() {
+    scanSubScription?.cancel();
+    scanSubScription = null;
   }
 
   ListView _buildListViewOfDevices() {
@@ -88,6 +101,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
+                  stopScan();
+                  _addDeviceTolist(device);
+                  // FlutterBlue.instance.stopScan();
                   widget.flutterBlue.stopScan();
                   try {
                     await device.connect();
@@ -96,13 +112,26 @@ class _MyHomePageState extends State<MyHomePage> {
                       throw e;
                     }
                   } finally {
-                    _services = await device.discoverServices();
+                    //_services = await device.discoverServices();
                   }
                   setState(() {
                     _connectedDevice = device;
-
                   });
+                  stopScan();
+                  // FlutterBlue.instance.stopScan();
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SensorListScreen()));
+                  // StreamBuilder(
+                  //   stream: deviceScanner.sensorData,
+                  //   builder: (context, data) {
+                  //     if (data.data == null) {
+                  //       return Center(
+                  //         child: Text("Sensor x"),
+                  //       );
+                  //     }
+                  //     return Navigator.push(context, MaterialPageRoute(builder: (context) => SensorView(data.data)));
+                  //     //return SensorView(data.data as SensorData);
+                  //   },
+                  // );
                 },
               ),
             ],
@@ -194,24 +223,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
         title: Text(widget.title),
-      actions: [
-        IconButton(onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Temp()));
-        }, icon: Icon(Icons.arrow_forward))
-      ],
     ),
     body: _buildView(),
   );
-}
-
-class Temp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('임시'),
-      ),
-      body: Container(),
-    );
-  }
 }
