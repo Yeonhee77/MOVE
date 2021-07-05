@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     _connectedDevice = device;
                   });
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SensorListScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SensorListScreen(_connectedDevice)));
 
                 },
               ),
