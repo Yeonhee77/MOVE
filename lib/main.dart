@@ -73,6 +73,11 @@ class _MyHomePageState extends State<MyHomePage> {
     widget.flutterBlue.startScan();
   }
 
+  void dispose() {
+    widget.flutterBlue.stopScan();
+    stopScan();
+  }
+
   stopScan() {
     scanSubScription?.cancel();
     scanSubScription = null;
@@ -116,9 +121,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                   setState(() {
                     _connectedDevice = device;
+                    FlutterBlue.instance.stopScan();
+                    stopScan();
                   });
-                  stopScan();
-                  // FlutterBlue.instance.stopScan();
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SensorListScreen()));
                   // StreamBuilder(
                   //   stream: deviceScanner.sensorData,
