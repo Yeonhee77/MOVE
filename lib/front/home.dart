@@ -4,10 +4,17 @@ import 'package:move/front/game.dart';
 
 class User {
   final String name;
-  final num score1, score2, score3, score4;
+  final num score1, score2, score3, score4, total;
 
-  User(this.name, this.score1, this.score2, this.score3, this.score4);
+  User(this.name, this.score1, this.score2, this.score3, this.score4, this.total);
 }
+ List<User> userList = [
+  User('용재', 100, 50, 60, 70, 280),
+  User('종현', 80, 70, 90, 100, 340),
+  User('은지', 50, 90, 100, 80, 320),
+  User('연희', 70, 100, 60, 90, 320),
+  User('주은', 100, 80, 60, 90, 330),
+];
 
 class Home extends StatelessWidget {
   @override
@@ -27,13 +34,7 @@ class Homepage extends StatefulWidget {
 
 class _HomeState extends State<Homepage> {
 
-  static List<User> user = [
-    User('용재', 100, 50, 60, 70),
-    User('종현', 80, 70, 90, 100),
-    User('은지', 50, 90, 100, 80),
-    User('연희', 70, 100, 60, 90),
-    User('주은', 100, 80, 60, 90),
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,47 +51,36 @@ class _HomeState extends State<Homepage> {
       ),
       body: Center(
         child: Container(
-          margin: const EdgeInsets.all(50.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.baseline, //line alignment
-            textBaseline: TextBaseline.alphabetic, //line alignment
             children: [
-              Text(
-              'Rank',
-              style: TextStyle(
-                fontSize: 32,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),),
               SizedBox(height: 30),
               Text(
-                '1. 청기백기 : ',
+                'Ranking',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 32,
                   color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ),),
               SizedBox(height: 30),
-              Text(
-                '2. 공룡 : ',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                ),),
-              SizedBox(height: 30),
-              Text(
-                '3. 허들 : ',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                ),),
-              SizedBox(height: 30),
-              Text(
-                '4. 공용게임 : ',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                ),),
-              SizedBox(height: 80),
+              ListView.separated(
+                scrollDirection: Axis.vertical, //to use "ListView.seperated" in children
+                shrinkWrap: true, //to use "ListView.seperated" in children
+                padding: const EdgeInsets.all(8),
+                itemCount: userList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    height: 50,
+                    child: Center(child: Text('${userList[index].name}  ' + ' ${userList[index].total} 점',style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      //fontWeight: FontWeight.bold,
+                  ),)),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                const Divider(),
+              ),
+              SizedBox(height: 50),
               SizedBox(
                   height: 100,
                   width: 200,
@@ -114,11 +104,10 @@ class _HomeState extends State<Homepage> {
                           color: Colors.black54),
                     ),
                   )),
-
             ],
-            ),
+          ),
         ),
-        ),
+      ),
 
       );
   }
