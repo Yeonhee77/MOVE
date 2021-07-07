@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/game.dart';
 
@@ -38,6 +39,11 @@ class _HomeState extends State<Homepage> {
     User('주은', 100, 80, 60, 90),
   ];
 
+  signOut() async {
+    await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +56,7 @@ class _HomeState extends State<Homepage> {
           IconButton(
               icon: Icon(Icons.signal_cellular_no_sim_outlined),
             onPressed: () {
-              FirebaseAuth.instance.signOut();
+              signOut();
               Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
             },
           ),
