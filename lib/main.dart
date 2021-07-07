@@ -1,16 +1,23 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/sensor_list_screen.dart';
 import 'package:move/widget/sensor_view.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'bluetooth_off_screen.dart';
+import 'front/login.dart';
 import 'model/sensor_data.dart';
 
 int sec = 0;
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -20,7 +27,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'MOVE!'),
+      home: Login(),
+      // home: MyHomePage(title: 'MOVE!'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -102,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-              FlatButton(
+              FlatButton( //button "connect"
                 color: Colors.blue,
                 child: Text(
                   'Connect',
@@ -215,7 +224,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
         title: Text(widget.title),
+      actions: [
+        IconButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Login())),
+            icon: Icon(Icons.arrow_forward))
+      ],
     ),
-    body: _buildView(),
+    body: _buildListViewOfDevices(),
   );
 }
