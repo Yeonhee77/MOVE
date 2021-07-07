@@ -89,6 +89,17 @@ byte tensorArena[tensorArenaSize];
 ************************************************************************/
 bool useMagnetometer = false; // Can be toggled with BLE (disableMagnetometerRx)
 
+void LedRed()  //BLE disconnecte
+{
+  digitalWrite(LEDR, LOW);
+  digitalWrite(LEDB, HIGH);
+}
+
+void LedBlue()   //BLE connected
+{
+  digitalWrite(LEDR, HIGH);
+  digitalWrite(LEDB, LOW);
+}
 
 /************************************************************************
 * BLE Characteristic / Service UUIDs
@@ -98,27 +109,28 @@ bool useMagnetometer = false; // Can be toggled with BLE (disableMagnetometerRx)
 
 #define UUID_GEN(val) ("81c30e5c-" val "-4f7d-a886-de3e90749161")
 
-BLEService                      service                   (UUID_GEN("0000"));
+BLEService                         moveService                   (UUID_GEN("0000"));
 
-BLECharacteristic               dataProviderTxChar        (UUID_GEN("1001"), BLERead | BLENotify, 9 * FLOAT_BYTE_SIZE);
-BLECharacteristic               dataProviderLabelsTxChar  (UUID_GEN("1002"), BLERead, 128);
-BLEUnsignedCharCharacteristic   versionTxChar             (UUID_GEN("1003"), BLERead);
-BLECharacteristic               inferenceTxChar           (UUID_GEN("1004"), BLERead | BLENotify, 3);
+BLECharacteristic               dataProviderTxChar            (UUID_GEN("1001"), BLERead | BLENotify, 9 * FLOAT_BYTE_SIZE);
+BLECharacteristic                  dataProviderLabelsTxChar      (UUID_GEN("1002"), BLERead, 128);
+BLEUnsignedCharCharacteristic      versionTxChar                 (UUID_GEN("1003"), BLERead);
 
-BLEUnsignedCharCharacteristic   numClassesRxChar          (UUID_GEN("2001"), BLEWrite);
-BLEIntCharacteristic            numSamplesRxChar          (UUID_GEN("2002"), BLEWrite);
-BLEIntCharacteristic            captureDelayRxChar        (UUID_GEN("2003"), BLEWrite);
-BLEFloatCharacteristic          thresholdRxChar           (UUID_GEN("2004"), BLEWrite);
-BLEBoolCharacteristic           disableMagnetometerRx     (UUID_GEN("2005"), BLEWrite);
+//BLECharacteristic               inferenceTxChar           (UUID_GEN("1004"), BLERead | BLENotify, 3);
 
-BLEUnsignedCharCharacteristic   stateRxChar               (UUID_GEN("3001"), BLEWrite);
-BLEUnsignedCharCharacteristic   stateTxChar               (UUID_GEN("3002"), BLERead | BLENotify);
-BLEUnsignedCharCharacteristic   fileTransferTypeRxChar    (UUID_GEN("3003"), BLEWrite);
-BLEBoolCharacteristic           hasModelTxChar            (UUID_GEN("3004"), BLERead | BLENotify);
-
-// Meta is for future-proofing, we can use it to store and read any 64 bytes
-BLECharacteristic               metaRxChar                (UUID_GEN("4001"), BLEWrite, 64);
-BLECharacteristic               metaTxChar                (UUID_GEN("4002"), BLERead, 64);
+//BLEUnsignedCharCharacteristic   numClassesRxChar          (UUID_GEN("2001"), BLEWrite);
+//BLEIntCharacteristic            numSamplesRxChar          (UUID_GEN("2002"), BLEWrite);
+//BLEIntCharacteristic            captureDelayRxChar        (UUID_GEN("2003"), BLEWrite);
+//BLEFloatCharacteristic          thresholdRxChar           (UUID_GEN("2004"), BLEWrite);
+//BLEBoolCharacteristic           disableMagnetometerRx     (UUID_GEN("2005"), BLEWrite);
+//
+//BLEUnsignedCharCharacteristic   stateRxChar               (UUID_GEN("3001"), BLEWrite);
+//BLEUnsignedCharCharacteristic   stateTxChar               (UUID_GEN("3002"), BLERead | BLENotify);
+//BLEUnsignedCharCharacteristic   fileTransferTypeRxChar    (UUID_GEN("3003"), BLEWrite);
+//BLEBoolCharacteristic           hasModelTxChar            (UUID_GEN("3004"), BLERead | BLENotify);
+//
+//// Meta is for future-proofing, we can use it to store and read any 64 bytes
+//BLECharacteristic               metaRxChar                (UUID_GEN("4001"), BLEWrite, 64);
+//BLECharacteristic               metaTxChar                (UUID_GEN("4002"), BLERead, 64);
 
 
 /************************************************************************
@@ -136,10 +148,6 @@ void setup()
 
   // Prepare LED pins.
   pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(LEDR, OUTPUT);
-  pinMode(LEDG, OUTPUT);
-  pinMode(LEDB, OUTPUT);
-
 
   // Initialize IMU sensors
   if (!IMU.begin()) {
@@ -147,24 +155,24 @@ void setup()
     while (1);
   }
 
-  service.addCharacteristic(versionTxChar);
-  service.addCharacteristic(dataProviderTxChar);
-  service.addCharacteristic(dataProviderLabelsTxChar);
-  service.addCharacteristic(inferenceTxChar);
-
-  service.addCharacteristic(numClassesRxChar);
-  service.addCharacteristic(numSamplesRxChar);
-  service.addCharacteristic(captureDelayRxChar);
-  service.addCharacteristic(thresholdRxChar);
-  service.addCharacteristic(disableMagnetometerRx);
-
-  service.addCharacteristic(stateRxChar);
-  service.addCharacteristic(stateTxChar);
-  service.addCharacteristic(fileTransferTypeRxChar);
-  service.addCharacteristic(hasModelTxChar);
-  
-  service.addCharacteristic(metaRxChar);
-  service.addCharacteristic(metaTxChar);
+  moveService.addCharacteristic(versionTxChar);
+  moveService.addCharacteristic(dataProviderTxChar);
+  moveService.addCharacteristic(dataProviderLabelsTxChar);
+//  service.addCharacteristic(inferenceTxChar);
+//
+//  service.addCharacteristic(numClassesRxChar);
+//  service.addCharacteristic(numSamplesRxChar);
+//  service.addCharacteristic(captureDelayRxChar);
+//  service.addCharacteristic(thresholdRxChar);
+//  service.addCharacteristic(disableMagnetometerRx);
+//
+//  service.addCharacteristic(stateRxChar);
+//  service.addCharacteristic(stateTxChar);
+//  service.addCharacteristic(fileTransferTypeRxChar);
+//  service.addCharacteristic(hasModelTxChar);
+//  
+//  service.addCharacteristic(metaRxChar);
+//  service.addCharacteristic(metaTxChar);
 
   // Start the core BLE engine.
   if (!BLE.begin())
@@ -197,7 +205,7 @@ void setup()
   // Set up properties for the whole service.
   BLE.setLocalName(deviceName.c_str());
   BLE.setDeviceName(deviceName.c_str());
-  BLE.setAdvertisedService(service);
+  BLE.setAdvertisedService(moveService);
 
   // Print out full UUID and MAC address.
   Serial.println("Peripheral advertising info: ");
@@ -206,10 +214,10 @@ void setup()
   Serial.print("MAC: ");
   Serial.println(BLE.address());
   Serial.print("Service UUID: ");
-  Serial.println(service.uuid());
+  Serial.println(moveService.uuid());
 
   // Start up the service itself.
-  BLE.addService(service);
+  BLE.addService(moveService);
   
 //  byte data[3] = { 0x01, 0x02, 0x03 };
 //  BLE.setManufacturerData(data, 3);
@@ -223,14 +231,6 @@ void setup()
 
   // Used for Tiny Motion Trainer to label / filter values
   dataProviderLabelsTxChar.writeValue("acc.x, acc.y, acc.z, gyro.x, gyro.y, gyro.z, mag.x, mag.y, max.zl");
-
-  // Print out the samples rates of the IMUs
-  Serial.print("Accelerometer sample rate: ");
-  Serial.print(IMU.accelerationSampleRate());
-  Serial.println(" Hz");
-  Serial.print("Gyroscope sample rate: ");
-  Serial.print(IMU.gyroscopeSampleRate());
-  Serial.println(" Hz");
 
   Serial.println();
 
@@ -258,9 +258,12 @@ void setup()
 
 void loop()
 {
+  LedRed();
+  
   // Make sure we're connected and not busy file-transfering
   if (BLE.connected())
   {
+    LedBlue();
     
      Serial.println("BLE connected");
   
@@ -347,24 +350,26 @@ void loop()
            //               else "jump" print 2
           String(GESTURES[maxIndex]).equals("LEFT") ? result = 1 : result = 2;
 
+          dataProviderTxChar.writeValue((byte)result);
+
           Serial.println(result);
           Serial.println();
 
-          String ges1 = "";
-          String ges2 = "";
-          ges1 = String(result);
-          ges2 = String(result);
-          int dotInTemp = ges1.indexOf('.');
-          ges1.remove(dotInTemp);
-          ges2.remove(0, dotInTemp+1);
-          byte g1 = ges1.toInt();
-          byte g2 = ges2.toInt();
-          byte data[4] = { 0x00, 0x01, g1, g2};
-          BLE.setManufacturerData(data, 4);
+//          String ges1 = "";
+//          String ges2 = "";
+//          ges1 = String(result);
+//          ges2 = String(result);
+//          int dotInTemp = ges1.indexOf('.');
+//          ges1.remove(dotInTemp);
+//          ges2.remove(0, dotInTemp+1);
+//          byte g1 = ges1.toInt();
+//          byte g2 = ges2.toInt();
+//          byte data[4] = { 0x00, 0x01, g1, g2};
+//          BLE.setManufacturerData(data, 4);
           BLE.advertise();
 
           // Add delay to not double trigger
-          delay(100);
+          delay(200);
         }
       }
     }
