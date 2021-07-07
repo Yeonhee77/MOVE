@@ -12,6 +12,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final FlutterBlue flutterBlue = FlutterBlue.instance;
+  // ignore: deprecated_member_use
   final List<BluetoothDevice> devicesList = new List<BluetoothDevice>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   final textController = TextEditingController();
@@ -45,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   ListView _buildListViewOfDevices() {
+    // ignore: deprecated_member_use
     List<Container> containers = new List<Container>();
     for (BluetoothDevice device in devicesList) {
       containers.add(
@@ -60,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
+              // ignore: deprecated_member_use
               FlatButton(
                 color: Colors.blue,
                 child: Text(
@@ -98,6 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<ButtonTheme> _buildReadWriteNotifyButton(
       BluetoothCharacteristic characteristic) {
+    // ignore: deprecated_member_use
     List<ButtonTheme> buttons = new List<ButtonTheme>();
 
     if (characteristic.properties.read && characteristic.properties.notify) {
@@ -107,6 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
           height: 20,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
+            // ignore: deprecated_member_use
             child: RaisedButton(
               color: Colors.blue,
               child: Text('2', style: TextStyle(color: Colors.white)),
@@ -132,6 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
           height: 20,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
+            // ignore: deprecated_member_use
             child: RaisedButton(
               child: Text('WRITE', style: TextStyle(color: Colors.white)),
               onPressed: () async {
@@ -150,6 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ],
                         ),
                         actions: <Widget>[
+                          // ignore: deprecated_member_use
                           FlatButton(
                             child: Text("Send"),
                             onPressed: () {
@@ -158,6 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               Navigator.pop(context);
                             },
                           ),
+                          // ignore: deprecated_member_use
                           FlatButton(
                             child: Text("Cancel"),
                             onPressed: () {
@@ -180,6 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
           height: 20,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
+            // ignore: deprecated_member_use
             child: RaisedButton(
               child: Text('1', style: TextStyle(color: Colors.white)),
               onPressed: () async {
@@ -198,9 +207,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   ListView _buildConnectDeviceView() {
+    // ignore: deprecated_member_use
     List<Container> containers = new List<Container>();
 
     for (BluetoothService service in bluetoothServices) {
+      // ignore: deprecated_member_use
       List<Widget> characteristicsWidget = new List<Widget>();
 
       for (BluetoothCharacteristic characteristic in service.characteristics) {
@@ -261,7 +272,52 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text("Bluetooth Demo"),
+            actions: <Widget>[
+              new IconButton(
+                icon: new Icon(Icons.photo_album),
+                tooltip: 'Hi!',
+                onPressed: () => {
+                  print(gesture),
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Value1()),
+                )
+                },
+              ),
+              new IconButton(
+                icon: new Icon(Icons.pie_chart),
+                tooltip: 'Wow',
+                onPressed: () => {
+                },
+              )
+            ],
         ),
         body: _buildView(),
       );
+}
+
+
+// ignore: must_be_immutable
+class Value1 extends StatefulWidget {
+  @override
+  _Value1State createState() => _Value1State();
+}
+
+class _Value1State extends State<Value1> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.lightBlue,
+      body: Center(
+    //     child: StreamBuilder(
+    //       builder: (c, snapshot) =>Column(
+    //   children: snapshot.data.map((r)=>)![
+    // gesture != null? Text(gesture):Text("null value");
+    //   ],
+    // )
+    //       },
+    //     ),
+      ),
+    );
+  }
 }
