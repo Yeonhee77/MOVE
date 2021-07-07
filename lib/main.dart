@@ -1,14 +1,21 @@
-import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/sensor_list_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:move/front/home.dart';
 
 import 'bluetooth_off_screen.dart';
+import 'front/login.dart';
+import 'model/sensor_data.dart';
 
 int sec = 0;
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,7 +25,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         cardColor: Colors.deepPurple[100],
       ),
-      home: Home(),
+      home: Login(),
+      // home: MyHomePage(title: 'MOVE!'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -40,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _writeController = TextEditingController();
   BluetoothDevice? _connectedDevice;
   List<BluetoothService>? _services;
+  StreamSubscription? scanSubScription;
 
   _addDeviceTolist(final BluetoothDevice device) {
     if (!widget.devicesList.contains(device)) {
@@ -52,19 +61,36 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    widget.flutterBlue.connectedDevices
-        .asStream()
-        .listen((List<BluetoothDevice> devices) {
-      for (BluetoothDevice device in devices) {
-        _addDeviceTolist(device);
+    // scanSubScription = widget.flutterBlue.scan().listen((scanResult) async {
+    //   _addDeviceTolist(scanResult.device);
+    // }, onDone: () => stopScan());
+
+    scanSubScription = widget.flutterBlue.scanResults.listen((scanResult) {
+      for (ScanResult r in scanResult) {
+        _addDeviceTolist(r.device);
       }
     });
+    // widget.flutterBlue.stopScan();
+
+    // widget.flutterBlue.connectedDevices
+    //     .asStream()
+    //     .listen((List<BluetoothDevice> devices) {
+    //   for (BluetoothDevice device in devices) {
+    //     _addDeviceTolist(device);
+    //   }
+    // });
     widget.flutterBlue.scanResults.listen((List<ScanResult> results) {
       for (ScanResult result in results) {
         _addDeviceTolist(result.device);
       }
     });
     widget.flutterBlue.startScan();
+  }
+
+  stopScan() {
+    widget.flutterBlue.stopScan();
+    scanSubScription?.cancel();
+    scanSubScription = null;
   }
 
   ListView _buildListViewOfDevices() {
@@ -90,7 +116,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                  widget.flutterBlue.stopScan();
+                  stopScan();
+                  _addDeviceTolist(device);
                   try {
                     await device.connect();
                   } catch (e) {
@@ -98,13 +125,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       throw e;
                     }
                   } finally {
-                    _services = await device.discoverServices();
+                    //_services = await device.discoverServices();
                   }
                   setState(() {
                     _connectedDevice = device;
                   });
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SensorListScreen(_connectedDevice)));
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SensorListScreen()));
                 },
               ),
             ],
@@ -121,41 +147,86 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  List<ButtonTheme> _buildReadWriteNotifyButton(
+      BluetoothCharacteristic characteristic) {
+    List<ButtonTheme> buttons = [];
+
+    return buttons;
+  }
+
+  ListView _buildConnectDeviceView() {
+    List<Container> containers = [];
+
+    for (BluetoothService service in _services!) {
+      List<Widget> characteristicsWidget = [];
+
+      for (BluetoothCharacteristic characteristic in service.characteristics) {
+        characteristicsWidget.add(
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Text(characteristic.uuid.toString(),
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    ..._buildReadWriteNotifyButton(characteristic),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text('Value: ' +
+                        widget.readValues[characteristic.uuid].toString()),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text('Connected Successfully :)'),
+                  ],
+                ),
+                Divider(),
+              ],
+            ),
+          ),
+        );
+      }
+      containers.add(
+        Container(
+          child: ExpansionTile(
+              title: Text(service.uuid.toString()),
+              children: characteristicsWidget),
+        ),
+      );
+    }
+
+    return ListView(
+      padding: const EdgeInsets.all(8),
+      children: <Widget>[
+        ...containers,
+      ],
+    );
+  }
+
+  ListView _buildView() {
+    if (_connectedDevice != null) {
+      return _buildConnectDeviceView();
+    }
+    return _buildListViewOfDevices();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
         title: Text(widget.title),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Connected()));
-            },
-            icon: Icon(Icons.arrow_forward_rounded),
-            //
-          ),
-        ]
+      actions: [
+        IconButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Login())),
+            icon: Icon(Icons.arrow_forward))
+      ],
     ),
     body: _buildListViewOfDevices(),
   );
-}
-
-class Connected extends StatefulWidget {
-  @override
-  _ConnectedState createState() => _ConnectedState();
-
-  final gesture = '';
-}
-
-class _ConnectedState extends State<Connected> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('test'),
-      ),
-      body: Container(
-        child: Text(widget.gesture),
-      ),
-    );
-  }
 }

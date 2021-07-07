@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/game.dart';
+
+import 'login.dart';
 
 class User {
   final String name;
@@ -45,6 +48,13 @@ class _HomeState extends State<Homepage> {
         elevation: 0.0,
         backgroundColor: Colors.purple[100],
         actions: <Widget> [
+          IconButton(
+              icon: Icon(Icons.signal_cellular_no_sim_outlined),
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+            },
+          ),
           IconButton(onPressed: () {Navigator.push(context,
               MaterialPageRoute(builder: (context) => Mypage()));}, icon: Icon(Icons.account_circle_rounded))
         ],
