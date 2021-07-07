@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/sensor_list_screen.dart';
-import 'package:move/widget/sensor_view.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:move/front/home.dart';
 
 import 'bluetooth_off_screen.dart';
 import 'front/login.dart';
@@ -25,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MOVE!',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        cardColor: Colors.deepPurple[100],
       ),
       home: Login(),
       // home: MyHomePage(title: 'MOVE!'),
