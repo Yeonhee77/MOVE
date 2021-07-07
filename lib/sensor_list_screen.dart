@@ -34,16 +34,16 @@ class _SensorListScreenState extends State<SensorListScreen> {
         body: StreamBuilder(
           stream: deviceScanner.sensorData,
           builder: (context, data) {
-            if (data.data == null) {
-              return Center(
-                child: Text("Sensor x"),
-              );
-            }
-            else {
-              flag ++;
+            // if (data.data == null) {
+            //   return Center(
+            //     child: Text("Sensor x"),
+            //   );
+            // }
+            // else {
+            //   flag ++;
               print("success sensorview");
               return SensorView(data.data as SensorData);
-            }
+            // }
             },
         ),
       ),
