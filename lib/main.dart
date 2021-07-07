@@ -54,9 +54,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    scanSubScription = widget.flutterBlue.scan().listen((scanResult) async {
-      _addDeviceTolist(scanResult.device);
-    }, onDone: () => stopScan());
+    // scanSubScription = widget.flutterBlue.scan().listen((scanResult) async {
+    //   _addDeviceTolist(scanResult.device);
+    // }, onDone: () => stopScan());
+
+    scanSubScription = widget.flutterBlue.scanResults.listen((scanResult) {
+      for (ScanResult r in scanResult) {
+        _addDeviceTolist(r.device);
+      }
+    });
+    // widget.flutterBlue.stopScan();
 
     // widget.flutterBlue.connectedDevices
     //     .asStream()
@@ -73,12 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
     widget.flutterBlue.startScan();
   }
 
-  void dispose() {
-    widget.flutterBlue.stopScan();
-    stopScan();
-  }
-
   stopScan() {
+    widget.flutterBlue.stopScan();
     scanSubScription?.cancel();
     scanSubScription = null;
   }
@@ -108,8 +111,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () async {
                   stopScan();
                   _addDeviceTolist(device);
-                  // FlutterBlue.instance.stopScan();
-                  widget.flutterBlue.stopScan();
                   try {
                     await device.connect();
                   } catch (e) {
@@ -121,22 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                   setState(() {
                     _connectedDevice = device;
-                    FlutterBlue.instance.stopScan();
-                    stopScan();
                   });
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SensorListScreen()));
-                  // StreamBuilder(
-                  //   stream: deviceScanner.sensorData,
-                  //   builder: (context, data) {
-                  //     if (data.data == null) {
-                  //       return Center(
-                  //         child: Text("Sensor x"),
-                  //       );
-                  //     }
-                  //     return Navigator.push(context, MaterialPageRoute(builder: (context) => SensorView(data.data)));
-                  //     //return SensorView(data.data as SensorData);
-                  //   },
-                  // );
                 },
               ),
             ],
