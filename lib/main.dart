@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/sensor_list_screen.dart';
+import 'package:move/front/home.dart';
 
 import 'bluetooth_off_screen.dart';
 
@@ -15,9 +16,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MOVE!',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        cardColor: Colors.deepPurple[100],
       ),
-      home: MyHomePage(title: 'MOVE!'),
+      home: Home(),
       debugShowCheckedModeBanner: false,
     );
   }
