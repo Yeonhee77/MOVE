@@ -36,9 +36,6 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomeState extends State<Homepage> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,27 +88,29 @@ class _HomeState extends State<Homepage> {
                 const Divider(),
               ),
               SizedBox(height: 50),
-              SizedBox(
-                  height: 100,
-                  width: 200,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(
-                            color: Color.fromARGB(100, 70, 10, 245), width: 5),
+              Flexible(
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 50.0,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          side: BorderSide(
+                              color: Color.fromARGB(100, 70, 10, 245), width: 5),
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Game()));
-                    },
-                    child: Text(
-                      'Game Start!',
-                      style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black54),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Game()));
+                      },
+                      child: Text(
+                        'Game Start!',
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54),
+                      ),
                     ),
                   )),
             ],
