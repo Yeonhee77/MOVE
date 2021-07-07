@@ -11,8 +11,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final GoogleSignIn googleSignIn = GoogleSignIn();
-
   num game1 = 0;
   num game2 = 0;
   num game3 = 0;
@@ -28,9 +26,11 @@ class _LoginState extends State<Login> {
       idToken: googleAuth.idToken,
     );
 
+    final UserCredential authResult = await FirebaseAuth.instance.signInWithCredential(credential);
+
     FirebaseFirestore.instance
         .collection('user')
-        .doc(googleAuth.idToken)
+        .doc(authResult.user!.uid)
         .get()
         .then((value) => {
       if(!value.exists) {
