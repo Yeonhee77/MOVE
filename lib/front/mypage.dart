@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,19 @@ class Mypage extends StatefulWidget {
 }
 
 class _MypageState extends State<Mypage> {
+  CollectionReference user = FirebaseFirestore.instance.collection('user');
+  String id = FirebaseAuth.instance.currentUser!.uid;
+  num total = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    user.doc(id).get().then((doc) {
+      total = doc.get('avg');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +44,7 @@ class _MypageState extends State<Mypage> {
               Text(FirebaseAuth.instance.currentUser!.displayName.toString()),
             ],
           ),
+          Text(total.toString()),
         ],
       ),
     );

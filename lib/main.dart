@@ -17,6 +17,11 @@ void main() async {
   runApp(MyApp());
 }
 
+enum ApplicationLoginState {
+  loggedOut,
+  loggedIn,
+}
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -25,6 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         cardColor: Colors.deepPurple[100],
       ),
+
       home: Login(),
       // home: MyHomePage(title: 'MOVE!'),
       debugShowCheckedModeBanner: false,

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/game.dart';
 
@@ -12,11 +13,11 @@ class User {
   User(this.name, this.score1, this.score2, this.score3, this.score4, this.total);
 }
  List<User> userList = [
-  User('용재', 100, 50, 60, 70, 280),
-  User('종현', 80, 70, 90, 100, 340),
-  User('은지', 50, 90, 100, 80, 320),
-  User('연희', 70, 100, 60, 90, 320),
-  User('주은', 100, 80, 60, 90, 330),
+   User('종현', 80, 70, 90, 100, 340),
+   User('은지', 100, 80, 60, 90, 330),
+   User('주은', 50, 90, 100, 80, 320),
+   User('연희', 70, 100, 60, 90, 320),
+   User('용재', 100, 50, 60, 70, 280),
 ];
 
 class Home extends StatelessWidget {
@@ -36,6 +37,11 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomeState extends State<Homepage> {
+
+  signOut() async {
+await FirebaseAuth.instance.signOut();
+await GoogleSignIn().signOut();
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +54,7 @@ class _HomeState extends State<Homepage> {
           IconButton(
               icon: Icon(Icons.signal_cellular_no_sim_outlined),
             onPressed: () {
-              FirebaseAuth.instance.signOut();
+              signOut();
               Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
             },
           ),

@@ -12,7 +12,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   num game1 = 0;
   num game2 = 0;
   num game3 = 0;
@@ -28,9 +28,15 @@ class _LoginState extends State<Login> {
       idToken: googleAuth.idToken,
     );
 
-    if(googleUser != null) {
-      print(googleUser);
-    }
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(googleAuth.idToken)
+        .get()
+        .then((value) => {
+      if(!value.exists) {
+        addUser()
+      }
+    });
 
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
@@ -58,7 +64,6 @@ class _LoginState extends State<Login> {
           child: Text('Google Login'),
           onPressed: () {
             signInWithGoogle();
-            addUser();
             Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
           },
         ),
