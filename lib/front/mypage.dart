@@ -23,6 +23,10 @@ class _MypageState extends State<Mypage> {
         .get()
         .then((doc) {
           setState(() {
+            game1 = doc.get('game1');
+            game2 = doc.get('game2');
+            game3 = doc.get('game3');
+            game4 = doc.get('game4');
             total = doc.get('avg');
           });
     });
@@ -56,26 +60,69 @@ class _MypageState extends State<Mypage> {
             ),
             SizedBox(height: 30),
             Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Total Score: $total', style: TextStyle(fontSize: 32),),
+                Text('Total Score: $total', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold,),),
+                SizedBox(height: 40),
                 Center(
                   child: Container(
-                    width: 50, height: 50,
+                    width: double.infinity, height: 50,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.purple),
+                    ),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset('Bluewhite_text.png',fit: BoxFit.fitWidth),
-                        Text('  $game1 점', style: TextStyle(fontSize: 20),),
+                        Image.asset('Bluewhite_text.png',fit: BoxFit.fill),
+                        Text('  $game1 점', style: TextStyle(fontSize: 25),),
                     ],
                   )),
                 ),
-
                 SizedBox(height: 20),
-                Text('2. 공룡 : $game2', style: TextStyle(fontSize: 20),),
+                Center(
+                  child: Container(
+                      width: double.infinity, height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.purple),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('Dino_text.png',fit: BoxFit.fill),
+                          Text('  $game2 점', style: TextStyle(fontSize: 25),),
+                        ],
+                      )),
+                ),
                 SizedBox(height: 20),
-                Text('3. 낚시 : $game3', style: TextStyle(fontSize: 20),),
+                Center(
+                  child: Container(
+                      width: double.infinity, height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.purple),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('Fish_text.png',fit: BoxFit.fill),
+                          Text('  $game3 점', style: TextStyle(fontSize: 25),),
+                        ],
+                      )),
+                ),
                 SizedBox(height: 20),
-                Text('4. 펌프 : $game4', style: TextStyle(fontSize: 20),),
+                Center(
+                  child: Container(
+                      width: double.infinity, height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.purple),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('Pump_text.png',fit: BoxFit.fill),
+                          Text('  $game4 점', style: TextStyle(fontSize: 25),),
+                        ],
+                      )),
+                ),
                 ],
             ),
           ],
