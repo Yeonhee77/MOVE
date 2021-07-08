@@ -8,16 +8,23 @@ class Mypage extends StatefulWidget {
 }
 
 class _MypageState extends State<Mypage> {
-  CollectionReference user = FirebaseFirestore.instance.collection('user');
-  String id = FirebaseAuth.instance.currentUser!.uid;
   num total = 0;
+  num game1 = 0;
+  num game2 = 0;
+  num game3 = 0;
+  num game4 = 0;
 
   @override
   void initState() {
     super.initState();
 
-    user.doc(id).get().then((doc) {
-      total = doc.get('avg');
+    FirebaseFirestore.instance.collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((doc) {
+          setState(() {
+            total = doc.get('avg');
+          });
     });
   }
 
@@ -30,22 +37,36 @@ class _MypageState extends State<Mypage> {
         elevation: 0.0,
         backgroundColor: Colors.purple[100],
       ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(width: 15,),
-              CircleAvatar(
-                radius: 30,
-                backgroundImage: NetworkImage(FirebaseAuth.instance.currentUser!.photoURL.toString()),
-                backgroundColor: Colors.transparent,
-              ),
-              Text(FirebaseAuth.instance.currentUser!.displayName.toString()),
-            ],
-          ),
-          Text(total.toString()),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(13),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(width: 15,),
+                CircleAvatar(
+                  radius: 30,
+                  backgroundImage: NetworkImage(FirebaseAuth.instance.currentUser!.photoURL.toString()),
+                  backgroundColor: Colors.transparent,
+                ),
+                SizedBox(width: 15),
+                Text(FirebaseAuth.instance.currentUser!.displayName.toString(), style: TextStyle(fontSize: 20),),
+              ],
+            ),
+            SizedBox(height: 30),
+
+            Text('Total Score: $total', style: TextStyle(fontSize: 32),),
+            SizedBox(height: 20),
+            Text('1. 청기백기: $game1', style: TextStyle(fontSize: 20),),
+            SizedBox(height: 20),
+            Text('2. 공룡 : $game2', style: TextStyle(fontSize: 20),),
+            SizedBox(height: 20),
+            Text('3. 허들 : $game3', style: TextStyle(fontSize: 20),),
+            SizedBox(height: 20),
+            Text('4. 공용게임 : $game4', style: TextStyle(fontSize: 20),),
+          ],
+        ),
       ),
     );
   }
