@@ -20,16 +20,48 @@ class _GameState extends State<Game> {
                 MaterialPageRoute(builder: (context) => Mypage()));}, icon: Icon(Icons.account_circle_rounded))
           ],
         ),
-      body: Column(
-        children: [
-          Row(
-
+      body: LayoutBuilder(builder: (context, constraints) {
+        return Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                child: makeRow('bluewhite.png', 'Dino.png'),
+                height: (constraints.maxHeight)/2,
+              ),
+              Container(
+                child: makeRow('Fish.jpg', 'Pump.jpg'),
+                height: (constraints.maxHeight)/2,
+              ),
+            ],
           ),
-          Row(
-
-          ),
-        ],
+        );
+      }
       )
+    );
+  }
+
+  Widget makeRow(String leftPath, String rightPath) {
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ExpandImage(leftPath),
+          ExpandImage(rightPath),
+        ],
+      ),
+    );
+  }
+
+  Widget ExpandImage(String image) {
+    return Expanded(
+      child: Container(
+        child: Image.asset(
+          image,
+          fit: BoxFit.cover,
+        ),
+        margin: EdgeInsets.all(0.5),
+      ),
     );
   }
 }
