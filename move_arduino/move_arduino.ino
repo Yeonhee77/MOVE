@@ -41,11 +41,11 @@ limitations under the License.
 // Values from Tiny Motion Trainer
 #define MOTION_THRESHOLD 0.2
 #define CAPTURE_DELAY 200 // This is now in milliseconds
-#define NUM_SAMPLES 20
+#define NUM_SAMPLES 30
 
 // Array to map gesture index to a name
 const char *GESTURES[] = {
-    "LEFT", "JUMP"
+    "LEFT", "RIGHT", "UP", "DOWN"
 };
 
 
@@ -218,10 +218,7 @@ void setup()
 
   // Start up the service itself.
   BLE.addService(moveService);
-  
-//  byte data[3] = { 0x01, 0x02, 0x03 };
-//  BLE.setManufacturerData(data, 3);
-  
+
   BLE.advertise();
 
   Serial.println("Bluetooth device active, waiting for connections...");
@@ -346,30 +343,22 @@ void loop()
                     
           int result = 0;
           
-           // If the gestures is "left" print 1,
-           //               else "jump" print 2
-          String(GESTURES[maxIndex]).equals("LEFT") ? result = 1 : result = 2;
+           // If the gestures is "left" print 1, "RIGHT" print 2, "UP" print 3, "DOWN" print 4
+           
+          if (String(GESTURES[maxIndex]).equals("LEFT")) result = 1;
+          else if (String(GESTURES[maxIndex]).equals("RIGHT")) result = 2;
+          else if (String(GESTURES[maxIndex]).equals("UP")) result = 3;
+          else if (String(GESTURES[maxIndex]).equals("DOWN")) result = 4;
 
           dataProviderTxChar.writeValue((byte)result);
 
           Serial.println(result);
           Serial.println();
 
-//          String ges1 = "";
-//          String ges2 = "";
-//          ges1 = String(result);
-//          ges2 = String(result);
-//          int dotInTemp = ges1.indexOf('.');
-//          ges1.remove(dotInTemp);
-//          ges2.remove(0, dotInTemp+1);
-//          byte g1 = ges1.toInt();
-//          byte g2 = ges2.toInt();
-//          byte data[4] = { 0x00, 0x01, g1, g2};
-//          BLE.setManufacturerData(data, 4);
           BLE.advertise();
 
           // Add delay to not double trigger
-          delay(200);
+          delay(300);
         }
       }
     }

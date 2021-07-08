@@ -1,13 +1,21 @@
-import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/sensor_list_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:move/front/home.dart';
 
 import 'bluetooth_off_screen.dart';
+import 'front/login.dart';
+import 'model/sensor_data.dart';
 
 int sec = 0;
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -15,9 +23,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MOVE!',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        cardColor: Colors.deepPurple[100],
       ),
-      home: MyHomePage(title: 'MOVE!'),
+      home: Login(),
+      // home: MyHomePage(title: 'MOVE!'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -38,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _writeController = TextEditingController();
   BluetoothDevice? _connectedDevice;
   List<BluetoothService>? _services;
+  StreamSubscription? scanSubScription;
 
   _addDeviceTolist(final BluetoothDevice device) {
     if (!widget.devicesList.contains(device)) {
@@ -50,19 +61,36 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    widget.flutterBlue.connectedDevices
-        .asStream()
-        .listen((List<BluetoothDevice> devices) {
-      for (BluetoothDevice device in devices) {
-        _addDeviceTolist(device);
+    // scanSubScription = widget.flutterBlue.scan().listen((scanResult) async {
+    //   _addDeviceTolist(scanResult.device);
+    // }, onDone: () => stopScan());
+
+    scanSubScription = widget.flutterBlue.scanResults.listen((scanResult) {
+      for (ScanResult r in scanResult) {
+        _addDeviceTolist(r.device);
       }
     });
+    // widget.flutterBlue.stopScan();
+
+    // widget.flutterBlue.connectedDevices
+    //     .asStream()
+    //     .listen((List<BluetoothDevice> devices) {
+    //   for (BluetoothDevice device in devices) {
+    //     _addDeviceTolist(device);
+    //   }
+    // });
     widget.flutterBlue.scanResults.listen((List<ScanResult> results) {
       for (ScanResult result in results) {
         _addDeviceTolist(result.device);
       }
     });
     widget.flutterBlue.startScan();
+  }
+
+  stopScan() {
+    widget.flutterBlue.stopScan();
+    scanSubScription?.cancel();
+    scanSubScription = null;
   }
 
   ListView _buildListViewOfDevices() {
@@ -81,14 +109,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-              FlatButton(
+              FlatButton( //button "connect"
                 color: Colors.blue,
                 child: Text(
                   'Connect',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                  widget.flutterBlue.stopScan();
+                  stopScan();
+                  _addDeviceTolist(device);
                   try {
                     await device.connect();
                   } catch (e) {
@@ -96,14 +125,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       throw e;
                     }
                   } finally {
-                    _services = await device.discoverServices();
+                    //_services = await device.discoverServices();
                   }
                   setState(() {
                     _connectedDevice = device;
-
                   });
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SensorListScreen()));
-                  //Navigator.push(context, MaterialPageRoute(builder: (context) => Blue_List()));
                 },
               ),
             ],
@@ -123,99 +150,6 @@ class _MyHomePageState extends State<MyHomePage> {
   List<ButtonTheme> _buildReadWriteNotifyButton(
       BluetoothCharacteristic characteristic) {
     List<ButtonTheme> buttons = [];
-
-    if (characteristic.properties.read) {
-      buttons.add(
-        ButtonTheme(
-          minWidth: 10,
-          height: 20,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: RaisedButton(
-              color: Colors.blue,
-              child: Text('READ', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                var sub = characteristic.value.listen((value) {
-                  setState(() {
-                    widget.readValues[characteristic.uuid] = value;
-                  });
-                });
-                await characteristic.read();
-                sub.cancel();
-              },
-            ),
-          ),
-        ),
-      );
-    }
-    if (characteristic.properties.write) {
-      buttons.add(
-        ButtonTheme(
-          minWidth: 10,
-          height: 20,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: RaisedButton(
-              child: Text('WRITE', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                await showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text("Write"),
-                        content: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: TextField(
-                                controller: _writeController,
-                              ),
-                            ),
-                          ],
-                        ),
-                        actions: <Widget>[
-                          FlatButton(
-                            child: Text("Send"),
-                            onPressed: () {
-                              characteristic.write(
-                                  utf8.encode(_writeController.value.text));
-                              Navigator.pop(context);
-                            },
-                          ),
-                          FlatButton(
-                            child: Text("Cancel"),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ],
-                      );
-                    });
-              },
-            ),
-          ),
-        ),
-      );
-    }
-    if (characteristic.properties.notify) {
-      buttons.add(
-        ButtonTheme(
-          minWidth: 10,
-          height: 20,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: RaisedButton(
-              child: Text('NOTIFY', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                characteristic.value.listen((value) {
-                  widget.readValues[characteristic.uuid] = value;
-                });
-                await characteristic.setNotifyValue(true);
-              },
-            ),
-          ),
-        ),
-      );
-    }
 
     return buttons;
   }
@@ -288,16 +222,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
         title: Text(widget.title),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Connected()));
-            },
-            icon: Icon(Icons.arrow_forward_rounded),
-          ),
-        ]
+      actions: [
+        IconButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Login())),
+            icon: Icon(Icons.arrow_forward))
+      ],
     ),
-    body: _buildView(),
+    body: _buildListViewOfDevices(),
   );
 }
 
@@ -324,3 +254,4 @@ class _ConnectedState extends State<Connected> {
 
 //JH/0705/"Working on different repository!"
 //created new project!
+

@@ -1,5 +1,9 @@
 name: move
-description: A new Flutter project.
+description: A new Flutter application.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -20,6 +24,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_blue: ^0.8.0
+  google_sign_in: ^5.0.3
+  firebase_auth: ^2.0.0
+  cloud_firestore: ^2.2.0
+  firebase_core: ^1.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
