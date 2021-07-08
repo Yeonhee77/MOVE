@@ -1,5 +1,5 @@
 class Gesture{
- int gesturedata;
+ int gesturedata=0;
 
  Gesture(this.gesturedata);
 }
