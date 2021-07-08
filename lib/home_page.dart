@@ -103,7 +103,27 @@ class _MyHomePageState extends State<MyHomePage> {
       BluetoothCharacteristic characteristic) {
     // ignore: deprecated_member_use
     List<ButtonTheme> buttons = new List<ButtonTheme>();
-
+    if (characteristic.properties.notify) {
+      buttons.add(
+        ButtonTheme(
+          minWidth: 10,
+          height: 20,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            // ignore: deprecated_member_use
+            child: RaisedButton(
+              child: Text('1', style: TextStyle(color: Colors.white)),
+              onPressed: () async {
+                characteristic.value.listen((value) {
+                  readValues[characteristic.uuid] = value;
+                });
+                await characteristic.setNotifyValue(true);
+              },
+            ),
+          ),
+        ),
+      );
+    }
     if (characteristic.properties.read && characteristic.properties.notify) {
       buttons.add(
         ButtonTheme(
@@ -130,86 +150,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     }
-    if (characteristic.properties.write) {
-      buttons.add(
-        ButtonTheme(
-          minWidth: 10,
-          height: 20,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            // ignore: deprecated_member_use
-            child: RaisedButton(
-              child: Text('WRITE', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                await showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text("Write"),
-                        content: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: TextField(
-                                controller: textController,
-                              ),
-                            ),
-                          ],
-                        ),
-                        actions: <Widget>[
-                          // ignore: deprecated_member_use
-                          FlatButton(
-                            child: Text("Send"),
-                            onPressed: () {
-                              characteristic.write(
-                                  utf8.encode(textController.value.text));
-                              Navigator.pop(context);
-                            },
-                          ),
-                          // ignore: deprecated_member_use
-                          FlatButton(
-                            child: Text("Cancel"),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ],
-                      );
-                    });
-              },
-            ),
-          ),
-        ),
-      );
-    }
-    if (characteristic.properties.notify) {
-      buttons.add(
-        ButtonTheme(
-          minWidth: 10,
-          height: 20,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            // ignore: deprecated_member_use
-            child: RaisedButton(
-              child: Text('1', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                characteristic.value.listen((value) {
-                  readValues[characteristic.uuid] = value;
-                });
-                await characteristic.setNotifyValue(true);
-              },
-            ),
-          ),
-        ),
-      );
-    }
-
     return buttons;
   }
 
   ListView _buildConnectDeviceView() {
     // ignore: deprecated_member_use
     List<Container> containers = new List<Container>();
-
     for (BluetoothService service in bluetoothServices) {
       // ignore: deprecated_member_use
       List<Widget> characteristicsWidget = new List<Widget>();
@@ -222,22 +168,9 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    Text(characteristic.uuid.toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
                     ..._buildReadWriteNotifyButton(characteristic),
                   ],
                 ),
-                Row(
-                  children: <Widget>[
-                    Text(
-                        'Value: ' + readValues[characteristic.uuid].toString()),
-                  ],
-                ),
-                Divider(),
               ],
             ),
           ),
@@ -246,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
       containers.add(
         Container(
           child: ExpansionTile(
-              title: Text(service.uuid.toString()),
+              title: Text("블루투스 연결설정"),
               children: characteristicsWidget),
         ),
       );
@@ -255,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return ListView(
       padding: const EdgeInsets.all(8),
       children: <Widget>[
-        ...containers,
+        containers[2],
         Text("값:" + gesture),
       ],
     );
@@ -284,12 +217,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
                 },
               ),
-              new IconButton(
-                icon: new Icon(Icons.pie_chart),
-                tooltip: 'Wow',
-                onPressed: () => {
-                },
-              )
             ],
         ),
         body: _buildView(),
@@ -309,14 +236,6 @@ class _Value1State extends State<Value1> {
     return Scaffold(
       backgroundColor: Colors.lightBlue,
       body: Center(
-    //     child: StreamBuilder(
-    //       builder: (c, snapshot) =>Column(
-    //   children: snapshot.data.map((r)=>)![
-    // gesture != null? Text(gesture):Text("null value");
-    //   ],
-    // )
-    //       },
-    //     ),
       ),
     );
   }
