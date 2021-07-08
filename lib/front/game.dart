@@ -29,7 +29,7 @@ class _GameState extends State<Game> {
                   child: makeRow('bluewhite.png', 'Dino.png'),
                   height: (constraints.maxHeight)/2,
                 ),
-          RaisedButton( child: Text("Fade In"), onPressed: () {}),
+          //RaisedButton( child: Text("Fade In"), onPressed: () {}),
                 Container(
                   child: makeRow('Fish.jpg', 'Pump.jpg'),
                   height: (constraints.maxHeight)/2,
