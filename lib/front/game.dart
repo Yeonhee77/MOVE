@@ -26,43 +26,114 @@ class _GameState extends State<Game> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  child: makeRow('bluewhite.png', 'Dino.png'),
-                  height: (constraints.maxHeight)/2,
+                  child: Row(
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            child: Image.asset(
+                              'bluewhite.png',
+                              fit: BoxFit.fill,
+                            ),
+                            margin: EdgeInsets.all(0.5),
+                            width: MediaQuery.of(context).size.width/2 - 1,
+                            height: (constraints.maxHeight)/2 - 1,
+                          ),
+                          Positioned(
+                            left: MediaQuery.of(context).size.width/6,
+                            bottom: MediaQuery.of(context).size.height/12,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                              },
+                              child: Text('Play!'),
+                            ),
+                          )
+                        ],
+                      ),
+                      Stack(
+                        children: [
+                          Container(
+                            child: Image.asset(
+                              'Dino.png',
+                              fit: BoxFit.fill,
+                            ),
+                            margin: EdgeInsets.all(0.5),
+                            width: MediaQuery.of(context).size.width/2 - 1,
+                            height: (constraints.maxHeight)/2 - 1,
+                          ),
+                          Positioned(
+                            left: MediaQuery.of(context).size.width/6,
+                            bottom: MediaQuery.of(context).size.height/12,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                              },
+                              child: Text('Play!'),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-          //RaisedButton( child: Text("Fade In"), onPressed: () {}),
                 Container(
-                  child: makeRow('Fish.jpg', 'Pump.jpg'),
-                  height: (constraints.maxHeight)/2,
+                  child: Row(
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            child: Image.asset(
+                              'Fish.jpg',
+                              fit: BoxFit.fill,
+                            ),
+                            margin: EdgeInsets.all(0.5),
+                            width: MediaQuery.of(context).size.width/2 - 1,
+                            height: (constraints.maxHeight)/2 - 1,
+                          ),
+                          Positioned(
+                            left: MediaQuery.of(context).size.width/6,
+                            bottom: MediaQuery.of(context).size.height/12,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                              },
+                              child: Text('Play!'),
+                            ),
+                          )
+                        ],
+                      ),
+                      Stack(
+                        children: [
+                          Container(
+                            child: Image.asset(
+                              'Pump.jpg',
+                              fit: BoxFit.fill,
+                            ),
+                            margin: EdgeInsets.all(0.5),
+                            width: MediaQuery.of(context).size.width/2 - 1,
+                            height: (constraints.maxHeight)/2 - 1,
+                          ),
+                          Positioned(
+                            left: MediaQuery.of(context).size.width/6,
+                            bottom: MediaQuery.of(context).size.height/12,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                              },
+                              child: Text('Play!'),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           );
         }
         )
-    );
-  }
-
-  Widget makeRow(String leftPath, String rightPath) {
-    return IntrinsicHeight(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ExpandImage(leftPath),
-          ExpandImage(rightPath),
-        ],
-      ),
-    );
-  }
-
-  Widget ExpandImage(String image) {
-    return Expanded(
-      child: Container(
-        child: Image.asset(
-          image,
-          fit: BoxFit.fill,
-        ),
-        margin: EdgeInsets.all(0.5),
-      ),
     );
   }
 }

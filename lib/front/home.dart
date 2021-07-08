@@ -47,8 +47,12 @@ class _HomeState extends State<Homepage> {
         .listen((data) {
       setState(() {
         data.docs.forEach((element) {
-          if(!rankId.contains(element.get('id')))
+          if(!rankId.contains(element.get('id'))) {
             rankId.add(element.get('id'));
+            total.add(element.get('avg').toString());
+            name.add(element.get('name').toString());
+            photo.add(element.get('photo').toString());
+          }
         });
       });
     });
@@ -98,17 +102,17 @@ class _HomeState extends State<Homepage> {
                         shrinkWrap: true,
                         itemCount: rankId.length,
                         itemBuilder: (context, index) {
-                          FirebaseFirestore.instance
-                              .collection('user')
-                              .doc(rankId[index].toString())
-                              .get()
-                              .then((value) {
-                            setState(() {
-                              total.add(value.get('avg').toString());
-                              name.add(value.get('name').toString());
-                              photo.add(value.get('photo').toString());
-                            });
-                          });
+                          // FirebaseFirestore.instance
+                          //     .collection('user')
+                          //     .doc(rankId[index].toString())
+                          //     .get()
+                          //     .then((value) {
+                          //   setState(() {
+                          //     total.add(value.get('avg').toString());
+                          //     name.add(value.get('name').toString());
+                          //     photo.add(value.get('photo').toString());
+                          //   });
+                          // });
                           return Card(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
