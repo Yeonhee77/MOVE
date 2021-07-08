@@ -102,17 +102,6 @@ class _HomeState extends State<Homepage> {
                         shrinkWrap: true,
                         itemCount: rankId.length,
                         itemBuilder: (context, index) {
-                          // FirebaseFirestore.instance
-                          //     .collection('user')
-                          //     .doc(rankId[index].toString())
-                          //     .get()
-                          //     .then((value) {
-                          //   setState(() {
-                          //     total.add(value.get('avg').toString());
-                          //     name.add(value.get('name').toString());
-                          //     photo.add(value.get('photo').toString());
-                          //   });
-                          // });
                           return Card(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
