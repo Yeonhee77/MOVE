@@ -56,6 +56,10 @@ flutter:
     - Dino.png
     - Fish.jpg
     - Pump.jpg
+    - Bluewhite_text.png
+    - Dino_text.png
+    - Fish_text.png
+    - Pump_text.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

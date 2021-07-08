@@ -130,7 +130,7 @@ class _HomeState extends State<Homepage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                           side: BorderSide(
-                              color: Color.fromARGB(100, 70, 10, 245), width: 5),
+                              color: Colors.purple, width: 5),
                         ),
                       ),
                       onPressed: () {
