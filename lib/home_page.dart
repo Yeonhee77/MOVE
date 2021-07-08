@@ -1,9 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 String gesture = "";
-
+// ignore: non_constant_identifier_names
+int gesture_num = 0;
+// ignore: non_constant_identifier_names
+String gesture_name = "";
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -133,13 +134,17 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.symmetric(horizontal: 4),
             // ignore: deprecated_member_use
             child: RaisedButton(
-              color: Colors.blue,
               child: Text('2', style: TextStyle(color: Colors.white)),
               onPressed: () async {
                 var sub = characteristic.value.listen((value) {
                   setState(() {
                     readValues[characteristic.uuid] = value;
                     gesture = value.toString();
+                    gesture_num = int.parse(gesture[1]);
+                    switch(gesture_num){
+                      case 1: gesture_name = "Left"; break;
+                      case 2: gesture_name = "Jump"; break;
+                    }
                   });
                 });
                 await characteristic.read();
@@ -179,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
       containers.add(
         Container(
           child: ExpansionTile(
-              title: Text("블루투스 연결설정"),
+              title: Center(child:Text("블루투스 연결설정")),
               children: characteristicsWidget),
         ),
       );
@@ -188,8 +193,23 @@ class _MyHomePageState extends State<MyHomePage> {
     return ListView(
       padding: const EdgeInsets.all(8),
       children: <Widget>[
-        containers[2],
-        Text("값:" + gesture),
+        Center(child:containers[2]),
+        Container(
+        child:Column(
+          children: [
+            SizedBox(height: 30,),
+            Center(
+                child:Column(
+                  children: [
+                    Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                    SizedBox(height: 30,),
+                    Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                  ],
+                )
+    ),
+          ],
+        )
+        ),
       ],
     );
   }
@@ -204,7 +224,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text("Bluetooth Demo"),
+          title: Center(child: Text("MOVE!")),
+            leading: IconButton(
+              icon: Icon(Icons.people_alt,color: Colors.white,),
+              onPressed: () => {
+
+              },
+            ),
             actions: <Widget>[
               new IconButton(
                 icon: new Icon(Icons.photo_album),
