@@ -18,6 +18,9 @@ class _LoginState extends State<Login> {
   num game3 = 0;
   num game4 = 0;
   double avg = 0;
+  String id = '';
+  String name = '';
+  String photo = '';
 
   Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -30,6 +33,9 @@ class _LoginState extends State<Login> {
     );
 
     final UserCredential authResult = await FirebaseAuth.instance.signInWithCredential(credential);
+    id = FirebaseAuth.instance.currentUser!.uid.toString();
+    name = FirebaseAuth.instance.currentUser!.displayName.toString();
+    photo = FirebaseAuth.instance.currentUser!.photoURL.toString();
 
     FirebaseFirestore.instance
         .collection('user')
@@ -51,6 +57,9 @@ class _LoginState extends State<Login> {
       'game3' : game3,
       'game4' : game4,
       'avg' : avg,
+      'id' : id,
+      'name' : name,
+      'photo' : photo,
     }).then((value) => print("user add!"));
   }
 
@@ -63,12 +72,29 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: TextButton(
-          child: Text('Google Login'),
-          onPressed: () {
-            signInWithGoogle();
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-          },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'MOVE!',
+              style: TextStyle(
+                fontSize: 32,
+                color: Colors.purple[100],
+                fontWeight: FontWeight.bold,
+              ),),
+            SizedBox(height: 30),
+            OutlinedButton(
+              child: Text('Google Login',style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54),),
+              onPressed: () {
+                signInWithGoogle();
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+              },
+            ),
+          ],
         ),
       ),
     );

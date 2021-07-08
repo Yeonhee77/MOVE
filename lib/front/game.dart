@@ -20,10 +20,43 @@ class _GameState extends State<Game> {
                 MaterialPageRoute(builder: (context) => Mypage()));}, icon: Icon(Icons.account_circle_rounded))
           ],
         ),
-    body: Center(child: Text('Game Page', style: TextStyle(
-      fontSize: 32,
-      color: Colors.black,
-    ),),),
+      body: Column(
+        children: [
+          Container(
+            child: Row(
+                children: <Widget>[
+                  Expanded(
+                      flex: 2,
+                      child: Text('1. 청기백기')
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Icon(Icons.sentiment_very_satisfied),
+                  )
+                ]
+            ),
+          ),
+          SizedBox(height: 300),
+          Container(
+            child: Row(
+                children: <Widget>[
+                  Expanded(
+                      flex: 2,
+                      child: Text('Hello, Flutter Beginner!')
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Icon(Icons.sentiment_very_satisfied),
+                  )
+                ]
+
+            ),
+          ),
+
+        ],
+
+      )
+
     );
   }
 }

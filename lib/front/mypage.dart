@@ -51,7 +51,7 @@ class _MypageState extends State<Mypage> {
                   backgroundColor: Colors.transparent,
                 ),
                 SizedBox(width: 15),
-                Text(FirebaseAuth.instance.currentUser!.displayName.toString(), style: TextStyle(fontSize: 20),),
+                Text(FirebaseAuth.instance.currentUser!.displayName.toString() + ' 님', style: TextStyle(fontSize: 20),),
               ],
             ),
             SizedBox(height: 30),
