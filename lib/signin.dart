@@ -3,14 +3,14 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'home.dart';
+import 'package:move/front/home.dart';
 
-class Login extends StatefulWidget {
+class Signin extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends State<Signin> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   String name = '';

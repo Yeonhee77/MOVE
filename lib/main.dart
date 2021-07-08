@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:move/front/home.dart';
 
 import 'bluetooth_off_screen.dart';
-import 'front/login.dart';
+import 'signin.dart';
 import 'model/sensor_data.dart';
 
 int sec = 0;
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         cardColor: Colors.deepPurple[100],
       ),
 
-      home: Login(),
+      home: Signin(),
       // home: MyHomePage(title: 'MOVE!'),
       debugShowCheckedModeBanner: false,
     );
@@ -229,7 +229,7 @@ class _MyHomePageState extends State<MyHomePage> {
     appBar: AppBar(
         title: Text(widget.title),
       actions: [
-        IconButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Login())),
+        IconButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Signin())),
             icon: Icon(Icons.arrow_forward))
       ],
     ),
