@@ -40,6 +40,7 @@ class _HomeState extends State<Homepage> {
 
     FirebaseFirestore.instance
         .collection('user')
+        .where('avg', isGreaterThan: -1)
         .orderBy('avg', descending: true)
         .limit(10)
         .snapshots()
@@ -91,7 +92,6 @@ class _HomeState extends State<Homepage> {
                 SizedBox(height: 30),
 
               FutureBuilder(
-                // stream: FirebaseFirestore.instance.collection('user').snapshots(),
                 builder: (context, snapshot) {
                   return ListView.builder(
                       scrollDirection: Axis.vertical,
