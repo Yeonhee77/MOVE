@@ -20,10 +20,16 @@ class _GameState extends State<Game> {
                 MaterialPageRoute(builder: (context) => Mypage()));}, icon: Icon(Icons.account_circle_rounded))
           ],
         ),
-    body: Center(child: Text('Game Page', style: TextStyle(
-      fontSize: 32,
-      color: Colors.black,
-    ),),),
+      body: Column(
+        children: [
+          Row(
+
+          ),
+          Row(
+
+          ),
+        ],
+      )
     );
   }
 }
