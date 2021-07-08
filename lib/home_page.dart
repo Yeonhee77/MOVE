@@ -1,8 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:move/data.dart';
+import 'package:move/value.dart';
 String gesture = "";
 // ignore: non_constant_identifier_names
-int gesture_num = 0;
+//int gesture_num = 0;
+final StreamController<int> streamController = StreamController<int>();
+
 // ignore: non_constant_identifier_names
 String gesture_name = "";
 class MyHomePage extends StatefulWidget {
@@ -12,6 +18,8 @@ class MyHomePage extends StatefulWidget {
 
 
 class _MyHomePageState extends State<MyHomePage> {
+  Gesture gesturedata;
+
   final FlutterBlue flutterBlue = FlutterBlue.instance;
   // ignore: deprecated_member_use
   final List<BluetoothDevice> devicesList = new List<BluetoothDevice>();
@@ -136,19 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: RaisedButton(
               child: Text('2', style: TextStyle(color: Colors.white)),
               onPressed: () async {
-                var sub = characteristic.value.listen((value) {
-                  setState(() {
-                    readValues[characteristic.uuid] = value;
-                    gesture = value.toString();
-                    gesture_num = int.parse(gesture[1]);
-                    switch(gesture_num){
-                      case 1: gesture_name = "Left"; break;
-                      case 2: gesture_name = "Jump"; break;
-                    }
-                  });
-                });
-                await characteristic.read();
-                sub.cancel();
+                setnum(characteristic);
               },
             ),
           ),
@@ -158,6 +154,22 @@ class _MyHomePageState extends State<MyHomePage> {
     return buttons;
   }
 
+  Future<void> setnum(characteristic) async {
+    var sub = characteristic.value.listen((value) {
+      setState(() {
+        readValues[characteristic.uuid] = value;
+        gesture = value.toString();
+        gesturedata.gesturedata = int.parse(gesture[1]);
+        switch(gesturedata.gesturedata){
+          case 1: gesture_name = "Left"; break;
+          case 2: gesture_name = "Jump"; break;
+        }
+      });
+    });
+
+    await characteristic.read();
+    sub.cancel();
+  }
   ListView _buildConnectDeviceView() {
     // ignore: deprecated_member_use
     List<Container> containers = new List<Container>();
@@ -201,12 +213,12 @@ class _MyHomePageState extends State<MyHomePage> {
             Center(
                 child:Column(
                   children: [
-                    Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                    Text("값:" + gesturedata.gesturedata.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                     SizedBox(height: 30,),
                     Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                   ],
                 )
-    ),
+              ),
           ],
         )
         ),
@@ -236,10 +248,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: new Icon(Icons.photo_album),
                 tooltip: 'Hi!',
                 onPressed: () => {
-                  print(gesture),
+                  print(gesturedata.gesturedata),
                 Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Value1()),
+                MaterialPageRoute(builder: (context) => CounterPage(gesturedata)),
                 )
                 },
               ),
@@ -250,19 +262,3 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 
-// ignore: must_be_immutable
-class Value1 extends StatefulWidget {
-  @override
-  _Value1State createState() => _Value1State();
-}
-
-class _Value1State extends State<Value1> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.lightBlue,
-      body: Center(
-      ),
-    );
-  }
-}
