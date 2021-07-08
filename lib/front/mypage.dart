@@ -55,16 +55,29 @@ class _MypageState extends State<Mypage> {
               ],
             ),
             SizedBox(height: 30),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text('Total Score: $total', style: TextStyle(fontSize: 32),),
+                Center(
+                  child: Container(
+                    width: 50, height: 50,
+                      child: Row(
+                      children: [
+                        Image.asset('Bluewhite_text.png',fit: BoxFit.fitWidth),
+                        Text('  $game1 점', style: TextStyle(fontSize: 20),),
+                    ],
+                  )),
+                ),
 
-            Text('Total Score: $total', style: TextStyle(fontSize: 32),),
-            SizedBox(height: 20),
-            Text('1. 청기백기: $game1', style: TextStyle(fontSize: 20),),
-            SizedBox(height: 20),
-            Text('2. 공룡 : $game2', style: TextStyle(fontSize: 20),),
-            SizedBox(height: 20),
-            Text('3. 낚시 : $game3', style: TextStyle(fontSize: 20),),
-            SizedBox(height: 20),
-            Text('4. 펌프 : $game4', style: TextStyle(fontSize: 20),),
+                SizedBox(height: 20),
+                Text('2. 공룡 : $game2', style: TextStyle(fontSize: 20),),
+                SizedBox(height: 20),
+                Text('3. 낚시 : $game3', style: TextStyle(fontSize: 20),),
+                SizedBox(height: 20),
+                Text('4. 펌프 : $game4', style: TextStyle(fontSize: 20),),
+                ],
+            ),
           ],
         ),
       ),
