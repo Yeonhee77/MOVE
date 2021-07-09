@@ -68,7 +68,7 @@ int numSamplesRead = 0;
 // Global variables used for TensorFlow Lite (Micro)
 tflite::MicroErrorReporter tflErrorReporter;
 
-// Auto resolve all the TensorFlow Lite for MicroInterpreters ops, for reduced memory-footprint change this to only 
+// Auto resolve all the TensorFlow Lite for MicroInterpreters ops, for reduced memory-footprint change this to only
 // include the op's you need.
 tflite::AllOpsResolver tflOpsResolver;
 
@@ -139,10 +139,10 @@ BLEUnsignedCharCharacteristic      versionTxChar                 (UUID_GEN("1003
 
 void setup()
 {
-  
+
   Serial.begin(9600);
   const int startTime = millis();
-  
+
   // Give serial port 2 second to connect.
   while (!Serial && millis() - startTime < 2000);
 
@@ -170,7 +170,7 @@ void setup()
 //  service.addCharacteristic(stateTxChar);
 //  service.addCharacteristic(fileTransferTypeRxChar);
 //  service.addCharacteristic(hasModelTxChar);
-//  
+//
 //  service.addCharacteristic(metaRxChar);
 //  service.addCharacteristic(metaTxChar);
 
@@ -249,35 +249,35 @@ void setup()
   tflOutputTensor = tflInterpreter->output(0);
 
   Serial.println("end of setup");
-  
+
 }
 
 
 void loop()
 {
   LedRed();
-  
+
   // Make sure we're connected and not busy file-transfering
   if (BLE.connected())
   {
     LedBlue();
-    
+
      Serial.println("BLE connected");
-  
+
      // Variables to hold IMU data
     float aX, aY, aZ, gX, gY, gZ;
 
     // Wait for motion above the threshold setting
-    while (!isCapturing) {    
+    while (!isCapturing) {
       if (IMU.accelerationAvailable() && IMU.gyroscopeAvailable()) {
-       
+
         IMU.readAcceleration(aX, aY, aZ);
         IMU.readGyroscope(gX, gY, gZ);
-  
+
         // Sum absolute values
         float average = fabs(aX / 4.0) + fabs(aY / 4.0) + fabs(aZ / 4.0) + fabs(gX / 2000.0) + fabs(gY / 2000.0) + fabs(gZ / 2000.0);
         average /= 6.;
-  
+
         // Above the threshold?
         if (average >= MOTION_THRESHOLD) {
           isCapturing = true;
@@ -290,11 +290,11 @@ void loop()
     while (isCapturing) {
       // Check if both acceleration and gyroscope data is available
       if (IMU.accelerationAvailable() && IMU.gyroscopeAvailable()) {
-  
+
         // read the acceleration and gyroscope data
         IMU.readAcceleration(aX, aY, aZ);
         IMU.readGyroscope(gX, gY, gZ);
-  
+
         // Normalize the IMU data between -1 to 1 and store in the model's
         // input tensor. Accelerometer data ranges between -4 and 4,
         // gyroscope data ranges between -2000 and 2000
@@ -304,15 +304,15 @@ void loop()
         tflInputTensor->data.f[numSamplesRead * 6 + 3] = gX / 2000.0;
         tflInputTensor->data.f[numSamplesRead * 6 + 4] = gY / 2000.0;
         tflInputTensor->data.f[numSamplesRead * 6 + 5] = gZ / 2000.0;
-  
+
         numSamplesRead++;
-  
+
         // Do we have the samples we need?
         if (numSamplesRead == NUM_SAMPLES) {
-          
+
           // Stop capturing
           isCapturing = false;
-          
+
           // Run inference
           TfLiteStatus invokeStatus = tflInterpreter->Invoke();
           if (invokeStatus != kTfLiteOk) {
@@ -320,11 +320,11 @@ void loop()
             while (1);
             return;
           }
-  
+
           // Loop through the output tensor values from the model
           int maxIndex = 0;
           float maxValue = 0;
-          
+
           for (int i = 0; i < NUM_GESTURES; i++) {
             float _value = tflOutputTensor->data.f[i];
 
@@ -332,19 +332,19 @@ void loop()
               maxValue = _value;
               maxIndex = i;
             }
-            
+
             Serial.print(GESTURES[i]);
             Serial.print(": ");
             Serial.println(tflOutputTensor->data.f[i], 6);
           }
-              
+
           Serial.print("Gesture: ");
           Serial.println(GESTURES[maxIndex]);
-                    
+
           int result = 0;
-          
+
            // If the gestures is "left" print 1, "RIGHT" print 2, "UP" print 3, "DOWN" print 4
-           
+
           if (String(GESTURES[maxIndex]).equals("LEFT")) result = 1;
           else if (String(GESTURES[maxIndex]).equals("RIGHT")) result = 2;
           else if (String(GESTURES[maxIndex]).equals("UP")) result = 3;

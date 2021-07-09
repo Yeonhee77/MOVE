@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1073143112432-5av17r3kve6uroue8k724tvvp9dulfl0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bluetooth_test",
+            "certificate_hash": "b989c993a3988679bc2ac09696c6cd0e940792aa"
+          }
+        },
+        {
           "client_id": "1073143112432-viddjlj6i2vbofjp957ph39blt74c954.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
