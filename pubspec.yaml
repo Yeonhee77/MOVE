@@ -27,7 +27,8 @@ dependencies:
   firebase_storage: ^9.0.0
   toast: ^0.1.5
   cupertino_icons: ^0.1.3
-  flutter_blue: ^0.7.2
+  flutter_blue: ^0.8.0
+  flame: 1.0.0-rc9
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -57,6 +58,7 @@ flutter:
     - Dino_text.png
     - Fish_text.png
     - Pump_text.png
+    - sprite.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

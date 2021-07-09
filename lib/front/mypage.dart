@@ -62,7 +62,7 @@ class _MypageState extends State<Mypage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Total Score: $total', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold,),),
+                Text('Average Score: $total', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold,),),
                 SizedBox(height: 40),
                 Center(
                   child: Container(

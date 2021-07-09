@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:move/front/mypage.dart';
+import 'package:move/trex/trex_main.dart';
 
 class Game extends StatefulWidget {
   @override
@@ -70,7 +71,7 @@ class _GameState extends State<Game> {
                             bottom: MediaQuery.of(context).size.height/12,
                             child: ElevatedButton(
                               onPressed: () {
-                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper()));
                               },
                               style: ElevatedButton.styleFrom(
                                 primary: Color.fromARGB(100, 70, 10, 245),

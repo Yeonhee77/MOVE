@@ -1,5 +1,6 @@
-class Gesture{
- int gesturedata=0;
+class Move{
+ int gdata;
 
- Gesture(this.gesturedata);
+ Move(this.gdata);
+
 }

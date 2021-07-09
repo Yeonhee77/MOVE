@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:move/data.dart';
 
 class CounterPage extends StatefulWidget {
-  Gesture gesturedata;
-  CounterPage(this.gesturedata);
+  final Move move;
+  CounterPage({required this.move});
 
   // ignore: non_constant_identifier_names
   @override
@@ -12,9 +12,15 @@ class CounterPage extends StatefulWidget {
 }
 
 class _CounterPageState extends State<CounterPage> {
-  int value = 0;
   final StreamController<int> _streamController = StreamController<int>();
 
+  // @override
+  // void initState() {
+  //   Future.delayed(const Duration(seconds: 1), () {
+  //     _streamController.add(widget.move.gdata);
+  //   });
+  //   super.initState();
+  // }
 
   @override
   void dispose(){
@@ -26,15 +32,13 @@ class _CounterPageState extends State<CounterPage> {
     return Scaffold(
       appBar: AppBar(title: Text('Stream version of the Counter App')),
       body: Center(
-        child:
-        StreamBuilder<int>(
-            stream: _streamController.stream,
-            initialData: value = widget.gesturedata.gesturedata,
-            builder: (BuildContext context, AsyncSnapshot<int> snapshot){
-              return Text('You hit me: ${snapshot.data} times');
-            }
-        ),
-      ),
+          child: Text('You hit me: ' + widget.move.gdata.toString()),
+      ),// floatingActionButton: FloatingActionButton(
+    //   child: const Icon(Icons.add),
+    //   onPressed: (){
+    //     _streamController.sink.add(widget.move.gdata);
+    //   },
+    // ),
     );
   }
 }
