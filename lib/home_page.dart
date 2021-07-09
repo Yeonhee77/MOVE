@@ -58,7 +58,16 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     flutterBlue.startScan();
 
-    //setnum(characteristic);
+    //dataState(characteristic);
+  }
+
+  Future dataState(BluetoothCharacteristic characteristic) async {
+    characteristic.value.listen((value) {
+      readValues[characteristic.uuid] = value;
+    });
+    await characteristic.setNotifyValue(true);
+
+    setnum(characteristic);
   }
 
   ListView _buildListViewOfDevices() {
@@ -121,45 +130,14 @@ class _MyHomePageState extends State<MyHomePage> {
     // ignore: deprecated_member_use
     List<ButtonTheme> buttons = [];
     if (characteristic.properties.notify) {
-      buttons.add(
-        ButtonTheme(
-          minWidth: 10,
-          height: 20,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            // ignore: deprecated_member_use
-            child: RaisedButton(
-              child: Text('1', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                characteristic.value.listen((value) {
-                  readValues[characteristic.uuid] = value;
-                });
-                await characteristic.setNotifyValue(true);
-              },
-            ),
-          ),
-        ),
-      );
+      characteristic.value.listen((value) {
+        readValues[characteristic.uuid] = value;});
+      characteristic.setNotifyValue(true);
     }
-    if (characteristic.properties.read && characteristic.properties.notify) {
-      buttons.add(
-        ButtonTheme(
-          minWidth: 10,
-          height: 20,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            // ignore: deprecated_member_use
-            child: RaisedButton(
-              child: Text('2', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                setnum(characteristic);
-              },
-            ),
-          ),
-        ),
-      );
-    }
-    return buttons;
+
+    if (characteristic.properties.read && characteristic.properties.notify)    setnum(characteristic);
+
+     return buttons;
   }
 
   Future<void> setnum(characteristic) async {
@@ -216,7 +194,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return ListView(
       padding: const EdgeInsets.all(8),
       children: <Widget>[
-        Center(child:containers[2]),
+        //Center(child:containers[2]),
         Container(
             child:Column(
               children: [
@@ -251,7 +229,6 @@ class _MyHomePageState extends State<MyHomePage> {
       leading: IconButton(
         icon: Icon(Icons.people_alt,color: Colors.white,),
         onPressed: () => {
-            BluetoothDevice.
         },
       ),
       actions: <Widget>[
@@ -263,7 +240,8 @@ class _MyHomePageState extends State<MyHomePage> {
             final move = Move(gesture_num);
             await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CounterPage(move: move))
+                MaterialPageRoute(builder: (context) => CounterPage(bluetoothServices: bluetoothServices))
+                // MaterialPageRoute(builder: (context) => CounterPage(move: move))
             );
           },
         ),
