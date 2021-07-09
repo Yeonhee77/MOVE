@@ -58,9 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     flutterBlue.startScan();
 
-<<<<<<< HEAD
-    //setnum(characteristic);
-=======
     //dataState(characteristic);
   }
 
@@ -71,7 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
     await characteristic.setNotifyValue(true);
 
     setnum(characteristic);
->>>>>>> cfb7e6f9cc4e08fd7252461d52e5a0580e63bad5
   }
 
   ListView _buildListViewOfDevices() {

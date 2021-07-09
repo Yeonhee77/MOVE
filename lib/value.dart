@@ -113,15 +113,6 @@ class _CounterPageState extends State<CounterPage> {
     return Scaffold(
       appBar: AppBar(title: Text('Stream version of the Counter App')),
       body: Center(
-<<<<<<< HEAD
-          child: Text('You hit me: ' + widget.move.gdata.toString()),
-      ),// floatingActionButton: FloatingActionButton(
-    //   child: const Icon(Icons.add),
-    //   onPressed: (){
-    //     _streamController.sink.add(widget.move.gdata);
-    //   },
-    // ),
-=======
         child: _buildConnectDeviceView(),
         // child: StreamBuilder<int>(
         //     stream: _streamController.stream,
@@ -131,7 +122,6 @@ class _CounterPageState extends State<CounterPage> {
         //     }
         // ),
       ),
->>>>>>> cfb7e6f9cc4e08fd7252461d52e5a0580e63bad5
     );
   }
 }
