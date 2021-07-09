@@ -5,6 +5,8 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/data.dart';
 import 'package:move/value.dart';
 
+import 'front/login.dart';
+
 String gesture = "";
 // ignore: non_constant_identifier_names
 int gesture_num = 0;
@@ -22,11 +24,12 @@ class _MyHomePageState extends State<MyHomePage> {
   final Move move = Move(gesture_num);
   final FlutterBlue flutterBlue = FlutterBlue.instance;
   // ignore: deprecated_member_use
-  final List<BluetoothDevice> devicesList = <BluetoothDevice>[];
+
+  final List<BluetoothDevice> devicesList = [];
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   final textController = TextEditingController();
-  late BluetoothDevice connectedDevice;
-  late List<BluetoothService> bluetoothServices;
+  BluetoothDevice? connectedDevice;
+  List<BluetoothService>? bluetoothServices;
 
   _showDeviceTolist(final BluetoothDevice device) {
     if (!devicesList.contains(device)) {
@@ -35,6 +38,8 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     }
   }
+
+  StreamController<String> dataController = new StreamController();
 
   @override
   void initState() {
@@ -52,11 +57,14 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
     flutterBlue.startScan();
+
+    //setnum(characteristic);
   }
 
   ListView _buildListViewOfDevices() {
     // ignore: deprecated_member_use
-    List<Container> containers = <Container>[];
+
+    List<Container> containers = [];
     for (BluetoothDevice device in devicesList) {
       containers.add(
         Container(
@@ -111,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<ButtonTheme> _buildReadWriteNotifyButton(
       BluetoothCharacteristic characteristic) {
     // ignore: deprecated_member_use
-    List<ButtonTheme> buttons = <ButtonTheme>[];
+    List<ButtonTheme> buttons = [];
     if (characteristic.properties.notify) {
       buttons.add(
         ButtonTheme(
@@ -161,10 +169,10 @@ class _MyHomePageState extends State<MyHomePage> {
         gesture = value.toString();
         gesture_num = int.parse(gesture[1]);
         switch(gesture_num){
-          case 1: gesture_name = "RUN"; break;
-          case 2: gesture_name = "LEFT"; break;
-          case 3: gesture_name = "RIGHT"; break;
-          // case 4: gesture_name = "DOWN"; break;
+          case 1: gesture_name = "LEFT"; break;
+          case 2: gesture_name = "RIGHT"; break;
+          case 3: gesture_name = "UP"; break;
+          case 4: gesture_name = "DOWN"; break;
         }
       });
     });
@@ -175,10 +183,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ListView _buildConnectDeviceView() {
     // ignore: deprecated_member_use
-    List<Container> containers = <Container>[];
-    for (BluetoothService service in bluetoothServices) {
+    List<Container> containers = [];
+    for (BluetoothService service in bluetoothServices!) {
       // ignore: deprecated_member_use
-      List<Widget> characteristicsWidget = <Widget>[];
+      List<Widget> characteristicsWidget = [];
 
       for (BluetoothCharacteristic characteristic in service.characteristics) {
         characteristicsWidget.add(
@@ -243,7 +251,7 @@ class _MyHomePageState extends State<MyHomePage> {
       leading: IconButton(
         icon: Icon(Icons.people_alt,color: Colors.white,),
         onPressed: () => {
-
+            BluetoothDevice.
         },
       ),
       actions: <Widget>[
@@ -259,7 +267,16 @@ class _MyHomePageState extends State<MyHomePage> {
             );
           },
         ),
-      ],
+        IconButton(
+                icon: new Icon(Icons.design_services),
+                onPressed: () => {
+                      print(gesture_num),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Login()),
+                      )
+                    })
+          ],
     ),
     body: _buildView(),
   );

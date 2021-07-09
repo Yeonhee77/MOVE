@@ -6,7 +6,6 @@ class CounterPage extends StatefulWidget {
   final Move move;
   CounterPage({required this.move});
 
-
   // ignore: non_constant_identifier_names
   @override
   _CounterPageState createState() => _CounterPageState();
@@ -33,20 +32,13 @@ class _CounterPageState extends State<CounterPage> {
     return Scaffold(
       appBar: AppBar(title: Text('Stream version of the Counter App')),
       body: Center(
-        child: StreamBuilder<int>(
-            stream: _streamController.stream,
-            initialData: 0,
-            builder: (BuildContext context, AsyncSnapshot<int> snapshot){
-              return Text('You hit me: ' + widget.move.gdata.toString());
-            }
-        ),
-      ),
-      // floatingActionButton: FloatingActionButton(
-      //   child: const Icon(Icons.add),
-      //   onPressed: (){
-      //     _streamController.sink.add(widget.move.gdata);
-      //   },
-      // ),
+          child: Text('You hit me: ' + widget.move.gdata.toString()),
+      ),// floatingActionButton: FloatingActionButton(
+    //   child: const Icon(Icons.add),
+    //   onPressed: (){
+    //     _streamController.sink.add(widget.move.gdata);
+    //   },
+    // ),
     );
   }
 }
