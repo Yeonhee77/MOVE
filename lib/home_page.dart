@@ -24,6 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final Move move = Move(gesture_num);
   final FlutterBlue flutterBlue = FlutterBlue.instance;
   // ignore: deprecated_member_use
+
   final List<BluetoothDevice> devicesList = [];
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   final textController = TextEditingController();
@@ -37,6 +38,8 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     }
   }
+
+  StreamController<String> dataController = new StreamController();
 
   @override
   void initState() {
@@ -54,10 +57,22 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
     flutterBlue.startScan();
+
+    //dataState(characteristic);
+  }
+
+  Future dataState(BluetoothCharacteristic characteristic) async {
+    characteristic.value.listen((value) {
+      readValues[characteristic.uuid] = value;
+    });
+    await characteristic.setNotifyValue(true);
+
+    setnum(characteristic);
   }
 
   ListView _buildListViewOfDevices() {
     // ignore: deprecated_member_use
+
     List<Container> containers = [];
     for (BluetoothDevice device in devicesList) {
       containers.add(
@@ -115,44 +130,13 @@ class _MyHomePageState extends State<MyHomePage> {
     // ignore: deprecated_member_use
     List<ButtonTheme> buttons = [];
     if (characteristic.properties.notify) {
-      buttons.add(
-        ButtonTheme(
-          minWidth: 10,
-          height: 20,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            // ignore: deprecated_member_use
-            child: RaisedButton(
-              child: Text('1', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                characteristic.value.listen((value) {
-                  readValues[characteristic.uuid] = value;
-                });
-                await characteristic.setNotifyValue(true);
-              },
-            ),
-          ),
-        ),
-      );
+      characteristic.value.listen((value) {
+        readValues[characteristic.uuid] = value;});
+      characteristic.setNotifyValue(true);
     }
-    if (characteristic.properties.read && characteristic.properties.notify) {
-      buttons.add(
-        ButtonTheme(
-          minWidth: 10,
-          height: 20,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            // ignore: deprecated_member_use
-            child: RaisedButton(
-              child: Text('2', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                setnum(characteristic);
-              },
-            ),
-          ),
-        ),
-      );
-    }
+
+    if (characteristic.properties.read && characteristic.properties.notify)    setnum(characteristic);
+
     return buttons;
   }
 
@@ -210,7 +194,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return ListView(
       padding: const EdgeInsets.all(8),
       children: <Widget>[
-        Center(child:containers[2]),
+        //Center(child:containers[2]),
         Container(
             child:Column(
               children: [
@@ -245,7 +229,6 @@ class _MyHomePageState extends State<MyHomePage> {
       leading: IconButton(
         icon: Icon(Icons.people_alt,color: Colors.white,),
         onPressed: () => {
-
         },
       ),
       actions: <Widget>[
@@ -258,20 +241,20 @@ class _MyHomePageState extends State<MyHomePage> {
             await Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => CounterPage(bluetoothServices: bluetoothServices))
-                // MaterialPageRoute(builder: (context) => CounterPage(move: move))
+              // MaterialPageRoute(builder: (context) => CounterPage(move: move))
             );
           },
         ),
         IconButton(
-                icon: new Icon(Icons.design_services),
-                onPressed: () => {
-                      print(gesture_num),
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Login()),
-                      )
-                    })
-          ],
+            icon: new Icon(Icons.design_services),
+            onPressed: () => {
+              print(gesture_num),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Login()),
+              )
+            })
+      ],
     ),
     body: _buildView(),
   );
