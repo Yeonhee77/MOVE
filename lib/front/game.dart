@@ -46,7 +46,10 @@ class _GameState extends State<Game> {
                               onPressed: () {
                                 // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
                               },
-                              child: Text('Play!'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Color.fromARGB(100, 70, 10, 245),
+                              ),
+                              child: Text('Play!', style: TextStyle(fontSize: 20),),
                             ),
                           )
                         ],
@@ -69,7 +72,10 @@ class _GameState extends State<Game> {
                               onPressed: () {
                                 // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
                               },
-                              child: Text('Play!'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Color.fromARGB(100, 70, 10, 245),
+                              ),
+                              child: Text('Play!', style: TextStyle(fontSize: 20),),
                             ),
                           )
                         ],
@@ -98,7 +104,10 @@ class _GameState extends State<Game> {
                               onPressed: () {
                                 // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
                               },
-                              child: Text('Play!'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Color.fromARGB(100, 70, 10, 245),
+                              ),
+                              child: Text('Play!', style: TextStyle(fontSize: 20),),
                             ),
                           )
                         ],
@@ -121,7 +130,10 @@ class _GameState extends State<Game> {
                               onPressed: () {
                                 // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
                               },
-                              child: Text('Play!'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Color.fromARGB(100, 70, 10, 245),
+                              ),
+                              child: Text('Play!', style: TextStyle(fontSize: 20),),
                             ),
                           )
                         ],

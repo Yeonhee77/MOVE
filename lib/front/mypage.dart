@@ -19,7 +19,7 @@ class _MypageState extends State<Mypage> {
     super.initState();
 
     FirebaseFirestore.instance.collection('user')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(FirebaseAuth.instance.currentUser.uid)
         .get()
         .then((doc) {
           setState(() {
@@ -51,11 +51,11 @@ class _MypageState extends State<Mypage> {
                 SizedBox(width: 15,),
                 CircleAvatar(
                   radius: 30,
-                  backgroundImage: NetworkImage(FirebaseAuth.instance.currentUser!.photoURL.toString()),
+                  backgroundImage: NetworkImage(FirebaseAuth.instance.currentUser.photoURL.toString()),
                   backgroundColor: Colors.transparent,
                 ),
                 SizedBox(width: 15),
-                Text(FirebaseAuth.instance.currentUser!.displayName.toString() + ' 님', style: TextStyle(fontSize: 20),),
+                Text(FirebaseAuth.instance.currentUser.displayName.toString() + ' 님', style: TextStyle(fontSize: 20),),
               ],
             ),
             SizedBox(height: 30),
