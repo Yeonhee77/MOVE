@@ -71,7 +71,7 @@ class _GameState extends State<Game> {
                             bottom: MediaQuery.of(context).size.height/12,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper()));
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper()));
                               },
                               style: ElevatedButton.styleFrom(
                                 primary: Color.fromARGB(100, 70, 10, 245),

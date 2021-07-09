@@ -58,7 +58,20 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     flutterBlue.startScan();
 
+<<<<<<< HEAD
     //setnum(characteristic);
+=======
+    //dataState(characteristic);
+  }
+
+  Future dataState(BluetoothCharacteristic characteristic) async {
+    characteristic.value.listen((value) {
+      readValues[characteristic.uuid] = value;
+    });
+    await characteristic.setNotifyValue(true);
+
+    setnum(characteristic);
+>>>>>>> cfb7e6f9cc4e08fd7252461d52e5a0580e63bad5
   }
 
   ListView _buildListViewOfDevices() {
@@ -121,44 +134,13 @@ class _MyHomePageState extends State<MyHomePage> {
     // ignore: deprecated_member_use
     List<ButtonTheme> buttons = [];
     if (characteristic.properties.notify) {
-      buttons.add(
-        ButtonTheme(
-          minWidth: 10,
-          height: 20,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            // ignore: deprecated_member_use
-            child: RaisedButton(
-              child: Text('1', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                characteristic.value.listen((value) {
-                  readValues[characteristic.uuid] = value;
-                });
-                await characteristic.setNotifyValue(true);
-              },
-            ),
-          ),
-        ),
-      );
+      characteristic.value.listen((value) {
+        readValues[characteristic.uuid] = value;});
+      characteristic.setNotifyValue(true);
     }
-    if (characteristic.properties.read && characteristic.properties.notify) {
-      buttons.add(
-        ButtonTheme(
-          minWidth: 10,
-          height: 20,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            // ignore: deprecated_member_use
-            child: RaisedButton(
-              child: Text('2', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                setnum(characteristic);
-              },
-            ),
-          ),
-        ),
-      );
-    }
+
+    if (characteristic.properties.read && characteristic.properties.notify)    setnum(characteristic);
+
     return buttons;
   }
 
@@ -216,7 +198,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return ListView(
       padding: const EdgeInsets.all(8),
       children: <Widget>[
-        Center(child:containers[2]),
+        //Center(child:containers[2]),
         Container(
             child:Column(
               children: [
@@ -251,7 +233,6 @@ class _MyHomePageState extends State<MyHomePage> {
       leading: IconButton(
         icon: Icon(Icons.people_alt,color: Colors.white,),
         onPressed: () => {
-
         },
       ),
       actions: <Widget>[
@@ -263,20 +244,21 @@ class _MyHomePageState extends State<MyHomePage> {
             final move = Move(gesture_num);
             await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CounterPage(move: move))
+                MaterialPageRoute(builder: (context) => CounterPage(bluetoothServices: bluetoothServices))
+              // MaterialPageRoute(builder: (context) => CounterPage(move: move))
             );
           },
         ),
         IconButton(
-                icon: new Icon(Icons.design_services),
-                onPressed: () => {
-                      print(gesture_num),
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Login()),
-                      )
-                    })
-          ],
+            icon: new Icon(Icons.design_services),
+            onPressed: () => {
+              print(gesture_num),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Login()),
+              )
+            })
+      ],
     ),
     body: _buildView(),
   );
