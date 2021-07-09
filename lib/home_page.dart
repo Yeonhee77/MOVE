@@ -6,6 +6,7 @@ import 'package:move/data.dart';
 import 'package:move/value.dart';
 
 import 'front/login.dart';
+
 String gesture = "";
 // ignore: non_constant_identifier_names
 int gesture_num = 0;
@@ -20,14 +21,7 @@ class MyHomePage extends StatefulWidget {
 
 
 class _MyHomePageState extends State<MyHomePage> {
-  Gesture? _gesturedata;
-  Gesture? get gesturedata{
-    if (_gesturedata == null) {
-      _gesturedata = Gesture(0); // Instantiate the object if its null.
-    }
-    return _gesturedata;
-  }
-
+  final Move move = Move(gesture_num);
   final FlutterBlue flutterBlue = FlutterBlue.instance;
   // ignore: deprecated_member_use
   final List<BluetoothDevice> devicesList = [];
@@ -168,9 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
         readValues[characteristic.uuid] = value;
         gesture = value.toString();
         gesture_num = int.parse(gesture[1]);
-        gesturedata!.gesturedata = 0;
-        gesturedata!.gesturedata = gesture_num;
-        switch(gesturedata!.gesturedata){
+        switch(gesture_num){
           case 1: gesture_name = "LEFT"; break;
           case 2: gesture_name = "RIGHT"; break;
           case 3: gesture_name = "UP"; break;
@@ -182,6 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
     await characteristic.read();
     sub.cancel();
   }
+
   ListView _buildConnectDeviceView() {
     // ignore: deprecated_member_use
     List<Container> containers = [];
@@ -219,20 +212,20 @@ class _MyHomePageState extends State<MyHomePage> {
       children: <Widget>[
         Center(child:containers[2]),
         Container(
-        child:Column(
-          children: [
-            SizedBox(height: 30,),
-            Center(
-                child:Column(
-                  children: [
-                    Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                    SizedBox(height: 30,),
-                    Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                  ],
-                )
-              ),
-          ],
-        )
+            child:Column(
+              children: [
+                SizedBox(height: 30,),
+                Center(
+                    child:Column(
+                      children: [
+                        Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        SizedBox(height: 30,),
+                        Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                      ],
+                    )
+                ),
+              ],
+            )
         ),
       ],
     );
@@ -247,34 +240,38 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Center(child: Text("MOVE!")),
-            leading: IconButton(
-              icon: Icon(Icons.people_alt,color: Colors.white,),
-              onPressed: () => {
-                print(gesturedata!.gesturedata),
-              },
-            ),
-            actions: <Widget>[
-              new IconButton(
-                icon: new Icon(Icons.photo_album),
-                tooltip: 'Hi!',
-                onPressed: () => {
-                  print(gesture_num),
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CounterPage(gesturedata!)),)
-                },
-              ),
-              IconButton(
+    appBar: AppBar(
+      title: Center(child: Text("MOVE!")),
+      leading: IconButton(
+        icon: Icon(Icons.people_alt,color: Colors.white,),
+        onPressed: () => {
+
+        },
+      ),
+      actions: <Widget>[
+        new IconButton(
+          icon: new Icon(Icons.photo_album),
+          tooltip: 'Hi!',
+          onPressed: () async {
+            print(gesture_name);
+            final move = Move(gesture_num);
+            await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CounterPage(move: move))
+            );
+          },
+        ),
+        IconButton(
                 icon: new Icon(Icons.design_services),
                 onPressed: () => {
-                  print(gesture_num),
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Login()),)
-                },
-              ),
-            ],
-        ),
-        body: _buildView(),
-      );
+                      print(gesture_num),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Login()),
+                      )
+                    })
+          ],
+    ),
+    body: _buildView(),
+  );
 }
-
-
