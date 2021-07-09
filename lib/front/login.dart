@@ -23,8 +23,8 @@ class _LoginState extends State<Login> {
   String photo = '';
 
   Future<UserCredential> signInWithGoogle() async {
-    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
     final FirebaseAuth _auth = FirebaseAuth.instance;
 
     final OAuthCredential credential = GoogleAuthProvider.credential(
@@ -33,13 +33,13 @@ class _LoginState extends State<Login> {
     );
 
     final UserCredential authResult = await FirebaseAuth.instance.signInWithCredential(credential);
-    id = FirebaseAuth.instance.currentUser.uid.toString();
-    name = FirebaseAuth.instance.currentUser.displayName.toString();
-    photo = FirebaseAuth.instance.currentUser.photoURL.toString();
+    id = FirebaseAuth.instance.currentUser!.uid.toString();
+    name = FirebaseAuth.instance.currentUser!.displayName.toString();
+    photo = FirebaseAuth.instance.currentUser!.photoURL.toString();
 
     FirebaseFirestore.instance
         .collection('user')
-        .doc(authResult.user.uid)
+        .doc(authResult.user!.uid)
         .get()
         .then((value) => {
       if(!value.exists) {
@@ -51,7 +51,7 @@ class _LoginState extends State<Login> {
   }
 
   Future<void> addUser() async{
-    FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser.uid).set({
+    FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser!.uid).set({
       'game1' : game1,
       'game2' : game2,
       'game3' : game3,

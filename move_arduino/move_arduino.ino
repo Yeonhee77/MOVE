@@ -38,14 +38,14 @@ limitations under the License.
 // a C style byte array.
 #include "model.h"
 
-// Values from Tiny Motion Trainer
-#define MOTION_THRESHOLD 0.2
-#define CAPTURE_DELAY 200 // This is now in milliseconds
-#define NUM_SAMPLES 30
+//Values from Tiny Motion Trainer
+#define MOTION_THRESHOLD 0.1
+#define CAPTURE_DELAY 1000 // This is now in milliseconds
+#define NUM_SAMPLES 20
 
 // Array to map gesture index to a name
 const char *GESTURES[] = {
-    "LEFT", "RIGHT", "UP", "DOWN"
+    "RUN", "LEFT", "RIGHT"
 };
 
 
@@ -345,10 +345,10 @@ void loop()
 
            // If the gestures is "left" print 1, "RIGHT" print 2, "UP" print 3, "DOWN" print 4
 
-          if (String(GESTURES[maxIndex]).equals("LEFT")) result = 1;
-          else if (String(GESTURES[maxIndex]).equals("RIGHT")) result = 2;
-          else if (String(GESTURES[maxIndex]).equals("UP")) result = 3;
-          else if (String(GESTURES[maxIndex]).equals("DOWN")) result = 4;
+          if (String(GESTURES[maxIndex]).equals("RUN")) result = 1;
+          else if (String(GESTURES[maxIndex]).equals("LEFT")) result = 2;
+          else if (String(GESTURES[maxIndex]).equals("RIGHT")) result = 3;
+          //else if (String(GESTURES[maxIndex]).equals("DOWN")) result = 4;
 
           dataProviderTxChar.writeValue((byte)result);
 

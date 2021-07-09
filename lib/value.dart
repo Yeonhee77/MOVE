@@ -4,7 +4,7 @@ import 'package:move/data.dart';
 
 class CounterPage extends StatefulWidget {
   final Move move;
-  CounterPage({this.move});
+  CounterPage({required this.move});
 
 
   // ignore: non_constant_identifier_names
@@ -37,14 +37,14 @@ class _CounterPageState extends State<CounterPage> {
             stream: _streamController.stream,
             initialData: 0,
             builder: (BuildContext context, AsyncSnapshot<int> snapshot){
-              return Text('You hit me: ' + {snapshot.data}.toString());
+              return Text('You hit me: ' + widget.move.gdata.toString());
             }
         ),
       ),
       // floatingActionButton: FloatingActionButton(
       //   child: const Icon(Icons.add),
       //   onPressed: (){
-      //     _streamController.sink.add(++_counter);
+      //     _streamController.sink.add(widget.move.gdata);
       //   },
       // ),
     );

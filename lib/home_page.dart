@@ -22,11 +22,11 @@ class _MyHomePageState extends State<MyHomePage> {
   final Move move = Move(gesture_num);
   final FlutterBlue flutterBlue = FlutterBlue.instance;
   // ignore: deprecated_member_use
-  final List<BluetoothDevice> devicesList = new List<BluetoothDevice>();
+  final List<BluetoothDevice> devicesList = <BluetoothDevice>[];
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   final textController = TextEditingController();
-  BluetoothDevice connectedDevice;
-  List<BluetoothService> bluetoothServices;
+  late BluetoothDevice connectedDevice;
+  late List<BluetoothService> bluetoothServices;
 
   _showDeviceTolist(final BluetoothDevice device) {
     if (!devicesList.contains(device)) {
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ListView _buildListViewOfDevices() {
     // ignore: deprecated_member_use
-    List<Container> containers = new List<Container>();
+    List<Container> containers = <Container>[];
     for (BluetoothDevice device in devicesList) {
       containers.add(
         Container(
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   try {
                     await device.connect();
                   } catch (e) {
-                    if (e.code != 'already_connected') {
+                    if (e != 'already_connected') {
                       throw e;
                     }
                   } finally {
@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<ButtonTheme> _buildReadWriteNotifyButton(
       BluetoothCharacteristic characteristic) {
     // ignore: deprecated_member_use
-    List<ButtonTheme> buttons = new List<ButtonTheme>();
+    List<ButtonTheme> buttons = <ButtonTheme>[];
     if (characteristic.properties.notify) {
       buttons.add(
         ButtonTheme(
@@ -161,10 +161,10 @@ class _MyHomePageState extends State<MyHomePage> {
         gesture = value.toString();
         gesture_num = int.parse(gesture[1]);
         switch(gesture_num){
-          case 1: gesture_name = "LEFT"; break;
-          case 2: gesture_name = "RIGHT"; break;
-          case 3: gesture_name = "UP"; break;
-          case 4: gesture_name = "DOWN"; break;
+          case 1: gesture_name = "RUN"; break;
+          case 2: gesture_name = "LEFT"; break;
+          case 3: gesture_name = "RIGHT"; break;
+          // case 4: gesture_name = "DOWN"; break;
         }
       });
     });
@@ -175,10 +175,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ListView _buildConnectDeviceView() {
     // ignore: deprecated_member_use
-    List<Container> containers = new List<Container>();
+    List<Container> containers = <Container>[];
     for (BluetoothService service in bluetoothServices) {
       // ignore: deprecated_member_use
-      List<Widget> characteristicsWidget = new List<Widget>();
+      List<Widget> characteristicsWidget = <Widget>[];
 
       for (BluetoothCharacteristic characteristic in service.characteristics) {
         characteristicsWidget.add(
