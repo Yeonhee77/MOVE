@@ -257,7 +257,8 @@ class _MyHomePageState extends State<MyHomePage> {
             final move = Move(gesture_num);
             await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CounterPage(move: move))
+                MaterialPageRoute(builder: (context) => CounterPage(bluetoothServices: bluetoothServices))
+                // MaterialPageRoute(builder: (context) => CounterPage(move: move))
             );
           },
         ),
