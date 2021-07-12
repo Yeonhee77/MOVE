@@ -1,24 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/game.dart';
+import 'package:move/front/training.dart';
 
+import '../home_page.dart';
 import 'login.dart';
 
-class Home extends StatelessWidget {
-  @override
-  Widget build (BuildContext context) {
-    return MaterialApp(
-      title: 'Move!',
-      debugShowCheckedModeBanner: false,
-      home: Homepage(),
-    );
-  }
-}
-
 class Homepage extends StatefulWidget {
+  final List<BluetoothService>? bluetoothServices;
+  Homepage({this.bluetoothServices});
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -28,11 +23,6 @@ class _HomeState extends State<Homepage> {
   List<String> total = [];
   List<String> name = [];
   List<String> photo = [];
-
-  signOut() async {
-    await FirebaseAuth.instance.signOut();
-    await GoogleSignIn().signOut();
-  }
 
   @override
   void initState() {
@@ -68,10 +58,9 @@ class _HomeState extends State<Homepage> {
         backgroundColor: Colors.purple[100],
         actions: <Widget> [
           IconButton(
-            icon: Icon(Icons.signal_cellular_no_sim_outlined),
+            icon: Icon(Icons.add),
             onPressed: () {
-              signOut();
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
             },
           ),
           IconButton(onPressed: () {Navigator.push(context,
@@ -81,7 +70,7 @@ class _HomeState extends State<Homepage> {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            margin: const EdgeInsets.all(50.0),
+            margin: const EdgeInsets.all(30.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.baseline, //line alignment
               textBaseline: TextBaseline.alphabetic, //line alignment
@@ -122,29 +111,83 @@ class _HomeState extends State<Homepage> {
                 ),
 
                 SizedBox(height: 80),
-                SizedBox(
-                    height: 100,
-                    width: 200,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          side: BorderSide(
-                              color: Colors.purple, width: 5),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Game()));
-                      },
-                      child: Text(
-                        'Game Start!',
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black54),
-                      ),
-                    )
+                Row(
+                  children: [
+                    SizedBox(
+                        height: 100,
+                        width: 105,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              side: BorderSide(
+                                  color: Colors.purple, width: 5),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => Training(bluetoothServices: widget.bluetoothServices)));
+                          },
+                          child: Text(
+                            'Home Workout',
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black54),
+                          ),
+                        )
+                    ),
+                    SizedBox(width: 20,),
+                    SizedBox(
+                        height: 100,
+                        width: 105,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              side: BorderSide(
+                                  color: Colors.purple, width: 5),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices)));
+                          },
+                          child: Text(
+                            'Play Game',
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black54),
+                          ),
+                        )
+                    ),
+                    SizedBox(width: 20,),
+                    SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              side: BorderSide(
+                                  color: Colors.purple, width: 5),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => Training(bluetoothServices: widget.bluetoothServices)));
+                          },
+                          child: Text(
+                            '재활',
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black54),
+                          ),
+                        )
+                    ),
+                  ],
                 ),
               ],
             ),

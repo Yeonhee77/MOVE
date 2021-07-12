@@ -1,19 +1,15 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
-class CounterPage extends StatefulWidget {
+class Squat extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
-  CounterPage({this.bluetoothServices});
+  Squat({this.bluetoothServices});
 
-  // ignore: non_constant_identifier_names
   @override
-  _CounterPageState createState() => _CounterPageState();
+  _SquatState createState() => _SquatState();
 }
 
-class _CounterPageState extends State<CounterPage> {
-  final StreamController<int> _streamController = StreamController<int>();
-
+class _SquatState extends State<Squat> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   String gesture = "";
   // ignore: non_constant_identifier_names
@@ -21,7 +17,7 @@ class _CounterPageState extends State<CounterPage> {
 
   @override
   void dispose(){
-    _streamController.close();
+    // _streamController.close();
     super.dispose();
   }
 
@@ -91,9 +87,11 @@ class _CounterPageState extends State<CounterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Stream version of the Counter App')),
+      appBar: AppBar(
+        title: Text('Squat'),
+      ),
       body: Center(
-        child: _buildConnectDeviceView(),
+          child: _buildConnectDeviceView()
       ),
     );
   }
