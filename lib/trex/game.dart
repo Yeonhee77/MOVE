@@ -10,6 +10,7 @@ import 'package:move/trex/game_config.dart';
 import 'package:move/trex/game_over/game_over.dart';
 import 'package:move/trex/obstacle/obstacle.dart';
 import 'package:move/trex/t_rex/t_rex.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
 import 'collision/collision_utils.dart';
 
@@ -33,6 +34,7 @@ class Bg extends Component with HasGameRef {
 enum TRexGameStatus { playing, waiting, gameOver }
 
 class TRexGame extends BaseGame with TapDetector {
+
   TRexGame({
     required this.spriteImage,
   }) : super();
@@ -67,9 +69,12 @@ class TRexGame extends BaseGame with TapDetector {
 
   var result;
 
+  //bluetooth services
+  List<BluetoothService>? bluetoothServices;
+
   @override
   void onTap() {
-    onAction();
+    onAction(bluetoothServices);
   }
 
   // void convert(sensorData) {
@@ -80,7 +85,7 @@ class TRexGame extends BaseGame with TapDetector {
   //   onAction();
   // }
 
-  void onAction() {
+  void onAction(bluetoothServices) {
     if (gameOver) {
       restart();
       return;

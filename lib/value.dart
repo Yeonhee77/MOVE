@@ -32,20 +32,15 @@ class _CounterPageState extends State<CounterPage> {
       List<Widget> characteristicsWidget = [];
 
       for (BluetoothCharacteristic characteristic in service.characteristics) {
-        characteristicsWidget.add(
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    ..._buildReadWriteNotifyButton(characteristic),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
+        if (characteristic.properties.notify) {
+          characteristic.value.listen((value) {
+            readValues[characteristic.uuid] = value;
+          });
+          characteristic.setNotifyValue(true);
+        }
+        if (characteristic.properties.read && characteristic.properties.notify) {
+          setnum(characteristic);
+        }
       }
       containers.add(
         Container(
@@ -59,7 +54,6 @@ class _CounterPageState extends State<CounterPage> {
     return ListView(
       padding: const EdgeInsets.all(8),
       children: <Widget>[
-        Center(child:containers[2]),
         Container(
             child:Column(
               children: [
@@ -80,48 +74,17 @@ class _CounterPageState extends State<CounterPage> {
     );
   }
 
-  List<ButtonTheme> _buildReadWriteNotifyButton(
-      BluetoothCharacteristic characteristic) {
+  Future<List<ButtonTheme>> _buildReadWriteNotifyButton(BluetoothCharacteristic characteristic) async {
     // ignore: deprecated_member_use
     List<ButtonTheme> buttons = [];
     if (characteristic.properties.notify) {
-      buttons.add(
-        ButtonTheme(
-          minWidth: 10,
-          height: 20,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            // ignore: deprecated_member_use
-            child: RaisedButton(
-              child: Text('1', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                characteristic.value.listen((value) {
-                  readValues[characteristic.uuid] = value;
-                });
-                await characteristic.setNotifyValue(true);
-              },
-            ),
-          ),
-        ),
-      );
+      characteristic.value.listen((value) {
+        readValues[characteristic.uuid] = value;
+      });
+      await characteristic.setNotifyValue(true);
     }
     if (characteristic.properties.read && characteristic.properties.notify) {
-      buttons.add(
-        ButtonTheme(
-          minWidth: 10,
-          height: 20,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            // ignore: deprecated_member_use
-            child: RaisedButton(
-              child: Text('2', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                setnum(characteristic);
-              },
-            ),
-          ),
-        ),
-      );
+      setnum(characteristic);
     }
     return buttons;
   }

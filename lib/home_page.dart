@@ -241,20 +241,19 @@ class _MyHomePageState extends State<MyHomePage> {
             await Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => CounterPage(bluetoothServices: bluetoothServices))
-                // MaterialPageRoute(builder: (context) => CounterPage(move: move))
             );
           },
         ),
         IconButton(
-                icon: new Icon(Icons.design_services),
-                onPressed: () => {
-                      print(gesture_num),
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Login()),
-                      )
-                    })
-          ],
+            icon: new Icon(Icons.design_services),
+            onPressed: () => {
+              print(gesture_num),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Login(bluetoothServices: bluetoothServices)),
+              )
+            })
+      ],
     ),
     body: _buildView(),
   );
