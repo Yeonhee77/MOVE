@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/data.dart';
+import 'package:move/front/home.dart';
 import 'package:move/value.dart';
 
 import 'front/login.dart';
@@ -14,6 +15,7 @@ final StreamController<int> streamController = StreamController<int>();
 
 // ignore: non_constant_identifier_names
 String gesture_name = "";
+
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -39,7 +41,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  // ignore: close_sinks
   StreamController<String> dataController = new StreamController();
 
   @override
@@ -110,6 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     connectedDevice = device;
                   });
+                  // Navigator.pop(context);
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
                 },
               ),
             ],
@@ -224,38 +227,39 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: Center(child: Text("MOVE!")),
-      leading: IconButton(
-        icon: Icon(Icons.people_alt,color: Colors.white,),
-        onPressed: () => {
-        },
-      ),
-      actions: <Widget>[
-        new IconButton(
-          icon: new Icon(Icons.photo_album),
-          tooltip: 'Hi!',
-          onPressed: () async {
-            print(gesture_name);
-            await Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CounterPage(bluetoothServices: bluetoothServices))
-              // MaterialPageRoute(builder: (context) => CounterPage(move: move))
-            );
+  Widget build(BuildContext context) => WillPopScope(
+    onWillPop: () {
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
+
+      return Future.value(false);
+    },
+    child: Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text("MOVE!")),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
           },
         ),
-        IconButton(
-            icon: new Icon(Icons.design_services),
-            onPressed: () => {
-              print(gesture_num),
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Login()),
-              )
-            })
-      ],
+        // actions: <Widget>[
+        //   new IconButton(
+        //     icon: new Icon(Icons.photo_album),
+        //     tooltip: 'Hi!',
+        //     onPressed: () async {
+        //       print(gesture_name);
+        //       final move = Move(gesture_num);
+        //       await Navigator.push(
+        //           context,
+        //           MaterialPageRoute(builder: (context) => CounterPage(bluetoothServices: bluetoothServices))
+        //       );
+        //     },
+        //   ),
+        // ],
+      ),
+      body: _buildView(),
     ),
-    body: _buildView(),
   );
 }

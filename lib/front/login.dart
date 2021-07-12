@@ -91,7 +91,7 @@ class _LoginState extends State<Login> {
                   color: Colors.black54),),
               onPressed: () {
                 signInWithGoogle();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
               },
             ),
           ],
