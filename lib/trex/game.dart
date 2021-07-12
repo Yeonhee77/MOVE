@@ -3,7 +3,6 @@ import 'dart:ui' as ui;
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/gestures.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:move/trex/game_over/config.dart';
 import 'package:move/trex/horizon/horizon.dart';
 import 'package:move/trex/game_config.dart';

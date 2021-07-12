@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:move/front/mypage.dart';
-import 'package:move/trex/trex_main.dart';
 
 class Game extends StatefulWidget {
   @override

@@ -5,7 +5,6 @@ import 'package:flutter_blue/flutter_blue.dart';
 class CounterPage extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
   CounterPage({this.bluetoothServices});
-
   // ignore: non_constant_identifier_names
   @override
   _CounterPageState createState() => _CounterPageState();
@@ -16,6 +15,7 @@ class _CounterPageState extends State<CounterPage> {
 
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   String gesture = "";
+  // ignore: non_constant_identifier_names
   int gesture_num = 0;
 
   @override
@@ -42,20 +42,6 @@ class _CounterPageState extends State<CounterPage> {
         if (characteristic.properties.read && characteristic.properties.notify) {
           setnum(characteristic);
         }
-        // characteristicsWidget.add(
-        //   Align(
-        //     alignment: Alignment.centerLeft,
-        //     child: Column(
-        //       children: <Widget>[
-        //         Row(
-        //           children: <Widget>[
-        //             ..._buildReadWriteNotifyButton(characteristic),
-        //           ],
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // );
       }
       containers.add(
         Container(
@@ -69,7 +55,6 @@ class _CounterPageState extends State<CounterPage> {
     return ListView(
       padding: const EdgeInsets.all(8),
       children: <Widget>[
-        //Center(child:containers[2]),
         Container(
             child:Column(
               children: [
@@ -79,7 +64,6 @@ class _CounterPageState extends State<CounterPage> {
                       children: [
                         Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         SizedBox(height: 30,),
-                        // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                       ],
                     )
                 ),
@@ -111,12 +95,6 @@ class _CounterPageState extends State<CounterPage> {
         readValues[characteristic.uuid] = value;
         gesture = value.toString();
         gesture_num = int.parse(gesture[1]);
-        // switch(gesture_num){
-        //   case 1: gesture_name = "LEFT"; break;
-        //   case 2: gesture_name = "RIGHT"; break;
-        //   case 3: gesture_name = "UP"; break;
-        //   case 4: gesture_name = "DOWN"; break;
-        // }
       });
     });
 
@@ -130,13 +108,6 @@ class _CounterPageState extends State<CounterPage> {
       appBar: AppBar(title: Text('Stream version of the Counter App')),
       body: Center(
         child: _buildConnectDeviceView(),
-        // child: StreamBuilder<int>(
-        //     stream: _streamController.stream,
-        //     initialData: 0,
-        //     builder: (BuildContext context, AsyncSnapshot<int> snapshot){
-        //       return Text('You hit me: ' + {snapshot.data}.toString());
-        //     }
-        // ),
       ),
     );
   }

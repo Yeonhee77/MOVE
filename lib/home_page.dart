@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  // ignore: close_sinks
   StreamController<String> dataController = new StreamController();
 
   @override
@@ -237,7 +238,6 @@ class _MyHomePageState extends State<MyHomePage> {
           tooltip: 'Hi!',
           onPressed: () async {
             print(gesture_name);
-            final move = Move(gesture_num);
             await Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => CounterPage(bluetoothServices: bluetoothServices))
