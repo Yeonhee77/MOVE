@@ -115,7 +115,7 @@ class TRexGame extends BaseGame with TapDetector {
     if (gesture_num == 3)
     {
       onAction();
-      print('gesture nu : ' + gesture_num.toString());
+      print('gesture : ' + gesture_num.toString());
     }
 
   }
