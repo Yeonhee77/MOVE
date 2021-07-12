@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:move/front/squat_page.dart';
 
 class Tutorial1 extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
@@ -15,17 +16,16 @@ class _Tutorial1State extends State<Tutorial1> {
   // ignore: non_constant_identifier_names
   int gesture_num = 0;
   List<Widget>? tutorial;
-  final Stream<int> _bids = (() async* {
+  Stream<int> _bids = (() async* {
     yield 1;
-    await Future<void>.delayed(const Duration(seconds: 4));
+    await Future<void>.delayed(const Duration(seconds: 3));
     yield 2;
-    await Future<void>.delayed(const Duration(seconds: 4));
+    await Future<void>.delayed(const Duration(seconds: 3));
     yield 3;
-    await Future<void>.delayed(const Duration(seconds: 4));
+    await Future<void>.delayed(const Duration(seconds: 3));
     yield 4;
-    await Future<void>.delayed(const Duration(seconds: 4));
+    await Future<void>.delayed(const Duration(seconds: 3));
     yield 5;
-    await Future<void>.delayed(const Duration(seconds: 4));
   })();
 
   @override
@@ -94,19 +94,18 @@ class _Tutorial1State extends State<Tutorial1> {
                               switch (snapshot.data) {
                                 case 1:
                                   tutorial = <Widget>[
-                                    SizedBox(height: 120,),
-                                    Text("어꺠너비로 서서",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                                    SizedBox(height: 20,),
+                                    Text("어깨너비로 서서",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                                     Text("발끝이 약간 바깥쪽을 향하도록 해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                                     SizedBox(height: 20,),
-                                    Image.asset('bluewhite.png'),
-                                    SizedBox(height: 30,),
+                                    Image.asset('squat_1.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
                                         // foreground
                                       ),
                                       onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial1(bluetoothServices: widget.bluetoothServices)));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
                                       },
                                       child: Text('skip'),
                                     ),
@@ -114,19 +113,18 @@ class _Tutorial1State extends State<Tutorial1> {
                                   break;
                                 case 2:
                                   tutorial = <Widget>[
-                                    SizedBox(height: 120,),
+                                    SizedBox(height: 20,),
                                     Text("시선은 정면을 향하고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("복근에 힘을 주어 허리를 단단히 조여주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
-                                    Image.asset('bluewhite.png'),
-                                    SizedBox(height: 30,),
+                                    Image.asset('squat_2.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
                                         // foreground
                                       ),
                                       onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial1(bluetoothServices: widget.bluetoothServices)));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
                                       },
                                       child: Text('skip'),
                                     ),
@@ -134,18 +132,17 @@ class _Tutorial1State extends State<Tutorial1> {
                                   break;
                                 case 3:
                                   tutorial = <Widget>[
-                                    SizedBox(height: 120,),
+                                    SizedBox(height: 20,),
                                     Text("무릎이 발끝보다 앞으로 나오지 않도록 하면",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("허벅지와 수평이 될 때까지 앉으세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
-                                    Image.asset('bluewhite.png'),
-                                    SizedBox(height: 30,),
+                                    Image.asset('squat_1.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
                                       ),
                                       onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial1(bluetoothServices: widget.bluetoothServices)));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
                                       },
                                       child: Text('skip'),
                                     ),
@@ -153,19 +150,18 @@ class _Tutorial1State extends State<Tutorial1> {
                                   break;
                                 case 4:
                                   tutorial = <Widget>[
-                                    SizedBox(height: 120,),
+                                    SizedBox(height: 20,),
                                     Text("발뒤꿈치로 민다는 느낌으로",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("허벅지에 힘을 주면서 일어나세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
-                                    Image.asset('bluewhite.png'),
-                                    SizedBox(height: 30,),
+                                    Image.asset('squat_2.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
                                         // foreground
                                       ),
                                       onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial1(bluetoothServices: widget.bluetoothServices)));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
                                       },
                                       child: Text('skip'),
                                     ),
@@ -174,13 +170,22 @@ class _Tutorial1State extends State<Tutorial1> {
                                 case 5:
                                   tutorial = <Widget>[
                                     SizedBox(height: 120,),
-                                    Text("준비됐으면",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("마이크로 칩을 한번 흔들어주세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
                                     Image.asset('bluewhite.png'),
                                     SizedBox(height: 30,),
-                                    Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                                    ];
+                                    Text("moving value:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                        primary: Colors.black,
+                                        // foreground
+                                      ),
+                                      onPressed: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
+                                      },
+                                      child: Text('Start'),
+                                    ),
+                                  ];
                                   break;
                               }
                             }
