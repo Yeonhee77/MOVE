@@ -42,7 +42,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   void onRawKeyEvent(RawKeyEvent event) {
     if (event.logicalKey == LogicalKeyboardKey.enter ||
         event.logicalKey == LogicalKeyboardKey.space) {
-      game!.onAction(bluetoothServices);
+      game!.onAction();
     }
   }
 
