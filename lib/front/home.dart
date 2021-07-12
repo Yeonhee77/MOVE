@@ -4,30 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/game.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
 import 'login.dart';
 
-class Home extends StatelessWidget {
-  @override
-  Widget build (BuildContext context) {
-    return MaterialApp(
-      title: 'Move!',
-      debugShowCheckedModeBanner: false,
-      home: Homepage(),
-    );
-  }
-}
+class Home extends StatefulWidget {
+  final List<BluetoothService>? bluetoothServices;
+  Home({this.bluetoothServices});
 
-class Homepage extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Homepage> {
+class _HomeState extends State<Home> {
   List rankId = [];
   List<String> total = [];
   List<String> name = [];
   List<String> photo = [];
+
+  //bluetooth services
+  List<BluetoothService>? bluetoothServices;
 
   signOut() async {
     await FirebaseAuth.instance.signOut();
@@ -71,7 +67,7 @@ class _HomeState extends State<Homepage> {
             icon: Icon(Icons.signal_cellular_no_sim_outlined),
             onPressed: () {
               signOut();
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Login(bluetoothServices: bluetoothServices)));
             },
           ),
           IconButton(onPressed: () {Navigator.push(context,
@@ -135,7 +131,7 @@ class _HomeState extends State<Homepage> {
                       ),
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Game()));
+                            MaterialPageRoute(builder: (context) => Game(bluetoothServices: bluetoothServices)));
                       },
                       child: Text(
                         'Game Start!',

@@ -137,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (characteristic.properties.read && characteristic.properties.notify)    setnum(characteristic);
 
-    return buttons;
+     return buttons;
   }
 
   Future<void> setnum(characteristic) async {
@@ -241,7 +241,6 @@ class _MyHomePageState extends State<MyHomePage> {
             await Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => CounterPage(bluetoothServices: bluetoothServices))
-              // MaterialPageRoute(builder: (context) => CounterPage(move: move))
             );
           },
         ),
@@ -251,7 +250,7 @@ class _MyHomePageState extends State<MyHomePage> {
               print(gesture_num),
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Login()),
+                MaterialPageRoute(builder: (context) => Login(bluetoothServices: bluetoothServices)),
               )
             })
       ],

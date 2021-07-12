@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_blue/flutter_blue.dart';
+import 'dart:async';
 
 import 'home.dart';
+import 'package:move/home_page.dart';
 
 class Login extends StatefulWidget {
+  final List<BluetoothService>? bluetoothServices;
+  Login({this.bluetoothServices});
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -21,6 +27,9 @@ class _LoginState extends State<Login> {
   String id = '';
   String name = '';
   String photo = '';
+
+  //bluetooth services
+  List<BluetoothService>? bluetoothServices;
 
   Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -72,7 +81,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
+        child: Column /*_buildConnectDeviceView()*/(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -91,7 +100,8 @@ class _LoginState extends State<Login> {
                   color: Colors.black54),),
               onPressed: () {
                 signInWithGoogle();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                //_buildConnectDeviceView();
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Home(bluetoothServices: bluetoothServices)));
               },
             ),
           ],
