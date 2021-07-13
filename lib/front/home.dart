@@ -5,7 +5,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/game.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-
+import 'package:move/data.dart';
+import 'package:move/home_page.dart';
 import 'login.dart';
 
 class Home extends StatefulWidget {
@@ -21,9 +22,6 @@ class _HomeState extends State<Home> {
   List<String> total = [];
   List<String> name = [];
   List<String> photo = [];
-
-  //bluetooth services
-  List<BluetoothService>? bluetoothServices;
 
   signOut() async {
     await FirebaseAuth.instance.signOut();
@@ -67,7 +65,7 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.signal_cellular_no_sim_outlined),
             onPressed: () {
               signOut();
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Login(bluetoothServices: bluetoothServices)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Login(bluetoothServices: widget.bluetoothServices)));
             },
           ),
           IconButton(onPressed: () {Navigator.push(context,
@@ -130,8 +128,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Game(bluetoothServices: bluetoothServices)));
+                            MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices));
                       },
                       child: Text(
                         'Game Start!',

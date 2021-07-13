@@ -61,15 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
     //dataState(characteristic);
   }
 
-  Future dataState(BluetoothCharacteristic characteristic) async {
-    characteristic.value.listen((value) {
-      readValues[characteristic.uuid] = value;
-    });
-    await characteristic.setNotifyValue(true);
-
-    setnum(characteristic);
-  }
-
   ListView _buildListViewOfDevices() {
     // ignore: deprecated_member_use
 
@@ -137,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (characteristic.properties.read && characteristic.properties.notify)    setnum(characteristic);
 
-     return buttons;
+    return buttons;
   }
 
   Future<void> setnum(characteristic) async {
@@ -246,13 +237,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         IconButton(
             icon: new Icon(Icons.design_services),
-            onPressed: () => {
-              print(gesture_num),
-              Navigator.push(
+          onPressed: () async {
+            print(gesture_name);
+            final move = Move(gesture_num);
+            await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Login(bluetoothServices: bluetoothServices)),
-              )
-            })
+                MaterialPageRoute(builder: (context) => Login(bluetoothServices: bluetoothServices))
+            );
+          },)
       ],
     ),
     body: _buildView(),

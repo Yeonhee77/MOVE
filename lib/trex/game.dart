@@ -81,7 +81,58 @@ class TRexGame extends BaseGame with TapDetector {
   @override
   void dispose(){
     _streamController.close();
+
   }
+
+  Future<ListView> _buildConnectDeviceView() async { //Widget build 안에 있어야 함..
+    List<Container> containers = [];
+    for (BluetoothService service in bluetoothServices!) {
+      // ignore: deprecated_member_use
+      List<Widget> characteristicsWidget = [];
+
+      for (BluetoothCharacteristic characteristic in service.characteristics) {
+        if (characteristic.properties.notify) {
+          characteristic.value.listen((value) {
+            readValues[characteristic.uuid] = value;
+          });
+          characteristic.setNotifyValue(true);
+        }
+        if (characteristic.properties.read && characteristic.properties.notify) {
+          setnum(characteristic);
+        }
+      }
+      containers.add(
+        Container(
+          child: ExpansionTile(
+              title: Center(child:Text("블루투스 연결설정")),
+              children: characteristicsWidget),
+        ),
+      );
+    }
+
+    return ListView(
+      padding: const EdgeInsets.all(8),
+      children: <Widget>[
+        Container(
+            child:Column(
+              children: [
+                SizedBox(height: 30,),
+                Center(
+                    child:Column(
+                      children: [
+                        Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        SizedBox(height: 30,),
+                        // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                      ],
+                    )
+                ),
+              ],
+            )
+        ),
+      ],
+    );
+  }
+
 
   Future<List<ButtonTheme>> _buildReadWriteNotifyButton(BluetoothCharacteristic characteristic) async {
     // ignore: deprecated_member_use
@@ -94,28 +145,35 @@ class TRexGame extends BaseGame with TapDetector {
     }
     if (characteristic.properties.read && characteristic.properties.notify) {
       setnum(characteristic);
+      callAction();
     }
     return buttons;
   }
 
   Future<void> setnum(characteristic) async {
     var sub = characteristic.value.listen((value) {
+
         readValues[characteristic.uuid] = value;
         gesture = value.toString();
         gesture_num = int.parse(gesture[1]);
+        print('gesture :  $gesture_num');
+        // switch(gesture_num){
+        //   case 1: gesture_name = "LEFT"; break;
+        //   case 2: gesture_name = "RIGHT"; break;
+        //   case 3: gesture_name = "UP"; break;
+        //   case 4: gesture_name = "DOWN"; break;
+        // }
     });
 
     await characteristic.read();
     sub.cancel();
-
-    callAction ();
   }
 
   void callAction () {
     if (gesture_num == 3)
     {
       onAction();
-      print('gesture : ' + gesture_num.toString());
+
     }
 
   }

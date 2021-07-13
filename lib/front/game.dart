@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/trex/trex_main.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:move/data.dart';
+import 'package:move/home_page.dart';
 
 class Game extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
@@ -12,9 +14,6 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
-  //bluetooth services
-  List<BluetoothService>? bluetoothServices;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +77,7 @@ class _GameState extends State<Game> {
                             bottom: MediaQuery.of(context).size.height/12,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper(bluetoothServices: bluetoothServices)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper(bluetoothServices: widget.bluetoothServices)));
                               },
                               style: ElevatedButton.styleFrom(
                                 primary: Color.fromARGB(100, 70, 10, 245),
