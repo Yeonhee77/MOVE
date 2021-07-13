@@ -39,7 +39,7 @@ limitations under the License.
 #include "model.h"
 
 // Values from Tiny Motion Trainer
-#define MOTION_THRESHOLD 0.2
+#define MOTION_THRESHOLD 0.07
 #define CAPTURE_DELAY 200 // This is now in milliseconds
 #define NUM_SAMPLES 30
 
@@ -105,7 +105,7 @@ void LedBlue()   //BLE connected
 * BLE Characteristic / Service UUIDs
 ************************************************************************/
 
-#define LOCAL_NAME "Move!"
+#define LOCAL_NAME "YJ!"
 
 #define UUID_GEN(val) ("81c30e5c-" val "-4f7d-a886-de3e90749161")
 
