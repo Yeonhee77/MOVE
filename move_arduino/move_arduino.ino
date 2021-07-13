@@ -358,7 +358,7 @@ void loop()
           BLE.advertise();
 
           // Add delay to not double trigger
-          delay(300);
+          delay(CAPTURE_DELAY);
         }
       }
     }

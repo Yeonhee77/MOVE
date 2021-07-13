@@ -16,6 +16,6 @@ class GameConfig {
   late final int maxObstacleDuplication = 2;
   late final double maxSpeed = 50.0;
   late final double minJumpHeight = 35.0;
-  late final double speed = 12;
+  late final double speed = 6;
   late final double speedDropCoefficient = 3.0;
 }
