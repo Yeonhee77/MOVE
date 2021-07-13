@@ -191,8 +191,6 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: new Icon(Icons.photo_album),
             tooltip: 'Hi!',
             onPressed: () async {
-              print(gesture_name);
-              final move = Move(gesture_num);
               await Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) =>

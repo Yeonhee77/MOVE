@@ -13,7 +13,6 @@ class CounterPage extends StatefulWidget {
 
 class _CounterPageState extends State<CounterPage> {
   final StreamController<int> _streamController = StreamController<int>();
-
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   String gesture = "";
   String gesture_name = "";
