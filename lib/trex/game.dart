@@ -69,10 +69,12 @@ class TRexGame extends BaseGame with TapDetector {
   bool get gameOver => status == TRexGameStatus.gameOver;
 
   var result;
+  int score = 0;
 
   //bluetooth services
   final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
+
 
   @override
   void dispose(){
@@ -80,14 +82,19 @@ class TRexGame extends BaseGame with TapDetector {
 
   }
 
-  void onAction(int gesture_num) {
+  void onAction(int gesture_num, int score) {
     if (gameOver) {
       restart();
       return;
     }
 
     if(gesture_num == 3)
+    {
       tRex.startJump(currentSpeed);
+      score += 1;
+      this.score = score;
+      //print('score = $score');
+    }
   }
 
   void startGame() {
@@ -102,6 +109,7 @@ class TRexGame extends BaseGame with TapDetector {
     status = TRexGameStatus.gameOver;
     tRex.status = TRexStatus.crashed;
     currentSpeed = 0.0;
+
   }
 
   void restart() {
@@ -112,6 +120,7 @@ class TRexGame extends BaseGame with TapDetector {
     gameOverPanel.visible = false;
     timePlaying = 0.0;
   }
+
 
   @override
   void update(double dt) {
@@ -142,3 +151,34 @@ class TRexGame extends BaseGame with TapDetector {
   }
 
 }
+
+// class GameOver extends StatefulWidget {
+//   @override
+//   _GameOverState createState() => _GameOverState();
+// }
+//
+// class _GameOverState extends State<GameOver> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: AlertDialog(
+//         title: Text('Game over'),
+//         content: Text('Your score is $this.score'),
+//         actions: [
+//           FlatButton(
+//             textColor: Color(0xFF6200EE),
+//             onPressed: () {},
+//             child: Text('CANCEL'),
+//           ),
+//           FlatButton(
+//             textColor: Color(0xFF6200EE),
+//             onPressed: () {},
+//             child: Text('ACCEPT'),
+//           ),
+//         ],
+//       ),
+//
+//     );
+//   }
+// }
+

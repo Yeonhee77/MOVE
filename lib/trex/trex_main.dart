@@ -25,6 +25,7 @@ class TRexGameWrapper extends StatefulWidget {
 class _TRexGameWrapperState extends State<TRexGameWrapper> {
   bool splashGone = false;
   TRexGame? game;
+  int score = 0;
   //final _focusNode = FocusNode();
 
   @override
@@ -44,6 +45,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       },
     );
   }
+
   /*--------bluetooth-------*/
   final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
@@ -119,10 +121,28 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     sub.cancel();
   }
 
+  Widget scoreDisplay() {
+    return Text(
+      score.toString(),
+      style: TextStyle(
+        fontSize: 150,
+        color: Colors.green,
+        shadows: <Shadow>[
+          Shadow(
+            color: Color(0x88000000),
+            blurRadius: 10,
+            offset: Offset(2, 2),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     _buildConnectDeviceView();
-    game!.onAction(gesture_num);
+    game!.onAction(gesture_num,score);
+    scoreDisplay();
     if (game == null) {
       return const Center(
         child: Text("Loading"),
