@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/data.dart';
 import 'package:move/front/home.dart';
-import 'package:move/value.dart';
-
-import 'front/login.dart';
 
 String gesture = "";
 // ignore: non_constant_identifier_names
@@ -59,8 +56,6 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
     flutterBlue.startScan();
-
-    //dataState(characteristic);
   }
 
   Future dataState(BluetoothCharacteristic characteristic) async {
@@ -99,6 +94,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 onPressed: () async {
                   flutterBlue.stopScan();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Shake yout controller!'),
+                        duration: Duration(seconds: 5),
+                      )
+                  );
                   try {
                     await device.connect();
                   } catch (e) {
@@ -111,8 +112,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     connectedDevice = device;
                   });
-                  // Navigator.pop(context);
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
                 },
               ),
             ],
@@ -129,19 +128,16 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  List<ButtonTheme> _buildReadWriteNotifyButton(
-      BluetoothCharacteristic characteristic) {
+  Future<void> _buildReadWriteNotify(BluetoothCharacteristic characteristic) async{
     // ignore: deprecated_member_use
-    List<ButtonTheme> buttons = [];
     if (characteristic.properties.notify) {
       characteristic.value.listen((value) {
         readValues[characteristic.uuid] = value;});
       characteristic.setNotifyValue(true);
     }
 
-    if (characteristic.properties.read && characteristic.properties.notify)    setnum(characteristic);
-
-    return buttons;
+    if (characteristic.properties.read && characteristic.properties.notify)
+      setnum(characteristic);
   }
 
   Future<void> setnum(characteristic) async {
@@ -163,103 +159,27 @@ class _MyHomePageState extends State<MyHomePage> {
     sub.cancel();
   }
 
-  ListView _buildConnectDeviceView() {
-    // ignore: deprecated_member_use
-    List<Container> containers = [];
+  Future<void> _buildConnectDevice() async{
     for (BluetoothService service in bluetoothServices!) {
-      // ignore: deprecated_member_use
-      List<Widget> characteristicsWidget = [];
-
       for (BluetoothCharacteristic characteristic in service.characteristics) {
-        characteristicsWidget.add(
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    ..._buildReadWriteNotifyButton(characteristic),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
+        _buildReadWriteNotify(characteristic);
       }
-      containers.add(
-        Container(
-          child: ExpansionTile(
-              title: Center(child:Text("블루투스 연결설정")),
-              children: characteristicsWidget),
-        ),
-      );
     }
-
-    return ListView(
-      padding: const EdgeInsets.all(8),
-      children: <Widget>[
-        //Center(child:containers[2]),
-        Container(
-            child:Column(
-              children: [
-                SizedBox(height: 30,),
-                Center(
-                    child:Column(
-                      children: [
-                        Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                        SizedBox(height: 30,),
-                        Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                      ],
-                    )
-                ),
-              ],
-            )
-        ),
-      ],
-    );
   }
 
   ListView _buildView() {
     if (connectedDevice != null) {
-      return _buildConnectDeviceView();
+      _buildConnectDevice();
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
     }
     return _buildListViewOfDevices();
   }
 
   @override
-  Widget build(BuildContext context) => WillPopScope(
-    onWillPop: () {
-      Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-
-      return Future.value(false);
-    },
-    child: Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text("MOVE!")),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-          },
-        ),
-        // actions: <Widget>[
-        //   new IconButton(
-        //     icon: new Icon(Icons.photo_album),
-        //     tooltip: 'Hi!',
-        //     onPressed: () async {
-        //       print(gesture_name);
-        //       final move = Move(gesture_num);
-        //       await Navigator.push(
-        //           context,
-        //           MaterialPageRoute(builder: (context) => CounterPage(bluetoothServices: bluetoothServices))
-        //       );
-        //     },
-        //   ),
-        // ],
-      ),
-      body: _buildView(),
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(
+      title: Center(child: Text("MOVE!")),
     ),
+    body: _buildView(),
   );
 }

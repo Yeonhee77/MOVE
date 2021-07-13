@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:move/front/dumbbell.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/squat.dart';
 
@@ -32,44 +33,38 @@ class _TrainingState extends State<Training> {
               children: [
                 SizedBox(height: 30,),
                 Container(
-                  child: Stack(
-                    children: [
-                      Center(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width/2,
-                          child: InkWell(
-                            child: Image.asset(
-                              'bluewhite.png',
-                              fit: BoxFit.fill,
-                            ),
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
-                            },
-                          ),
+                  child: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width/2,
+                      child: InkWell(
+                        child: Image.asset(
+                          'bluewhite.png',
+                          fit: BoxFit.fill,
                         ),
+                        onTap: () {
+                          if(widget.bluetoothServices != null)
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
+                        },
                       ),
-                    ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 30,),
                 Container(
-                  child: Stack(
-                    children: [
-                      Center(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width/2,
-                          child: InkWell(
-                            child: Image.asset(
-                              'Fish.jpg',
-                              fit: BoxFit.fill,
-                            ),
-                            onTap: () {
-                              // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-                            },
-                          ),
+                  child: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width/2,
+                      child: InkWell(
+                        child: Image.asset(
+                          'Fish.jpg',
+                          fit: BoxFit.fill,
                         ),
+                        onTap: () {
+                          if(widget.bluetoothServices != null)
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Dumbbell(bluetoothServices: widget.bluetoothServices)));
+                        },
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ],

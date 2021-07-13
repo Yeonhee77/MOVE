@@ -13,10 +13,10 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
-  num game1 = 0;
-  num game2 = 0;
-  num game3 = 0;
-  num game4 = 0;
+  num dino = 0;
+  num fish = 0;
+  num squat = 0;
+  num dumbbell = 0;
   double avg = 0;
   String id = '';
   String name = '';
@@ -52,10 +52,10 @@ class _LoginState extends State<Login> {
 
   Future<void> addUser() async{
     FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser!.uid).set({
-      'game1' : game1,
-      'game2' : game2,
-      'game3' : game3,
-      'game4' : game4,
+      'dino' : dino,
+      'fish' : fish,
+      'squat' : squat,
+      'dumbbell' : dumbbell,
       'avg' : avg,
       'id' : id,
       'name' : name,

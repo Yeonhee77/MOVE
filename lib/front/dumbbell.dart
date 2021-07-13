@@ -1,27 +1,24 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
-class CounterPage extends StatefulWidget {
+class Dumbbell extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
-  CounterPage({this.bluetoothServices});
+  Dumbbell({this.bluetoothServices});
 
-  // ignore: non_constant_identifier_names
   @override
-  _CounterPageState createState() => _CounterPageState();
+  _DumbbellState createState() => _DumbbellState();
 }
 
-class _CounterPageState extends State<CounterPage> {
-  final StreamController<int> _streamController = StreamController<int>();
-
+class _DumbbellState extends State<Dumbbell> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   String gesture = "";
   // ignore: non_constant_identifier_names
   int gesture_num = 0;
+  int cnt = 0;
+  int set = 0;
 
   @override
   void dispose(){
-    _streamController.close();
     super.dispose();
   }
 
@@ -58,13 +55,11 @@ class _CounterPageState extends State<CounterPage> {
         Container(
             child:Column(
               children: [
-                SizedBox(height: 30,),
+                SizedBox(height: 30),
                 Center(
                     child:Column(
                       children: [
                         Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                        SizedBox(height: 30,),
-                        // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                       ],
                     )
                 ),
@@ -81,6 +76,10 @@ class _CounterPageState extends State<CounterPage> {
         readValues[characteristic.uuid] = value;
         gesture = value.toString();
         gesture_num = int.parse(gesture[1]);
+
+        if(gesture_num == 4) {
+          cnt++;
+        }
       });
     });
 
@@ -91,10 +90,20 @@ class _CounterPageState extends State<CounterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Stream version of the Counter App')),
-      body: Center(
-        child: _buildConnectDeviceView(),
+      appBar: AppBar(
+        title: Text('Dumbbell'),
       ),
+      body: Column(
+        children: [
+          Container(
+            height: 100,
+              child: _buildConnectDeviceView()
+          ),
+          // Text('세트 $set', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+          SizedBox(height: 20),
+          Text('카운트: $cnt 개', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+        ],
+      )
     );
   }
 }
