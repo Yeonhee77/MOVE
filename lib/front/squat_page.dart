@@ -93,45 +93,61 @@ class _SquatstartState extends State<Squatstart> {
                               switch (snapshot.data) {
                                 case 0:
                                   tutorial = <Widget>[
+                                    Row(children: [
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                    ],),
                                     SizedBox(height: 120,),
                                     Text("Start",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                                   ];
                                   break;
                                 case 1:
                                   tutorial = <Widget>[
+                                    Row(children: [
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                    ],),
                                     SizedBox(height: 120,),
                                     Text("3",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                                   ];
                                   break;
                                 case 2:
                                   tutorial = <Widget>[
+                                    Row(children: [
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                    ],),
                                     SizedBox(height: 120,),
                                     Text("2",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                   ];
                                   break;
                                 case 3:
                                   tutorial = <Widget>[
+                                    Row(children: [
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                    ],),
                                     SizedBox(height: 120,),
                                     Text("1",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                   ];
                                   break;
                                 case 4:
                                   tutorial = <Widget>[
+                                    Row(children: [
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                    ],),
                                     Text("자 이제,",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
                                     Text("Start", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),),
                                     Center(child:
                                     Image.asset('squat_3.gif',height: 400,width: 300,),),
+                                    Text("값: " + gesture_num.toString()),
                                   ];
                                   break;
                               }
                             }
-
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: tutorial!,
                             );
+
                           },
                         ),
                       ],
@@ -160,9 +176,6 @@ class _SquatstartState extends State<Squatstart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Squat'),
-      ),
       body: Center(
           child: _buildConnectDeviceView()
       ),

@@ -61,10 +61,13 @@ class _SquatState extends State<Squat> {
                 Center(
                     child:Column(
                       children: [
+                        Row(children: [
+                          IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                        ],),
                         SizedBox(height: 120,),
                         Text("마이크로 칩을 어깨에 부착해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                         SizedBox(height: 20,),
-                        Image.asset('bluewhite.png'),
+                        Image.asset('shoulder.png',height: 200,),
                         //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         SizedBox(height: 30,),
                         // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
@@ -109,9 +112,6 @@ class _SquatState extends State<Squat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Squat'),
-      ),
       body: Center(
           child: _buildConnectDeviceView(),
       ),

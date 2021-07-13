@@ -62,6 +62,8 @@ flutter:
     - squat_1.png
     - squat_2.png
     - squat_3.gif
+    - shoulder.png
+    - background.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

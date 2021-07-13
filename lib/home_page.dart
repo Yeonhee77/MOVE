@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               // ignore: deprecated_member_use
               FlatButton(
-                color: Colors.blue,
+                color: Colors.deepPurpleAccent[100],
                 child: Text(
                   'Connect',
                   style: TextStyle(color: Colors.white),
@@ -236,9 +236,11 @@ class _MyHomePageState extends State<MyHomePage> {
     },
     child: Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("MOVE!")),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: Text("MOVE!",textAlign: TextAlign.center,style: TextStyle(color: Colors.black),),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back,color: Colors.black,),
           onPressed: () {
             Navigator.pop(context);
             Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));

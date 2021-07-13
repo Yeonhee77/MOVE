@@ -94,6 +94,9 @@ class _Tutorial1State extends State<Tutorial1> {
                               switch (snapshot.data) {
                                 case 1:
                                   tutorial = <Widget>[
+                                    Row(children: [
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                    ],),
                                     SizedBox(height: 20,),
                                     Text("어깨너비로 서서",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                                     Text("발끝이 약간 바깥쪽을 향하도록 해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
@@ -113,6 +116,9 @@ class _Tutorial1State extends State<Tutorial1> {
                                   break;
                                 case 2:
                                   tutorial = <Widget>[
+                                    Row(children: [
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                    ],),
                                     SizedBox(height: 20,),
                                     Text("시선은 정면을 향하고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("복근에 힘을 주어 허리를 단단히 조여주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
@@ -132,6 +138,9 @@ class _Tutorial1State extends State<Tutorial1> {
                                   break;
                                 case 3:
                                   tutorial = <Widget>[
+                                    Row(children: [
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                    ],),
                                     SizedBox(height: 20,),
                                     Text("무릎이 발끝보다 앞으로 나오지 않도록 하면",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("허벅지와 수평이 될 때까지 앉으세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
@@ -150,6 +159,9 @@ class _Tutorial1State extends State<Tutorial1> {
                                   break;
                                 case 4:
                                   tutorial = <Widget>[
+                                    Row(children: [
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                    ],),
                                     SizedBox(height: 20,),
                                     Text("발뒤꿈치로 민다는 느낌으로",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("허벅지에 힘을 주면서 일어나세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
@@ -169,6 +181,9 @@ class _Tutorial1State extends State<Tutorial1> {
                                   break;
                                 case 5:
                                   tutorial = <Widget>[
+                                    Row(children: [
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                    ],),
                                     SizedBox(height: 120,),
                                     Text("마이크로 칩을 한번 흔들어주세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
@@ -223,9 +238,6 @@ class _Tutorial1State extends State<Tutorial1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Squat'),
-      ),
       body: Center(
           child: _buildConnectDeviceView()
       ),

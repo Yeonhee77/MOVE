@@ -5,6 +5,7 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/game.dart';
+import 'package:move/front/select.dart';
 import 'package:move/front/training.dart';
 
 import '../home_page.dart';
@@ -115,7 +116,7 @@ class _HomeState extends State<Homepage> {
                   children: [
                     SizedBox(
                         height: 80,
-                        width: 80,
+                        width: 300,
                         child: TextButton(
                           style: TextButton.styleFrom(
                             shape: RoundedRectangleBorder(
@@ -126,10 +127,10 @@ class _HomeState extends State<Homepage> {
                           ),
                           onPressed: () {
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => Training(bluetoothServices: widget.bluetoothServices)));
+                                MaterialPageRoute(builder: (context) => Select(bluetoothServices: widget.bluetoothServices)));
                           },
                           child: Text(
-                            'Home Workout',
+                            'MOVE!',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
@@ -137,56 +138,56 @@ class _HomeState extends State<Homepage> {
                           ),
                         )
                     ),
-                    SizedBox(width: 20,),
-                    SizedBox(
-                        height: 80,
-                        width: 80,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              side: BorderSide(
-                                  color: Colors.purple, width: 5),
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices)));
-                          },
-                          child: Text(
-                            'Play Game',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black54),
-                          ),
-                        )
-                    ),
-                    SizedBox(width: 20,),
-                    SizedBox(
-                        height: 80,
-                        width: 80,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              side: BorderSide(
-                                  color: Colors.purple, width: 5),
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => Training(bluetoothServices: widget.bluetoothServices)));
-                          },
-                          child: Text(
-                            '재활',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black54),
-                          ),
-                        )
-                    ),
+                    // SizedBox(width: 20,),
+                    // SizedBox(
+                    //     height: 80,
+                    //     width: 80,
+                    //     child: TextButton(
+                    //       style: TextButton.styleFrom(
+                    //         shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(20),
+                    //           side: BorderSide(
+                    //               color: Colors.purple, width: 5),
+                    //         ),
+                    //       ),
+                    //       onPressed: () {
+                    //         Navigator.push(context,
+                    //             MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices)));
+                    //       },
+                    //       child: Text(
+                    //         'Play Game',
+                    //         style: TextStyle(
+                    //             fontSize: 15,
+                    //             fontWeight: FontWeight.bold,
+                    //             color: Colors.black54),
+                    //       ),
+                    //     )
+                    // ),
+                    // SizedBox(width: 20,),
+                    // SizedBox(
+                    //     height: 80,
+                    //     width: 80,
+                    //     child: TextButton(
+                    //       style: TextButton.styleFrom(
+                    //         shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(20),
+                    //           side: BorderSide(
+                    //               color: Colors.purple, width: 5),
+                    //         ),
+                    //       ),
+                    //       onPressed: () {
+                    //         Navigator.push(context,
+                    //             MaterialPageRoute(builder: (context) => Training(bluetoothServices: widget.bluetoothServices)));
+                    //       },
+                    //       child: Text(
+                    //         '재활',
+                    //         style: TextStyle(
+                    //             fontSize: 15,
+                    //             fontWeight: FontWeight.bold,
+                    //             color: Colors.black54),
+                    //       ),
+                    //     )
+                    // ),
                   ],
                 ),
               ],
