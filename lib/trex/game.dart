@@ -1,9 +1,11 @@
 import 'dart:ui' as ui;
+import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/gestures.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:move/trex/game_over/config.dart';
 import 'package:move/trex/horizon/horizon.dart';
 import 'package:move/trex/game_config.dart';
@@ -11,7 +13,6 @@ import 'package:move/trex/game_over/game_over.dart';
 import 'package:move/trex/obstacle/obstacle.dart';
 import 'package:move/trex/t_rex/t_rex.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-
 import 'collision/collision_utils.dart';
 
 class Bg extends Component with HasGameRef {
@@ -35,7 +36,7 @@ enum TRexGameStatus { playing, waiting, gameOver }
 
 class TRexGame extends BaseGame with TapDetector {
 
-  TRexGame({
+  TRexGame( {
     required this.spriteImage,
   }) : super();
 
@@ -70,33 +71,23 @@ class TRexGame extends BaseGame with TapDetector {
   var result;
 
   //bluetooth services
-  List<BluetoothService>? bluetoothServices;
+  final StreamController<int> _streamController = StreamController<int>();
+  final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
 
   @override
-  void onTap() {
-    onAction(bluetoothServices);
+  void dispose(){
+    _streamController.close();
+
   }
 
-  // void convert(sensorData) {
-  //   result = sensorData.result.toStringAsFixed(2);
-  //   int.parse(result);
-  //   print('converting: $result');
-  //   //return int.parse(result);
-  //   onAction();
-  // }
-
-  void onAction(bluetoothServices) {
+  void onAction(int gesture_num) {
     if (gameOver) {
       restart();
       return;
     }
 
-    // if(result == 1.00) {
-    //   print('start result: $result');
-    //   result = 0;
-    //   tRex.startJump(currentSpeed);
-    // }
-     tRex.startJump(currentSpeed);
+    if(gesture_num == 3)
+      tRex.startJump(currentSpeed);
   }
 
   void startGame() {
@@ -149,4 +140,5 @@ class TRexGame extends BaseGame with TapDetector {
       }
     }
   }
+
 }

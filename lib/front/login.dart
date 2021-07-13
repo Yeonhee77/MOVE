@@ -7,6 +7,8 @@ import 'dart:async';
 
 import 'home.dart';
 import 'package:move/home_page.dart';
+import 'package:move/data.dart';
+import 'package:move/value.dart';
 
 class Login extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
@@ -18,6 +20,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
+  final Move move = Move(gesture_num);
 
   num game1 = 0;
   num game2 = 0;
@@ -27,9 +30,6 @@ class _LoginState extends State<Login> {
   String id = '';
   String name = '';
   String photo = '';
-
-  //bluetooth services
-  List<BluetoothService>? bluetoothServices;
 
   Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -100,8 +100,7 @@ class _LoginState extends State<Login> {
                   color: Colors.black54),),
               onPressed: () {
                 signInWithGoogle();
-                //_buildConnectDeviceView();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Home(bluetoothServices: bluetoothServices)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
               },
             ),
           ],

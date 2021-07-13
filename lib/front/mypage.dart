@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+import 'login.dart';
 
 class Mypage extends StatefulWidget {
   @override
@@ -30,6 +33,11 @@ class _MypageState extends State<Mypage> {
             total = doc.get('avg');
           });
     });
+  }
+
+  signOut() async {
+    await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
   }
 
   @override
@@ -123,6 +131,14 @@ class _MypageState extends State<Mypage> {
                         ],
                       )),
                 ),
+                SizedBox(height: 40),
+                ElevatedButton(
+                  child: Text('Sign Out'),
+                  onPressed: () {
+                    signOut();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                  },
+                )
                 ],
             ),
           ],

@@ -12,9 +12,6 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
-  //bluetooth services
-  List<BluetoothService>? bluetoothServices;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +75,7 @@ class _GameState extends State<Game> {
                             bottom: MediaQuery.of(context).size.height/12,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper(bluetoothServices: bluetoothServices)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper(bluetoothServices: widget.bluetoothServices)));
                               },
                               style: ElevatedButton.styleFrom(
                                 primary: Color.fromARGB(100, 70, 10, 245),
