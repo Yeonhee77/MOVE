@@ -22,9 +22,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
 
-  String gesture = "";
-  int gesture_num = 0;
-
   @override
   void dispose(){
     _streamController.close();

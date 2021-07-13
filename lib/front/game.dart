@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/trex/trex_main.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/data.dart';
-import 'package:move/home_page.dart';
 
 class Game extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
