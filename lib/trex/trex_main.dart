@@ -5,6 +5,14 @@ import 'package:move/data.dart';
 import 'package:move/home_page.dart';
 import 'package:move/front/game.dart';
 
+
+import 'package:flame/flame.dart';
+import 'package:flame/game.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'game.dart';
+
 class TRexGameWrapper extends StatefulWidget {
 
   final List<BluetoothService>? bluetoothServices;
@@ -15,10 +23,28 @@ class TRexGameWrapper extends StatefulWidget {
 }
 
 class _TRexGameWrapperState extends State<TRexGameWrapper> {
-  //bool splashGone = false;
-  //TRexGame? game;
+  bool splashGone = false;
+  TRexGame? game;
   //final _focusNode = FocusNode();
 
+  @override
+  void initState() {
+    super.initState();
+    startGame();
+  }
+
+  void startGame() {
+    Flame.images.loadAll(["sprite.png"]).then(
+          (image) => {
+        setState(() {
+          game = TRexGame(spriteImage: image[0]);
+
+          //_focusNode.requestFocus();
+        })
+      },
+    );
+  }
+  /*--------bluetooth-------*/
   final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
 
@@ -85,12 +111,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
           readValues[characteristic.uuid] = value;
           gesture = value.toString();
           gesture_num = int.parse(gesture[1]);
-          // switch(gesture_num){
-          //   case 1: gesture_name = "LEFT"; break;
-          //   case 2: gesture_name = "RIGHT"; break;
-          //   case 3: gesture_name = "UP"; break;
-          //   case 4: gesture_name = "DOWN"; break;
-          // }
         });
       }
     });
@@ -99,72 +119,22 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     sub.cancel();
   }
 
-  /*
-  @override
-  void initState() {
-    super.initState();
-    //startGame();
-  }
-
-  void startGame() {
-    Flame.images.loadAll(["sprite.png"]).then(
-          (image) => {
-        setState(() {
-          game = TRexGame(spriteImage: image[0]);
-          _focusNode.requestFocus();
-        })
-      },
-    );
-  }
-
-  void onRawKeyEvent(RawKeyEvent event) {
-    if (event.logicalKey == LogicalKeyboardKey.enter ||
-        event.logicalKey == LogicalKeyboardKey.space) {
-      game!.onAction();
-    }
-  }
-
-*/
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Trex main')),
-      body: Center(
-
-        child: _buildConnectDeviceView(),
-        // child: StreamBuilder<int>(
-        //     stream: _streamController.stream,
-        //     initialData: 0,
-        //     builder: (BuildContext context, AsyncSnapshot<int> snapshot){
-        //       return Text('You hit me: ' + {snapshot.data}.toString());
-        //     }
-        // ),
-      ),
-    );
-    /*
+    _buildConnectDeviceView();
+    game!.onAction(gesture_num);
     if (game == null) {
       return const Center(
         child: Text("Loading"),
       );
-    }*/
-
-    /*
-    return Column(
-      children: [
-        Container(
-          color: Colors.white,
-          constraints: const BoxConstraints.expand(),
-          child: _buildConnectDeviceView(),
-            /*(
-            focusNode: _focusNode,
-            //onKey: onRawKeyEvent,
-            child: GameWidget(
-              game: game!,
-            ),
-          ),*/
+    }
+    return Container(
+      color: Colors.white,
+      constraints: const BoxConstraints.expand(),
+      child: GameWidget(
+          game: game!,
         ),
-      ],
-    );*/
-
+    );
   }
+
 }

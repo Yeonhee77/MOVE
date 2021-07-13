@@ -71,12 +71,8 @@ class TRexGame extends BaseGame with TapDetector {
   var result;
 
   //bluetooth services
-  List<BluetoothService>? bluetoothServices;
   final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
-
-  String gesture = "";
-  int gesture_num = 0;
 
   @override
   void dispose(){
@@ -84,107 +80,14 @@ class TRexGame extends BaseGame with TapDetector {
 
   }
 
-  Future<ListView> _buildConnectDeviceView() async { //Widget build 안에 있어야 함..
-    List<Container> containers = [];
-    for (BluetoothService service in bluetoothServices!) {
-      // ignore: deprecated_member_use
-      List<Widget> characteristicsWidget = [];
-
-      for (BluetoothCharacteristic characteristic in service.characteristics) {
-        if (characteristic.properties.notify) {
-          characteristic.value.listen((value) {
-            readValues[characteristic.uuid] = value;
-          });
-          characteristic.setNotifyValue(true);
-        }
-        if (characteristic.properties.read && characteristic.properties.notify) {
-          setnum(characteristic);
-        }
-      }
-      containers.add(
-        Container(
-          child: ExpansionTile(
-              title: Center(child:Text("블루투스 연결설정")),
-              children: characteristicsWidget),
-        ),
-      );
-    }
-
-    return ListView(
-      padding: const EdgeInsets.all(8),
-      children: <Widget>[
-        Container(
-            child:Column(
-              children: [
-                SizedBox(height: 30,),
-                Center(
-                    child:Column(
-                      children: [
-                        Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                        SizedBox(height: 30,),
-                        // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                      ],
-                    )
-                ),
-              ],
-            )
-        ),
-      ],
-    );
-  }
-
-
-  Future<List<ButtonTheme>> _buildReadWriteNotifyButton(BluetoothCharacteristic characteristic) async {
-    // ignore: deprecated_member_use
-    List<ButtonTheme> buttons = [];
-    if (characteristic.properties.notify) {
-      characteristic.value.listen((value) {
-        readValues[characteristic.uuid] = value;
-      });
-      await characteristic.setNotifyValue(true);
-    }
-    if (characteristic.properties.read && characteristic.properties.notify) {
-      setnum(characteristic);
-      callAction();
-    }
-    return buttons;
-  }
-
-  Future<void> setnum(characteristic) async {
-    var sub = characteristic.value.listen((value) {
-
-        readValues[characteristic.uuid] = value;
-        gesture = value.toString();
-        gesture_num = int.parse(gesture[1]);
-        print('gesture :  $gesture_num');
-        // switch(gesture_num){
-        //   case 1: gesture_name = "LEFT"; break;
-        //   case 2: gesture_name = "RIGHT"; break;
-        //   case 3: gesture_name = "UP"; break;
-        //   case 4: gesture_name = "DOWN"; break;
-        // }
-    });
-
-    await characteristic.read();
-    sub.cancel();
-  }
-
-  void callAction () {
-    if (gesture_num == 3)
-    {
-      onAction();
-
-    }
-
-  }
-
-  void onAction() {
+  void onAction(int gesture_num) {
     if (gameOver) {
       restart();
       return;
     }
 
-     tRex.startJump(currentSpeed);
+    if(gesture_num == 3)
+      tRex.startJump(currentSpeed);
   }
 
   void startGame() {
