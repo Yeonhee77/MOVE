@@ -21,6 +21,10 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
 
   //bluetooth services
   List<BluetoothService>? bluetoothServices;
+  final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
+  String gesture = "";
+  String gesture_name = "";
+  int gesture_num = 0;
 
   @override
   void initState() {
@@ -43,8 +47,43 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     if (event.logicalKey == LogicalKeyboardKey.enter ||
         event.logicalKey == LogicalKeyboardKey.space) {
       game!.onAction(bluetoothServices);
+      //gesture_action();
     }
   }
+
+  // void gesture_action() {
+  //   // ignore: deprecated_member_use
+  //   for (BluetoothService service in widget.bluetoothServices!) {
+  //     // ignore: deprecated_member_use
+  //     List<Widget> characteristicsWidget = [];
+  //
+  //     for (BluetoothCharacteristic characteristic in service.characteristics) {
+  //       if (characteristic.properties.notify) {
+  //         characteristic.value.listen((value) {
+  //           readValues[characteristic.uuid] = value;
+  //         });
+  //         characteristic.setNotifyValue(true);
+  //       }
+  //       if (characteristic.properties.read && characteristic.properties.notify) {
+  //         setnum(characteristic);
+  //       }
+  //     }
+  //   }
+  // }
+  //
+  // Future<void> setnum(characteristic) async {
+  //   var sub = characteristic.value.listen((value) {
+  //     setState(() {
+  //       readValues[characteristic.uuid] = value;
+  //       gesture = value.toString();
+  //       gesture_num = int.parse(gesture[1]);
+  //       print('GESTURE RECEIVED in TREX - ' + gesture);
+  //     });
+  //   });
+  //
+  //   await characteristic.read();
+  //   sub.cancel();
+  // }
 
   @override
   Widget build(BuildContext context) {

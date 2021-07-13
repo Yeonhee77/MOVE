@@ -39,8 +39,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  StreamController<String> dataController = new StreamController();
-
   @override
   void initState() {
     super.initState();
@@ -57,22 +55,10 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
     flutterBlue.startScan();
-
-    //dataState(characteristic);
-  }
-
-  Future dataState(BluetoothCharacteristic characteristic) async {
-    characteristic.value.listen((value) {
-      readValues[characteristic.uuid] = value;
-    });
-    await characteristic.setNotifyValue(true);
-
-    setnum(characteristic);
   }
 
   ListView _buildListViewOfDevices() {
     // ignore: deprecated_member_use
-
     List<Container> containers = [];
     for (BluetoothDevice device in devicesList) {
       containers.add(
@@ -125,19 +111,15 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  List<ButtonTheme> _buildReadWriteNotifyButton(
+  void _bleRead(
       BluetoothCharacteristic characteristic) {
     // ignore: deprecated_member_use
-    List<ButtonTheme> buttons = [];
-    if (characteristic.properties.notify) {
-      characteristic.value.listen((value) {
-        readValues[characteristic.uuid] = value;});
-      characteristic.setNotifyValue(true);
-    }
-
-    if (characteristic.properties.read && characteristic.properties.notify)    setnum(characteristic);
-
-     return buttons;
+        if (characteristic.properties.notify) {
+          characteristic.value.listen((value) {
+            readValues[characteristic.uuid] = value;});
+          characteristic.setNotifyValue(true);
+        }
+        if (characteristic.properties.read && characteristic.properties.notify) setnum(characteristic);
   }
 
   Future<void> setnum(characteristic) async {
@@ -146,6 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
         readValues[characteristic.uuid] = value;
         gesture = value.toString();
         gesture_num = int.parse(gesture[1]);
+        print('GESTURE - ' + gesture);
         switch(gesture_num){
           case 1: gesture_name = "LEFT"; break;
           case 2: gesture_name = "RIGHT"; break;
@@ -159,102 +142,78 @@ class _MyHomePageState extends State<MyHomePage> {
     sub.cancel();
   }
 
-  ListView _buildConnectDeviceView() {
+  void _bleServices() {
     // ignore: deprecated_member_use
-    List<Container> containers = [];
     for (BluetoothService service in bluetoothServices!) {
       // ignore: deprecated_member_use
-      List<Widget> characteristicsWidget = [];
-
       for (BluetoothCharacteristic characteristic in service.characteristics) {
-        characteristicsWidget.add(
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    ..._buildReadWriteNotifyButton(characteristic),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
+        _bleRead(characteristic);
       }
-      containers.add(
-        Container(
-          child: ExpansionTile(
-              title: Center(child:Text("블루투스 연결설정")),
-              children: characteristicsWidget),
-        ),
-      );
     }
-
-    return ListView(
-      padding: const EdgeInsets.all(8),
-      children: <Widget>[
-        //Center(child:containers[2]),
-        Container(
-            child:Column(
-              children: [
-                SizedBox(height: 30,),
-                Center(
-                    child:Column(
-                      children: [
-                        Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                        SizedBox(height: 30,),
-                        Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                      ],
-                    )
-                ),
-              ],
-            )
-        ),
-      ],
-    );
   }
 
-  ListView _buildView() {
+  Widget _buildView() {
     if (connectedDevice != null) {
-      return _buildConnectDeviceView();
+      _bleServices();
+      return Center(
+        child:Column(
+          children: [
+            SizedBox(height: 30,),
+            Center(
+                child:Column(
+                  children: [
+                    Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                    SizedBox(height: 30,),
+                    Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                  ],
+                )
+            ),
+          ],
+        ),
+      );
     }
     return _buildListViewOfDevices();
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: Center(child: Text("MOVE!")),
-      leading: IconButton(
-        icon: Icon(Icons.people_alt,color: Colors.white,),
-        onPressed: () => {
-        },
-      ),
-      actions: <Widget>[
-        new IconButton(
-          icon: new Icon(Icons.photo_album),
-          tooltip: 'Hi!',
-          onPressed: () async {
-            print(gesture_name);
-            final move = Move(gesture_num);
-            await Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CounterPage(bluetoothServices: bluetoothServices))
-            );
+  Widget build(BuildContext context) {
+   return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text("MOVE!")),
+        leading: IconButton(
+          icon: Icon(Icons.people_alt, color: Colors.white,),
+          onPressed: () =>
+          {
           },
         ),
-        IconButton(
-            icon: new Icon(Icons.design_services),
-            onPressed: () => {
-              print(gesture_num),
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Login(bluetoothServices: bluetoothServices)),
-              )
-            })
-      ],
-    ),
-    body: _buildView(),
-  );
+        actions: <Widget>[
+          new IconButton(
+            icon: new Icon(Icons.photo_album),
+            tooltip: 'Hi!',
+            onPressed: () async {
+              print(gesture_name);
+              final move = Move(gesture_num);
+              await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>
+                      CounterPage(bluetoothServices: bluetoothServices))
+              );
+            },
+          ),
+          IconButton(
+              icon: new Icon(Icons.design_services),
+              onPressed: () =>
+              {
+                print(gesture_num),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>
+                      Login(bluetoothServices: bluetoothServices)),
+                )
+              })
+        ],
+      ),
+      body: _buildView()
+    );
+  }
 }
