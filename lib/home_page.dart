@@ -151,10 +151,10 @@ class _MyHomePageState extends State<MyHomePage> {
         gesture = value.toString();
         gesture_num = int.parse(gesture[1]);
         switch(gesture_num){
-          case 1: gesture_name = "LEFT"; break;
-          case 2: gesture_name = "RIGHT"; break;
-          case 3: gesture_name = "UP"; break;
-          case 4: gesture_name = "DOWN"; break;
+          case 1: gesture_name = "PUNCH"; break;
+          case 2: gesture_name = "UPPERCUT"; break;
+//          case 3: gesture_name = "UP"; break;
+//          case 4: gesture_name = "DOWN"; break;
         }
       });
     });
