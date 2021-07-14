@@ -39,7 +39,7 @@ limitations under the License.
 #include "model.h"
 
 // Values from Tiny Motion Trainer
-#define MOTION_THRESHOLD 0.07
+#define MOTION_THRESHOLD 0.2
 #define CAPTURE_DELAY 200 // This is now in milliseconds
 #define NUM_SAMPLES 30
 
