@@ -87,7 +87,7 @@ class _BoxingState extends State<Boxing> {
         body: Column(
           children: [
             Container(
-              height: 100,
+                height: 100,
                 child: _buildConnectDeviceView()
             ),
             SizedBox(height: 40),

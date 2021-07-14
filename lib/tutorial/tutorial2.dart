@@ -19,13 +19,13 @@ class _Tutorial2State extends State<Tutorial2> {
   List<Widget>? tutorial;
   Stream<int> _bids = (() async* {
     yield 1;
-    await Future<void>.delayed(const Duration(seconds: 3));
+    await Future<void>.delayed(const Duration(seconds: 2));
     yield 2;
-    await Future<void>.delayed(const Duration(seconds: 3));
+    await Future<void>.delayed(const Duration(seconds: 2));
     yield 3;
-    await Future<void>.delayed(const Duration(seconds: 3));
+    await Future<void>.delayed(const Duration(seconds: 2));
     yield 4;
-    await Future<void>.delayed(const Duration(seconds: 3));
+    await Future<void>.delayed(const Duration(seconds: 2));
     yield 5;
   })();
 
@@ -98,9 +98,8 @@ class _Tutorial2State extends State<Tutorial2> {
                                     Row(children: [
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
-                                    SizedBox(height: 20,),
                                     Text("곧게 서주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                                    SizedBox(height: 20,),
+                                    SizedBox(height:60),
                                     Image.asset('jumping_1.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
@@ -119,7 +118,6 @@ class _Tutorial2State extends State<Tutorial2> {
                                     Row(children: [
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
-                                    SizedBox(height: 20,),
                                     Text("양팔을 90도 벌리고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("양다리를 어깨너비만큼 벌려주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
@@ -141,10 +139,9 @@ class _Tutorial2State extends State<Tutorial2> {
                                     Row(children: [
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
-                                    SizedBox(height: 20,),
                                     Text("벌린 팔과 다리를 모아",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("차렷자세로 돌아옵니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    SizedBox(height: 20,),
+                                    SizedBox(height: 30,),
                                     Image.asset('jumping_3.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
@@ -162,10 +159,9 @@ class _Tutorial2State extends State<Tutorial2> {
                                     Row(children: [
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
-                                    SizedBox(height: 20,),
                                     Text("다시 다리를 어깨 너비만큼 벌리고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("양팔은 머리위로 손바닥을 마주봅니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    SizedBox(height: 20,),
+                                    SizedBox(height: 30,),
                                     Image.asset('jumping_4.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
@@ -184,13 +180,10 @@ class _Tutorial2State extends State<Tutorial2> {
                                     Row(children: [
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
-                                    SizedBox(height: 120,),
                                     Text("차렷자세로 돌아옵니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("이제 Start버튼을 눌러주세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    SizedBox(height: 20,),
-                                    Image.asset('jumping_5.png'),
-                                    SizedBox(height: 30,),
-                                    Text("moving value:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                                    SizedBox(height:30),
+                                    Image.asset('jumping_5.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,

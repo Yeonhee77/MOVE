@@ -18,13 +18,13 @@ class _Tutorial1State extends State<Tutorial1> {
   List<Widget>? tutorial;
   Stream<int> _bids = (() async* {
     yield 1;
-    await Future<void>.delayed(const Duration(seconds: 3));
+    await Future<void>.delayed(const Duration(seconds: 2));
     yield 2;
-    await Future<void>.delayed(const Duration(seconds: 3));
+    await Future<void>.delayed(const Duration(seconds: 2));
     yield 3;
-    await Future<void>.delayed(const Duration(seconds: 3));
+    await Future<void>.delayed(const Duration(seconds: 2));
     yield 4;
-    await Future<void>.delayed(const Duration(seconds: 3));
+    await Future<void>.delayed(const Duration(seconds: 2));
     yield 5;
   })();
 
