@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/front/squat_page.dart';
-//Squat tutorial
-class Tutorial1 extends StatefulWidget {
+import 'package:move/front/crossjack_page.dart';
+//Crossjack tutorial
+class Tutorial3 extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
-  Tutorial1({this.bluetoothServices});
+  Tutorial3({this.bluetoothServices});
 
   @override
-  _Tutorial1State createState() => _Tutorial1State();
+  _Tutorial3State createState() => _Tutorial3State();
 }
 
-class _Tutorial1State extends State<Tutorial1> {
+class _Tutorial3State extends State<Tutorial3> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   String gesture = "";
   // ignore: non_constant_identifier_names
@@ -76,7 +76,7 @@ class _Tutorial1State extends State<Tutorial1> {
                           builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                             if (snapshot.hasError) {
                               tutorial = <Widget>[
-                                 Icon(
+                                Icon(
                                   Icons.error_outline,
                                   color: Colors.red,
                                   size: 60,
@@ -108,7 +108,7 @@ class _Tutorial1State extends State<Tutorial1> {
                                         // foreground
                                       ),
                                       onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
                                       },
                                       child: Text('skip'),
                                     ),
@@ -130,7 +130,7 @@ class _Tutorial1State extends State<Tutorial1> {
                                         // foreground
                                       ),
                                       onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
                                       },
                                       child: Text('skip'),
                                     ),
@@ -151,7 +151,7 @@ class _Tutorial1State extends State<Tutorial1> {
                                         primary: Colors.black,
                                       ),
                                       onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
                                       },
                                       child: Text('skip'),
                                     ),
@@ -173,7 +173,7 @@ class _Tutorial1State extends State<Tutorial1> {
                                         // foreground
                                       ),
                                       onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
                                       },
                                       child: Text('skip'),
                                     ),
@@ -196,7 +196,7 @@ class _Tutorial1State extends State<Tutorial1> {
                                         // foreground
                                       ),
                                       onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
                                       },
                                       child: Text('Start'),
                                     ),
