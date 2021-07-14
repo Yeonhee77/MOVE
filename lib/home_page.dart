@@ -69,7 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ListView _buildListViewOfDevices() {
     // ignore: deprecated_member_use
-
     List<Container> containers = [];
     for (BluetoothDevice device in devicesList) {
       containers.add(
@@ -128,8 +127,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future<void> _buildReadWriteNotify(BluetoothCharacteristic characteristic) async{
+  List<ButtonTheme> _buildReadWriteNotifyButton(BluetoothCharacteristic characteristic) {
     // ignore: deprecated_member_use
+    List<ButtonTheme> buttons = [];
     if (characteristic.properties.notify) {
       characteristic.value.listen((value) {
         readValues[characteristic.uuid] = value;});
@@ -138,6 +138,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (characteristic.properties.read && characteristic.properties.notify)
       setnum(characteristic);
+
+    return buttons;
   }
 
   Future<void> setnum(characteristic) async {
@@ -147,10 +149,8 @@ class _MyHomePageState extends State<MyHomePage> {
         gesture = value.toString();
         gesture_num = int.parse(gesture[1]);
         switch(gesture_num){
-          case 1: gesture_name = "LEFT"; break;
-          case 2: gesture_name = "RIGHT"; break;
-          case 3: gesture_name = "UP"; break;
-          case 4: gesture_name = "DOWN"; break;
+          case 1: gesture_name = "PUNCH"; break;
+          case 2: gesture_name = "UPPERCUT"; break;
         }
       });
     });
@@ -159,27 +159,84 @@ class _MyHomePageState extends State<MyHomePage> {
     sub.cancel();
   }
 
-  Future<void> _buildConnectDevice() async{
+  ListView _buildConnectDeviceView() {
     for (BluetoothService service in bluetoothServices!) {
+      // ignore: deprecated_member_use
+      List<Widget> characteristicsWidget = [];
+
       for (BluetoothCharacteristic characteristic in service.characteristics) {
-        _buildReadWriteNotify(characteristic);
+        characteristicsWidget.add(
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    ..._buildReadWriteNotifyButton(characteristic),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
       }
     }
+
+    // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
+
+    return ListView(
+      padding: const EdgeInsets.all(8),
+      children: <Widget>[
+        Container(
+            child:Column(
+              children: [
+                SizedBox(height: 30,),
+                Center(
+                    child:Column(
+                      children: [
+                        Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        SizedBox(height: 30,),
+                        Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                      ],
+                    )
+                ),
+              ],
+            )
+        ),
+      ],
+    );
   }
 
   ListView _buildView() {
     if (connectedDevice != null) {
-      _buildConnectDevice();
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
+      return _buildConnectDeviceView();
+      // return _buildConnectDevice();
     }
     return _buildListViewOfDevices();
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: Center(child: Text("MOVE!")),
+  Widget build(BuildContext context) => WillPopScope(
+    onWillPop: () {
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
+
+      return Future.value(false);
+    },
+    child: Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: Text("MOVE!",textAlign: TextAlign.center,style: TextStyle(color: Colors.black),),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back,color: Colors.black,),
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
+          },
+        ),
+      ),
+      body: _buildView(),
     ),
-    body: _buildView(),
   );
 }

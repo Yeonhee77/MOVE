@@ -3,6 +3,8 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/trex/trex_main.dart';
 
+import 'boxing.dart';
+
 class Game extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
   Game({this.bluetoothServices});
@@ -32,36 +34,20 @@ class _GameState extends State<Game> {
               children: [
                 SizedBox(height: 30,),
                 Container(
-                  child: Stack(
-                    children: [
-                      Center(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width/2,
-                          child: InkWell(
-                            child: Image.asset(
-                              'bluewhite.png',
-                              fit: BoxFit.fill,
-                            ),
-                            onTap: () {
-                              // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-                            },
-                          ),
+                  child: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width/2,
+                      child: InkWell(
+                        child: Image.asset(
+                          'bluewhite.png',
+                          fit: BoxFit.fill,
                         ),
+                        onTap: () {
+                          if(widget.bluetoothServices != null)
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Boxing(bluetoothServices: widget.bluetoothServices)));
+                        },
                       ),
-                      Positioned(
-                        left: MediaQuery.of(context).size.width/2.5,
-                        bottom: MediaQuery.of(context).size.height/50,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(100, 70, 10, 245),
-                          ),
-                          child: Text('Play!', style: TextStyle(fontSize: 20),),
-                        ),
-                      )
-                    ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 30,),
@@ -74,40 +60,6 @@ class _GameState extends State<Game> {
                           child: InkWell(
                             child: Image.asset(
                               'Fish.jpg',
-                              fit: BoxFit.fill,
-                            ),
-                            onTap: () {
-                              // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-                            },
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: MediaQuery.of(context).size.width/2.5,
-                        bottom: MediaQuery.of(context).size.height/50,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(100, 70, 10, 245),
-                          ),
-                          child: Text('Play!', style: TextStyle(fontSize: 20),),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(height: 30,),
-                Container(
-                  child: Stack(
-                    children: [
-                      Center(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width/2,
-                          child: InkWell(
-                            child: Image.asset(
-                              'Pump.jpg',
                               fit: BoxFit.fill,
                             ),
                             onTap: () {

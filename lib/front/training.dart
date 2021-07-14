@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/front/dumbbell.dart';
+import 'package:move/front/jumpingJack.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/squat.dart';
+
+import 'crossJack.dart';
 
 class Training extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
@@ -61,7 +63,25 @@ class _TrainingState extends State<Training> {
                         ),
                         onTap: () {
                           if(widget.bluetoothServices != null)
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => Dumbbell(bluetoothServices: widget.bluetoothServices)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => JumpingJack(bluetoothServices: widget.bluetoothServices)));
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30,),
+                Container(
+                  child: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width/2,
+                      child: InkWell(
+                        child: Image.asset(
+                          'Pump.jpg',
+                          fit: BoxFit.fill,
+                        ),
+                        onTap: () {
+                          if(widget.bluetoothServices != null)
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => CrossJack(bluetoothServices: widget.bluetoothServices)));
                         },
                       ),
                     ),

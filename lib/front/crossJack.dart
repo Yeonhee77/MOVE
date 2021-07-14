@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
-class Dumbbell extends StatefulWidget {
+class CrossJack extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
-  Dumbbell({this.bluetoothServices});
+  CrossJack({this.bluetoothServices});
 
   @override
-  _DumbbellState createState() => _DumbbellState();
+  _CrossJackState createState() => _CrossJackState();
 }
 
-class _DumbbellState extends State<Dumbbell> {
+class _CrossJackState extends State<CrossJack> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   String gesture = "";
   // ignore: non_constant_identifier_names
@@ -90,20 +90,20 @@ class _DumbbellState extends State<Dumbbell> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Dumbbell'),
-      ),
-      body: Column(
-        children: [
-          Container(
-            height: 100,
-              child: _buildConnectDeviceView()
-          ),
-          // Text('세트 $set', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
-          SizedBox(height: 20),
-          Text('카운트: $cnt 개', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-        ],
-      )
+        appBar: AppBar(
+          title: Text('Cross Jack'),
+        ),
+        body: Column(
+          children: [
+            Container(
+                height: 100,
+                child: _buildConnectDeviceView()
+            ),
+            // Text('세트 $set', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+            SizedBox(height: 20),
+            Text('카운트: $cnt 개', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+          ],
+        )
     );
   }
 }
