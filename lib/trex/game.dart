@@ -64,6 +64,7 @@ class TRexGame extends BaseGame with TapDetector {
   late TRexGameStatus status = TRexGameStatus.waiting;
   late double currentSpeed = 0.0;
   late double timePlaying = 0.0;
+  late int score = -1;
 
   bool get playing => status == TRexGameStatus.playing;
   bool get gameOver => status == TRexGameStatus.gameOver;
@@ -83,11 +84,16 @@ class TRexGame extends BaseGame with TapDetector {
   void onAction(int gesture_num) {
     if (gameOver) {
       restart();
-      return;
     }
 
-    if(gesture_num == 3)
+    if(gesture_num == 3) {
+      this.score += 1;
       tRex.startJump(currentSpeed);
+    }
+  }
+
+  int returnScore() {
+    return this.score;
   }
 
   void startGame() {
@@ -111,6 +117,7 @@ class TRexGame extends BaseGame with TapDetector {
     currentSpeed = config.speed;
     gameOverPanel.visible = false;
     timePlaying = 0.0;
+    this.score = -1;
   }
 
   @override

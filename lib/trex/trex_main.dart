@@ -5,7 +5,7 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/data.dart';
 import 'package:move/home_page.dart';
 import 'package:move/front/game.dart';
-
+import 'package:move/trex/game.dart';
 
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
@@ -29,23 +29,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   bool splashGone = false;
   TRexGame? game;
-  //final _focusNode = FocusNode();
-
-  Widget pauseMenu(BuildContext buildContext, TRexGame game) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Container(
-        width: 100,
-        height: 100,
-        color: Colors.white,
-        child: Center(
-          child: Text('Paused')
-        )
-      )
-    ]
-    );
-  }
+  int score = -1;
 
   @override
   void initState() {
@@ -58,8 +42,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
           (image) => {
         setState(() {
           game = TRexGame(spriteImage: image[0]);
-
-          //_focusNode.requestFocus();
         })
       },
     );
@@ -109,10 +91,28 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     );
   }
 
+  Widget scoreBox(BuildContext buildContext, TRexGame game) {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+              width: 100,
+              height: 100,
+              color: Colors.white,
+              child: Center(
+                child: Text('Score : $score', style: TextStyle(color: Colors.blue, fontSize: 16),),
+              )
+          )
+        ]
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     _gesture();
     game!.onAction(gesture_num);
+    score = game!.returnScore();
+
     if (game == null) {
       return const Center(
         child: Text("Loading"),
@@ -124,9 +124,9 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       child: GameWidget(
         game: game!,
         overlayBuilderMap: {
-          'PauseMenu' : pauseMenu
+          'Score' : scoreBox
         },
-        initialActiveOverlays: ['PauseMenu'],
+        initialActiveOverlays: ['Score'],
       ),
     );
   }
