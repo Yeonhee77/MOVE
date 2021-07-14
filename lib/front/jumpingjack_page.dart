@@ -14,6 +14,9 @@ class _JumpingstartState extends State<Jumpingstart> {
   String gesture = "";
   // ignore: non_constant_identifier_names
   int gesture_num = 0;
+  int gesture_num2 = 0;
+  int count =0;
+  bool flag = false;
   List<Widget>? tutorial;
   final Stream<int> _bids = (() async* {
     yield 0;
@@ -138,6 +141,8 @@ class _JumpingstartState extends State<Jumpingstart> {
                                     Center(child:
                                     Image.asset('squat_3.gif',height: 400,width: 300,),),
                                     Text("값: " + gesture_num.toString()),
+                                    Text("횟수: " + count.toString()),
+                                    flag? Text("Correct"): Text("Wrong"),
                                   ];
                                   break;
                               }
@@ -165,9 +170,19 @@ class _JumpingstartState extends State<Jumpingstart> {
         readValues[characteristic.uuid] = value;
         gesture = value.toString();
         gesture_num = int.parse(gesture[1]);
+        gesture_num2 = int.parse(gesture[1]);
+        if(gesture_num == 2) {
+          flag = true;
+        }
+        else if(gesture_num == 1) {
+          flag = false;
+        }
       });
-    });
-
+    },);
+    if(gesture_num2 == 1 || gesture_num2 == 2) {
+      gesture_num2 = 0;
+      count += 1;
+    }
     await characteristic.read();
     sub.cancel();
   }

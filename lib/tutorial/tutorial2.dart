@@ -99,10 +99,9 @@ class _Tutorial2State extends State<Tutorial2> {
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
                                     SizedBox(height: 20,),
-                                    Text("어깨너비로 서서",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                                    Text("발끝이 약간 바깥쪽을 향하도록 해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                                    Text("곧게 서주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                                     SizedBox(height: 20,),
-                                    Image.asset('squat_1.png',height: 400,width: 300,),
+                                    Image.asset('jumping_1.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
@@ -121,10 +120,10 @@ class _Tutorial2State extends State<Tutorial2> {
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
                                     SizedBox(height: 20,),
-                                    Text("시선은 정면을 향하고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("복근에 힘을 주어 허리를 단단히 조여주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                    Text("양팔을 90도 벌리고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                    Text("양다리를 어깨너비만큼 벌려주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
-                                    Image.asset('squat_2.png',height: 400,width: 300,),
+                                    Image.asset('jumping_2.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
@@ -143,10 +142,10 @@ class _Tutorial2State extends State<Tutorial2> {
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
                                     SizedBox(height: 20,),
-                                    Text("무릎이 발끝보다 앞으로 나오지 않도록 하면",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("허벅지와 수평이 될 때까지 앉으세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                    Text("벌린 팔과 다리를 모아",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                    Text("차렷자세로 돌아옵니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
-                                    Image.asset('squat_1.png',height: 400,width: 300,),
+                                    Image.asset('jumping_3.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
@@ -164,10 +163,10 @@ class _Tutorial2State extends State<Tutorial2> {
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
                                     SizedBox(height: 20,),
-                                    Text("발뒤꿈치로 민다는 느낌으로",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("허벅지에 힘을 주면서 일어나세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                    Text("다시 다리를 어깨 너비만큼 벌리고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                    Text("양팔은 머리위로 손바닥을 마주봅니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
-                                    Image.asset('squat_2.png',height: 400,width: 300,),
+                                    Image.asset('jumping_4.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
@@ -186,9 +185,10 @@ class _Tutorial2State extends State<Tutorial2> {
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
                                     SizedBox(height: 120,),
-                                    Text("마이크로 칩을 한번 흔들어주세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                    Text("차렷자세로 돌아옵니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                    Text("이제 Start버튼을 눌러주세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
-                                    Image.asset('bluewhite.png'),
+                                    Image.asset('jumping_5.png'),
                                     SizedBox(height: 30,),
                                     Text("moving value:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                                     TextButton(
