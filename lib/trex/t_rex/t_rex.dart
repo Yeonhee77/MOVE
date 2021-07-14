@@ -35,7 +35,7 @@ class TRex extends PositionComponent with HasGameRef<TRexGame> {
   bool get ducking => status == TRexStatus.ducking;
 
   double get groundYPos {
-    return (gameRef.size.y / 2) - config.height / 2;
+    return (gameRef.size.y / 2) - (config.height / 2) * 1.3; //공룡 y축
   }
 
   @override
@@ -118,11 +118,11 @@ class TRexStateStillComponent extends SpriteComponent with TRexStateVisibility {
     required TRexConfig config,
     required Vector2 srcPosition,
   }) : super(
-          size: Vector2(config.width, config.height),
+          size: Vector2(config.width, config.height), //88, 90
           sprite: Sprite(
             spriteImage,
             srcPosition: srcPosition,
-            srcSize: Vector2(config.width, config.height),
+            srcSize: Vector2(config.width, config.height), //88, 90
           ),
         ) {
     this.showFor = showFor;
@@ -143,7 +143,7 @@ class TRexStateAnimatedComponent extends SpriteAnimationComponent
             frames
                 .map((vector) => Sprite(
                       spriteImage,
-                      srcSize: Vector2(config.width, config.height),
+                      srcSize: Vector2(config.width, config.height), // 88, 90
                       srcPosition: vector,
                     ))
                 .toList(),
@@ -155,45 +155,45 @@ class TRexStateAnimatedComponent extends SpriteAnimationComponent
   }
 }
 
-class RunningTRex extends TRexStateAnimatedComponent {
+class RunningTRex extends TRexStateAnimatedComponent { //왼쪽발 위 뛰는 공룡
   RunningTRex(
     Image spriteImage,
     TRexConfig config,
   ) : super(
           showFor: [TRexStatus.running, TRexStatus.intro],
           spriteImage: spriteImage,
-          size: Vector2(88.0, 90.0),
+          size: Vector2(79.0, 100.0),
           config: config,
-          frames: [Vector2(1514.0, 4.0), Vector2(1602.0, 4.0)],
+          frames: [Vector2(96.0, 12.0), Vector2(185.0, 12.0)], //바꿈
         );
 }
 
-class WaitingTRex extends TRexStateStillComponent {
+class WaitingTRex extends TRexStateStillComponent { //시작할 때
   WaitingTRex(Image spriteImage, TRexConfig config)
       : super(
           showFor: [TRexStatus.waiting],
           config: config,
           spriteImage: spriteImage,
-          srcPosition: Vector2(76.0, 6.0),
+          srcPosition: Vector2(1425.0, 12.0), //바꿈
         );
 }
 
-class JumpingTRex extends TRexStateStillComponent {
+class JumpingTRex extends TRexStateStillComponent { //뛰는 공룡
   JumpingTRex(Image spriteImage, TRexConfig config)
       : super(
           showFor: [TRexStatus.jumping],
           config: config,
           spriteImage: spriteImage,
-          srcPosition: Vector2(1339.0, 6.0),
+          srcPosition: Vector2(1425.0, 12.0), //바꿈
         );
 }
 
-class SurprisedTRex extends TRexStateStillComponent {
+class SurprisedTRex extends TRexStateStillComponent { //박았을 때
   SurprisedTRex(Image spriteImage, TRexConfig config)
       : super(
           showFor: [TRexStatus.crashed],
           config: config,
           spriteImage: spriteImage,
-          srcPosition: Vector2(1782.0, 6.0),
+          srcPosition: Vector2(273.0, 12.0), //바꿈
         );
 }

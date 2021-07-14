@@ -18,7 +18,7 @@ import 'collision/collision_utils.dart';
 class Bg extends Component with HasGameRef {
   Vector2 size = Vector2.zero();
 
-  late final ui.Paint _paint = ui.Paint()..color = const ui.Color(0xffffffff);
+  late final ui.Paint _paint = ui.Paint()..color = const ui.Color.fromARGB(255,29,173,148);
 
   @override
   void render(ui.Canvas c) {
@@ -86,7 +86,7 @@ class TRexGame extends BaseGame with TapDetector {
       restart();
     }
 
-    if(gesture_num == 3) {
+    if(gesture_num == 2) {
       this.score += 1;
       tRex.startJump(currentSpeed);
     }

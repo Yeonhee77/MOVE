@@ -34,8 +34,8 @@ class ObstacleType {
 
   static final cactusSmall = ObstacleType._internal(
     "cactusSmall",
-    width: 34.0,
-    height: 70.0,
+    width: 56.0,
+    height: 35.0,
     y: 20.0,
     multipleSpeed: 4,
     minGap: 120.0,
@@ -58,8 +58,8 @@ class ObstacleType {
 
   static final cactusLarge = ObstacleType._internal(
     "cactusLarge",
-    width: 50.0,
-    height: 100.0,
+    width: 66.0,
+    height: 43.0,
     y: 1.0,
     multipleSpeed: 7,
     minGap: 120.0,
@@ -84,14 +84,14 @@ class ObstacleType {
     if (this == cactusSmall) {
       return Sprite(
         spriteImage,
-        srcPosition: Vector2(446.0, 2.0),
+        srcPosition: Vector2(610.0, 45.0),
         srcSize: Vector2(width, height),
       );
     }
     return Sprite(
       spriteImage,
-      srcPosition: Vector2(652.0, 2.0),
-      srcSize: Vector2(width, height),
+      srcPosition: Vector2(688.0, 67.0),
+      srcSize: Vector2(66.0, 43.0),
     );
   }
 
