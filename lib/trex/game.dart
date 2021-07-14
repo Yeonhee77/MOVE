@@ -11,9 +11,12 @@ import 'package:move/trex/horizon/horizon.dart';
 import 'package:move/trex/game_config.dart';
 import 'package:move/trex/game_over/game_over.dart';
 import 'package:move/trex/obstacle/obstacle.dart';
+import 'package:move/trex/score/config.dart';
+import 'package:move/trex/score/score.dart';
 import 'package:move/trex/t_rex/t_rex.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'collision/collision_utils.dart';
+import 'package:flame/components.dart';
 
 class Bg extends Component with HasGameRef {
   Vector2 size = Vector2.zero();
@@ -34,13 +37,14 @@ class Bg extends Component with HasGameRef {
 
 enum TRexGameStatus { playing, waiting, gameOver }
 
-class TRexGame extends BaseGame with TapDetector {
+class TRexGame extends BaseGame {
 
   TRexGame( {
     required this.spriteImage,
   }) : super();
 
   late final config = GameConfig();
+  late NineTileBox nineTileBox; //Display score
 
   @override
   ui.Color backgroundColor() => const ui.Color(0xFFFFFFFF);
@@ -51,6 +55,7 @@ class TRexGame extends BaseGame with TapDetector {
   late final tRex = TRex();
   late final horizon = Horizon();
   late final gameOverPanel = GameOverPanel(spriteImage, GameOverConfig());
+  late final scorePanel = ScorePanel(spriteImage, ScoreConfig());
 
   @override
   Future<void> onLoad() async {
@@ -58,6 +63,7 @@ class TRexGame extends BaseGame with TapDetector {
     add(horizon);
     add(tRex);
     add(gameOverPanel);
+    add(scorePanel);
   }
 
   // state
@@ -69,7 +75,6 @@ class TRexGame extends BaseGame with TapDetector {
   bool get gameOver => status == TRexGameStatus.gameOver;
 
   var result;
-  int score = 0;
 
   //bluetooth services
   final StreamController<int> _streamController = StreamController<int>();
@@ -81,6 +86,8 @@ class TRexGame extends BaseGame with TapDetector {
     _streamController.close();
 
   }
+
+  int score = 0;
 
   void onAction(int gesture_num, int score) {
     if (gameOver) {
@@ -151,6 +158,7 @@ class TRexGame extends BaseGame with TapDetector {
   }
 
 }
+
 
 // class GameOver extends StatefulWidget {
 //   @override

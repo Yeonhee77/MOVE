@@ -24,7 +24,6 @@ class GameOverPanel extends BaseComponent with HasGameRef<TRexGame> {
   Future<void>? onLoad() {
     addChild(gameOverText);
     addChild(gameOverRestart);
-    //addChild(gameOverScore);
     return super.onLoad();
   }
 
@@ -82,27 +81,3 @@ class GameOverRestart extends SpriteComponent {
     x = (gameSize.x / 2) - config.restartWidth / 2;
   }
 }
-
-// class GameOverScore extends SpriteComponent {
-//   GameOverScore(Image spriteImage, this.config)
-//       : super(
-//     size: Vector2(config.scoreWidth, config.scoreHeight),
-//     sprite: Sprite(
-//       spriteImage,
-//       srcPosition: Vector2(955.0, 0.0),
-//       srcSize: Vector2(
-//         config.scoreWidth,
-//         config.scoreHeight,
-//       ),
-//     ),
-//   );
-//
-//   final GameOverConfig config;
-//
-//   @override
-//   void onGameResize(Vector2 gameSize) {
-//     super.onGameResize(gameSize);
-//     y = gameSize.y * .25;
-//     x = (gameSize.x / 2) - config.textWidth / 2;
-//   }
-// }

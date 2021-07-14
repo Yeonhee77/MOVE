@@ -121,28 +121,11 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     sub.cancel();
   }
 
-  Widget scoreDisplay() {
-    return Text(
-      score.toString(),
-      style: TextStyle(
-        fontSize: 150,
-        color: Colors.green,
-        shadows: <Shadow>[
-          Shadow(
-            color: Color(0x88000000),
-            blurRadius: 10,
-            offset: Offset(2, 2),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     _buildConnectDeviceView();
     game!.onAction(gesture_num,score);
-    scoreDisplay();
+    //scoreDisplay();
     if (game == null) {
       return const Center(
         child: Text("Loading"),
