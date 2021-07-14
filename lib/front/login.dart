@@ -79,8 +79,11 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column /*_buildConnectDeviceView()*/(
+      body: Stack(
+        fit: StackFit.expand,
+        children:<Widget>[
+          Image( image: AssetImage("background.png"), fit: BoxFit.cover, colorBlendMode: BlendMode.darken, ),
+          Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -103,7 +106,7 @@ class _LoginState extends State<Login> {
               },
             ),
           ],
-        ),
+        ),]
       ),
     );
   }

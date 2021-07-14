@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/front/jumpingJack.dart';
+import 'package:move/front/Crossjack.dart';
+import 'package:move/front/Jumpingjack.dart';
+import 'package:move/front/crossjack_page.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/squat.dart';
-
-import 'crossJack.dart';
 
 class Training extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
@@ -34,57 +34,70 @@ class _TrainingState extends State<Training> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(height: 30,),
+                Row(children: [
+                  IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                ],),
+                SizedBox(height: 30,),
                 Container(
-                  child: Center(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width/2,
-                      child: InkWell(
-                        child: Image.asset(
-                          'bluewhite.png',
-                          fit: BoxFit.fill,
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width/2,
+                          child: InkWell(
+                            child: Image.asset(
+                              'Fish.jpg',
+                              fit: BoxFit.fill,
+                            ),
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingjack(bluetoothServices: widget.bluetoothServices)));
+                            },
+                          ),
                         ),
-                        onTap: () {
-                          if(widget.bluetoothServices != null)
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
-                        },
                       ),
-                    ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 30,),
                 Container(
-                  child: Center(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width/2,
-                      child: InkWell(
-                        child: Image.asset(
-                          'Fish.jpg',
-                          fit: BoxFit.fill,
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width/2,
+                          child: InkWell(
+                            child: Image.asset(
+                              'bluewhite.png',
+                              fit: BoxFit.fill,
+                            ),
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjack(bluetoothServices: widget.bluetoothServices)));
+                            },
+                          ),
                         ),
-                        onTap: () {
-                          if(widget.bluetoothServices != null)
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => JumpingJack(bluetoothServices: widget.bluetoothServices)));
-                        },
                       ),
-                    ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 30,),
                 Container(
-                  child: Center(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width/2,
-                      child: InkWell(
-                        child: Image.asset(
-                          'Pump.jpg',
-                          fit: BoxFit.fill,
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width/2,
+                          child: InkWell(
+                            child: Image.asset(
+                              'bluewhite.png',
+                              fit: BoxFit.fill,
+                            ),
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
+                            },
+                          ),
                         ),
-                        onTap: () {
-                          if(widget.bluetoothServices != null)
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => CrossJack(bluetoothServices: widget.bluetoothServices)));
-                        },
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ],

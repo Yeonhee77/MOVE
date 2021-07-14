@@ -59,6 +59,16 @@ flutter:
     - Fish_text.png
     - Pump_text.png
     - sprite.png
+    - squat_1.png
+    - squat_2.png
+    - squat_3.gif
+    - shoulder.png
+    - background.png
+    - jumping_1.png
+    - jumping_2.png
+    - jumping_3.png
+    - jumping_4.png
+    - jumping_5.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

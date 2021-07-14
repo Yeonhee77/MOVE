@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:move/front/squat_page.dart';
+import 'package:move/tutorial/tutorial1.dart';
 
 class Squat extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
@@ -14,18 +17,6 @@ class _SquatState extends State<Squat> {
   String gesture = "";
   // ignore: non_constant_identifier_names
   int gesture_num = 0;
-  List<Widget>? tutorial;
-  final Stream<int> _bids = (() async* {
-    yield 0;
-    await Future<void>.delayed(const Duration(seconds: 1));
-    yield 1;
-    await Future<void>.delayed(const Duration(seconds: 1));
-    yield 2;
-    await Future<void>.delayed(const Duration(seconds: 1));
-    yield 3;
-    await Future<void>.delayed(const Duration(seconds: 1));
-    yield 4;
-  })();
 
   @override
   void dispose(){
@@ -70,86 +61,31 @@ class _SquatState extends State<Squat> {
                 Center(
                     child:Column(
                       children: [
-                        StreamBuilder<int>(
-                          stream: _bids,
-                          builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                            if (snapshot.hasError) {
-                              tutorial = <Widget>[
-                                Icon(
-                                  Icons.error_outline,
-                                  color: Colors.red,
-                                  size: 60,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 16),
-                                  child: Text('Error: ${snapshot.error}'),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8),
-                                  child: Text('Stack trace: ${snapshot.stackTrace}'),
-                                ),
-                              ];
-                            } else {
-                              switch (snapshot.data) {
-                                case 0:
-                                  tutorial = <Widget>[
-                                    Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
-                                    ],),
-                                    SizedBox(height: 120,),
-                                    Text("Start",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                                  ];
-                                  break;
-                                case 1:
-                                  tutorial = <Widget>[
-                                    Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
-                                    ],),
-                                    SizedBox(height: 120,),
-                                    Text("3",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                                  ];
-                                  break;
-                                case 2:
-                                  tutorial = <Widget>[
-                                    Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
-                                    ],),
-                                    SizedBox(height: 120,),
-                                    Text("2",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                  ];
-                                  break;
-                                case 3:
-                                  tutorial = <Widget>[
-                                    Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
-                                    ],),
-                                    SizedBox(height: 120,),
-                                    Text("1",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                  ];
-                                  break;
-                                case 4:
-                                  tutorial = <Widget>[
-                                    Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
-                                    ],),
-                                    Text("자 이제,",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    SizedBox(height: 20,),
-                                    Text("Start", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),),
-                                    Center(child:
-                                    Image.asset('squat_3.gif',height: 400,width: 300,),),
-                                    Text("값: " + gesture_num.toString()),
-                                  ];
-                                  break;
-                              }
-                            }
-                            return Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: tutorial!,
-                            );
-
-                          },
-                        ),
+                        Row(children: [
+                          IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                        ],),
+                        SizedBox(height: 120,),
+                        Text("마이크로 칩을 어깨에 부착해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                        SizedBox(height: 20,),
+                        Image.asset('shoulder.png',height: 200,),
+                        //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        SizedBox(height: 30,),
+                        // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        Row(
+                          children: [
+                            SizedBox(width: 270,),
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                primary: Colors.black,
+                                // foreground
+                              ),
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial1(bluetoothServices: widget.bluetoothServices)));
+                              },
+                              child: Text('next'),
+                            ),
+                          ],
+                        )
                       ],
                     )
                 ),
@@ -177,7 +113,7 @@ class _SquatState extends State<Squat> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: _buildConnectDeviceView()
+          child: _buildConnectDeviceView(),
       ),
     );
   }

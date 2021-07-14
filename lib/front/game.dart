@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/trex/trex_main.dart';
 import 'package:flutter_blue/flutter_blue.dart';
@@ -32,6 +33,7 @@ class _GameState extends State<Game> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                SizedBox(height: 30,),
                 Container(
                   child: Center(
                     child: Container(
@@ -49,6 +51,7 @@ class _GameState extends State<Game> {
                     ),
                   ),
                 ),
+                SizedBox(height: 30,),
                 Container(
                   width: MediaQuery.of(context).size.width/2,
                   child: InkWell(

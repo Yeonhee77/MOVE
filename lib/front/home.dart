@@ -110,8 +110,7 @@ class _HomeState extends State<Homepage> {
                     );
                   },
                 ),
-
-                SizedBox(height: 80),
+                SizedBox(height: 50),
                 Row(
                   children: [
                     SizedBox(

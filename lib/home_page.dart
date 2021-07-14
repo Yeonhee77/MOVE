@@ -38,6 +38,8 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  StreamController<String> dataController = new StreamController();
+
   @override
   void initState() {
     super.initState();
@@ -54,10 +56,22 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
     flutterBlue.startScan();
+
+    //dataState(characteristic);
+  }
+
+  Future dataState(BluetoothCharacteristic characteristic) async {
+    characteristic.value.listen((value) {
+      readValues[characteristic.uuid] = value;
+    });
+    await characteristic.setNotifyValue(true);
+
+    setnum(characteristic);
   }
 
   ListView _buildListViewOfDevices() {
     // ignore: deprecated_member_use
+
     List<Container> containers = [];
     for (BluetoothDevice device in devicesList) {
       containers.add(
@@ -75,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               // ignore: deprecated_member_use
               FlatButton(
-                color: Colors.blue,
+                color: Colors.deepPurpleAccent[100],
                 child: Text(
                   'Connect',
                   style: TextStyle(color: Colors.white),
@@ -100,6 +114,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     connectedDevice = device;
                   });
+                  // Navigator.pop(context);
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
                 },
               ),
             ],
@@ -118,12 +134,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _bleRead(
       BluetoothCharacteristic characteristic) {
-        if (characteristic.properties.notify) {
-          characteristic.value.listen((value) {
-            readValues[characteristic.uuid] = value;});
-          characteristic.setNotifyValue(true);
-        }
-        if (characteristic.properties.read && characteristic.properties.notify) setnum(characteristic);
+    // ignore: deprecated_member_use
+    List<ButtonTheme> buttons = [];
+    if (characteristic.properties.notify) {
+      characteristic.value.listen((value) {
+        readValues[characteristic.uuid] = value;});
+      characteristic.setNotifyValue(true);
+    }
+
+    if (characteristic.properties.read && characteristic.properties.notify)    setnum(characteristic);
   }
 
   Future<void> setnum(characteristic) async {
@@ -136,6 +155,8 @@ class _MyHomePageState extends State<MyHomePage> {
         switch(gesture_num){
           case 1: gesture_name = "PUNCH"; break;
           case 2: gesture_name = "UPPERCUT"; break;
+//          case 3: gesture_name = "UP"; break;
+//          case 4: gesture_name = "DOWN"; break;
         }
       });
     });
