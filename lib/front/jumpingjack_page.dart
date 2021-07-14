@@ -16,6 +16,8 @@ class _JumpingstartState extends State<Jumpingstart> {
   int gesture_num = 0;
   int gesture_num2 = 0;
   int count =0;
+  int correct = 0;
+  double score = 0;
   bool flag = false;
   List<Widget>? tutorial;
   final Stream<int> _bids = (() async* {
@@ -95,8 +97,10 @@ class _JumpingstartState extends State<Jumpingstart> {
                             }
                             else {
                               if (count >= 20) {
+                                score = ((correct/count)*100);
                                 tutorial = <Widget>[
                                   Text("Finished"),
+                                  Text("Score: " + score.toString()),
                                 ];
                               }
                               else {
@@ -160,11 +164,8 @@ class _JumpingstartState extends State<Jumpingstart> {
                                           Navigator.pop(context);
                                         }, icon: Icon(Icons.arrow_back))
                                       ],),
-                                      flag ? Text("Correct") : Text("Wrong"),
-                                      // Text("자 이제,",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                      // SizedBox(height: 20,),
-                                      // Text("Start", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),),
-                                      SizedBox(height: 50,),
+                                      flag ? Image.asset('correct.png'):Image.asset('wrong.png'),
+                                      Text("맞은 횟수: " + correct.toString()),
                                       Center(child:
                                       Image.asset('squat_3.gif', height: 400,
                                         width: 300,),),
@@ -199,14 +200,15 @@ class _JumpingstartState extends State<Jumpingstart> {
         gesture = value.toString();
         gesture_num = int.parse(gesture[1]);
         gesture_num2 = int.parse(gesture[1]);
-        if(gesture_num == 2) {
-          flag = true;
-        }
-        else if(gesture_num == 1) {
-          flag = false;
-        }
       });
     },);
+    if(gesture_num == 2) {
+      flag = true;
+      correct = correct +1;
+    }
+    else if(gesture_num == 1) {
+      flag = false;
+    }
     if(gesture_num2 == 1 || gesture_num2 == 2) {
       gesture_num2 = 0;
       count += 1;

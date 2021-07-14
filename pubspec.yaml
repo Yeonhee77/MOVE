@@ -69,6 +69,8 @@ flutter:
     - jumping_3.png
     - jumping_4.png
     - jumping_5.png
+    - correct.png
+    - wrong.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
