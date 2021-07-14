@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/data.dart';
@@ -29,6 +30,22 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   bool splashGone = false;
   TRexGame? game;
   //final _focusNode = FocusNode();
+
+  Widget pauseMenu(BuildContext buildContext, TRexGame game) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Container(
+        width: 100,
+        height: 100,
+        color: Colors.white,
+        child: Center(
+          child: Text('Paused')
+        )
+      )
+    ]
+    );
+  }
 
   @override
   void initState() {
@@ -86,6 +103,12 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     sub.cancel();
   }
 
+  Widget _textBox() {
+    return Center(
+      child: Text("Hi"),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     _gesture();
@@ -100,6 +123,10 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       constraints: const BoxConstraints.expand(),
       child: GameWidget(
         game: game!,
+        overlayBuilderMap: {
+          'PauseMenu' : pauseMenu
+        },
+        initialActiveOverlays: ['PauseMenu'],
       ),
     );
   }
