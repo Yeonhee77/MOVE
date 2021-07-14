@@ -1,10 +1,11 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/data.dart';
 import 'package:move/home_page.dart';
 import 'package:move/front/game.dart';
-
+import 'package:move/trex/game.dart';
 
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
@@ -23,10 +24,12 @@ class TRexGameWrapper extends StatefulWidget {
 }
 
 class _TRexGameWrapperState extends State<TRexGameWrapper> {
+  /*--------bluetooth-------*/
+  final StreamController<int> _streamController = StreamController<int>();
+  final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   bool splashGone = false;
   TRexGame? game;
-  int score = 0;
-  //final _focusNode = FocusNode();
+  int score = -1;
 
   @override
   void initState() {
@@ -39,16 +42,10 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
           (image) => {
         setState(() {
           game = TRexGame(spriteImage: image[0]);
-
-          //_focusNode.requestFocus();
         })
       },
     );
   }
-
-  /*--------bluetooth-------*/
-  final StreamController<int> _streamController = StreamController<int>();
-  final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
 
   @override
   void dispose(){
@@ -56,13 +53,8 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     super.dispose();
   }
 
-  ListView _buildConnectDeviceView() {
-    // ignore: deprecated_member_use
-    List<Container> containers = [];
+  void _gesture() {
     for (BluetoothService service in widget.bluetoothServices!) {
-      // ignore: deprecated_member_use
-      List<Widget> characteristicsWidget = [];
-
       for (BluetoothCharacteristic characteristic in service.characteristics) {
         if (characteristic.properties.notify) {
           characteristic.value.listen((value) {
@@ -70,40 +62,12 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
           });
           characteristic.setNotifyValue(true);
         }
-        if (characteristic.properties.read && characteristic.properties.notify) {
+        if (characteristic.properties.read &&
+            characteristic.properties.notify) {
           setnum(characteristic);
         }
       }
-      containers.add(
-        Container(
-          child: ExpansionTile(
-              title: Center(child:Text("블루투스 연결설정")),
-              children: characteristicsWidget),
-        ),
-      );
     }
-
-    return ListView(
-      padding: const EdgeInsets.all(8),
-      children: <Widget>[
-        Container(
-            child:Column(
-              children: [
-                SizedBox(height: 30,),
-                Center(
-                    child:Column(
-                      children: [
-                        Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                        SizedBox(height: 30,),
-                        // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                      ],
-                    )
-                ),
-              ],
-            )
-        ),
-      ],
-    );
   }
 
   Future<void> setnum(characteristic) async {
@@ -121,11 +85,34 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     sub.cancel();
   }
 
+  Widget _textBox() {
+    return Center(
+      child: Text("Hi"),
+    );
+  }
+
+  Widget scoreBox(BuildContext buildContext, TRexGame game) {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+              width: 100,
+              height: 100,
+              color: Colors.white,
+              child: Center(
+                child: Text('Score : $score', style: TextStyle(color: Colors.purple, fontSize: 16, decoration: TextDecoration.none)),
+              )
+          )
+        ]
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    _buildConnectDeviceView();
-    game!.onAction(gesture_num,score);
-    //scoreDisplay();
+    _gesture();
+    game!.onAction(gesture_num);
+    score = game!.returnScore();
+
     if (game == null) {
       return const Center(
         child: Text("Loading"),
@@ -135,8 +122,12 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       color: Colors.white,
       constraints: const BoxConstraints.expand(),
       child: GameWidget(
-          game: game!,
-        ),
+        game: game!,
+        overlayBuilderMap: {
+          'Score' : scoreBox
+        },
+        initialActiveOverlays: ['Score'],
+      ),
     );
   }
 

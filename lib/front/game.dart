@@ -38,7 +38,7 @@ class _GameState extends State<Game> {
                           Container(
                             child: Image.asset(
                               'bluewhite.png',
-                              fit: BoxFit.fill,
+                              fit: BoxFit.contain,
                             ),
                             margin: EdgeInsets.all(0.5),
                             width: MediaQuery.of(context).size.width/2 - 1,
@@ -64,7 +64,7 @@ class _GameState extends State<Game> {
                           Container(
                             child: Image.asset(
                               'Dino.png',
-                              fit: BoxFit.fill,
+                              fit: BoxFit.contain,
                             ),
                             margin: EdgeInsets.all(0.5),
                             width: MediaQuery.of(context).size.width/2 - 1,
@@ -96,7 +96,7 @@ class _GameState extends State<Game> {
                           Container(
                             child: Image.asset(
                               'Fish.jpg',
-                              fit: BoxFit.fill,
+                              fit: BoxFit.contain,
                             ),
                             margin: EdgeInsets.all(0.5),
                             width: MediaQuery.of(context).size.width/2 - 1,
@@ -122,7 +122,7 @@ class _GameState extends State<Game> {
                           Container(
                             child: Image.asset(
                               'Pump.jpg',
-                              fit: BoxFit.fill,
+                              fit: BoxFit.contain,
                             ),
                             margin: EdgeInsets.all(0.5),
                             width: MediaQuery.of(context).size.width/2 - 1,

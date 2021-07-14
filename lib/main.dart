@@ -20,3 +20,26 @@ class MyApp extends StatelessWidget {
     home: Login(),
   );
 }
+
+class Connected extends StatefulWidget {
+  @override
+  _ConnectedState createState() => _ConnectedState();
+
+  final gesture = '';
+}
+
+class _ConnectedState extends State<Connected> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('test'),
+      ),
+      body: Container(
+        child: Text(widget.gesture),
+      ),
+    );
+  }
+}
+
+

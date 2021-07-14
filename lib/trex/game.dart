@@ -11,12 +11,9 @@ import 'package:move/trex/horizon/horizon.dart';
 import 'package:move/trex/game_config.dart';
 import 'package:move/trex/game_over/game_over.dart';
 import 'package:move/trex/obstacle/obstacle.dart';
-import 'package:move/trex/score/config.dart';
-import 'package:move/trex/score/score.dart';
 import 'package:move/trex/t_rex/t_rex.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'collision/collision_utils.dart';
-import 'package:flame/components.dart';
 
 class Bg extends Component with HasGameRef {
   Vector2 size = Vector2.zero();
@@ -37,14 +34,13 @@ class Bg extends Component with HasGameRef {
 
 enum TRexGameStatus { playing, waiting, gameOver }
 
-class TRexGame extends BaseGame {
+class TRexGame extends BaseGame with TapDetector {
 
   TRexGame( {
     required this.spriteImage,
   }) : super();
 
   late final config = GameConfig();
-  late NineTileBox nineTileBox; //Display score
 
   @override
   ui.Color backgroundColor() => const ui.Color(0xFFFFFFFF);
@@ -55,7 +51,6 @@ class TRexGame extends BaseGame {
   late final tRex = TRex();
   late final horizon = Horizon();
   late final gameOverPanel = GameOverPanel(spriteImage, GameOverConfig());
-  late final scorePanel = ScorePanel(spriteImage, ScoreConfig());
 
   @override
   Future<void> onLoad() async {
@@ -63,13 +58,13 @@ class TRexGame extends BaseGame {
     add(horizon);
     add(tRex);
     add(gameOverPanel);
-    add(scorePanel);
   }
 
   // state
   late TRexGameStatus status = TRexGameStatus.waiting;
   late double currentSpeed = 0.0;
   late double timePlaying = 0.0;
+  late int score = -1;
 
   bool get playing => status == TRexGameStatus.playing;
   bool get gameOver => status == TRexGameStatus.gameOver;
@@ -80,28 +75,25 @@ class TRexGame extends BaseGame {
   final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
 
-
   @override
   void dispose(){
     _streamController.close();
 
   }
 
-  int score = 0;
-
-  void onAction(int gesture_num, int score) {
+  void onAction(int gesture_num) {
     if (gameOver) {
       restart();
-      return;
     }
 
-    if(gesture_num == 3)
-    {
+    if(gesture_num == 3) {
+      this.score += 1;
       tRex.startJump(currentSpeed);
-      score += 1;
-      this.score = score;
-      //print('score = $score');
     }
+  }
+
+  int returnScore() {
+    return this.score;
   }
 
   void startGame() {
@@ -116,7 +108,6 @@ class TRexGame extends BaseGame {
     status = TRexGameStatus.gameOver;
     tRex.status = TRexStatus.crashed;
     currentSpeed = 0.0;
-
   }
 
   void restart() {
@@ -126,8 +117,8 @@ class TRexGame extends BaseGame {
     currentSpeed = config.speed;
     gameOverPanel.visible = false;
     timePlaying = 0.0;
+    this.score = -1;
   }
-
 
   @override
   void update(double dt) {
@@ -158,35 +149,3 @@ class TRexGame extends BaseGame {
   }
 
 }
-
-
-// class GameOver extends StatefulWidget {
-//   @override
-//   _GameOverState createState() => _GameOverState();
-// }
-//
-// class _GameOverState extends State<GameOver> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: AlertDialog(
-//         title: Text('Game over'),
-//         content: Text('Your score is $this.score'),
-//         actions: [
-//           FlatButton(
-//             textColor: Color(0xFF6200EE),
-//             onPressed: () {},
-//             child: Text('CANCEL'),
-//           ),
-//           FlatButton(
-//             textColor: Color(0xFF6200EE),
-//             onPressed: () {},
-//             child: Text('ACCEPT'),
-//           ),
-//         ],
-//       ),
-//
-//     );
-//   }
-// }
-
