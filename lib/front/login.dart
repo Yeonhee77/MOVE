@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -81,17 +82,19 @@ class _LoginState extends State<Login> {
           children: [
             Text(
               'MOVE!',
-              style: TextStyle(
+              style: GoogleFonts.mcLaren(
                 fontSize: 32,
                 color: Colors.purple[100],
-                fontWeight: FontWeight.bold,
-              ),),
+                fontWeight: FontWeight.bold,),
+            ),
             SizedBox(height: 30),
             OutlinedButton(
-              child: Text('Google Login',style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black54),),
+              child: Text('Google Login',
+                style: GoogleFonts.mcLaren(
+                fontSize: 32,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,),
+              ),
               onPressed: () {
                 signInWithGoogle();
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
