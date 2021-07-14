@@ -22,8 +22,8 @@ bool checkForCollision(Obstacle obstacle, TRex tRex) {
       obstacle.absolutePosition.y + 1,
     ),
     size: Vector2(
-      obstacle.type.width * obstacle.internalSize - 2,
-      obstacle.type.height - 2,
+      obstacle.type.width * obstacle.internalSize - 5,
+      obstacle.type.height - 5,
     ),
   );
 

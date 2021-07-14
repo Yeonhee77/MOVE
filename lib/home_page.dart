@@ -38,8 +38,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  StreamController<String> dataController = new StreamController();
-
   @override
   void initState() {
     super.initState();
@@ -56,15 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
     flutterBlue.startScan();
-  }
-
-  Future dataState(BluetoothCharacteristic characteristic) async {
-    characteristic.value.listen((value) {
-      readValues[characteristic.uuid] = value;
-    });
-    await characteristic.setNotifyValue(true);
-
-    setnum(characteristic);
   }
 
   ListView _buildListViewOfDevices() {
@@ -127,19 +116,14 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  List<ButtonTheme> _buildReadWriteNotifyButton(BluetoothCharacteristic characteristic) {
-    // ignore: deprecated_member_use
-    List<ButtonTheme> buttons = [];
-    if (characteristic.properties.notify) {
-      characteristic.value.listen((value) {
-        readValues[characteristic.uuid] = value;});
-      characteristic.setNotifyValue(true);
-    }
-
-    if (characteristic.properties.read && characteristic.properties.notify)
-      setnum(characteristic);
-
-    return buttons;
+  void _bleRead(
+      BluetoothCharacteristic characteristic) {
+        if (characteristic.properties.notify) {
+          characteristic.value.listen((value) {
+            readValues[characteristic.uuid] = value;});
+          characteristic.setNotifyValue(true);
+        }
+        if (characteristic.properties.read && characteristic.properties.notify) setnum(characteristic);
   }
 
   Future<void> setnum(characteristic) async {
@@ -148,6 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
         readValues[characteristic.uuid] = value;
         gesture = value.toString();
         gesture_num = int.parse(gesture[1]);
+        print('GESTURE - ' + gesture);
         switch(gesture_num){
           case 1: gesture_name = "PUNCH"; break;
           case 2: gesture_name = "UPPERCUT"; break;
@@ -159,58 +144,35 @@ class _MyHomePageState extends State<MyHomePage> {
     sub.cancel();
   }
 
-  ListView _buildConnectDeviceView() {
+  void _bleServices() {
+    // ignore: deprecated_member_use
     for (BluetoothService service in bluetoothServices!) {
       // ignore: deprecated_member_use
-      List<Widget> characteristicsWidget = [];
-
       for (BluetoothCharacteristic characteristic in service.characteristics) {
-        characteristicsWidget.add(
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    ..._buildReadWriteNotifyButton(characteristic),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
+        _bleRead(characteristic);
       }
     }
-
-    // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-
-    return ListView(
-      padding: const EdgeInsets.all(8),
-      children: <Widget>[
-        Container(
-            child:Column(
-              children: [
-                SizedBox(height: 30,),
-                Center(
-                    child:Column(
-                      children: [
-                        Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                        SizedBox(height: 30,),
-                        Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                      ],
-                    )
-                ),
-              ],
-            )
-        ),
-      ],
-    );
   }
 
-  ListView _buildView() {
+  Widget _buildView() {
     if (connectedDevice != null) {
-      return _buildConnectDeviceView();
-      // return _buildConnectDevice();
+      _bleServices();
+      return Center(
+        child:Column(
+          children: [
+            SizedBox(height: 30,),
+            Center(
+                child:Column(
+                  children: [
+                    Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                    SizedBox(height: 30,),
+                    Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                  ],
+                )
+            ),
+          ],
+        ),
+      );
     }
     return _buildListViewOfDevices();
   }
@@ -220,7 +182,6 @@ class _MyHomePageState extends State<MyHomePage> {
     onWillPop: () {
       Navigator.pop(context);
       Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-
       return Future.value(false);
     },
     child: Scaffold(
