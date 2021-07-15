@@ -18,54 +18,45 @@ class _GameState extends State<Game> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: Text('Move!'),
           centerTitle: true,
           elevation: 0.0,
-          backgroundColor: Colors.purple[100],
-          actions: <Widget> [
-            IconButton(onPressed: () {Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Mypage()));}, icon: Icon(Icons.account_circle_rounded))
-          ],
+          backgroundColor: Colors.transparent,
         ),
         body: LayoutBuilder(builder: (context, constraints) {
           return Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(height: 30,),
-                Container(
-                  child: Center(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width/2,
-                      child: InkWell(
-                        child: Image.asset(
-                          'bluewhite.png',
-                          fit: BoxFit.fill,
-                        ),
-                        onTap: () {
-                          if(widget.bluetoothServices != null)
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 30,),
-                Container(
-                  width: MediaQuery.of(context).size.width/2,
-                  child: InkWell(
-                    child: Image.asset(
-                      'bluewhite.png',
-                      fit: BoxFit.fill,
-                    ),
-                    onTap: () {
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('background.png'),
+                    fit: BoxFit.fill
+                )
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: 30,),
+                  TextButton(
+                    onPressed: () {
                       if(widget.bluetoothServices != null)
                         Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper(bluetoothServices: widget.bluetoothServices)));
                     },
+                    child: Image.asset('dinoButton.png', width: MediaQuery.of(context).size.width*0.7,),
                   ),
-                ),
-              ],
+                  SizedBox(height: 5,),
+                  TextButton(
+                    onPressed: () {
+                      if(widget.bluetoothServices != null)
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
+                    },
+                    child: Image.asset('boxButton.png', width: MediaQuery.of(context).size.width*0.7,),
+                  ),
+                ],
+              ),
             ),
           );
         }

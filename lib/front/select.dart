@@ -23,106 +23,54 @@ class _SelectState extends State<Select> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.arrow_back))
-              ],
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            SizedBox(
-                height: 120,
-                width: 300,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(color: Colors.purple, width: 5),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Training(
-                                bluetoothServices: widget.bluetoothServices)));
-                  },
-                  child: Text(
-                    'Home workout!',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black54),
-                  ),
-                )),
-            SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-                height: 120,
-                width: 300,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(color: Colors.purple, width: 5),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Game(
-                                bluetoothServices: widget.bluetoothServices)));
-                  },
-                  child: Text(
-                    'Play Game',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black54),
-                  ),
-                )),
-            SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-                height: 120,
-                width: 300,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(color: Colors.purple, width: 5),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Training(
-                                bluetoothServices: widget.bluetoothServices)));
-                  },
-                  child: Text(
-                    'Rehabilitation',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black54),
-                  ),
-                )),
-          ],
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        leading: BackButton(
+            color: Colors.indigo
+        ),
+      ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('background.png'),
+                fit: BoxFit.fill
+            )
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Training(bluetoothServices: widget.bluetoothServices)));
+                },
+                child: Image.asset('hwButton.png', width: MediaQuery.of(context).size.width*0.7,),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices)));
+                },
+                child: Image.asset('gameButton.png', width: MediaQuery.of(context).size.width*0.7,),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices)));
+                },
+                child: Image.asset('reabButton.png', width: MediaQuery.of(context).size.width*0.7,)
+              ),
+            ],
+          ),
         ),
       ),
     );

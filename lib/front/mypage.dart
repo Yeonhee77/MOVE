@@ -68,7 +68,7 @@ class _MypageState extends State<Mypage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(width: 15,),
+                  SizedBox(width: 20,),
                   CircleAvatar(
                     radius: 30,
                     backgroundImage: NetworkImage(FirebaseAuth.instance.currentUser!.photoURL.toString()),
@@ -92,14 +92,18 @@ class _MypageState extends State<Mypage> {
                         width: MediaQuery.of(context).size.width/2-1,
                         child: Column(
                           children: [
-                            Text('Home workout'),
+                            Text('Home workout', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),),
+                            SizedBox(height: 20,),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text('Jumping Jack: '),
                                 Text(jumpingJack.toString()),
                               ],
                             ),
+                            SizedBox(height: 10,),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text('Cross Jack: '),
                                 Text(crossJack.toString()),
@@ -117,14 +121,18 @@ class _MypageState extends State<Mypage> {
                         width: MediaQuery.of(context).size.width/2-1,
                         child: Column(
                           children: [
-                            Center(child: Text('Game')),
+                            Text('Game', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),),
+                            SizedBox(height: 20,),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text('Dino: '),
                                 Text(dino.toString()),
                               ],
                             ),
+                            SizedBox(height: 10,),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text('Boxing: '),
                                 Text(boxing.toString()),

@@ -23,10 +23,6 @@ class _TrainingState extends State<Training> {
           centerTitle: true,
           elevation: 0.0,
           backgroundColor: Colors.transparent,
-          actions: <Widget> [
-            IconButton(onPressed: () {Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Mypage()));}, icon: Icon(Icons.account_circle_rounded))
-          ],
         ),
         body: LayoutBuilder(builder: (context, constraints) {
           return Container(
@@ -46,7 +42,8 @@ class _TrainingState extends State<Training> {
                               fit: BoxFit.fill,
                             ),
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingjack(bluetoothServices: widget.bluetoothServices)));
+                              if(widget.bluetoothServices != null)
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingjack(bluetoothServices: widget.bluetoothServices)));
                             },
                           ),
                         ),
@@ -67,7 +64,8 @@ class _TrainingState extends State<Training> {
                               fit: BoxFit.fill,
                             ),
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjack(bluetoothServices: widget.bluetoothServices)));
+                              if(widget.bluetoothServices != null)
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjack(bluetoothServices: widget.bluetoothServices)));
                             },
                           ),
                         ),
@@ -88,7 +86,8 @@ class _TrainingState extends State<Training> {
                               fit: BoxFit.fill,
                             ),
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
+                              if(widget.bluetoothServices != null)
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
                             },
                           ),
                         ),

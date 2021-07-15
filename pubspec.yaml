@@ -75,6 +75,11 @@ flutter:
     - moveButton.png
     - connect.png
     - logo.png
+    - boxButton.png
+    - dinoButton.png
+    - gameButton.png
+    - hwButton.png
+    - reabButton.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
