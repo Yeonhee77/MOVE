@@ -86,6 +86,8 @@ flutter:
     - crossjack_2.png
     - tutorial_background.png
     - snap.png
+    - finish.png
+    - logo.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -80,13 +80,7 @@ class _LoginState extends State<Login> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'MOVE!',
-                  style: GoogleFonts.mcLaren(
-                    fontSize: 32,
-                    color: Colors.purple[100],
-                    fontWeight: FontWeight.bold,),
-                ),
+                Image.asset('logo.png',height: 200,width: 200,),
                 SizedBox(height: 30),
                 OutlinedButton(
                   child: Text('Google Login',

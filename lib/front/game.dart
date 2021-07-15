@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/trex/trex_main.dart';
-import 'package:flutter_blue/flutter_blue.dart';
 
 import 'boxing.dart';
 
