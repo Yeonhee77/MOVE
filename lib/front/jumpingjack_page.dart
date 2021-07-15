@@ -145,10 +145,8 @@ class _JumpingstartState extends State<Jumpingstart> {
                                           Navigator.pop(context);
                                         }, icon: Icon(Icons.arrow_back))
                                       ],),
-                                      SizedBox(height: 120,),
-                                      Text("Start", style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20),),
+                                      SizedBox(height: 80,),
+                                      Image.asset('start_start.png', height: 250,width: 250,),
                                     ];
                                     break;
                                   case 1:
