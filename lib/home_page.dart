@@ -141,8 +141,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _bleRead(
       BluetoothCharacteristic characteristic) {
-    // ignore: deprecated_member_use
-    List<ButtonTheme> buttons = [];
     if (characteristic.properties.notify) {
       characteristic.value.listen((value) {
         readValues[characteristic.uuid] = value;});
