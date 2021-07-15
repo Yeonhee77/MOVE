@@ -4,8 +4,6 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/gestures.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:move/trex/game_over/config.dart';
 import 'package:move/trex/horizon/horizon.dart';
 import 'package:move/trex/game_config.dart';
@@ -18,7 +16,7 @@ import 'collision/collision_utils.dart';
 class Bg extends Component with HasGameRef {
   Vector2 size = Vector2.zero();
 
-  late final ui.Paint _paint = ui.Paint()..color = const ui.Color.fromARGB(255,29,173,148);
+  late final ui.Paint _paint = ui.Paint()..color = const ui.Color.fromARGB(255,162,209,221); //background color
 
   @override
   void render(ui.Canvas c) {
@@ -43,7 +41,7 @@ class TRexGame extends BaseGame with TapDetector {
   late final config = GameConfig();
 
   @override
-  ui.Color backgroundColor() => const ui.Color(0xFFFFFFFF);
+  ui.Color backgroundColor() => const ui.Color.fromARGB(255,162,209,221);
 
   final ui.Image spriteImage;
 

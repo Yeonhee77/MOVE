@@ -65,7 +65,7 @@ class _HomeState extends State<Homepage> {
             },
           ),
           IconButton(onPressed: () {Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Mypage()));}, icon: Icon(Icons.account_circle_rounded))
+              MaterialPageRoute(builder: (context) => Mypage()));}, icon: Icon(Icons.account_circle_rounded)),
         ],
       ),
       body: SingleChildScrollView(

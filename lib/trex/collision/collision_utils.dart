@@ -19,11 +19,11 @@ bool checkForCollision(Obstacle obstacle, TRex tRex) {
   final obstacleBox = CollisionBox(
     position: Vector2(
       obstacle.absolutePosition.x + 1,
-      obstacle.absolutePosition.y + 1,
+      obstacle.absolutePosition.y - 10,
     ),
     size: Vector2(
-      obstacle.type.width * obstacle.internalSize - 5,
-      obstacle.type.height - 5,
+      obstacle.type.width * obstacle.internalSize - 5, // (65 * 1 - 5 = 60)
+      obstacle.type.height - 5, // (40 - 5 = 35)
     ),
   );
 

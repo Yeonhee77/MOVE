@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
+import 'package:flame/geometry.dart';
 import 'package:flame/sprite.dart';
 import 'package:move/trex/game.dart';
 import 'package:move/trex/t_rex/config.dart';
@@ -35,7 +36,7 @@ class TRex extends PositionComponent with HasGameRef<TRexGame> {
   bool get ducking => status == TRexStatus.ducking;
 
   double get groundYPos {
-    return (gameRef.size.y / 2) - (config.height / 2) * 1.3; //공룡 y축
+    return (gameRef.size.y / 2) + 33.5; //dinosaur y axis
   }
 
   @override
@@ -111,21 +112,23 @@ mixin TRexStateVisibility on BaseComponent {
 }
 
 /// A component superclass for TRex states with still sprites
-class TRexStateStillComponent extends SpriteComponent with TRexStateVisibility {
+class TRexStateStillComponent extends SpriteComponent with TRexStateVisibility, Hitbox {
   TRexStateStillComponent({
     required List<TRexStatus> showFor,
     required Image spriteImage,
     required TRexConfig config,
     required Vector2 srcPosition,
   }) : super(
-          size: Vector2(config.width, config.height), //88, 90
+          size: Vector2(config.width, config.height),
           sprite: Sprite(
             spriteImage,
             srcPosition: srcPosition,
-            srcSize: Vector2(config.width, config.height), //88, 90
+            srcSize: Vector2(config.width, config.height),
           ),
         ) {
     this.showFor = showFor;
+    debugMode = true;
+    addShape(HitboxRectangle());
   }
 }
 
@@ -143,7 +146,7 @@ class TRexStateAnimatedComponent extends SpriteAnimationComponent
             frames
                 .map((vector) => Sprite(
                       spriteImage,
-                      srcSize: Vector2(config.width, config.height), // 88, 90
+                      srcSize: Vector2(config.width, config.height),
                       srcPosition: vector,
                     ))
                 .toList(),
@@ -155,45 +158,48 @@ class TRexStateAnimatedComponent extends SpriteAnimationComponent
   }
 }
 
-class RunningTRex extends TRexStateAnimatedComponent { //왼쪽발 위 뛰는 공룡
+class RunningTRex extends TRexStateAnimatedComponent {
   RunningTRex(
     Image spriteImage,
     TRexConfig config,
   ) : super(
           showFor: [TRexStatus.running, TRexStatus.intro],
           spriteImage: spriteImage,
-          size: Vector2(79.0, 100.0),
+          size: Vector2(80.0, 90.0),
           config: config,
           frames: [Vector2(96.0, 12.0), Vector2(185.0, 12.0)], //바꿈
         );
 }
 
-class WaitingTRex extends TRexStateStillComponent { //시작할 때
+class WaitingTRex extends TRexStateAnimatedComponent { //change to animate
   WaitingTRex(Image spriteImage, TRexConfig config)
       : super(
-          showFor: [TRexStatus.waiting],
-          config: config,
+          showFor: [TRexStatus.waiting, TRexStatus.intro],
           spriteImage: spriteImage,
-          srcPosition: Vector2(1425.0, 12.0), //바꿈
+          size: Vector2(80.0, 90.0),
+          config: config,
+          frames: [Vector2(96.0, 12.0), Vector2(96.0, 12.0)]
         );
 }
 
-class JumpingTRex extends TRexStateStillComponent { //뛰는 공룡
+class JumpingTRex extends TRexStateAnimatedComponent { //change to animate
   JumpingTRex(Image spriteImage, TRexConfig config)
       : super(
-          showFor: [TRexStatus.jumping],
-          config: config,
+          showFor: [TRexStatus.jumping, TRexStatus.intro],
           spriteImage: spriteImage,
-          srcPosition: Vector2(1425.0, 12.0), //바꿈
+          size: Vector2(80.0, 90.0),
+          config: config,
+          frames: [Vector2(1425.0, 2.0), Vector2(1425.0, 2.0)],
         );
 }
 
-class SurprisedTRex extends TRexStateStillComponent { //박았을 때
+class SurprisedTRex extends TRexStateAnimatedComponent { //change to animate
   SurprisedTRex(Image spriteImage, TRexConfig config)
       : super(
-          showFor: [TRexStatus.crashed],
-          config: config,
+          showFor: [TRexStatus.crashed, TRexStatus.intro],
           spriteImage: spriteImage,
-          srcPosition: Vector2(273.0, 12.0), //바꿈
+          size: Vector2(80.0, 90.0),
+          config: config,
+          frames: [Vector2(273.0, 12.0), Vector2(273.0, 12.0)]
         );
 }

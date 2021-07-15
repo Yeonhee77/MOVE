@@ -11,8 +11,10 @@ class TRexConfig {
   final double speedDropCoefficient = 3.0;
   final double startXPos = 50.0;
 
-  final double height = 100.0; //dino container height
+  final double height = 90.0; //dino container height
   final double width = 79.0; //dino container width
+
+  final double jumpHeight = 80.0; //jumping dino container height
 
   final double heightDuck = 50.0;
   final double widthDuck = 118.0;
