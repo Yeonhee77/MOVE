@@ -61,7 +61,7 @@ class ObstacleType {
     "tree",
     width: 60.0,
     height: 70.0,
-    y: 2.0, //obstacle y axis (position of height)
+    y: 3, //obstacle y axis (position of height)
     multipleSpeed: 7,
     minGap: 120.0,
     minSpeed: 0.0,
