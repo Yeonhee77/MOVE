@@ -29,6 +29,8 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   bool splashGone = false;
   TRexGame? game;
   int score = -1;
+  int gesture_num = 0;
+  String gesture = "";
 
   @override
   void initState() {
@@ -84,12 +86,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     sub.cancel();
   }
 
-  Widget _textBox() {
-    return Center(
-      child: Text("Hi"),
-    );
-  }
-
   Widget scoreBox(BuildContext buildContext, TRexGame game) {
     return Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -97,9 +93,9 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
           Container(
               width: 100,
               height: 100,
-              color: Colors.white,
+              color: Color.fromARGB(255,162,209,221),
               child: Center(
-                child: Text('Score : $score', style: TextStyle(color: Colors.purple, fontSize: 16, decoration: TextDecoration.none)),
+                child: Text('Score : $score', style: TextStyle(color: Colors.black, fontSize: 16, decoration: TextDecoration.none)),
               )
           )
         ]
@@ -117,6 +113,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         child: Text("Loading"),
       );
     }
+    else
     return Container(
       color: Colors.white,
       constraints: const BoxConstraints.expand(),
@@ -129,5 +126,4 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       ),
     );
   }
-
 }

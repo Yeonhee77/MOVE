@@ -16,8 +16,8 @@ class Cloud extends SpriteComponent {
         super(
           sprite: Sprite(
             spriteImage,
-            srcPosition: Vector2(166.0, 2.0),
-            srcSize: Vector2(config.width, config.height),
+            srcPosition: Vector2(764.0, 20.0), //changed
+            srcSize: Vector2(90.0, 33.0), //changed
           ),
         );
 

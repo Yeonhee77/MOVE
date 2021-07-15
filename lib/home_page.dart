@@ -151,6 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (characteristic.properties.read && characteristic.properties.notify)
       setnum(characteristic);
+    if (characteristic.properties.read && characteristic.properties.notify) setnum(characteristic);
   }
 
   Future<void> setnum(characteristic) async {
@@ -163,6 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
         switch(gesture_num){
           case 1: gesture_name = "PUNCH"; break;
           case 2: gesture_name = "UPPERCUT"; break;
+
         }
       });
     });

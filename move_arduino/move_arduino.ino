@@ -343,12 +343,12 @@ void loop()
 
           int result = 0;
 
-           // If the gestures is "PUNCH" print 1, "UPPERCUT" print 2
-
+           // If the gestures is "left" print 1, "RIGHT" print 2, "UP" print 3, "DOWN" print 4
+           
           if (String(GESTURES[maxIndex]).equals("PUNCH")) result = 1;
           else if (String(GESTURES[maxIndex]).equals("UPPERCUT")) result = 2;
-//          else if (String(GESTURES[maxIndex]).equals("squat")) result = 3;
-//          else if (String(GESTURES[maxIndex]).equals("dumbbell")) result = 4;
+          //else if (String(GESTURES[maxIndex]).equals("UP")) result = 3;
+          //else if (String(GESTURES[maxIndex]).equals("DOWN")) result = 4;
 
           dataProviderTxChar.writeValue((byte)result);
 
