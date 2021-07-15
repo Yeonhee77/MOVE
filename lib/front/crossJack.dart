@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/tutorial/tutorial3.dart';
 
-class Crossjack extends StatefulWidget {
+class CrossJack extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
-  Crossjack({this.bluetoothServices});
+  CrossJack({this.bluetoothServices});
 
   @override
-  _CrossjackState createState() => _CrossjackState();
+  _CrossJackState createState() => _CrossJackState();
 }
 
-class _CrossjackState extends State<Crossjack> {
+class _CrossJackState extends State<CrossJack> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   String gesture = "";
   // ignore: non_constant_identifier_names

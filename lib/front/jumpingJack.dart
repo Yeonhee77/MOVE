@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/tutorial/tutorial2.dart';
 
-class Jumpingjack extends StatefulWidget {
+class JumpingJack extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
-  Jumpingjack({this.bluetoothServices});
+  JumpingJack({this.bluetoothServices});
 
   @override
-  _JumpingjackState createState() => _JumpingjackState();
+  _JumpingJackState createState() => _JumpingJackState();
 }
 
-class _JumpingjackState extends State<Jumpingjack> {
+class _JumpingJackState extends State<JumpingJack> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   String gesture = "";
   // ignore: non_constant_identifier_names
