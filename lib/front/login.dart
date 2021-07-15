@@ -1,31 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_blue/flutter_blue.dart';
-import 'dart:async';
 
 import 'home.dart';
-import 'package:move/home_page.dart';
-import 'package:move/data.dart';
-import 'package:move/value.dart';
 
 class Login extends StatefulWidget {
-  final List<BluetoothService>? bluetoothServices;
-  Login({this.bluetoothServices});
-
   @override
   _LoginState createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends State<Login> with TickerProviderStateMixin{
   final GoogleSignIn googleSignIn = GoogleSignIn();
-  final Move move = Move(gesture_num);
 
-  num game1 = 0;
-  num game2 = 0;
-  num game3 = 0;
-  num game4 = 0;
+  num dino = 0;
+  num boxing = 0;
+  num jumpingJack = 0;
+  num crossJack = 0;
   double avg = 0;
   String id = '';
   String name = '';
@@ -61,10 +53,10 @@ class _LoginState extends State<Login> {
 
   Future<void> addUser() async{
     FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser!.uid).set({
-      'game1' : game1,
-      'game2' : game2,
-      'game3' : game3,
-      'game4' : game4,
+      'dino' : dino,
+      'boxing' : boxing,
+      'jumpingJack' : jumpingJack,
+      'crossJack' : crossJack,
       'avg' : avg,
       'id' : id,
       'name' : name,
@@ -72,39 +64,54 @@ class _LoginState extends State<Login> {
     }).then((value) => print("user add!"));
   }
 
-  @override
+  AnimationController? _controller;
+  Animation<double>? _animation;
+
   void initState() {
+    _controller = AnimationController(duration: Duration(seconds: 2), value: 0.1, vsync: this);
+
+    _animation = CurvedAnimation(parent: _controller!, curve: Curves.bounceInOut);
+
+    _controller!.forward();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller!.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column /*_buildConnectDeviceView()*/(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'MOVE!',
-              style: TextStyle(
-                fontSize: 32,
-                color: Colors.purple[100],
-                fontWeight: FontWeight.bold,
-              ),),
-            SizedBox(height: 30),
-            OutlinedButton(
-              child: Text('Google Login',style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black54),),
-              onPressed: () {
-                signInWithGoogle();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
-              },
-            ),
-          ],
-        ),
+      body: Stack(
+          fit: StackFit.expand,
+          children:<Widget>[
+            Image( image: AssetImage("background.png"), fit: BoxFit.cover, colorBlendMode: BlendMode.darken, ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ScaleTransition(
+                    scale: _animation!,
+                    child: Image.asset('logo.png', width: 250,)
+                ),
+                SizedBox(height: 30),
+                OutlinedButton(
+                  child: Text('Google Login',
+                    style: GoogleFonts.mcLaren(
+                      fontSize: 32,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,),
+                  ),
+                  onPressed: () {
+                    signInWithGoogle();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
+                  },
+                ),
+              ],
+            ),]
       ),
     );
   }

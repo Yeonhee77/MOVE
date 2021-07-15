@@ -1,12 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/data.dart';
 import 'package:move/front/home.dart';
-import 'package:move/value.dart';
-
-import 'front/login.dart';
 
 String gesture = "";
 // ignore: non_constant_identifier_names
@@ -41,6 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  StreamController<String> dataController = new StreamController();
+
   @override
   void initState() {
     super.initState();
@@ -59,48 +59,72 @@ class _MyHomePageState extends State<MyHomePage> {
     flutterBlue.startScan();
   }
 
+  Future dataState(BluetoothCharacteristic characteristic) async {
+    characteristic.value.listen((value) {
+      readValues[characteristic.uuid] = value;
+    });
+    await characteristic.setNotifyValue(true);
+
+    setnum(characteristic);
+  }
+
   ListView _buildListViewOfDevices() {
     // ignore: deprecated_member_use
+
     List<Container> containers = [];
     for (BluetoothDevice device in devicesList) {
       containers.add(
         Container(
           height: 50,
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: Column(
-                  children: <Widget>[
-                    Text(device.name == '' ? '(unknown device)' : device.name),
-                    Text(device.id.toString()),
-                  ],
-                ),
+          child: Column(
+            children: [
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(device.name == '' ? '(unknown device)' : device.name,
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                          ),
+                        ),
+                        // Text(device.id.toString()),
+                      ],
+                    ),
+                  ),
+                  // ignore: deprecated_member_use
+                  FlatButton(
+                    child: Image.asset('connect.png', width: MediaQuery.of(context).size.width*0.35,),
+                    onPressed: () async {
+                      flutterBlue.stopScan();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Shake your controller!'),
+                            duration: Duration(seconds: 5),
+                          )
+                      );
+                      try {
+                        await device.connect();
+                      } catch (e) {
+                        if (e != 'already_connected') {
+                          throw e;
+                        }
+                      } finally {
+                        bluetoothServices = await device.discoverServices();
+                      }
+                      setState(() {
+                        connectedDevice = device;
+                      });
+                    },
+                  ),
+                ],
               ),
-              // ignore: deprecated_member_use
-              FlatButton(
-                color: Colors.blue,
-                child: Text(
-                  'Connect',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () async {
-                  flutterBlue.stopScan();
-                  try {
-                    await device.connect();
-                  } catch (e) {
-                    if (e != 'already_connected') {
-                      throw e;
-                    }
-                  } finally {
-                    bluetoothServices = await device.discoverServices();
-                  }
-                  setState(() {
-                    connectedDevice = device;
-                  });
-                  // Navigator.pop(context);
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-                },
-              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                child: Divider(height: 1, color: Colors.white),
+              )
             ],
           ),
         ),
@@ -122,7 +146,9 @@ class _MyHomePageState extends State<MyHomePage> {
         readValues[characteristic.uuid] = value;});
       characteristic.setNotifyValue(true);
     }
-    if (characteristic.properties.read && characteristic.properties.notify) setnum(characteristic);
+
+    if (characteristic.properties.read && characteristic.properties.notify)
+      setnum(characteristic);
   }
 
   Future<void> setnum(characteristic) async {
@@ -135,8 +161,6 @@ class _MyHomePageState extends State<MyHomePage> {
         switch(gesture_num){
           case 1: gesture_name = "PUNCH"; break;
           case 2: gesture_name = "UPPERCUT"; break;
-          //case 3: gesture_name = "UP"; break;
-          //case 4: gesture_name = "DOWN"; break;
         }
       });
     });
@@ -158,22 +182,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildView() {
     if (connectedDevice != null) {
       _bleServices();
-      return Center(
-        child:Column(
-          children: [
-            SizedBox(height: 30,),
-            Center(
-                child:Column(
-                  children: [
-                    Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                    SizedBox(height: 30,),
-                    Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                  ],
-                )
-            ),
-          ],
-        ),
-      );
+      SchedulerBinding.instance!.addPostFrameCallback((_) {
+        Navigator.pop(context);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
+      });
     }
     return _buildListViewOfDevices();
   }
@@ -186,17 +198,33 @@ class _MyHomePageState extends State<MyHomePage> {
       return Future.value(false);
     },
     child: Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Center(child: Text("MOVE!")),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: Text("Connect",textAlign: TextAlign.center,style: TextStyle(color: Colors.indigo),),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back,color: Colors.indigo,),
           onPressed: () {
             Navigator.pop(context);
             Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
           },
         ),
       ),
-      body: _buildView(),
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('background.png'),
+                  fit: BoxFit.fill
+              )
+          ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+            child: _buildView(),
+          )
+      ),
     ),
   );
 }
