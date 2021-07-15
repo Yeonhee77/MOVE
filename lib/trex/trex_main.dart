@@ -100,7 +100,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
               height: 100,
               color: Colors.white,
               child: Center(
-                child: Text('Score : $score', style: TextStyle(color: Colors.blue, fontSize: 16),),
+                child: Text('Score : $score', style: TextStyle(color: Colors.black, fontSize: 17, decoration: TextDecoration.none),),
               )
           )
         ]
