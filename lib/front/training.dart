@@ -19,10 +19,10 @@ class _TrainingState extends State<Training> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Move!'),
+          title: Text('Home workout'),
           centerTitle: true,
           elevation: 0.0,
-          backgroundColor: Colors.purple[100],
+          backgroundColor: Colors.transparent,
           actions: <Widget> [
             IconButton(onPressed: () {Navigator.push(context,
                 MaterialPageRoute(builder: (context) => Mypage()));}, icon: Icon(Icons.account_circle_rounded))
@@ -33,10 +33,6 @@ class _TrainingState extends State<Training> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(height: 30,),
-                Row(children: [
-                  IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
-                ],),
                 SizedBox(height: 30,),
                 Container(
                   child: Stack(

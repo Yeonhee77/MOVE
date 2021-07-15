@@ -59,7 +59,7 @@ class _SelectState extends State<Select> {
                                 bluetoothServices: widget.bluetoothServices)));
                   },
                   child: Text(
-                    'Homework out!',
+                    'Home workout!',
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,

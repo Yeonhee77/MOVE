@@ -238,7 +238,14 @@ class _Tutorial1State extends State<Tutorial1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('background.png'),
+                  fit: BoxFit.fill
+              )
+          ),
           child: _buildConnectDeviceView()
       ),
     );

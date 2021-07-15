@@ -113,8 +113,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     connectedDevice = device;
                   });
-                  // Navigator.pop(context);
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
                 },
               ),
             ],
@@ -180,24 +178,6 @@ class _MyHomePageState extends State<MyHomePage> {
         Navigator.pop(context);
         Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
       });
-      // Navigator.pop(context);
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-      // return Center(
-      //   child:Column(
-      //     children: [
-      //       SizedBox(height: 30,),
-      //       Center(
-      //           child:Column(
-      //             children: [
-      //               Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-      //               SizedBox(height: 30,),
-      //               Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-      //             ],
-      //           )
-      //       ),
-      //     ],
-      //   ),
-      // );
     }
     return _buildListViewOfDevices();
   }
@@ -210,19 +190,33 @@ class _MyHomePageState extends State<MyHomePage> {
       return Future.value(false);
     },
     child: Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: Text("MOVE!",textAlign: TextAlign.center,style: TextStyle(color: Colors.black),),
+        title: Text("Connect",textAlign: TextAlign.center,style: TextStyle(color: Colors.indigo),),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back,color: Colors.black,),
+          icon: Icon(Icons.arrow_back,color: Colors.indigo,),
           onPressed: () {
             Navigator.pop(context);
             Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
           },
         ),
       ),
-      body: _buildView(),
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('background.png'),
+                  fit: BoxFit.fill
+              )
+          ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+            child: _buildView(),
+          )
+      ),
     ),
   );
 }

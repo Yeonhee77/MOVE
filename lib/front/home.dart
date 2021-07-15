@@ -34,7 +34,7 @@ class _HomeState extends State<Homepage> {
         .collection('user')
         .where('avg', isGreaterThan: -1)
         .orderBy('avg', descending: true)
-        .limit(10)
+        .limit(7)
         .snapshots()
         .listen((data) {
       setState(() {
@@ -53,97 +53,129 @@ class _HomeState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text('Move!'),
         centerTitle: true,
         elevation: 0.0,
-        backgroundColor: Colors.purple[100],
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
         actions: <Widget> [
           IconButton(
             icon: Icon(Icons.add),
+            color: Colors.indigo,
             onPressed: () {
               SchedulerBinding.instance!.addPostFrameCallback((_) {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
               });
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
             },
           ),
-          IconButton(onPressed: () {Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Mypage()));}, icon: Icon(Icons.account_circle_rounded))
+          IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Mypage()));},
+              icon: Icon(Icons.person),
+            color: Colors.indigo,
+          )
         ],
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            margin: const EdgeInsets.all(30.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.baseline, //line alignment
-              textBaseline: TextBaseline.alphabetic, //line alignment
-              children: [
-                Text(
-                  'Rank',
-                  style: TextStyle(
-                    fontSize: 32,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),),
-                SizedBox(height: 30),
-
-                FutureBuilder(
-                  builder: (context, snapshot) {
-                    return ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: rankId.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ListTile(
-                                title: Text(total[index]),
-                                subtitle: Text(name[index]),
-                                leading: CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage: NetworkImage(photo[index]),
-                                  backgroundColor: Colors.transparent,
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('background.png'),
+                  fit: BoxFit.fill
+              )
+            ),
+            child: Container(
+              margin: const EdgeInsets.all(30.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.baseline, //line alignment
+                textBaseline: TextBaseline.alphabetic, //line alignment
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+                    child: Text(
+                      'Ranking',
+                      style: TextStyle(
+                        fontSize: 32,
+                        color: Colors.indigo,
+                        fontWeight: FontWeight.bold,
+                      ),),
+                  ),
+                  FutureBuilder(
+                    builder: (context, snapshot) {
+                      return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: rankId.length,
+                          itemBuilder: (context, index) {
+                            var num = index + 1;
+                            return Padding(
+                              padding: const EdgeInsets.fromLTRB(1, 1, 1, 5),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width*0.8,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [const Color(0xffFFEED9), const Color(0xffF1E4A0)],
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.indigo.withOpacity(0.15),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3),
+                                    )
+                                  ]
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                  child: ListTile(
+                                    title: Text(name[index], style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black54),),
+                                    subtitle: Text(total[index], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.indigo),),
+                                    leading: Container(
+                                      width: 120,
+                                      child: Row(
+                                        children: [
+                                          Image.asset('$num.png', width: 50),
+                                          SizedBox(width: 10,),
+                                          Container(
+                                            width: 50,
+                                            child: CircleAvatar(
+                                              radius: 30,
+                                              backgroundImage: NetworkImage(photo[index]),
+                                              backgroundColor: Colors.transparent,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        }
-                    );
-                  },
-                ),
-                SizedBox(height: 50),
-                Row(
-                  children: [
-                    SizedBox(
-                        height: 80,
-                        width: 300,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              side: BorderSide(
-                                  color: Colors.purple, width: 5),
-                            ),
-                          ),
+                            );
+                          }
+                      );
+                    },
+                  ),
+                  SizedBox(height: 50),
+                  Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width*0.6,
+                      child: TextButton(
                           onPressed: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) => Select(bluetoothServices: widget.bluetoothServices)));
                           },
-                          child: Text(
-                            'MOVE!',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black54),
-                          ),
-                        )
+                          child: Image.asset('moveButton.png')
+                      ),
                     ),
-                  ],
-                ),
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

@@ -45,7 +45,7 @@ class _GameState extends State<Game> {
                         ),
                         onTap: () {
                           if(widget.bluetoothServices != null)
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => Boxing(bluetoothServices: widget.bluetoothServices)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
                         },
                       ),
                     ),
