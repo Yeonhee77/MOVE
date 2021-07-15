@@ -88,6 +88,11 @@ flutter:
     - snap.png
     - finish.png
     - logo.png
+    - exit.png
+    - restart.png
+    - start_1.png
+    - start_2.png
+    - start_3.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
