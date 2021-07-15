@@ -90,7 +90,7 @@ class ObstacleManager extends PositionComponent with HasGameRef<TRexGame> {
   }
 }
 
-class Obstacle extends SpriteComponent with HasGameRef<TRexGame>, Hitbox {
+class Obstacle extends SpriteComponent with HasGameRef<TRexGame> {
   Obstacle({
     required this.type,
     required Image spriteImage,
@@ -117,8 +117,8 @@ class Obstacle extends SpriteComponent with HasGameRef<TRexGame>, Hitbox {
       width,
       actualSrc.height,
     );
-    debugMode = true;
-    addShape(HitboxRectangle());
+    // debugMode = true;
+    // addShape(HitboxRectangle());
   }
 
   final ObstacleConfig config = ObstacleConfig();

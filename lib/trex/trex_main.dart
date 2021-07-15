@@ -9,7 +9,6 @@ import 'package:move/trex/game.dart';
 
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'game.dart';
@@ -28,7 +27,8 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   bool splashGone = false;
-  TRexGame? game;
+  TRexGame ? game;
+
   int score = -1;
 
   @override
@@ -113,7 +113,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       );
     }
     return Container(
-      color: Colors.white,
+      color: Color.fromARGB(255,162,209,221),
       constraints: const BoxConstraints.expand(),
       child: GameWidget(
         game: game!,

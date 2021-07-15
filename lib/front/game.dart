@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/trex/trex_main.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+
+import 'boxing.dart';
 
 class Game extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
@@ -15,138 +17,45 @@ class _GameState extends State<Game> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: Text('Move!'),
           centerTitle: true,
           elevation: 0.0,
-          backgroundColor: Colors.purple[100],
-          actions: <Widget> [
-            IconButton(onPressed: () {Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Mypage()));}, icon: Icon(Icons.account_circle_rounded))
-          ],
+          backgroundColor: Colors.transparent,
         ),
         body: LayoutBuilder(builder: (context, constraints) {
           return Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  child: Row(
-                    children: [
-                      Stack(
-                        children: [
-                          Container(
-                            child: Image.asset(
-                              'bluewhite.png',
-                              fit: BoxFit.contain,
-                            ),
-                            margin: EdgeInsets.all(0.5),
-                            width: MediaQuery.of(context).size.width/2 - 1,
-                            height: (constraints.maxHeight)/2 - 1,
-                          ),
-                          Positioned(
-                            left: MediaQuery.of(context).size.width/6,
-                            bottom: MediaQuery.of(context).size.height/12,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                primary: Color.fromARGB(100, 70, 10, 245),
-                              ),
-                              child: Text('Play!', style: TextStyle(fontSize: 20),),
-                            ),
-                          )
-                        ],
-                      ),
-                      Stack(
-                        children: [
-                          Container(
-                            child: Image.asset(
-                              'Dino.png',
-                              fit: BoxFit.contain,
-                            ),
-                            margin: EdgeInsets.all(0.5),
-                            width: MediaQuery.of(context).size.width/2 - 1,
-                            height: (constraints.maxHeight)/2 - 1,
-                          ),
-                          Positioned(
-                            left: MediaQuery.of(context).size.width/6,
-                            bottom: MediaQuery.of(context).size.height/12,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper(bluetoothServices: widget.bluetoothServices)));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                primary: Color.fromARGB(100, 70, 10, 245),
-                              ),
-                              child: Text('Play!', style: TextStyle(fontSize: 20),),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('background.png'),
+                    fit: BoxFit.fill
+                )
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: 30,),
+                  TextButton(
+                    onPressed: () {
+                      if(widget.bluetoothServices != null)
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper(bluetoothServices: widget.bluetoothServices)));
+                    },
+                    child: Image.asset('dinoButton.png', width: MediaQuery.of(context).size.width*0.7,),
                   ),
-                ),
-                Container(
-                  child: Row(
-                    children: [
-                      Stack(
-                        children: [
-                          Container(
-                            child: Image.asset(
-                              'Fish.jpg',
-                              fit: BoxFit.contain,
-                            ),
-                            margin: EdgeInsets.all(0.5),
-                            width: MediaQuery.of(context).size.width/2 - 1,
-                            height: (constraints.maxHeight)/2 - 1,
-                          ),
-                          Positioned(
-                            left: MediaQuery.of(context).size.width/6,
-                            bottom: MediaQuery.of(context).size.height/12,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                primary: Color.fromARGB(100, 70, 10, 245),
-                              ),
-                              child: Text('Play!', style: TextStyle(fontSize: 20),),
-                            ),
-                          )
-                        ],
-                      ),
-                      Stack(
-                        children: [
-                          Container(
-                            child: Image.asset(
-                              'Pump.jpg',
-                              fit: BoxFit.contain,
-                            ),
-                            margin: EdgeInsets.all(0.5),
-                            width: MediaQuery.of(context).size.width/2 - 1,
-                            height: (constraints.maxHeight)/2 - 1,
-                          ),
-                          Positioned(
-                            left: MediaQuery.of(context).size.width/6,
-                            bottom: MediaQuery.of(context).size.height/12,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                primary: Color.fromARGB(100, 70, 10, 245),
-                              ),
-                              child: Text('Play!', style: TextStyle(fontSize: 20),),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
+                  SizedBox(height: 5,),
+                  TextButton(
+                    onPressed: () {
+                      if(widget.bluetoothServices != null)
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
+                    },
+                    child: Image.asset('boxButton.png', width: MediaQuery.of(context).size.width*0.7,),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         }
