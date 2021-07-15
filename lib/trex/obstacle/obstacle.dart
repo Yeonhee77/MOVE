@@ -49,8 +49,8 @@ class ObstacleManager extends PositionComponent with HasGameRef<TRexGame> {
       return;
     }
     final type = getRandomNum(0.0, 1.0).round() == 0
-        ? ObstacleType.cactusSmall
-        : ObstacleType.cactusLarge;
+        ? ObstacleType.pyramid
+        : ObstacleType.tree;
     if (duplicateObstacleCheck(type) || speed < type.multipleSpeed) {
       return;
     } else {
@@ -117,6 +117,8 @@ class Obstacle extends SpriteComponent with HasGameRef<TRexGame> {
       width,
       actualSrc.height,
     );
+    // debugMode = true;
+    // addShape(HitboxRectangle());
   }
 
   final ObstacleConfig config = ObstacleConfig();

@@ -117,12 +117,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _bleRead(
       BluetoothCharacteristic characteristic) {
-        if (characteristic.properties.notify) {
-          characteristic.value.listen((value) {
-            readValues[characteristic.uuid] = value;});
-          characteristic.setNotifyValue(true);
-        }
-        if (characteristic.properties.read && characteristic.properties.notify) setnum(characteristic);
+    if (characteristic.properties.notify) {
+      characteristic.value.listen((value) {
+        readValues[characteristic.uuid] = value;});
+      characteristic.setNotifyValue(true);
+    }
+    if (characteristic.properties.read && characteristic.properties.notify) setnum(characteristic);
   }
 
   Future<void> setnum(characteristic) async {

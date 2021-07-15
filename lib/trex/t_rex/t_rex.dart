@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
+import 'package:flame/geometry.dart';
 import 'package:flame/sprite.dart';
 import 'package:move/trex/game.dart';
 import 'package:move/trex/t_rex/config.dart';
@@ -35,7 +36,7 @@ class TRex extends PositionComponent with HasGameRef<TRexGame> {
   bool get ducking => status == TRexStatus.ducking;
 
   double get groundYPos {
-    return (gameRef.size.y / 2) - config.height / 2;
+    return (gameRef.size.y / 2) + 33.5; //dinosaur y axis
   }
 
   @override
@@ -111,7 +112,7 @@ mixin TRexStateVisibility on BaseComponent {
 }
 
 /// A component superclass for TRex states with still sprites
-class TRexStateStillComponent extends SpriteComponent with TRexStateVisibility {
+class TRexStateStillComponent extends SpriteComponent with TRexStateVisibility, Hitbox {
   TRexStateStillComponent({
     required List<TRexStatus> showFor,
     required Image spriteImage,
@@ -126,6 +127,8 @@ class TRexStateStillComponent extends SpriteComponent with TRexStateVisibility {
           ),
         ) {
     this.showFor = showFor;
+    debugMode = true;
+    addShape(HitboxRectangle());
   }
 }
 
@@ -162,38 +165,41 @@ class RunningTRex extends TRexStateAnimatedComponent {
   ) : super(
           showFor: [TRexStatus.running, TRexStatus.intro],
           spriteImage: spriteImage,
-          size: Vector2(88.0, 90.0),
+          size: Vector2(80.0, 90.0),
           config: config,
-          frames: [Vector2(1514.0, 4.0), Vector2(1602.0, 4.0)],
+          frames: [Vector2(96.0, 12.0), Vector2(185.0, 12.0)], //바꿈
         );
 }
 
-class WaitingTRex extends TRexStateStillComponent {
+class WaitingTRex extends TRexStateAnimatedComponent { //change to animate
   WaitingTRex(Image spriteImage, TRexConfig config)
       : super(
-          showFor: [TRexStatus.waiting],
-          config: config,
+          showFor: [TRexStatus.waiting, TRexStatus.intro],
           spriteImage: spriteImage,
-          srcPosition: Vector2(76.0, 6.0),
+          size: Vector2(80.0, 90.0),
+          config: config,
+          frames: [Vector2(96.0, 12.0), Vector2(96.0, 12.0)]
         );
 }
 
-class JumpingTRex extends TRexStateStillComponent {
+class JumpingTRex extends TRexStateAnimatedComponent { //change to animate
   JumpingTRex(Image spriteImage, TRexConfig config)
       : super(
-          showFor: [TRexStatus.jumping],
-          config: config,
+          showFor: [TRexStatus.jumping, TRexStatus.intro],
           spriteImage: spriteImage,
-          srcPosition: Vector2(1339.0, 6.0),
+          size: Vector2(80.0, 90.0),
+          config: config,
+          frames: [Vector2(1425.0, 2.0), Vector2(1425.0, 2.0)],
         );
 }
 
-class SurprisedTRex extends TRexStateStillComponent {
+class SurprisedTRex extends TRexStateAnimatedComponent { //change to animate
   SurprisedTRex(Image spriteImage, TRexConfig config)
       : super(
-          showFor: [TRexStatus.crashed],
-          config: config,
+          showFor: [TRexStatus.crashed, TRexStatus.intro],
           spriteImage: spriteImage,
-          srcPosition: Vector2(1782.0, 6.0),
+          size: Vector2(80.0, 90.0),
+          config: config,
+          frames: [Vector2(273.0, 12.0), Vector2(273.0, 12.0)]
         );
 }
