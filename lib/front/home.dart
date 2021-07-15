@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:move/front/mypage.dart';
@@ -61,7 +62,10 @@ class _HomeState extends State<Homepage> {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+              SchedulerBinding.instance!.addPostFrameCallback((_) {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+              });
+              // Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
             },
           ),
           IconButton(onPressed: () {Navigator.push(context,

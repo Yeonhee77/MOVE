@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/data.dart';
 import 'package:move/front/home.dart';
@@ -56,8 +57,6 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
     flutterBlue.startScan();
-
-    //dataState(characteristic);
   }
 
   Future dataState(BluetoothCharacteristic characteristic) async {
@@ -98,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   flutterBlue.stopScan();
                   ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Shake yout controller!'),
+                        content: Text('Shake your controller!'),
                         duration: Duration(seconds: 5),
                       )
                   );
@@ -142,7 +141,8 @@ class _MyHomePageState extends State<MyHomePage> {
       characteristic.setNotifyValue(true);
     }
 
-    if (characteristic.properties.read && characteristic.properties.notify)    setnum(characteristic);
+    if (characteristic.properties.read && characteristic.properties.notify)
+      setnum(characteristic);
   }
 
   Future<void> setnum(characteristic) async {
@@ -155,8 +155,6 @@ class _MyHomePageState extends State<MyHomePage> {
         switch(gesture_num){
           case 1: gesture_name = "PUNCH"; break;
           case 2: gesture_name = "UPPERCUT"; break;
-//          case 3: gesture_name = "UP"; break;
-//          case 4: gesture_name = "DOWN"; break;
         }
       });
     });
@@ -178,22 +176,28 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildView() {
     if (connectedDevice != null) {
       _bleServices();
-      return Center(
-        child:Column(
-          children: [
-            SizedBox(height: 30,),
-            Center(
-                child:Column(
-                  children: [
-                    Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                    SizedBox(height: 30,),
-                    Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                  ],
-                )
-            ),
-          ],
-        ),
-      );
+      SchedulerBinding.instance!.addPostFrameCallback((_) {
+        Navigator.pop(context);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
+      });
+      // Navigator.pop(context);
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
+      // return Center(
+      //   child:Column(
+      //     children: [
+      //       SizedBox(height: 30,),
+      //       Center(
+      //           child:Column(
+      //             children: [
+      //               Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+      //               SizedBox(height: 30,),
+      //               Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+      //             ],
+      //           )
+      //       ),
+      //     ],
+      //   ),
+      // );
     }
     return _buildListViewOfDevices();
   }
