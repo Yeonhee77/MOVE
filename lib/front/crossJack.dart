@@ -66,7 +66,7 @@ class _CrossjackState extends State<Crossjack> {
                         SizedBox(height: 120,),
                         Text("마이크로 칩을 손목에 부착해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                         SizedBox(height: 20,),
-                        Image.asset('shoulder.png',height: 200,),
+                        Image.asset('snap.png',height: 200,),
                         //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         SizedBox(height: 30,),
                         // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
@@ -111,8 +111,15 @@ class _CrossjackState extends State<Crossjack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _buildConnectDeviceView(),
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('tutorial_background.png'),
+                  fit: BoxFit.fill
+              )
+          ),
+          child: _buildConnectDeviceView()
       ),
     );
   }

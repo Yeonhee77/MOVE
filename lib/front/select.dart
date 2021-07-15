@@ -65,7 +65,7 @@ class _SelectState extends State<Select> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices)));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices)));
                 },
                 child: Image.asset('reabButton.png', width: MediaQuery.of(context).size.width*0.7,)
               ),

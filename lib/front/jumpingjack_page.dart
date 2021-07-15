@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:move/front/home.dart';
 
 class Jumpingstart extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
@@ -16,6 +17,9 @@ class _JumpingstartState extends State<Jumpingstart> {
   int gesture_num = 0;
   int gesture_num2 = 0;
   int count =0;
+  int correct = 0;
+  int wrong = 0;
+  double score = 0;
   bool flag = false;
   List<Widget>? tutorial;
   final Stream<int> _bids = (() async* {
@@ -95,8 +99,41 @@ class _JumpingstartState extends State<Jumpingstart> {
                             }
                             else {
                               if (count >= 20) {
+                                score = ((correct/count)*100);
+                                wrong = count -correct;
                                 tutorial = <Widget>[
-                                  Text("Finished"),
+                                  Image.asset('finish.png',height: 80,),
+                                  SizedBox(height: 100,),
+
+                                  Text("Score: " + score.toString(), style: TextStyle(fontSize: 40),),
+                                  Text("Correct: " + correct.toString(),style: TextStyle(fontSize: 30),),
+                                  Text("Wrong: " + wrong.toString(), style: TextStyle(fontSize: 30),),
+                                  SizedBox(height: 140,),
+
+                                  Center(child: Row(
+                                    children: [
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                          primary: Colors.black,
+                                          // foreground
+                                        ),
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: widget.bluetoothServices)));
+                                        },
+                                        child: Image.asset('exit.png',height: 85,),
+                                      ),
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                          primary: Colors.black,
+                                          // foreground
+                                        ),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          },
+                                        child: Image.asset('restart.png',height: 85,),
+                                      ),
+                                    ],
+                                  ),),
                                 ];
                               }
                               else {
@@ -108,10 +145,8 @@ class _JumpingstartState extends State<Jumpingstart> {
                                           Navigator.pop(context);
                                         }, icon: Icon(Icons.arrow_back))
                                       ],),
-                                      SizedBox(height: 120,),
-                                      Text("Start", style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20),),
+                                      SizedBox(height: 80,),
+                                      Image.asset('start_start.png', height: 250,width: 250,),
                                     ];
                                     break;
                                   case 1:
@@ -122,9 +157,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                         }, icon: Icon(Icons.arrow_back))
                                       ],),
                                       SizedBox(height: 120,),
-                                      Text("3", style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20),),
+                                      Image.asset('start_3.png', height: 150,width: 150,),
                                     ];
                                     break;
                                   case 2:
@@ -135,9 +168,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                         }, icon: Icon(Icons.arrow_back))
                                       ],),
                                       SizedBox(height: 120,),
-                                      Text("2", style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),),
+                                      Image.asset('start_2.png', height: 150,width: 150,),
                                     ];
                                     break;
                                   case 3:
@@ -148,9 +179,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                         }, icon: Icon(Icons.arrow_back))
                                       ],),
                                       SizedBox(height: 120,),
-                                      Text("1", style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),),
+                                      Image.asset('start_1.png', height: 150,width: 150,),
                                     ];
                                     break;
                                   case 4:
@@ -160,11 +189,8 @@ class _JumpingstartState extends State<Jumpingstart> {
                                           Navigator.pop(context);
                                         }, icon: Icon(Icons.arrow_back))
                                       ],),
-                                      flag ? Text("Correct") : Text("Wrong"),
-                                      // Text("자 이제,",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                      // SizedBox(height: 20,),
-                                      // Text("Start", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),),
-                                      SizedBox(height: 50,),
+                                      flag ? Image.asset('correct.png',height: 80,):Image.asset('wrong.png',height:80),
+                                      Text("맞은 횟수: " + correct.toString()),
                                       Center(child:
                                       Image.asset('squat_3.gif', height: 400,
                                         width: 300,),),
@@ -199,14 +225,15 @@ class _JumpingstartState extends State<Jumpingstart> {
         gesture = value.toString();
         gesture_num = int.parse(gesture[1]);
         gesture_num2 = int.parse(gesture[1]);
-        if(gesture_num == 2) {
-          flag = true;
-        }
-        else if(gesture_num == 1) {
-          flag = false;
-        }
       });
     },);
+    if(gesture_num == 2) {
+      flag = true;
+      correct = correct +1;
+    }
+    else if(gesture_num == 1) {
+      flag = false;
+    }
     if(gesture_num2 == 1 || gesture_num2 == 2) {
       gesture_num2 = 0;
       count += 1;
@@ -218,7 +245,14 @@ class _JumpingstartState extends State<Jumpingstart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('tutorial_background.png'),
+                  fit: BoxFit.fill
+              )
+          ),
           child: _buildConnectDeviceView()
       ),
     );

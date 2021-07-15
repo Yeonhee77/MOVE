@@ -101,7 +101,7 @@ class _Tutorial3State extends State<Tutorial3> {
                                     Text("어깨너비로 서서",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                                     Text("발끝이 약간 바깥쪽을 향하도록 해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                                     SizedBox(height: 20,),
-                                    Image.asset('squat_1.png',height: 400,width: 300,),
+                                    Image.asset('crossjack_1.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
@@ -123,7 +123,7 @@ class _Tutorial3State extends State<Tutorial3> {
                                     Text("시선은 정면을 향하고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("복근에 힘을 주어 허리를 단단히 조여주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
-                                    Image.asset('squat_2.png',height: 400,width: 300,),
+                                    Image.asset('crossjack_2.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
@@ -145,7 +145,7 @@ class _Tutorial3State extends State<Tutorial3> {
                                     Text("무릎이 발끝보다 앞으로 나오지 않도록 하면",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("허벅지와 수평이 될 때까지 앉으세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
-                                    Image.asset('squat_1.png',height: 400,width: 300,),
+                                    Image.asset('crossjack_1.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
@@ -166,7 +166,7 @@ class _Tutorial3State extends State<Tutorial3> {
                                     Text("발뒤꿈치로 민다는 느낌으로",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     Text("허벅지에 힘을 주면서 일어나세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
-                                    Image.asset('squat_2.png',height: 400,width: 300,),
+                                    Image.asset('crossjack_2.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
@@ -187,7 +187,7 @@ class _Tutorial3State extends State<Tutorial3> {
                                     SizedBox(height: 120,),
                                     Text("마이크로 칩을 한번 흔들어주세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
-                                    Image.asset('bluewhite.png'),
+                                    Image.asset('crossjack_1.png'),
                                     SizedBox(height: 30,),
                                     Text("moving value:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                                     TextButton(
@@ -238,7 +238,14 @@ class _Tutorial3State extends State<Tutorial3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('tutorial_background.png'),
+                  fit: BoxFit.fill
+              )
+          ),
           child: _buildConnectDeviceView()
       ),
     );

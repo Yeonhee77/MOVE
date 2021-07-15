@@ -98,18 +98,30 @@ class _Tutorial2State extends State<Tutorial2> {
                                     Row(children: [
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
-                                    Text("곧게 서주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                                    SizedBox(height:60),
-                                    Image.asset('jumping_1.png',height: 400,width: 300,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
-                                        // foreground
+                                    Container(
+                                      height: 70,
+                                      child: Column(
+                                        children: [
+                                          Text("곧게 서주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                                        ],
                                       ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Text('skip'),
+                                    ),
+                                    Image.asset('jumping_1.png',height: 400,width: 300,),
+                                    SizedBox(height: 20,),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 230,),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.black,
+                                            // foreground
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingstart(bluetoothServices: widget.bluetoothServices)));
+                                          },
+                                          child: Image.asset('skip.png',height: 30,),
+                                        ),
+                                      ],
                                     ),
                                   ];
                                   break;
@@ -118,19 +130,31 @@ class _Tutorial2State extends State<Tutorial2> {
                                     Row(children: [
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
-                                    Text("양팔을 90도 벌리고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("양다리를 어깨너비만큼 벌려주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    SizedBox(height: 20,),
-                                    Image.asset('jumping_2.png',height: 400,width: 300,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
-                                        // foreground
+                                    Container(
+                                      height: 70,
+                                      child: Column(
+                                        children: [
+                                          Text("양팔을 90도 벌리고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                          Text("양다리를 어깨너비만큼 벌려주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                        ],
                                       ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Text('skip'),
+                                    ),
+                                    Image.asset('jumping_2.png',height: 400,width: 300,),
+                                    SizedBox(height: 20,),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 230,),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.black,
+                                            // foreground
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingstart(bluetoothServices: widget.bluetoothServices)));
+                                          },
+                                          child: Image.asset('skip.png',height: 30,),
+                                        ),
+                                      ],
                                     ),
                                   ];
                                   break;
@@ -139,18 +163,31 @@ class _Tutorial2State extends State<Tutorial2> {
                                     Row(children: [
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
-                                    Text("벌린 팔과 다리를 모아",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("차렷자세로 돌아옵니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    SizedBox(height: 30,),
-                                    Image.asset('jumping_3.png',height: 400,width: 300,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
+                                    Container(
+                                      height: 70,
+                                      child: Column(
+                                        children: [
+                                          Text("벌린 팔과 다리를 모아",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                          Text("차렷자세로 돌아옵니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                        ],
                                       ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Text('skip'),
+                                    ),
+                                    Image.asset('jumping_3.png',height: 400,width: 300,),
+                                    SizedBox(height: 20,),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 230,),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.black,
+                                            // foreground
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingstart(bluetoothServices: widget.bluetoothServices)));
+                                          },
+                                          child: Image.asset('skip.png',height: 30,),
+                                        ),
+                                      ],
                                     ),
                                   ];
                                   break;
@@ -159,19 +196,31 @@ class _Tutorial2State extends State<Tutorial2> {
                                     Row(children: [
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
-                                    Text("다시 다리를 어깨 너비만큼 벌리고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("양팔은 머리위로 손바닥을 마주봅니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    SizedBox(height: 30,),
-                                    Image.asset('jumping_4.png',height: 400,width: 300,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
-                                        // foreground
+                                    Container(
+                                      height: 70,
+                                      child: Column(
+                                        children: [
+                                          Text("다시 다리를 어깨 너비만큼 벌리고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                          Text("양팔은 머리위로 손바닥을 마주봅니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                        ],
                                       ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Text('skip'),
+                                    ),
+                                    Image.asset('jumping_4.png',height: 400,width: 300,),
+                                    SizedBox(height: 20,),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 230,),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.black,
+                                            // foreground
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingstart(bluetoothServices: widget.bluetoothServices)));
+                                          },
+                                          child: Image.asset('skip.png',height: 30,),
+                                        ),
+                                      ],
                                     ),
                                   ];
                                   break;
@@ -180,19 +229,31 @@ class _Tutorial2State extends State<Tutorial2> {
                                     Row(children: [
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                                     ],),
-                                    Text("차렷자세로 돌아옵니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("이제 Start버튼을 눌러주세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    SizedBox(height:30),
+                                    Container(height: 70,
+                                      child:
+                                    Column(
+                                      children: [
+                                        Text("차렷자세로 돌아옵니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                        Text("이제 Start버튼을 눌러주세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                      ],
+                                    ),
+                                    ),
                                     Image.asset('jumping_5.png',height: 400,width: 300,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
-                                        // foreground
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Text('Start'),
+                                    SizedBox(height: 20,),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 230,),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.black,
+                                            // foreground
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingstart(bluetoothServices: widget.bluetoothServices)));
+                                          },
+                                          child: Image.asset('start.png',height: 30,),
+                                        ),
+                                      ],
                                     ),
                                   ];
                                   break;
@@ -232,7 +293,14 @@ class _Tutorial2State extends State<Tutorial2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('tutorial_background.png'),
+                  fit: BoxFit.fill
+              )
+          ),
           child: _buildConnectDeviceView()
       ),
     );

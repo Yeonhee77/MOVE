@@ -66,13 +66,13 @@ class _JumpingjackState extends State<Jumpingjack> {
                         SizedBox(height: 120,),
                         Text("마이크로 칩을 손목에 부착해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                         SizedBox(height: 20,),
-                        Image.asset('shoulder.png',height: 200,),
+                        Image.asset('snap.png',height: 200,),
                         //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         SizedBox(height: 30,),
                         // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         Row(
                           children: [
-                            SizedBox(width: 270,),
+                            SizedBox(width: 230,),
                             TextButton(
                               style: TextButton.styleFrom(
                                 primary: Colors.black,
@@ -81,7 +81,7 @@ class _JumpingjackState extends State<Jumpingjack> {
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial2(bluetoothServices: widget.bluetoothServices)));
                               },
-                              child: Text('next'),
+                              child: Image.asset('next.png',height: 30,),
                             ),
                           ],
                         )
@@ -111,8 +111,15 @@ class _JumpingjackState extends State<Jumpingjack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _buildConnectDeviceView(),
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('tutorial_background.png'),
+                  fit: BoxFit.fill
+              )
+          ),
+          child: _buildConnectDeviceView()
       ),
     );
   }

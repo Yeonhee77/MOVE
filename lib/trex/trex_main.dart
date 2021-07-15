@@ -9,7 +9,6 @@ import 'package:move/trex/game.dart';
 
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'game.dart';
