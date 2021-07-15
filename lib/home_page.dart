@@ -76,45 +76,55 @@ class _MyHomePageState extends State<MyHomePage> {
       containers.add(
         Container(
           height: 50,
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: Column(
-                  children: <Widget>[
-                    Text(device.name == '' ? '(unknown device)' : device.name),
-                    Text(device.id.toString()),
-                  ],
-                ),
+          child: Column(
+            children: [
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(device.name == '' ? '(unknown device)' : device.name,
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                          ),
+                        ),
+                        // Text(device.id.toString()),
+                      ],
+                    ),
+                  ),
+                  // ignore: deprecated_member_use
+                  FlatButton(
+                    child: Image.asset('connect.png', width: MediaQuery.of(context).size.width*0.35,),
+                    onPressed: () async {
+                      flutterBlue.stopScan();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Shake your controller!'),
+                            duration: Duration(seconds: 5),
+                          )
+                      );
+                      try {
+                        await device.connect();
+                      } catch (e) {
+                        if (e != 'already_connected') {
+                          throw e;
+                        }
+                      } finally {
+                        bluetoothServices = await device.discoverServices();
+                      }
+                      setState(() {
+                        connectedDevice = device;
+                      });
+                    },
+                  ),
+                ],
               ),
-              // ignore: deprecated_member_use
-              FlatButton(
-                color: Colors.deepPurpleAccent[100],
-                child: Text(
-                  'Connect',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () async {
-                  flutterBlue.stopScan();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Shake your controller!'),
-                        duration: Duration(seconds: 5),
-                      )
-                  );
-                  try {
-                    await device.connect();
-                  } catch (e) {
-                    if (e != 'already_connected') {
-                      throw e;
-                    }
-                  } finally {
-                    bluetoothServices = await device.discoverServices();
-                  }
-                  setState(() {
-                    connectedDevice = device;
-                  });
-                },
-              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                child: Divider(height: 1, color: Colors.white),
+              )
             ],
           ),
         ),

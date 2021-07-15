@@ -11,7 +11,7 @@ class Login extends StatefulWidget {
   _LoginState createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends State<Login> with TickerProviderStateMixin{
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   num dino = 0;
@@ -64,9 +64,22 @@ class _LoginState extends State<Login> {
     }).then((value) => print("user add!"));
   }
 
-  @override
+  AnimationController? _controller;
+  Animation<double>? _animation;
+
   void initState() {
+    _controller = AnimationController(duration: Duration(seconds: 2), value: 0.1, vsync: this);
+
+    _animation = CurvedAnimation(parent: _controller!, curve: Curves.bounceInOut);
+
+    _controller!.forward();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller!.dispose();
+    super.dispose();
   }
 
   @override
@@ -80,12 +93,9 @@ class _LoginState extends State<Login> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'MOVE!',
-                  style: GoogleFonts.mcLaren(
-                    fontSize: 32,
-                    color: Colors.purple[100],
-                    fontWeight: FontWeight.bold,),
+                ScaleTransition(
+                    scale: _animation!,
+                    child: Image.asset('logo.png', width: 250,)
                 ),
                 SizedBox(height: 30),
                 OutlinedButton(
