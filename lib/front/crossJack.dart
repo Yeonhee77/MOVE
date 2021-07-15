@@ -1,18 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/front/squat_page.dart';
-import 'package:move/tutorial/tutorial1.dart';
+import 'package:move/tutorial/tutorial3.dart';
 
-class Squat extends StatefulWidget {
+class Crossjack extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
-  Squat({this.bluetoothServices});
+  Crossjack({this.bluetoothServices});
 
   @override
-  _SquatState createState() => _SquatState();
+  _CrossjackState createState() => _CrossjackState();
 }
 
-class _SquatState extends State<Squat> {
+class _CrossjackState extends State<Crossjack> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   String gesture = "";
   // ignore: non_constant_identifier_names
@@ -65,9 +64,9 @@ class _SquatState extends State<Squat> {
                           IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                         ],),
                         SizedBox(height: 120,),
-                        Text("마이크로 칩을 어깨에 부착해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                        Text("마이크로 칩을 손목에 부착해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                         SizedBox(height: 20,),
-                        Image.asset('shoulder.png',height: 200,),
+                        Image.asset('snap.png',height: 200,),
                         //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         SizedBox(height: 30,),
                         // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
@@ -80,7 +79,7 @@ class _SquatState extends State<Squat> {
                                 // foreground
                               ),
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial1(bluetoothServices: widget.bluetoothServices)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial3(bluetoothServices: widget.bluetoothServices)));
                               },
                               child: Text('next'),
                             ),

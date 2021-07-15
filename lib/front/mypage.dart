@@ -12,10 +12,10 @@ class Mypage extends StatefulWidget {
 
 class _MypageState extends State<Mypage> {
   num total = 0;
-  num game1 = 0;
-  num game2 = 0;
-  num game3 = 0;
-  num game4 = 0;
+  num dino = 0;
+  num fish = 0;
+  num squat = 0;
+  num dumbbell = 0;
 
   @override
   void initState() {
@@ -26,10 +26,10 @@ class _MypageState extends State<Mypage> {
         .get()
         .then((doc) {
           setState(() {
-            game1 = doc.get('game1');
-            game2 = doc.get('game2');
-            game3 = doc.get('game3');
-            game4 = doc.get('game4');
+            dino = doc.get('dino');
+            fish = doc.get('fish');
+            squat = doc.get('squat');
+            dumbbell = doc.get('dumbbell');
             total = doc.get('avg');
           });
     });
@@ -82,7 +82,7 @@ class _MypageState extends State<Mypage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset('Bluewhite_text.png',fit: BoxFit.fill),
-                        Text('  $game1 점', style: TextStyle(fontSize: 25),),
+                        Text('  $dino 점', style: TextStyle(fontSize: 25),),
                     ],
                   )),
                 ),
@@ -97,7 +97,7 @@ class _MypageState extends State<Mypage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset('Dino_text.png',fit: BoxFit.fill),
-                          Text('  $game2 점', style: TextStyle(fontSize: 25),),
+                          Text('  $fish 점', style: TextStyle(fontSize: 25),),
                         ],
                       )),
                 ),
@@ -112,7 +112,7 @@ class _MypageState extends State<Mypage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset('Fish_text.png',fit: BoxFit.fill),
-                          Text('  $game3 점', style: TextStyle(fontSize: 25),),
+                          Text('  $squat 점', style: TextStyle(fontSize: 25),),
                         ],
                       )),
                 ),
@@ -127,7 +127,7 @@ class _MypageState extends State<Mypage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset('Pump_text.png',fit: BoxFit.fill),
-                          Text('  $game4 점', style: TextStyle(fontSize: 25),),
+                          Text('  $dumbbell 점', style: TextStyle(fontSize: 25),),
                         ],
                       )),
                 ),

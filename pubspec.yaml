@@ -74,6 +74,18 @@ flutter:
     - skip.png
     - next.png
     - start.png
+    - 1.png
+    - 2.png
+    - 3.png
+    - 4.png
+    - 5.png
+    - 6.png
+    - 7.png
+    - moveButton.png
+    - crossjack_1.png
+    - crossjack_2.png
+    - tutorial_background.png
+    - snap.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -176,7 +176,14 @@ class _SquatstartState extends State<Squatstart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('tutorial_background.png'),
+                  fit: BoxFit.fill
+              )
+          ),
           child: _buildConnectDeviceView()
       ),
     );

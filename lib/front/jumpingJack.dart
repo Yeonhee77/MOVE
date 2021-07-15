@@ -1,19 +1,17 @@
-import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:move/tutorial/tutorial2.dart';
 
-class CounterPage extends StatefulWidget {
+class Jumpingjack extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
-  CounterPage({this.bluetoothServices});
+  Jumpingjack({this.bluetoothServices});
 
-  // ignore: non_constant_identifier_names
   @override
-  _CounterPageState createState() => _CounterPageState();
+  _JumpingjackState createState() => _JumpingjackState();
 }
 
-class _CounterPageState extends State<CounterPage> {
-  final StreamController<int> _streamController = StreamController<int>();
-
+class _JumpingjackState extends State<Jumpingjack> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   String gesture = "";
   // ignore: non_constant_identifier_names
@@ -21,7 +19,7 @@ class _CounterPageState extends State<CounterPage> {
 
   @override
   void dispose(){
-    _streamController.close();
+    // _streamController.close();
     super.dispose();
   }
 
@@ -62,9 +60,31 @@ class _CounterPageState extends State<CounterPage> {
                 Center(
                     child:Column(
                       children: [
-                        Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        Row(children: [
+                          IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                        ],),
+                        SizedBox(height: 120,),
+                        Text("마이크로 칩을 손목에 부착해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                        SizedBox(height: 20,),
+                        Image.asset('snap.png',height: 200,),
+                        //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         SizedBox(height: 30,),
                         // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        Row(
+                          children: [
+                            SizedBox(width: 230,),
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                primary: Colors.black,
+                                // foreground
+                              ),
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial2(bluetoothServices: widget.bluetoothServices)));
+                              },
+                              child: Image.asset('next.png',height: 30,),
+                            ),
+                          ],
+                        )
                       ],
                     )
                 ),
@@ -91,9 +111,15 @@ class _CounterPageState extends State<CounterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Stream version of the Counter App')),
-      body: Center(
-        child: _buildConnectDeviceView(),
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('tutorial_background.png'),
+                  fit: BoxFit.fill
+              )
+          ),
+          child: _buildConnectDeviceView()
       ),
     );
   }

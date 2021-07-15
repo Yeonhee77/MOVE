@@ -297,7 +297,7 @@ class _Tutorial2State extends State<Tutorial2> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('background.png'),
+                  image: AssetImage('tutorial_background.png'),
                   fit: BoxFit.fill
               )
           ),

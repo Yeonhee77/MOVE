@@ -14,10 +14,10 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
-  num game1 = 0;
-  num game2 = 0;
-  num game3 = 0;
-  num game4 = 0;
+  num dino = 0;
+  num boxing = 0;
+  num jumpingJack = 0;
+  num crossJack = 0;
   double avg = 0;
   String id = '';
   String name = '';
@@ -53,10 +53,10 @@ class _LoginState extends State<Login> {
 
   Future<void> addUser() async{
     FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser!.uid).set({
-      'game1' : game1,
-      'game2' : game2,
-      'game3' : game3,
-      'game4' : game4,
+      'dino' : dino,
+      'boxing' : boxing,
+      'jumpingJack' : jumpingJack,
+      'crossJack' : crossJack,
       'avg' : avg,
       'id' : id,
       'name' : name,
@@ -73,35 +73,35 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        fit: StackFit.expand,
-        children:<Widget>[
-          Image( image: AssetImage("background.png"), fit: BoxFit.cover, colorBlendMode: BlendMode.darken, ),
-          Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'MOVE!',
-              style: GoogleFonts.mcLaren(
-                fontSize: 32,
-                color: Colors.purple[100],
-                fontWeight: FontWeight.bold,),
-            ),
-            SizedBox(height: 30),
-            OutlinedButton(
-              child: Text('Google Login',
-                style: GoogleFonts.mcLaren(
-                fontSize: 32,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,),
-              ),
-              onPressed: () {
-                signInWithGoogle();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
-              },
-            ),
-          ],
-        ),]
+          fit: StackFit.expand,
+          children:<Widget>[
+            Image( image: AssetImage("background.png"), fit: BoxFit.cover, colorBlendMode: BlendMode.darken, ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'MOVE!',
+                  style: GoogleFonts.mcLaren(
+                    fontSize: 32,
+                    color: Colors.purple[100],
+                    fontWeight: FontWeight.bold,),
+                ),
+                SizedBox(height: 30),
+                OutlinedButton(
+                  child: Text('Google Login',
+                    style: GoogleFonts.mcLaren(
+                      fontSize: 32,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,),
+                  ),
+                  onPressed: () {
+                    signInWithGoogle();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
+                  },
+                ),
+              ],
+            ),]
       ),
     );
   }
