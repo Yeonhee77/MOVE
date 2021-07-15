@@ -72,6 +72,8 @@ flutter:
     - correct.png
     - wrong.png
     - skip.png
+    - next.png
+    - start.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

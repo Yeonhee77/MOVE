@@ -72,7 +72,7 @@ class _JumpingjackState extends State<Jumpingjack> {
                         // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         Row(
                           children: [
-                            SizedBox(width: 270,),
+                            SizedBox(width: 230,),
                             TextButton(
                               style: TextButton.styleFrom(
                                 primary: Colors.black,
@@ -81,7 +81,7 @@ class _JumpingjackState extends State<Jumpingjack> {
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial2(bluetoothServices: widget.bluetoothServices)));
                               },
-                              child: Text('next'),
+                              child: Image.asset('next.png',height: 30,),
                             ),
                           ],
                         )

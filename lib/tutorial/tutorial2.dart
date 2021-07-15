@@ -240,15 +240,20 @@ class _Tutorial2State extends State<Tutorial2> {
                                     ),
                                     Image.asset('jumping_5.png',height: 400,width: 300,),
                                     SizedBox(height: 20,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
-                                        // foreground
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Text('Start'),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 230,),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.black,
+                                            // foreground
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingstart(bluetoothServices: widget.bluetoothServices)));
+                                          },
+                                          child: Image.asset('start.png',height: 30,),
+                                        ),
+                                      ],
                                     ),
                                   ];
                                   break;
