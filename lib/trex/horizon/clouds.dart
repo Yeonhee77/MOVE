@@ -30,7 +30,7 @@ class Cloud extends SpriteComponent {
     if (shouldRemove) {
       return;
     }
-    x -= (parent as CloudManager).cloudSpeed.ceil() * 50 * dt;
+    x -= (parent as CloudManager).cloudSpeed.ceil() * dt;
 
     if (!isVisible) {
       remove();
@@ -72,7 +72,7 @@ class CloudManager extends PositionComponent with HasGameRef<TRexGame> {
   }
 
   double get cloudSpeed =>
-      horizonConfig.bgCloudSpeed / 1000 * gameRef.currentSpeed;
+      horizonConfig.bgCloudSpeed / 1500 * gameRef.currentSpeed;
 
   @override
   void update(double dt) {

@@ -11,7 +11,7 @@ class HorizonDimensions {
 }
 
 class CloudConfig {
-  late final double maxCloudGap = 400.0;
+  late final double maxCloudGap = 300.0;
   late final double minCloudGap = 100.0;
 
   late final double maxSkyLevel = 71.0;
