@@ -1,14 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:move/front/mypage.dart';
-import 'package:move/front/game.dart';
 import 'package:move/front/select.dart';
-import 'package:move/front/training.dart';
 
 import '../home_page.dart';
 import 'login.dart';
@@ -33,7 +28,7 @@ class _HomeState extends State<Homepage> {
 
     FirebaseFirestore.instance
         .collection('user')
-        .where('avg', isGreaterThan: -1)
+        .where('avg', isGreaterThan: 0)
         .orderBy('avg', descending: true)
         .limit(7)
         .snapshots()
@@ -53,10 +48,7 @@ class _HomeState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([ //screen vertically
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.portraitUp,
-    ]);
+    //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]); //screen vertically
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -108,63 +100,65 @@ class _HomeState extends State<Homepage> {
                         fontWeight: FontWeight.bold,
                       ),),
                   ),
-                  FutureBuilder(
-                    builder: (context, snapshot) {
-                      return ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: rankId.length,
-                          itemBuilder: (context, index) {
-                            var num = index + 1;
-                            return Padding(
-                              padding: const EdgeInsets.fromLTRB(1, 1, 1, 5),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width*0.8,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [const Color(0xffFFEED9), const Color(0xffF1E4A0)],
+                  Flexible(
+                    child: FutureBuilder(
+                      builder: (context, snapshot) {
+                        return ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: rankId.length,
+                            itemBuilder: (context, index) {
+                              var num = index + 1;
+                              return Padding(
+                                padding: const EdgeInsets.fromLTRB(1, 1, 1, 5),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width*0.8,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [const Color(0xffFFEED9), const Color(0xffF1E4A0)],
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.indigo.withOpacity(0.15),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: Offset(0, 3),
+                                      )
+                                    ]
                                   ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.indigo.withOpacity(0.15),
-                                      spreadRadius: 5,
-                                      blurRadius: 7,
-                                      offset: Offset(0, 3),
-                                    )
-                                  ]
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                  child: ListTile(
-                                    title: Text(name[index], style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black54),),
-                                    subtitle: Text(total[index], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.indigo),),
-                                    leading: Container(
-                                      width: 120,
-                                      child: Row(
-                                        children: [
-                                          Image.asset('$num.png', width: 50),
-                                          SizedBox(width: 10,),
-                                          Container(
-                                            width: 50,
-                                            child: CircleAvatar(
-                                              radius: 30,
-                                              backgroundImage: NetworkImage(photo[index]),
-                                              backgroundColor: Colors.transparent,
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                    child: ListTile(
+                                      title: Text(name[index], style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black54),),
+                                      subtitle: Text(total[index], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.indigo),),
+                                      leading: Container(
+                                        width: 120,
+                                        child: Row(
+                                          children: [
+                                            Image.asset('$num.png', width: 50),
+                                            SizedBox(width: 10,),
+                                            Container(
+                                              width: 50,
+                                              child: CircleAvatar(
+                                                radius: 30,
+                                                backgroundImage: NetworkImage(photo[index]),
+                                                backgroundColor: Colors.transparent,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          }
-                      );
-                    },
+                              );
+                            }
+                        );
+                      },
+                    ),
                   ),
                   SizedBox(height: 50),
                   Center(

@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/home_page.dart';
 import 'package:move/trex/game.dart';
-import 'package:move/front/select.dart';
+import 'package:move/front/game.dart';
 
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
@@ -112,7 +112,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
               Flexible(
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pop(context, MaterialPageRoute(builder: (context) => Select(bluetoothServices: widget.bluetoothServices)));
+                    Navigator.pop(context);
                   },
                   child: Image.asset('dinoExit.png', height: 50,),
                 ),
@@ -124,10 +124,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([ //screen horizontally
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+    //SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]); //screen horizontally
 
     _gesture();
     game!.onAction(gesture_num);
