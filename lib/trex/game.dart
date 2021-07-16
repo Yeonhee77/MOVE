@@ -58,15 +58,15 @@ class TRexGame extends BaseGame {
   @override
   Future<void> onLoad() async {
     add(Bg());
-    add(cloud);
+    //add(cloud);
     add(horizon);
     add(tRex);
     add(gameOverPanel);
     sun
       ..sprite = await loadSprite('sun.png')
-      ..size = Vector2(25.0, 22.0)
-      ..x = 300
-      ..y = 20;
+      ..size = Vector2(40.0, 30.0)
+      ..x = 475
+      ..y = 65;
     add(sun);
   }
 
