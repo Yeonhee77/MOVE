@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/front/Crossjack.dart';
-import 'package:move/front/Jumpingjack.dart';
 import 'package:move/front/crossjack_page.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/squat.dart';
@@ -42,8 +40,8 @@ class _TrainingState extends State<Training> {
                               fit: BoxFit.fill,
                             ),
                             onTap: () {
-                              if(widget.bluetoothServices != null)
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingjack(bluetoothServices: widget.bluetoothServices)));
+                              //if(widget.bluetoothServices != null)
+                                //Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingjack(bluetoothServices: widget.bluetoothServices)));
                             },
                           ),
                         ),
@@ -64,8 +62,8 @@ class _TrainingState extends State<Training> {
                               fit: BoxFit.fill,
                             ),
                             onTap: () {
-                              if(widget.bluetoothServices != null)
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjack(bluetoothServices: widget.bluetoothServices)));
+                              //if(widget.bluetoothServices != null)
+                                //Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjack(bluetoothServices: widget.bluetoothServices)));
                             },
                           ),
                         ),
