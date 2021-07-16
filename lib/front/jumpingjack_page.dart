@@ -69,7 +69,7 @@ class _JumpingstartState extends State<Jumpingstart> {
           .collection('user')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
-        'jumpingJack': jumpingJack + score,
+        'jumpingJack': double.parse(jumpingJack.toStringAsFixed(2)),
         'avg': double.parse(avg.toStringAsFixed(2)),
       });
     }
