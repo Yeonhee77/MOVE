@@ -96,13 +96,13 @@ class _Tutorial2State extends State<Tutorial2> {
                                 case 1:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                                     ],),
                                     Container(
                                       height: 70,
                                       child: Column(
                                         children: [
-                                          Text("곧게 서주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                                          Text("Stand up straight, please",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
                                         ],
                                       ),
                                     ),
@@ -128,14 +128,14 @@ class _Tutorial2State extends State<Tutorial2> {
                                 case 2:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                                     ],),
                                     Container(
                                       height: 70,
                                       child: Column(
                                         children: [
-                                          Text("양팔을 90도 벌리고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                          Text("양다리를 어깨너비만큼 벌려주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                          Text("Spread both arms 90 degrees,",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
+                                          Text("Shoulder width apart",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
                                         ],
                                       ),
                                     ),
@@ -161,14 +161,14 @@ class _Tutorial2State extends State<Tutorial2> {
                                 case 3:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                                     ],),
                                     Container(
                                       height: 70,
                                       child: Column(
                                         children: [
-                                          Text("벌린 팔과 다리를 모아",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                          Text("차렷자세로 돌아옵니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                          Text("Bring your arms and legs together",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
+                                          Text("and return to the attention position.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
                                         ],
                                       ),
                                     ),
@@ -194,14 +194,15 @@ class _Tutorial2State extends State<Tutorial2> {
                                 case 4:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                                     ],),
                                     Container(
                                       height: 70,
                                       child: Column(
                                         children: [
-                                          Text("다시 다리를 어깨 너비만큼 벌리고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                          Text("양팔은 머리위로 손바닥을 마주봅니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                          Text("Spread your legs shoulder width",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
+                                          Text("apart again arms facing palms",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
+                                          Text("above your head",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
                                         ],
                                       ),
                                     ),
@@ -227,14 +228,14 @@ class _Tutorial2State extends State<Tutorial2> {
                                 case 5:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                                     ],),
                                     Container(height: 70,
                                       child:
                                     Column(
                                       children: [
-                                        Text("차렷자세로 돌아옵니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                        Text("이제 Start버튼을 눌러주세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                        Text("Come back to your attention position.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
+                                        Text("Now, Press the start button.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
                                       ],
                                     ),
                                     ),
@@ -297,7 +298,7 @@ class _Tutorial2State extends State<Tutorial2> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('tutorial_background.png'),
+                  image: AssetImage('tutorial2_background.png'),
                   fit: BoxFit.fill
               )
           ),

@@ -22,10 +22,6 @@ class _Tutorial3State extends State<Tutorial3> {
     yield 2;
     await Future<void>.delayed(const Duration(seconds: 2));
     yield 3;
-    await Future<void>.delayed(const Duration(seconds: 2));
-    yield 4;
-    await Future<void>.delayed(const Duration(seconds: 2));
-    yield 5;
   })();
 
   @override
@@ -95,13 +91,18 @@ class _Tutorial3State extends State<Tutorial3> {
                                 case 1:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                                     ],),
-                                    SizedBox(height: 20,),
-                                    Text("어깨너비로 서서",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                                    Text("발끝이 약간 바깥쪽을 향하도록 해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                                    SizedBox(height: 20,),
-                                    Image.asset('crossjack_1.png',height: 400,width: 300,),
+                                    Container(
+                                      height: 70,
+                                      child: Column(
+                                        children: [
+                                          Text("Please, spread your arms,",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
+                                          Text("spread your legs shoulder width apart.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
+                                        ],
+                                      ),
+                                    ),
+                                    Image.asset('cross_1.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
@@ -110,20 +111,25 @@ class _Tutorial3State extends State<Tutorial3> {
                                       onPressed: () {
                                         Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
                                       },
-                                      child: Text('skip'),
+                                      child: Image.asset('skip.png',height: 30,),
                                     ),
                                   ];
                                   break;
                                 case 2:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                                     ],),
-                                    SizedBox(height: 20,),
-                                    Text("시선은 정면을 향하고",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("복근에 힘을 주어 허리를 단단히 조여주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    SizedBox(height: 20,),
-                                    Image.asset('crossjack_2.png',height: 400,width: 300,),
+                                    Container(
+                                      height: 70,
+                                      child: Column(
+                                        children: [
+                                          Text("Cross both arms and legs, please.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
+                                          //Text("양팔은 머리위로 손바닥을 마주봅니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
+                                        ],
+                                      ),
+                                    ),
+                                    Image.asset('cross_2.png',height: 400,width: 300,),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
@@ -132,64 +138,26 @@ class _Tutorial3State extends State<Tutorial3> {
                                       onPressed: () {
                                         Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
                                       },
-                                      child: Text('skip'),
-                                    ),
+                                      child: Image.asset('skip.png',height: 30,),                                    ),
                                   ];
                                   break;
                                 case 3:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                                     ],),
-                                    SizedBox(height: 20,),
-                                    Text("무릎이 발끝보다 앞으로 나오지 않도록 하면",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("허벅지와 수평이 될 때까지 앉으세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    SizedBox(height: 20,),
-                                    Image.asset('crossjack_1.png',height: 400,width: 300,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
+                                    Container(height: 70,
+                                      child:
+                                      Column(
+                                        children: [
+                                          Text("Repeat Step 1 and Step 2.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
+                                          Text("Now press the start button.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
+                                        ],
                                       ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Text('skip'),
                                     ),
-                                  ];
-                                  break;
-                                case 4:
-                                  tutorial = <Widget>[
-                                    Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
-                                    ],),
-                                    SizedBox(height: 20,),
-                                    Text("발뒤꿈치로 민다는 느낌으로",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("허벅지에 힘을 주면서 일어나세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    SizedBox(height: 20,),
-                                    Image.asset('crossjack_2.png',height: 400,width: 300,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
-                                        // foreground
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Text('skip'),
-                                    ),
-                                  ];
-                                  break;
-                                case 5:
-                                  tutorial = <Widget>[
-                                    Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
-                                    ],),
-                                    SizedBox(height: 120,),
-                                    Text("마이크로 칩을 한번 흔들어주세요.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    SizedBox(height: 20,),
-                                    Image.asset('crossjack_1.png'),
+                                    Image.asset('cross_1.png'),
                                     SizedBox(height: 30,),
-                                    Text("moving value:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                                    Text("moving value:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
@@ -198,7 +166,7 @@ class _Tutorial3State extends State<Tutorial3> {
                                       onPressed: () {
                                         Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
                                       },
-                                      child: Text('Start'),
+                                      child: Image.asset('start.png',height: 30,),
                                     ),
                                   ];
                                   break;
@@ -242,7 +210,7 @@ class _Tutorial3State extends State<Tutorial3> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('tutorial_background.png'),
+                  image: AssetImage('tutorial2_background.png'),
                   fit: BoxFit.fill
               )
           ),

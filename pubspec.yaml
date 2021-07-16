@@ -85,9 +85,11 @@ flutter:
     - gameButton.png
     - hwButton.png
     - reabButton.png
-    - crossjack_1.png
-    - crossjack_2.png
-    - tutorial_background.png
+    - jumpingButton.png
+    - crossButton.png
+    - squatButton.png
+    - cross_1.png
+    - cross_2.png
     - snap.png
     - finish.png
     - logo.png
@@ -97,6 +99,11 @@ flutter:
     - start_2.png
     - start_3.png
     - start_start.png
+    - tutorial1_background.png
+    - tutorial2_background.png
+    - ok.png
+    - jumping.gif
+    - cross.gif
 
   # To add assets to your application, add an assets section, like this:
   # assets:
