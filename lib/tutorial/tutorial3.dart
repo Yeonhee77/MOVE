@@ -103,15 +103,20 @@ class _Tutorial3State extends State<Tutorial3> {
                                       ),
                                     ),
                                     Image.asset('cross_1.png',height: 400,width: 300,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
-                                        // foreground
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Image.asset('skip.png',height: 30,),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 230,),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.black,
+                                            // foreground
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
+                                          },
+                                          child: Image.asset('skip.png',height: 30,),
+                                        ),
+                                      ],
                                     ),
                                   ];
                                   break;
@@ -130,15 +135,20 @@ class _Tutorial3State extends State<Tutorial3> {
                                       ),
                                     ),
                                     Image.asset('cross_2.png',height: 400,width: 300,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
-                                        // foreground
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Image.asset('skip.png',height: 30,),                                    ),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 230,),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.black,
+                                            // foreground
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
+                                          },
+                                          child: Image.asset('skip.png',height: 30,),                                    ),
+                                      ],
+                                    ),
                                   ];
                                   break;
                                 case 3:
@@ -157,16 +167,21 @@ class _Tutorial3State extends State<Tutorial3> {
                                     ),
                                     Image.asset('cross_1.png'),
                                     SizedBox(height: 30,),
-                                    Text("moving value:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
-                                        // foreground
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Image.asset('start.png',height: 30,),
+                                    // Text("moving value:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 230,),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.black,
+                                            // foreground
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
+                                          },
+                                          child: Image.asset('start.png',height: 30,),
+                                        ),
+                                      ],
                                     ),
                                   ];
                                   break;

@@ -133,7 +133,7 @@ class _CrossjackstartState extends State<Crossjackstart> {
                               ];
                             }
                             else {
-                              if (count >= 20) {
+                              if (count >= 40) {
                                 score = ((correct/count)*100);
                                 wrong = count -correct;
                                 tutorial = <Widget>[
@@ -143,7 +143,7 @@ class _CrossjackstartState extends State<Crossjackstart> {
                                   Text("Score: " + score.toStringAsFixed(2), style: TextStyle(fontSize: 40,color: Colors.white),),
                                   Text("Correct: " + correct.toString(),style: TextStyle(fontSize: 30,color: Colors.white),),
                                   Text("Wrong: " + wrong.toString(), style: TextStyle(fontSize: 30,color: Colors.white),),
-                                  SizedBox(height: 140,),
+                                  SizedBox(height: 80,),
 
                                   Center(child: Row(
                                     children: [
@@ -159,7 +159,7 @@ class _CrossjackstartState extends State<Crossjackstart> {
                                           Navigator.pop(context);
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: widget.bluetoothServices)));
                                         },
-                                        child: Image.asset('exit.png',height: 85,),
+                                        child: Image.asset('exit.png',height: 72,),
                                       ),
                                       TextButton(
                                         style: TextButton.styleFrom(
@@ -170,7 +170,7 @@ class _CrossjackstartState extends State<Crossjackstart> {
                                           addScore();
                                           Navigator.pop(context);
                                         },
-                                        child: Image.asset('restart.png',height: 85,),
+                                        child: Image.asset('restart.png',height: 72,),
                                       ),
                                     ],
                                   ),),
@@ -230,12 +230,11 @@ class _CrossjackstartState extends State<Crossjackstart> {
                                         }, icon: Icon(Icons.arrow_back,color: Colors.white))
                                       ],),
                                       flag ? Image.asset('correct.png',height: 80,):Image.asset('wrong.png',height:80),
-                                      Text("맞은 횟수: " + correct.toString(),style: TextStyle(color: Colors.white),),
                                       Center(child:
                                       Image.asset('cross.gif', height: 400,
                                         width: 300,),),
-                                      Text("값: " + gesture_num.toString(),style: TextStyle(color: Colors.white),),
-                                      Text("횟수: " + count.toString(),style: TextStyle(color: Colors.white),),
+                                      Text("Count: " + (count/2).toStringAsFixed(0),style: TextStyle(color: Colors.white),),
+                                      Text("Achievement rate: " + ((count/40)*100).toStringAsFixed(0) + '%',style: TextStyle(color: Colors.white),),
                                     ];
                                     break;
                                 }
@@ -269,9 +268,9 @@ class _CrossjackstartState extends State<Crossjackstart> {
     },);
     if(gesture_num == 2) {
       flag = true;
-      correct = correct +1;
     }
     else if(gesture_num == 1) {
+      correct = correct +1;
       flag = false;
     }
     if(gesture_num2 == 1 || gesture_num2 == 2) {
