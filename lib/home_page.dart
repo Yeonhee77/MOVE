@@ -105,6 +105,14 @@ class _MyHomePageState extends State<MyHomePage> {
                             duration: Duration(seconds: 5),
                           )
                       );
+                      showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
                       try {
                         await device.connect();
                       } catch (e) {
