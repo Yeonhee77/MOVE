@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/tutorial/tutorial2.dart';
 
-class JumpingJack extends StatefulWidget {
+class Jumpingjack extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
-  JumpingJack({this.bluetoothServices});
+  Jumpingjack({this.bluetoothServices});
 
   @override
-  _JumpingJackState createState() => _JumpingJackState();
+  _JumpingjackState createState() => _JumpingjackState();
 }
 
-class _JumpingJackState extends State<JumpingJack> {
+class _JumpingjackState extends State<Jumpingjack> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   String gesture = "";
   // ignore: non_constant_identifier_names
@@ -66,7 +66,7 @@ class _JumpingJackState extends State<JumpingJack> {
                         SizedBox(height: 120,),
                         Text("마이크로 칩을 손목에 부착해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                         SizedBox(height: 20,),
-                        Image.asset('snap.png',height: 200,),
+                        Image.asset('shoulder.png',height: 200,),
                         //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         SizedBox(height: 30,),
                         // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
@@ -111,15 +111,8 @@ class _JumpingJackState extends State<JumpingJack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('tutorial_background.png'),
-                  fit: BoxFit.fill
-              )
-          ),
-          child: _buildConnectDeviceView()
+      body: Center(
+        child: _buildConnectDeviceView(),
       ),
     );
   }

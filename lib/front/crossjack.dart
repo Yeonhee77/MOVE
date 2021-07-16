@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/tutorial/tutorial3.dart';
 
-class CrossJack extends StatefulWidget {
+class Crossjack extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
-  CrossJack({this.bluetoothServices});
+  Crossjack({this.bluetoothServices});
 
   @override
-  _CrossJackState createState() => _CrossJackState();
+  _CrossjackState createState() => _CrossjackState();
 }
 
-class _CrossJackState extends State<CrossJack> {
+class _CrossjackState extends State<Crossjack> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   String gesture = "";
   // ignore: non_constant_identifier_names
@@ -66,7 +66,7 @@ class _CrossJackState extends State<CrossJack> {
                         SizedBox(height: 120,),
                         Text("마이크로 칩을 손목에 부착해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                         SizedBox(height: 20,),
-                        Image.asset('snap.png',height: 200,),
+                        Image.asset('shoulder.png',height: 200,),
                         //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         SizedBox(height: 30,),
                         // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
@@ -111,15 +111,8 @@ class _CrossJackState extends State<CrossJack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('tutorial_background.png'),
-                  fit: BoxFit.fill
-              )
-          ),
-          child: _buildConnectDeviceView()
+      body: Center(
+        child: _buildConnectDeviceView(),
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/front/Crossjack.dart';
-import 'package:move/front/Jumpingjack.dart';
+import 'package:move/front/crossjack.dart';
+import 'package:move/front/jumpingjack.dart';
 import 'package:move/front/crossjack_page.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/squat.dart';
