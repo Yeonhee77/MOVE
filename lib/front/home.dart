@@ -32,7 +32,7 @@ class _HomeState extends State<Homepage> {
 
     FirebaseFirestore.instance
         .collection('user')
-        .where('avg', isGreaterThan: -1)
+        .where('avg', isGreaterThan: 0)
         .orderBy('avg', descending: true)
         .limit(7)
         .snapshots()

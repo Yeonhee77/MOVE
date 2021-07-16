@@ -85,6 +85,9 @@ flutter:
     - gameButton.png
     - hwButton.png
     - reabButton.png
+    - jumpingButton.png
+    - crossButton.png
+    - squatButton.png
     - crossjack_1.png
     - crossjack_2.png
     - tutorial_background.png
