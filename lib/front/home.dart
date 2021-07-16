@@ -103,63 +103,65 @@ class _HomeState extends State<Homepage> {
                         fontWeight: FontWeight.bold,
                       ),),
                   ),
-                  FutureBuilder(
-                    builder: (context, snapshot) {
-                      return ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: rankId.length,
-                          itemBuilder: (context, index) {
-                            var num = index + 1;
-                            return Padding(
-                              padding: const EdgeInsets.fromLTRB(1, 1, 1, 5),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width*0.8,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [const Color(0xffFFEED9), const Color(0xffF1E4A0)],
+                  Flexible(
+                    child: FutureBuilder(
+                      builder: (context, snapshot) {
+                        return ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: rankId.length,
+                            itemBuilder: (context, index) {
+                              var num = index + 1;
+                              return Padding(
+                                padding: const EdgeInsets.fromLTRB(1, 1, 1, 5),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width*0.8,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [const Color(0xffFFEED9), const Color(0xffF1E4A0)],
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.indigo.withOpacity(0.15),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: Offset(0, 3),
+                                      )
+                                    ]
                                   ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.indigo.withOpacity(0.15),
-                                      spreadRadius: 5,
-                                      blurRadius: 7,
-                                      offset: Offset(0, 3),
-                                    )
-                                  ]
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                  child: ListTile(
-                                    title: Text(name[index], style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black54),),
-                                    subtitle: Text(total[index], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.indigo),),
-                                    leading: Container(
-                                      width: 120,
-                                      child: Row(
-                                        children: [
-                                          Image.asset('$num.png', width: 50),
-                                          SizedBox(width: 10,),
-                                          Container(
-                                            width: 50,
-                                            child: CircleAvatar(
-                                              radius: 30,
-                                              backgroundImage: NetworkImage(photo[index]),
-                                              backgroundColor: Colors.transparent,
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                    child: ListTile(
+                                      title: Text(name[index], style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black54),),
+                                      subtitle: Text(total[index], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.indigo),),
+                                      leading: Container(
+                                        width: 120,
+                                        child: Row(
+                                          children: [
+                                            Image.asset('$num.png', width: 50),
+                                            SizedBox(width: 10,),
+                                            Container(
+                                              width: 50,
+                                              child: CircleAvatar(
+                                                radius: 30,
+                                                backgroundImage: NetworkImage(photo[index]),
+                                                backgroundColor: Colors.transparent,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          }
-                      );
-                    },
+                              );
+                            }
+                        );
+                      },
+                    ),
                   ),
                   SizedBox(height: 50),
                   Center(

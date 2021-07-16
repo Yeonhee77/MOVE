@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:move/trex/game_over/config.dart';
 import 'package:move/trex/horizon/horizon.dart';
 import 'package:move/trex/game_config.dart';
@@ -51,7 +52,8 @@ class TRexGame extends BaseGame {
   late final tRex = TRex();
   late final horizon = Horizon();
   late final gameOverPanel = GameOverPanel(spriteImage, GameOverConfig());
-   late final cloud = Cloud(spriteImage);
+  late final cloud = Cloud();
+  SpriteComponent sun = SpriteComponent();
 
   @override
   Future<void> onLoad() async {
@@ -60,6 +62,12 @@ class TRexGame extends BaseGame {
     add(horizon);
     add(tRex);
     add(gameOverPanel);
+    sun
+      ..sprite = await loadSprite('sun.png')
+      ..size = Vector2(25.0, 22.0)
+      ..x = 300
+      ..y = 20;
+    add(sun);
   }
 
   // state
@@ -116,6 +124,7 @@ class TRexGame extends BaseGame {
     status = TRexGameStatus.playing;
     tRex.reset();
     horizon.reset();
+    cloud.reset();
     currentSpeed = config.speed;
     gameOverPanel.visible = false;
     timePlaying = 0.0;
@@ -136,6 +145,8 @@ class TRexGame extends BaseGame {
 
     if (playing) {
       timePlaying += dt;
+
+
 
       final obstacles = horizon.horizonLine.obstacleManager.children;
       final hasCollision = obstacles.isNotEmpty &&
