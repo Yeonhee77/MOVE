@@ -229,7 +229,7 @@ class _CrossjackstartState extends State<Crossjackstart> {
                                           Navigator.pop(context);
                                         }, icon: Icon(Icons.arrow_back,color: Colors.white))
                                       ],),
-                                      flag ? Image.asset('correct.png',height: 80,):Image.asset('wrong.png',height:80),
+                                      flag ? Image.asset('correct.png',height: 80,):Container(height: 80,),
                                       Center(child:
                                       Image.asset('cross.gif', height: 400,
                                         width: 300,),),

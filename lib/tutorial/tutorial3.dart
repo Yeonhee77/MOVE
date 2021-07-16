@@ -94,9 +94,10 @@ class _Tutorial3State extends State<Tutorial3> {
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                                     ],),
                                     Container(
-                                      height: 70,
+                                      height: 80,
                                       child: Column(
                                         children: [
+                                          Image.asset('num1.png'),
                                           Text("Please, spread your arms,",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
                                           Text("spread your legs shoulder width apart.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
                                         ],
@@ -126,9 +127,10 @@ class _Tutorial3State extends State<Tutorial3> {
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                                     ],),
                                     Container(
-                                      height: 70,
+                                      height: 80,
                                       child: Column(
                                         children: [
+                                          Image.asset('num2.png'),
                                           Text("Cross both arms and legs, please.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
                                           //Text("양팔은 머리위로 손바닥을 마주봅니다.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
                                         ],
@@ -156,21 +158,20 @@ class _Tutorial3State extends State<Tutorial3> {
                                     Row(children: [
                                       IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                                     ],),
-                                    Container(height: 70,
+                                    Container(height: 80,
                                       child:
                                       Column(
                                         children: [
+                                          Image.asset('num3.png'),
                                           Text("Repeat Step 1 and Step 2.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
                                           Text("Now press the start button.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
                                         ],
                                       ),
                                     ),
                                     Image.asset('cross_1.png'),
-                                    SizedBox(height: 30,),
-                                    // Text("moving value:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
                                     Row(
                                       children: [
-                                        SizedBox(width: 230,),
+                                        SizedBox(width: 95,),
                                         TextButton(
                                           style: TextButton.styleFrom(
                                             primary: Colors.black,
@@ -179,7 +180,7 @@ class _Tutorial3State extends State<Tutorial3> {
                                           onPressed: () {
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjackstart(bluetoothServices: widget.bluetoothServices)));
                                           },
-                                          child: Image.asset('start.png',height: 30,),
+                                          child: Image.asset('start.png',height: 60),
                                         ),
                                       ],
                                     ),

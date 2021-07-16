@@ -95,101 +95,132 @@ class _Tutorial1State extends State<Tutorial1> {
                                 case 1:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+                                      SizedBox(width: 110,),
+                                      Image.asset('num1.png'),
                                     ],),
                                     SizedBox(height: 20,),
-                                    Text("Stand shoulder-width",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                                    Text("with toes slightly outward.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                                    Text("Stand shoulder-width",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white,),),
+                                    Text("with toes slightly outward.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white,),),
                                     SizedBox(height: 20,),
-                                    Image.asset('squat_1.png',height: 400,width: 300,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
-                                        // foreground
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Text('skip'),
+                                    Image.asset('squat_1.png',height: 350,width: 280,),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 230,),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.black,
+                                            // foreground
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
+                                          },
+                                          child: Image.asset('skip.png',height: 30,),
+                                        ),
+                                      ],
                                     ),
                                   ];
                                   break;
                                 case 2:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+                                      SizedBox(width: 110,),
+                                      Image.asset('num2.png'),
                                     ],),
                                     SizedBox(height: 20,),
-                                    Text("Eyes forward, tighten your abs ",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("and tighten your waist.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                    Text("Eyes forward, tighten your abs ",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white,),),
+                                    Text("and tighten your waist.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white,),),
                                     SizedBox(height: 20,),
-                                    Image.asset('squat_2.png',height: 400,width: 300,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
-                                        // foreground
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Text('skip'),
+                                    Image.asset('squat_2.png',height: 350,width: 280,),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 230,),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.black,
+                                            // foreground
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
+                                          },
+                                          child: Image.asset('skip.png',height: 30,),
+                                        ),
+                                      ],
                                     ),
                                   ];
                                   break;
                                 case 3:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+                                      SizedBox(width: 110,),
+                                      Image.asset('num3.png'),
                                     ],),
                                     SizedBox(height: 20,),
-                                    Text("Sit until your knees are level",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("with your thighs, keeping them from moving ",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("forward beyond your toes.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Image.asset('squat_1.png',height: 400,width: 300,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Text('skip'),
+                                    Text("Sit until your knees are",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white,),),
+                                    Text("level with your thighs,",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white,),),
+                                    Text("keeping them from moving",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white,),),
+                                    Text("forward beyond your toes.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white,),),
+                                    Image.asset('squat_1.png',height: 350,width: 280,),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 230,),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.black,
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
+                                          },
+                                          child: Image.asset('skip.png',height: 30,),
+                                        ),
+                                      ],
                                     ),
                                   ];
                                   break;
                                 case 4:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+                                      SizedBox(width: 110,),
+                                      Image.asset('num4.png'),
                                     ],),
                                     SizedBox(height: 20,),
-                                    Text("Stand up with your thighs tightened",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                    Text("feeling like you're pushing with your heels.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                    Text("Stand up with your thighs tightened",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white,),),
+                                    Text("feeling like you're pushing with your heels.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white,),),
                                     SizedBox(height: 20,),
-                                    Image.asset('squat_2.png',height: 400,width: 300,),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.black,
-                                        // foreground
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
-                                      },
-                                      child: Text('skip'),
+                                    Image.asset('squat_2.png',height: 350,width: 280,),
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 230,),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.black,
+                                            // foreground
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
+                                          },
+                                          child: Image.asset('skip.png',height: 30,),
+                                        ),
+                                      ],
                                     ),
                                   ];
                                   break;
                                 case 5:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+                                      SizedBox(width: 110,),
+                                      Image.asset('num5.png'),
                                     ],),
-                                    SizedBox(height: 120,),
-                                    Text("Please shake the microchip once.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                                     SizedBox(height: 20,),
-                                    Image.asset('bluewhite.png'),
+                                    Text("Please shake the microchip once.",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white,),),
+                                    SizedBox(height: 20,),
+                                    Image.asset('squat_1.png',height: 350,width: 280,),
                                     SizedBox(height: 30,),
-                                    Text("moving value:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                                    //Text("moving value:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white,),),
                                     TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black,
@@ -198,7 +229,7 @@ class _Tutorial1State extends State<Tutorial1> {
                                       onPressed: () {
                                         Navigator.push(context, MaterialPageRoute(builder: (context) => Squatstart(bluetoothServices: widget.bluetoothServices)));
                                       },
-                                      child: Text('Start'),
+                                      child: Image.asset('start.png',height: 60),
                                     ),
                                   ];
                                   break;

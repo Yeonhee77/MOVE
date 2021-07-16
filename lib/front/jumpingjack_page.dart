@@ -229,7 +229,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                           Navigator.pop(context);
                                         }, icon: Icon(Icons.arrow_back,color: Colors.white))
                                       ],),
-                                      flag ? Image.asset('correct.png',height: 80,):Image.asset('wrong.png',height:80),
+                                      flag ? Image.asset('correct.png',height: 80,):Container(height: 80,),
                                       //Text("맞은 횟수: " + correct.toString(),style: TextStyle(color: Colors.white),),
                                       Center(child:
                                       Image.asset('jumping.gif', height: 400,

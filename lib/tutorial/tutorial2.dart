@@ -96,10 +96,12 @@ class _Tutorial2State extends State<Tutorial2> {
                                 case 1:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+                                      SizedBox(width: 110,),
+                                      Image.asset('num1.png'),
                                     ],),
                                     Container(
-                                      height: 70,
+                                      height: 80,
                                       child: Column(
                                         children: [
                                           Text("Stand up straight, please",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
@@ -128,10 +130,13 @@ class _Tutorial2State extends State<Tutorial2> {
                                 case 2:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+                                      SizedBox(width: 110,),
+                                      Image.asset('num2.png'),
+
                                     ],),
                                     Container(
-                                      height: 70,
+                                      height: 80,
                                       child: Column(
                                         children: [
                                           Text("Spread both arms 90 degrees,",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
@@ -161,10 +166,12 @@ class _Tutorial2State extends State<Tutorial2> {
                                 case 3:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+                                      SizedBox(width: 110,),
+                                      Image.asset('num3.png'),
                                     ],),
                                     Container(
-                                      height: 70,
+                                      height: 80,
                                       child: Column(
                                         children: [
                                           Text("Bring your arms and legs together",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
@@ -194,10 +201,12 @@ class _Tutorial2State extends State<Tutorial2> {
                                 case 4:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+                                      SizedBox(width: 110,),
+                                      Image.asset('num4.png'),
                                     ],),
                                     Container(
-                                      height: 70,
+                                      height: 80,
                                       child: Column(
                                         children: [
                                           Text("Spread your legs shoulder width",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18,color: Colors.white),),
@@ -228,9 +237,11 @@ class _Tutorial2State extends State<Tutorial2> {
                                 case 5:
                                   tutorial = <Widget>[
                                     Row(children: [
-                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
+                                      IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+                                      SizedBox(width: 110,),
+                                      Image.asset('num5.png'),
                                     ],),
-                                    Container(height: 70,
+                                    Container(height: 80,
                                       child:
                                     Column(
                                       children: [
@@ -240,10 +251,9 @@ class _Tutorial2State extends State<Tutorial2> {
                                     ),
                                     ),
                                     Image.asset('jumping_5.png',height: 400,width: 300,),
-                                    SizedBox(height: 20,),
                                     Row(
                                       children: [
-                                        SizedBox(width: 230,),
+                                        SizedBox(width: 95,),
                                         TextButton(
                                           style: TextButton.styleFrom(
                                             primary: Colors.black,
@@ -252,7 +262,7 @@ class _Tutorial2State extends State<Tutorial2> {
                                           onPressed: () {
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingstart(bluetoothServices: widget.bluetoothServices)));
                                           },
-                                          child: Image.asset('start.png',height: 30,),
+                                          child: Image.asset('start.png',height: 60),
                                         ),
                                       ],
                                     ),

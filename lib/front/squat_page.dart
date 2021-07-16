@@ -133,7 +133,7 @@ class _SquatstartState extends State<Squatstart> {
                               ];
                             }
                             else {
-                              if (count >= 20) {
+                              if (count >= 40) {
                                 score = ((correct/count)*100);
                                 wrong = count -correct;
                                 tutorial = <Widget>[
@@ -159,7 +159,7 @@ class _SquatstartState extends State<Squatstart> {
                                           Navigator.pop(context);
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: widget.bluetoothServices)));
                                         },
-                                        child: Image.asset('exit.png',height: 85,),
+                                        child: Image.asset('exit.png',height: 72,),
                                       ),
                                       TextButton(
                                         style: TextButton.styleFrom(
@@ -170,7 +170,7 @@ class _SquatstartState extends State<Squatstart> {
                                           addScore();
                                           Navigator.pop(context);
                                         },
-                                        child: Image.asset('restart.png',height: 85,),
+                                        child: Image.asset('restart.png',height: 72,),
                                       ),
                                     ],
                                   ),),
@@ -229,13 +229,13 @@ class _SquatstartState extends State<Squatstart> {
                                           Navigator.pop(context);
                                         }, icon: Icon(Icons.arrow_back,color: Colors.white))
                                       ],),
-                                      flag ? Image.asset('correct.png',height: 80,):Image.asset('wrong.png',height:80),
-                                      Text("맞은 횟수: " + correct.toString(),style: TextStyle(color: Colors.white),),
+                                      flag ? Image.asset('correct.png',height: 80,):Container(height: 80,),
                                       Center(child:
                                       Image.asset('squat_3.gif', height: 400,
                                         width: 300,),),
-                                      Text("값: " + gesture_num.toString(),style: TextStyle(color: Colors.white),),
-                                      Text("횟수: " + count.toString(),style: TextStyle(color: Colors.white),),
+                                      //Text("값: " + gesture_num.toString(),style: TextStyle(color: Colors.white),),
+                                      Text("Count: " + (count/2).toStringAsFixed(0),style: TextStyle(color: Colors.white),),
+                                      Text("Achievement rate: " + ((count/40)*100).toStringAsFixed(0) + '%',style: TextStyle(color: Colors.white),),
                                     ];
                                     break;
                                 }
