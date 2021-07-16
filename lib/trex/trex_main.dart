@@ -6,11 +6,10 @@ import 'package:move/data.dart';
 import 'package:move/home_page.dart';
 import 'package:move/front/game.dart';
 import 'package:move/trex/game.dart';
-
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/services.dart';
-
+import 'package:move/front/select.dart';
 import 'game.dart';
 
 class TRexGameWrapper extends StatefulWidget {
@@ -29,7 +28,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   bool splashGone = false;
   TRexGame ? game;
 
-  int score = -1;
+  int score = 0;
 
   @override
   void initState() {
@@ -90,14 +89,36 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
+              margin: EdgeInsets.only(top: 25, right: 5),
               width: 100,
-              height: 100,
-              color: Color.fromARGB(255,162,209,221),
+              height: 30,
               child: Center(
                 child: Text('Score : $score', style: TextStyle(color: Colors.black, fontSize: 16, decoration: TextDecoration.none)),
               )
           )
         ]
+    );
+  }
+
+  Widget exitBox(BuildContext buildContext, TRexGame game) {
+    return Container(
+      margin: EdgeInsets.only(top: 17),
+      width: 100,
+      height: 100,
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Select(bluetoothServices: widget.bluetoothServices)));
+                },
+                child: Image.asset('dinoExit.png', height: 50,),
+              ),
+            ),
+          ]
+      ),
     );
   }
 
@@ -113,14 +134,14 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       );
     }
     return Container(
-      color: Color.fromARGB(255,162,209,221),
       constraints: const BoxConstraints.expand(),
       child: GameWidget(
         game: game!,
         overlayBuilderMap: {
-          'Score' : scoreBox
+          'Score' : scoreBox,
+          'Exit' : exitBox
         },
-        initialActiveOverlays: ['Score'],
+        initialActiveOverlays: ['Score', 'Exit'],
       ),
     );
   }

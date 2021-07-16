@@ -51,12 +51,12 @@ class TRexGame extends BaseGame {
   late final tRex = TRex();
   late final horizon = Horizon();
   late final gameOverPanel = GameOverPanel(spriteImage, GameOverConfig());
-  // late final cloud = CloudManager(horizonConfig: HorizonConfig());
+   late final cloud = Cloud(spriteImage);
 
   @override
   Future<void> onLoad() async {
     add(Bg());
-    // add(cloud);
+    add(cloud);
     add(horizon);
     add(tRex);
     add(gameOverPanel);
@@ -66,7 +66,7 @@ class TRexGame extends BaseGame {
   late TRexGameStatus status = TRexGameStatus.waiting;
   late double currentSpeed = 0.0;
   late double timePlaying = 0.0;
-  late int score = -1;
+  late int score = 0;
 
   bool get playing => status == TRexGameStatus.playing;
   bool get gameOver => status == TRexGameStatus.gameOver;
@@ -119,7 +119,7 @@ class TRexGame extends BaseGame {
     currentSpeed = config.speed;
     gameOverPanel.visible = false;
     timePlaying = 0.0;
-    this.score = -1;
+    this.score = 0;
   }
 
   @override
