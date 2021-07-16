@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/trex/trex_main.dart';
-
+import 'package:flutter/services.dart';
 import 'boxing.dart';
 
 class Game extends StatefulWidget {
@@ -16,6 +16,10 @@ class Game extends StatefulWidget {
 class _GameState extends State<Game> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([ //screen vertically
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(

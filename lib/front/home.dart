@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:move/front/mypage.dart';
@@ -52,6 +53,10 @@ class _HomeState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([ //screen vertically
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(

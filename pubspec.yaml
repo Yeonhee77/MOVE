@@ -82,6 +82,7 @@ flutter:
     - logo.png
     - boxButton.png
     - dinoButton.png
+    - dinoExit.png
     - gameButton.png
     - hwButton.png
     - reabButton.png

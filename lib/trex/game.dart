@@ -16,7 +16,7 @@ import 'collision/collision_utils.dart';
 class Bg extends Component with HasGameRef {
   Vector2 size = Vector2.zero();
 
-  late final ui.Paint _paint = ui.Paint()..color = const ui.Color.fromARGB(255,162,209,221); //background color
+  late final ui.Paint _paint = ui.Paint()..color = const ui.Color.fromARGB(255,230, 255, 255); //background color
 
   @override
   void render(ui.Canvas c) {
@@ -36,19 +36,22 @@ class TRexGame extends BaseGame with TapDetector {
 
   TRexGame( {
     required this.spriteImage,
+    //required this.exitImage,
   }) : super();
 
   late final config = GameConfig();
 
   @override
-  ui.Color backgroundColor() => const ui.Color.fromARGB(255,162,209,221);
+  ui.Color backgroundColor() => const ui.Color.fromARGB(255,230, 255, 255);
 
   final ui.Image spriteImage;
+  //final ui.Image exitImage;
 
   /// children
   late final tRex = TRex();
   late final horizon = Horizon();
   late final gameOverPanel = GameOverPanel(spriteImage, GameOverConfig());
+  //late final gameOverExit = GameOverExit(exitImage, GameOverConfig());
 
   @override
   Future<void> onLoad() async {
@@ -56,6 +59,7 @@ class TRexGame extends BaseGame with TapDetector {
     add(horizon);
     add(tRex);
     add(gameOverPanel);
+    //add(gameOverExit);
   }
 
   // state

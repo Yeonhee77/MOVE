@@ -1,15 +1,14 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/data.dart';
 import 'package:move/home_page.dart';
-import 'package:move/front/game.dart';
 import 'package:move/trex/game.dart';
+import 'package:move/front/select.dart';
 
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
-import 'package:flutter/services.dart';
 
 import 'game.dart';
 
@@ -92,7 +91,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
           Container(
               width: 100,
               height: 100,
-              color: Color.fromARGB(255,162,209,221),
+              color: Color.fromARGB(255,230, 255, 255),
               child: Center(
                 child: Text('Score : $score', style: TextStyle(color: Colors.black, fontSize: 16, decoration: TextDecoration.none)),
               )
@@ -101,8 +100,34 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     );
   }
 
+  Widget exitBox(BuildContext buildContext, TRexGame game) {
+    return Container(
+        width: 100,
+        height: 100,
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, MaterialPageRoute(builder: (context) => Select(bluetoothServices: widget.bluetoothServices)));
+                  },
+                  child: Image.asset('dinoExit.png', height: 50,),
+                ),
+              ),
+            ]
+        ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([ //screen horizontally
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+
     _gesture();
     game!.onAction(gesture_num);
     score = game!.returnScore();
@@ -113,15 +138,16 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       );
     }
     return Container(
-      color: Color.fromARGB(255,162,209,221),
+      color: Color.fromARGB(255,230, 255, 255),
       constraints: const BoxConstraints.expand(),
       child: GameWidget(
-        game: game!,
-        overlayBuilderMap: {
-          'Score' : scoreBox
-        },
-        initialActiveOverlays: ['Score'],
-      ),
+            game: game!,
+            overlayBuilderMap: {
+              'Score' : scoreBox,
+              'Exit' : exitBox,
+            },
+            initialActiveOverlays: ['Score', 'Exit'],
+          ),
     );
   }
 
