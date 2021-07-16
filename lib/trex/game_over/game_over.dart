@@ -11,14 +11,12 @@ class GameOverPanel extends BaseComponent with HasGameRef<TRexGame> {
     GameOverConfig config,
   )   : gameOverText = GameOverText(spriteImage, config),
         gameOverRestart = GameOverRestart(spriteImage, config),
-        //gameOverExit = GameOverExit(exitImage, config),
         super();
 
   bool visible = false;
 
   GameOverText gameOverText;
   GameOverRestart gameOverRestart;
-  //GameOverExit gameOverExit;
 
   @override
   Future<void>? onLoad() {

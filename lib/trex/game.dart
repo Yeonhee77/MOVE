@@ -12,6 +12,8 @@ import 'package:move/trex/obstacle/obstacle.dart';
 import 'package:move/trex/t_rex/t_rex.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'collision/collision_utils.dart';
+import 'horizon/clouds.dart';
+import 'horizon/config.dart';
 
 class Bg extends Component with HasGameRef {
   Vector2 size = Vector2.zero();
@@ -32,7 +34,7 @@ class Bg extends Component with HasGameRef {
 
 enum TRexGameStatus { playing, waiting, gameOver }
 
-class TRexGame extends BaseGame with TapDetector {
+class TRexGame extends BaseGame {
 
   TRexGame( {
     required this.spriteImage,
@@ -51,11 +53,12 @@ class TRexGame extends BaseGame with TapDetector {
   late final tRex = TRex();
   late final horizon = Horizon();
   late final gameOverPanel = GameOverPanel(spriteImage, GameOverConfig());
-  //late final gameOverExit = GameOverExit(exitImage, GameOverConfig());
+   late final cloud = Cloud(spriteImage);
 
   @override
   Future<void> onLoad() async {
     add(Bg());
+    add(cloud);
     add(horizon);
     add(tRex);
     add(gameOverPanel);
@@ -66,7 +69,7 @@ class TRexGame extends BaseGame with TapDetector {
   late TRexGameStatus status = TRexGameStatus.waiting;
   late double currentSpeed = 0.0;
   late double timePlaying = 0.0;
-  late int score = -1;
+  late int score = 0;
 
   bool get playing => status == TRexGameStatus.playing;
   bool get gameOver => status == TRexGameStatus.gameOver;
@@ -119,7 +122,7 @@ class TRexGame extends BaseGame with TapDetector {
     currentSpeed = config.speed;
     gameOverPanel.visible = false;
     timePlaying = 0.0;
-    this.score = -1;
+    this.score = 0;
   }
 
   @override

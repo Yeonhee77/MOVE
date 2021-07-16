@@ -45,7 +45,7 @@ class _GameState extends State<Game> {
                   SizedBox(height: 30,),
                   TextButton(
                     onPressed: () {
-                      if(widget.bluetoothServices != null)
+                      //if(widget.bluetoothServices != null)
                         Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper(bluetoothServices: widget.bluetoothServices)));
                     },
                     child: Image.asset('dinoButton.png', width: MediaQuery.of(context).size.width*0.7,),

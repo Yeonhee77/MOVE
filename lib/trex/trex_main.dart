@@ -9,7 +9,6 @@ import 'package:move/front/select.dart';
 
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
-
 import 'game.dart';
 
 class TRexGameWrapper extends StatefulWidget {
@@ -28,7 +27,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   bool splashGone = false;
   TRexGame ? game;
 
-  int score = -1;
+  int score = 0;
 
   @override
   void initState() {
@@ -89,6 +88,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
+              margin: EdgeInsets.only(top: 25, right: 5),
               width: 100,
               height: 100,
               color: Color.fromARGB(255,230, 255, 255),
@@ -104,6 +104,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     return Container(
         width: 100,
         height: 100,
+        margin: EdgeInsets.only(top: 17),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
