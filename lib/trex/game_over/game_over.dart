@@ -18,7 +18,7 @@ class GameOverPanel extends BaseComponent with HasGameRef<TRexGame> {
   GameOverText gameOverText;
   GameOverRestart gameOverRestart;
 
-  late final Paint _paint = Paint()..color = const Color.fromARGB(100, 0, 0, 0); //background color
+  late final Paint _paint = Paint()..color = const Color.fromARGB(75, 0, 0, 0); //background color
 
   @override
   Future<void>? onLoad() {

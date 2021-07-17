@@ -28,7 +28,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   TRexGame? game;
   String gesture = "";
 
-  num score = -1;
+  num score = 0;
   num dino = 0;
   num boxing = 0;
   num jumpingJack = 0;
