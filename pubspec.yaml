@@ -50,10 +50,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - bluewhite.png
-    - Dino.png
-    - Fish.jpg
-    - Pump.jpg
     - sprite.png
     - squat_1.png
     - squat_2.png
@@ -75,8 +71,6 @@ flutter:
     - 3.png
     - 4.png
     - 5.png
-    - 6.png
-    - 7.png
     - moveButton.png
     - connect.png
     - logo.png
@@ -105,6 +99,12 @@ flutter:
     - boxing_back.png
     - punch.png
     - uppercut.png
+    - bridge.png
+    - crunch.png
+    - dumbbell.png
+    - plank.png
+    - pushUp.png
+    - fishing.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

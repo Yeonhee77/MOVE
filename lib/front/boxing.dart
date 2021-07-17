@@ -120,7 +120,7 @@ class _BoxingStartState extends State<BoxingStart> {
       }
     }
 
-    if(jar == 20) {
+    if(jar == 15) {
       SchedulerBinding.instance!.addPostFrameCallback((_) {
         Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingClear(
           bluetoothServices: widget.bluetoothServices,
@@ -146,7 +146,6 @@ class _BoxingStartState extends State<BoxingStart> {
           ),
           child: Column(
             children: [
-              // SizedBox(height: 30,),
               Row(children: [
                 IconButton(
                     onPressed: () {
@@ -186,7 +185,7 @@ class _BoxingStartState extends State<BoxingStart> {
                       decoration: BoxDecoration(
                           color: Colors.transparent
                       ),
-                      height: MediaQuery.of(context).size.height*0.3 / 20 * (20-jar),
+                      height: MediaQuery.of(context).size.height*0.3 / 15 * (15-jar),
                     ),
                     Container(
                       decoration: BoxDecoration(
@@ -199,7 +198,7 @@ class _BoxingStartState extends State<BoxingStart> {
                             Radius.circular(10) // POINT
                         ),
                       ),
-                      height: MediaQuery.of(context).size.height*0.45 / 20 * jar,
+                      height: MediaQuery.of(context).size.height*0.3 / 15 * jar,
                     )
                   ],
                 ),
@@ -214,13 +213,13 @@ class _BoxingStartState extends State<BoxingStart> {
                       if(ran_gesture == 'Punch')
                         return Align(
                             alignment: FractionalOffset(0.8, 1.0),
-                            child: Image.asset('dino_n.png', width: 150,)
+                            child: Image.asset('dino_n.png', width: MediaQuery.of(context).size.width/2.8,)
                         );
                         return Align(
                           alignment: FractionalOffset(0.8, 1.0),
                           child: Transform.rotate(
                             angle: 0.5,
-                            child: Image.asset('dino_j.png', width: 150,),
+                            child: Image.asset('dino_j.png', width: MediaQuery.of(context).size.width/2.8,),
                           ),
                         );
                     }
@@ -304,7 +303,10 @@ class _BoxingClearState extends State<BoxingClear> {
           icon: Icon(Icons.arrow_back, color: Colors.indigo,),
           onPressed: () {
             SchedulerBinding.instance!.addPostFrameCallback((_) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: widget.bluetoothServices)));
+              Navigator.pop(context);
+              Navigator.pop(context);
+              Navigator.pop(context);
+              // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: widget.bluetoothServices)));
             });
           },
         ),
@@ -334,8 +336,10 @@ class _BoxingClearState extends State<BoxingClear> {
                     onPressed: () {
                       SchedulerBinding.instance!.addPostFrameCallback((_) {
                         addScore();
-                        // Navigator.pop(context);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: widget.bluetoothServices)));
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: widget.bluetoothServices)));
                       });
                     },
                   ),
@@ -344,6 +348,7 @@ class _BoxingClearState extends State<BoxingClear> {
                     onPressed: () {
                       SchedulerBinding.instance!.addPostFrameCallback((_) {
                         addScore();
+                        Navigator.pop(context);
                         Navigator.pop(context);
                         Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
                       });
