@@ -133,7 +133,7 @@ class _CrossjackstartState extends State<Crossjackstart> {
                               ];
                             }
                             else {
-                              if (count >= 40) {
+                              if (count >= 2) {
                                 score = ((correct/count)*100);
                                 wrong = count -correct;
                                 tutorial = <Widget>[

@@ -5,7 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/home_page.dart';
 import 'package:move/trex/game.dart';
-import 'package:move/front/game.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
@@ -25,8 +26,14 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   bool splashGone = false;
   TRexGame? game;
-  int score = -1;
   String gesture = "";
+
+  num score = -1;
+  num dino = 0;
+  num boxing = 0;
+  num jumpingJack = 0;
+  num crossJack = 0;
+  double avg = 0;
 
   @override
   void initState() {
@@ -86,6 +93,33 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
 
     await characteristic.read();
     sub.cancel();
+  }
+
+  Future<void> addScore(int score) async{
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((doc) {
+      setState(() {
+        dino = doc.get('dino');
+        boxing = doc.get('boxing');
+        jumpingJack = doc.get('jumpingJack');
+        crossJack = doc.get('crossJack');
+      });
+    });
+
+    if(score > dino) {
+      avg = (score + boxing + jumpingJack + crossJack)/4;
+
+      FirebaseFirestore.instance
+          .collection('user')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        'score': score,
+        'avg': double.parse(avg.toStringAsFixed(2)),
+      });
+    }
   }
 
   Widget scoreBox(BuildContext buildContext, TRexGame game) {

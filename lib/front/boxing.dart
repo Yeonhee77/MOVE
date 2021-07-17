@@ -120,7 +120,7 @@ class _BoxingStartState extends State<BoxingStart> {
       }
     }
 
-    if(jar == 2) {
+    if(jar == 15) {
       SchedulerBinding.instance!.addPostFrameCallback((_) {
         Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingClear(
           bluetoothServices: widget.bluetoothServices,
@@ -185,7 +185,7 @@ class _BoxingStartState extends State<BoxingStart> {
                       decoration: BoxDecoration(
                           color: Colors.transparent
                       ),
-                      height: MediaQuery.of(context).size.height*0.3 / 2 * (2-jar),
+                      height: MediaQuery.of(context).size.height*0.3 / 15 * (15-jar),
                     ),
                     Container(
                       decoration: BoxDecoration(
@@ -198,7 +198,7 @@ class _BoxingStartState extends State<BoxingStart> {
                             Radius.circular(10) // POINT
                         ),
                       ),
-                      height: MediaQuery.of(context).size.height*0.3 / 2 * jar,
+                      height: MediaQuery.of(context).size.height*0.3 / 15 * jar,
                     )
                   ],
                 ),
