@@ -26,8 +26,8 @@ class HorizonLine extends PositionComponent with HasGameRef<TRexGame> {
   late final thirdGround = HorizonGround(_softSprite, dimensions);
 
   // children
-  late final CloudManager cloudManager =
-      CloudManager(horizonConfig: HorizonConfig());
+  // late final CloudManager cloudManager =
+  //     CloudManager(horizonConfig: HorizonConfig());
   late final ObstacleManager obstacleManager = ObstacleManager(dimensions);
 
   @override
@@ -35,7 +35,7 @@ class HorizonLine extends PositionComponent with HasGameRef<TRexGame> {
     addChild(firstGround);
     addChild(secondGround);
     addChild(thirdGround);
-    addChild(cloudManager);
+    // addChild(cloudManager);
     addChild(obstacleManager);
     super.onMount();
   }
@@ -69,7 +69,7 @@ class HorizonLine extends PositionComponent with HasGameRef<TRexGame> {
   }
 
   void reset() {
-    cloudManager.reset();
+    // cloudManager.reset();
     obstacleManager.reset();
 
     firstGround.x = 0.0;

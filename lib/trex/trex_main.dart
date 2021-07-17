@@ -1,16 +1,14 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/data.dart';
 import 'package:move/home_page.dart';
-import 'package:move/front/game.dart';
 import 'package:move/trex/game.dart';
+import 'package:move/front/game.dart';
 
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
-import 'package:flutter/services.dart';
-
 import 'game.dart';
 
 class TRexGameWrapper extends StatefulWidget {
@@ -24,18 +22,28 @@ class TRexGameWrapper extends StatefulWidget {
 
 class _TRexGameWrapperState extends State<TRexGameWrapper> {
   /*--------bluetooth-------*/
-  final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   bool splashGone = false;
   TRexGame? game;
   int score = -1;
-  int gesture_num = 0;
   String gesture = "";
 
   @override
   void initState() {
     super.initState();
     startGame();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]); //screen horizontally
+  }
+
+  @override
+  void dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
   }
 
   void startGame() {
@@ -46,12 +54,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         })
       },
     );
-  }
-
-  @override
-  void dispose(){
-    _streamController.close();
-    super.dispose();
   }
 
   void _gesture() {
@@ -91,14 +93,37 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
+              margin: EdgeInsets.only(top: 20, right: 5),
               width: 100,
               height: 100,
-              color: Color.fromARGB(255,162,209,221),
+              color: Color.fromARGB(255,230, 255, 255),
               child: Center(
                 child: Text('Score : $score', style: TextStyle(color: Colors.black, fontSize: 16, decoration: TextDecoration.none)),
               )
           )
         ]
+    );
+  }
+
+  Widget exitBox(BuildContext buildContext, TRexGame game) {
+    return Container(
+        width: 100,
+        height: 100,
+        margin: EdgeInsets.only(top: 17),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Image.asset('dinoExit.png', height: 50,),
+                ),
+              ),
+            ]
+        ),
     );
   }
 
@@ -115,15 +140,16 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     }
     else
     return Container(
-      color: Colors.white,
+      color: Color.fromARGB(255,230, 255, 255),
       constraints: const BoxConstraints.expand(),
       child: GameWidget(
-        game: game!,
-        overlayBuilderMap: {
-          'Score' : scoreBox
-        },
-        initialActiveOverlays: ['Score'],
-      ),
+            game: game!,
+            overlayBuilderMap: {
+              'Score' : scoreBox,
+              'Exit' : exitBox,
+            },
+            initialActiveOverlays: ['Score', 'Exit'],
+          ),
     );
   }
 }

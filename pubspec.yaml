@@ -76,6 +76,7 @@ flutter:
     - logo.png
     - boxButton.png
     - dinoButton.png
+    - dinoExit.png
     - gameButton.png
     - hwButton.png
     - reabButton.png
@@ -93,6 +94,7 @@ flutter:
     - start_2.png
     - start_3.png
     - start_start.png
+    - dinoExit.png
     - dino_j.png
     - dino_n.png
     - boxing_back.png

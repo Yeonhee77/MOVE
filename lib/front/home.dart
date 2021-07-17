@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:move/front/mypage.dart';
-import 'package:move/front/game.dart';
 import 'package:move/front/select.dart';
-import 'package:move/front/training.dart';
 
 import '../home_page.dart';
 import 'login.dart';
@@ -29,6 +26,7 @@ class _HomeState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]); //screen vertically
 
     FirebaseFirestore.instance
         .collection('user')
@@ -51,6 +49,18 @@ class _HomeState extends State<Homepage> {
   }
 
   @override
+  void dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -70,9 +80,9 @@ class _HomeState extends State<Homepage> {
             },
           ),
           IconButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Mypage()));},
-              icon: Icon(Icons.person),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Mypage()));},
+            icon: Icon(Icons.person),
             color: Colors.indigo,
           ),
         ],
@@ -82,10 +92,10 @@ class _HomeState extends State<Homepage> {
           child: Container(
             height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('background.png'),
-                  fit: BoxFit.fill
-              )
+                image: DecorationImage(
+                    image: AssetImage('background.png'),
+                    fit: BoxFit.fill
+                )
             ),
             child: Container(
               margin: const EdgeInsets.all(30.0),
@@ -111,7 +121,7 @@ class _HomeState extends State<Homepage> {
                           removeTop: true,
                           context: context,
                           child: ListView.builder(
-                            scrollDirection: Axis.vertical,
+                              scrollDirection: Axis.vertical,
                               shrinkWrap: true,
                               itemCount: rankId.length,
                               itemBuilder: (context, index) {
@@ -121,20 +131,20 @@ class _HomeState extends State<Homepage> {
                                   child: Container(
                                     width: MediaQuery.of(context).size.width*0.8,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      gradient: LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        colors: [const Color(0xffFFEED9), const Color(0xffF1E4A0)],
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.indigo.withOpacity(0.15),
-                                          spreadRadius: 5,
-                                          blurRadius: 7,
-                                          offset: Offset(0, 3),
-                                        )
-                                      ]
+                                        borderRadius: BorderRadius.circular(20),
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          colors: [const Color(0xffFFEED9), const Color(0xffF1E4A0)],
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.indigo.withOpacity(0.15),
+                                            spreadRadius: 5,
+                                            blurRadius: 7,
+                                            offset: Offset(0, 3),
+                                          )
+                                        ]
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.fromLTRB(0, 3, 0, 3),

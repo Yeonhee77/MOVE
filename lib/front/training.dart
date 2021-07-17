@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/front/Crossjack.dart';
-import 'package:move/front/Jumpingjack.dart';
+
+import 'package:move/front/crossJack.dart';
+import 'package:move/front/jumpingJack.dart';
 import 'package:move/front/crossjack_page.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/squat.dart';

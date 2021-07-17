@@ -37,7 +37,7 @@ class ObstacleType {
     "pyramid",
     width: 65.0, // obstacle : 60
     height: 40.0, // obstacle : 35
-    y: 40.0, //obstacle y axis, up : - , down : +
+    y: 42.0, //obstacle y axis, up : - , down : +
     multipleSpeed: 4,
     minGap: 120.0,
     minSpeed: 0.0,
@@ -61,7 +61,7 @@ class ObstacleType {
     "tree",
     width: 60.0,
     height: 70.0,
-    y: 2.0, //obstacle y axis (position of height)
+    y: 5.0, //obstacle y axis (position of height)
     multipleSpeed: 7,
     minGap: 120.0,
     minSpeed: 0.0,
