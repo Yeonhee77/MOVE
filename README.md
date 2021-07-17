@@ -38,7 +38,7 @@ In this pandemic situation where people can't go out freely due to the COVID-19,
 * Officially release the app
 
 ### MOVE! video link
->
+> https://youtu.be/Gmpm6iShmMo
 
 ### MOVE! apk download link
 > https://tinyurl.com/move-app-apk-download
