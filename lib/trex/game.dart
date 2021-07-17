@@ -19,7 +19,7 @@ import 'horizon/config.dart';
 class Bg extends Component with HasGameRef {
   Vector2 size = Vector2.zero();
 
-  late final ui.Paint _paint = ui.Paint()..color = const ui.Color.fromARGB(250, 0, 185, 165); //background color
+  late final ui.Paint _paint = ui.Paint()..color = const ui.Color.fromARGB(250, 255, 255, 255); //background color
 
   @override
   void render(ui.Canvas c) {
@@ -44,7 +44,7 @@ class TRexGame extends BaseGame {
   late final config = GameConfig();
 
   @override
-  ui.Color backgroundColor() => const ui.Color.fromARGB(250, 0, 185, 165);
+  ui.Color backgroundColor() => const ui.Color.fromARGB(250, 255, 255, 255);
 
   final ui.Image spriteImage;
 
@@ -54,10 +54,17 @@ class TRexGame extends BaseGame {
   late final gameOverPanel = GameOverPanel(spriteImage, GameOverConfig());
   late final cloud = Cloud();
   SpriteComponent sun = SpriteComponent();
+  SpriteComponent back = SpriteComponent();
 
   @override
   Future<void> onLoad() async {
     add(Bg());
+    back
+      ..sprite = await loadSprite('dino_bg.png')
+      ..size = Vector2(700, 375)
+      ..x = 0
+      ..y = 0;
+    add(back);
     add(cloud);
     add(horizon);
     add(tRex);
