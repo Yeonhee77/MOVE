@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "1073143112432-bnok7f5ol9s7v76crrs0t4r4orauab91.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bluetooth_test",
+            "certificate_hash": "aca3bfd25283ddf6c01d80f5f4b3e28df1f7b6b6"
+          }
+        },
+        {
           "client_id": "1073143112432-viddjlj6i2vbofjp957ph39blt74c954.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

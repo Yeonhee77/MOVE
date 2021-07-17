@@ -3,6 +3,7 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/trex/trex_main.dart';
 import 'package:flutter/services.dart';
+import 'package:move/trex/trex_tutorial.dart';
 import 'boxing.dart';
 
 class Game extends StatefulWidget {
@@ -69,7 +70,7 @@ class _GameState extends State<Game> {
                       if (widget.bluetoothServices != null)
                         Navigator.push(context, MaterialPageRoute(
                             builder: (context) =>
-                                TRexGameWrapper(bluetoothServices: widget
+                                TrexTutorial(bluetoothServices: widget
                                     .bluetoothServices)));
                     },
                     child: Image.asset('dinoButton.png', width: MediaQuery
