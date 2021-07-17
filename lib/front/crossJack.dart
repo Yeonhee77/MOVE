@@ -61,17 +61,18 @@ class _CrossjackState extends State<Crossjack> {
                     child:Column(
                       children: [
                         Row(children: [
-                          IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
+                          IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
                         ],),
-                        SizedBox(height: 60,),
-                        Image.asset('snap.png',height: 200,),
+                        SizedBox(height: 120,),
+                        Text("마이크로 칩을 손목에 부착해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                        SizedBox(height: 20,),
+                        Image.asset('shoulder.png',height: 200,),
                         //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         SizedBox(height: 30,),
-                        Text("Please attach the chip",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
-                        Text("to your Wrist",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
+                        // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         Row(
                           children: [
-                            SizedBox(width: 70,),
+                            SizedBox(width: 270,),
                             TextButton(
                               style: TextButton.styleFrom(
                                 primary: Colors.black,
@@ -80,7 +81,7 @@ class _CrossjackState extends State<Crossjack> {
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial3(bluetoothServices: widget.bluetoothServices)));
                               },
-                              child: Image.asset('ok.png'),
+                              child: Text('next'),
                             ),
                           ],
                         )
@@ -110,15 +111,8 @@ class _CrossjackState extends State<Crossjack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('tutorial1_background.png'),
-                  fit: BoxFit.fill
-              )
-          ),
-          child: _buildConnectDeviceView()
+      body: Center(
+        child: _buildConnectDeviceView(),
       ),
     );
   }
