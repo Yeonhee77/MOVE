@@ -14,11 +14,27 @@
       },
       "oauth_client": [
         {
+          "client_id": "1073143112432-0fllut3d9tkapridlqnqjbskq5039a89.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bluetooth_test",
+            "certificate_hash": "009304ba459152f656351f4f719078aecad6902d"
+          }
+        },
+        {
           "client_id": "1073143112432-5av17r3kve6uroue8k724tvvp9dulfl0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.bluetooth_test",
             "certificate_hash": "b989c993a3988679bc2ac09696c6cd0e940792aa"
+          }
+        },
+        {
+          "client_id": "1073143112432-bnok7f5ol9s7v76crrs0t4r4orauab91.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bluetooth_test",
+            "certificate_hash": "aca3bfd25283ddf6c01d80f5f4b3e28df1f7b6b6"
           }
         },
         {
