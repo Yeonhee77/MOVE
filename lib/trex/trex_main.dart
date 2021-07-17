@@ -24,9 +24,9 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   /*--------bluetooth-------*/
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   bool splashGone = false;
-  TRexGame ? game;
-
-  int score = 0;
+  TRexGame? game;
+  int score = -1;
+  String gesture = "";
 
   @override
   void initState() {
@@ -138,6 +138,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         child: Text("Loading"),
       );
     }
+    else
     return Container(
       color: Color.fromARGB(255,230, 255, 255),
       constraints: const BoxConstraints.expand(),
@@ -151,5 +152,4 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
           ),
     );
   }
-
 }

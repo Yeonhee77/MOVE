@@ -62,18 +62,17 @@ class _SquatState extends State<Squat> {
                     child:Column(
                       children: [
                         Row(children: [
-                          IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                          IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                         ],),
-                        SizedBox(height: 120,),
-                        Text("마이크로 칩을 어깨에 부착해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 60,),
                         Image.asset('shoulder.png',height: 200,),
                         //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         SizedBox(height: 30,),
-                        // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        Text("Please attach the chip",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
+                        Text("to your Shoulder",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
                         Row(
                           children: [
-                            SizedBox(width: 270,),
+                            SizedBox(width: 70,),
                             TextButton(
                               style: TextButton.styleFrom(
                                 primary: Colors.black,
@@ -82,7 +81,7 @@ class _SquatState extends State<Squat> {
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial1(bluetoothServices: widget.bluetoothServices)));
                               },
-                              child: Text('next'),
+                                child: Image.asset('ok.png'),
                             ),
                           ],
                         )
@@ -116,7 +115,7 @@ class _SquatState extends State<Squat> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('tutorial_background.png'),
+                  image: AssetImage('tutorial1_background.png'),
                   fit: BoxFit.fill
               )
           ),

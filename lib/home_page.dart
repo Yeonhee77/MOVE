@@ -108,10 +108,20 @@ class _MyHomePageState extends State<MyHomePage> {
                             duration: Duration(seconds: 5),
                           )
                       );
+                      showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
                       try {
                         await device.connect();
                       } catch (e) {
                         if (e != 'already_connected') {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
                           throw e;
                         }
                       } finally {
@@ -187,6 +197,8 @@ class _MyHomePageState extends State<MyHomePage> {
       _bleServices();
       SchedulerBinding.instance!.addPostFrameCallback((_) {
         Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.pop(context);
         Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
       });
     }
@@ -194,40 +206,32 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) => WillPopScope(
-    onWillPop: () {
-      Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-      return Future.value(false);
-    },
-    child: Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        title: Text("Connect",textAlign: TextAlign.center,style: TextStyle(color: Colors.indigo),),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back,color: Colors.indigo,),
-          onPressed: () {
-            Navigator.pop(context);
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-          },
+  Widget build(BuildContext context) => Scaffold(
+    extendBodyBehindAppBar: true,
+    appBar: AppBar(
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      centerTitle: true,
+      title: Text("Connect",textAlign: TextAlign.center,style: TextStyle(color: Colors.indigo),),
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back,color: Colors.indigo,),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+    ),
+    body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('background.png'),
+                fit: BoxFit.fill
+            )
         ),
-      ),
-      body: Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('background.png'),
-                  fit: BoxFit.fill
-              )
-          ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
-            child: _buildView(),
-          )
-      ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+          child: _buildView(),
+        )
     ),
   );
 }
