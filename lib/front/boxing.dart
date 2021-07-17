@@ -22,6 +22,94 @@ class _BoxingStartState extends State<BoxingStart> {
   final Stream<int> stream = Stream.periodic(Duration(milliseconds: 1500),  (int x) => x);
   final Stream<int> stream2 = Stream.periodic(Duration(milliseconds: 1500),  (int x) => x);
 
+  String gesture = "";
+  // ignore: non_constant_identifier_names
+  String ran_gesture = "";
+  // ignore: non_constant_identifier_names
+  int gesture_num = 0;
+
+  @override
+  void dispose(){
+    super.dispose();
+  }
+
+  ListView _buildConnectDeviceView() {
+    return ListView(
+      padding: const EdgeInsets.all(8),
+      children: <Widget>[
+        Container(
+            child:Column(
+              children: [
+                SizedBox(height: 30,),
+                Center(
+                    child:Column(
+                      children: [
+                        Row(children: [
+                          IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
+                        ],),
+                        SizedBox(height: 60,),
+                        Image.asset('snap.png',height: 200,),
+                        //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        SizedBox(height: 30,),
+                        Text("Please attach the chip",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
+                        Text("to your Wrist",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
+                        Row(
+                          children: [
+                            SizedBox(width: 70,),
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                primary: Colors.black,
+                                // foreground
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Boxing(bluetoothServices: widget.bluetoothServices)));
+                              },
+                              child: Image.asset('ok.png'),
+                            ),
+                          ],
+                        )
+                      ],
+                    )
+                ),
+              ],
+            )
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('boxing_back.png'),
+                  fit: BoxFit.fill
+              )
+          ),
+          child: _buildConnectDeviceView()
+      ),
+    );
+  }
+}
+
+class Boxing extends StatefulWidget {
+  final List<BluetoothService>? bluetoothServices;
+
+  Boxing({this.bluetoothServices});
+
+  @override
+  _BoxingState createState() => _BoxingState();
+}
+
+class _BoxingState extends State<Boxing> {
+  final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
+  final Stream<int> stream = Stream.periodic(Duration(milliseconds: 1500),  (int x) => x);
+  final Stream<int> stream2 = Stream.periodic(Duration(milliseconds: 1500),  (int x) => x);
+
   List<String> random = ['Punch', 'Uppercut'];
   List<String> image = ['punch.png', 'uppercut.png'];
   String gesture = "";
@@ -57,41 +145,7 @@ class _BoxingStartState extends State<BoxingStart> {
     return ListView(
       padding: const EdgeInsets.all(8),
       children: <Widget>[
-        Container(
-            child:Column(
-              children: [
-                SizedBox(height: 30,),
-                Center(
-                    child:Column(
-                      children: [
-                        SizedBox(height: 120,),
-                        Text("마이크로 칩을 어깨에 부착해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                        SizedBox(height: 20,),
-                        Image.asset('shoulder.png',height: 200,),
-                        //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                        SizedBox(height: 30,),
-                        // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                        Row(
-                          children: [
-                            SizedBox(width: 270,),
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                primary: Colors.black,
-                                // foreground
-                              ),
-                              onPressed: () {
-                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial1(bluetoothServices: widget.bluetoothServices)));
-                              },
-                              child: Text('next'),
-                            ),
-                          ],
-                        )
-                      ],
-                    )
-                ),
-              ],
-            )
-        ),
+        Container(),
       ],
     );
   }
@@ -150,7 +204,7 @@ class _BoxingStartState extends State<BoxingStart> {
                 IconButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      },
+                    },
                     icon: Icon(Icons.arrow_back))
               ],),
               Container(
@@ -215,13 +269,13 @@ class _BoxingStartState extends State<BoxingStart> {
                             alignment: FractionalOffset(0.8, 1.0),
                             child: Image.asset('dino_n.png', width: MediaQuery.of(context).size.width/2.8,)
                         );
-                        return Align(
-                          alignment: FractionalOffset(0.8, 1.0),
-                          child: Transform.rotate(
-                            angle: 0.5,
-                            child: Image.asset('dino_j.png', width: MediaQuery.of(context).size.width/2.8,),
-                          ),
-                        );
+                      return Align(
+                        alignment: FractionalOffset(0.8, 1.0),
+                        child: Transform.rotate(
+                          angle: 0.5,
+                          child: Image.asset('dino_j.png', width: MediaQuery.of(context).size.width/2.8,),
+                        ),
+                      );
                     }
                 ),
               ),
@@ -231,6 +285,7 @@ class _BoxingStartState extends State<BoxingStart> {
     );
   }
 }
+
 
 class BoxingClear extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;

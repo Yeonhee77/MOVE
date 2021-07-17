@@ -48,7 +48,7 @@ class _CrossjackstartState extends State<Crossjackstart> {
     super.dispose();
   }
 
-  Future<void> addScore() async{
+  Future<void> addScore(double score) async{
     FirebaseFirestore.instance
         .collection('user')
         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -62,14 +62,14 @@ class _CrossjackstartState extends State<Crossjackstart> {
       });
     });
 
-    if(score > jumpingJack) {
-      avg = (dino + boxing + score + crossJack)/4;
+    if(score > crossJack) {
+      avg = (dino + boxing + jumpingJack + score)/4;
 
       FirebaseFirestore.instance
           .collection('user')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
-        'jumpingJack': jumpingJack + score,
+        'crossJack': double.parse(score.toStringAsFixed(2)),
         'avg': double.parse(avg.toStringAsFixed(2)),
       });
     }
@@ -153,7 +153,7 @@ class _CrossjackstartState extends State<Crossjackstart> {
                                           // foreground
                                         ),
                                         onPressed: () {
-                                          addScore();
+                                          addScore(score);
                                           Navigator.pop(context);
                                           Navigator.pop(context);
                                           Navigator.pop(context);
@@ -167,7 +167,7 @@ class _CrossjackstartState extends State<Crossjackstart> {
                                           // foreground
                                         ),
                                         onPressed: () {
-                                          addScore();
+                                          addScore(score);
                                           Navigator.pop(context);
                                         },
                                         child: Image.asset('restart.png',height: 72,),
