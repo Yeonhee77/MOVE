@@ -74,7 +74,7 @@ class _HomeState extends State<Homepage> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Mypage()));},
               icon: Icon(Icons.person),
             color: Colors.indigo,
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(

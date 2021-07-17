@@ -133,17 +133,17 @@ class _JumpingstartState extends State<Jumpingstart> {
                               ];
                             }
                             else {
-                              if (count >= 20) {
+                              if (count >= 80) {
                                 score = ((correct/count)*100);
                                 wrong = count -correct;
                                 tutorial = <Widget>[
-                                  Image.asset('finish.png',height: 80,),
+                                  Image.asset('finish.png',height: 120,),
                                   SizedBox(height: 100,),
 
-                                  Text("Score: " + score.toStringAsFixed(2), style: TextStyle(fontSize: 40),),
-                                  Text("Correct: " + correct.toString(),style: TextStyle(fontSize: 30),),
-                                  Text("Wrong: " + wrong.toString(), style: TextStyle(fontSize: 30),),
-                                  SizedBox(height: 140,),
+                                  Text("Score: " + score.toStringAsFixed(2), style: TextStyle(fontSize: 40,color: Colors.white),),
+                                  Text("Correct: " + correct.toString(),style: TextStyle(fontSize: 30,color: Colors.white),),
+                                  Text("Wrong: " + wrong.toString(), style: TextStyle(fontSize: 30,color: Colors.white),),
+                                  SizedBox(height: 80,),
 
                                   Center(child: Row(
                                     children: [
@@ -159,7 +159,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                           Navigator.pop(context);
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: widget.bluetoothServices)));
                                         },
-                                        child: Image.asset('exit.png',height: 85,),
+                                        child: Image.asset('exit.png',height: 72,),
                                       ),
                                       TextButton(
                                         style: TextButton.styleFrom(
@@ -169,8 +169,8 @@ class _JumpingstartState extends State<Jumpingstart> {
                                         onPressed: () {
                                           addScore();
                                           Navigator.pop(context);
-                                          },
-                                        child: Image.asset('restart.png',height: 85,),
+                                        },
+                                        child: Image.asset('restart.png',height: 72,),
                                       ),
                                     ],
                                   ),),
@@ -183,7 +183,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                       Row(children: [
                                         IconButton(onPressed: () {
                                           Navigator.pop(context);
-                                        }, icon: Icon(Icons.arrow_back))
+                                        }, icon: Icon(Icons.arrow_back,color: Colors.white))
                                       ],),
                                       SizedBox(height: 80,),
                                       Image.asset('start_start.png', height: 250,width: 250,),
@@ -194,7 +194,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                       Row(children: [
                                         IconButton(onPressed: () {
                                           Navigator.pop(context);
-                                        }, icon: Icon(Icons.arrow_back))
+                                        }, icon: Icon(Icons.arrow_back,color: Colors.white))
                                       ],),
                                       SizedBox(height: 120,),
                                       Image.asset('start_3.png', height: 150,width: 150,),
@@ -205,7 +205,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                       Row(children: [
                                         IconButton(onPressed: () {
                                           Navigator.pop(context);
-                                        }, icon: Icon(Icons.arrow_back))
+                                        }, icon: Icon(Icons.arrow_back,color: Colors.white))
                                       ],),
                                       SizedBox(height: 120,),
                                       Image.asset('start_2.png', height: 150,width: 150,),
@@ -216,7 +216,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                       Row(children: [
                                         IconButton(onPressed: () {
                                           Navigator.pop(context);
-                                        }, icon: Icon(Icons.arrow_back))
+                                        }, icon: Icon(Icons.arrow_back,color: Colors.white))
                                       ],),
                                       SizedBox(height: 120,),
                                       Image.asset('start_1.png', height: 150,width: 150,),
@@ -227,15 +227,16 @@ class _JumpingstartState extends State<Jumpingstart> {
                                       Row(children: [
                                         IconButton(onPressed: () {
                                           Navigator.pop(context);
-                                        }, icon: Icon(Icons.arrow_back))
+                                        }, icon: Icon(Icons.arrow_back,color: Colors.white))
                                       ],),
-                                      flag ? Image.asset('correct.png',height: 80,):Image.asset('wrong.png',height:80),
-                                      Text("맞은 횟수: " + correct.toString()),
+                                      flag ? Image.asset('correct.png',height: 80,):Container(height: 80,),
+                                      //Text("맞은 횟수: " + correct.toString(),style: TextStyle(color: Colors.white),),
                                       Center(child:
-                                      Image.asset('squat_3.gif', height: 400,
+                                      Image.asset('jumping.gif', height: 400,
                                         width: 300,),),
-                                      Text("값: " + gesture_num.toString()),
-                                      Text("횟수: " + count.toString()),
+                                      //Text("값: " + gesture_num.toString(),style: TextStyle(color: Colors.white),),
+                                      Text("Count: " + (count/4).toStringAsFixed(0),style: TextStyle(color: Colors.white),),
+                                      Text("Achievement rate: " + ((count/80)*100).toStringAsFixed(0) + '%',style: TextStyle(color: Colors.white),),
                                     ];
                                     break;
                                 }
@@ -289,7 +290,7 @@ class _JumpingstartState extends State<Jumpingstart> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('tutorial_background.png'),
+                  image: AssetImage('tutorial2_background.png'),
                   fit: BoxFit.fill
               )
           ),
