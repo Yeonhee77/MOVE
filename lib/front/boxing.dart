@@ -120,7 +120,7 @@ class _BoxingStartState extends State<BoxingStart> {
       }
     }
 
-    if(jar == 15) {
+    if(jar == 2) {
       SchedulerBinding.instance!.addPostFrameCallback((_) {
         Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingClear(
           bluetoothServices: widget.bluetoothServices,
@@ -185,7 +185,7 @@ class _BoxingStartState extends State<BoxingStart> {
                       decoration: BoxDecoration(
                           color: Colors.transparent
                       ),
-                      height: MediaQuery.of(context).size.height*0.3 / 15 * (15-jar),
+                      height: MediaQuery.of(context).size.height*0.3 / 2 * (2-jar),
                     ),
                     Container(
                       decoration: BoxDecoration(
@@ -198,7 +198,7 @@ class _BoxingStartState extends State<BoxingStart> {
                             Radius.circular(10) // POINT
                         ),
                       ),
-                      height: MediaQuery.of(context).size.height*0.3 / 15 * jar,
+                      height: MediaQuery.of(context).size.height*0.3 / 2 * jar,
                     )
                   ],
                 ),
@@ -225,8 +225,6 @@ class _BoxingStartState extends State<BoxingStart> {
                     }
                 ),
               ),
-              // Text('횟수: $count 개', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-              // Text('점수: $correct 개', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
             ],
           ),
         )
@@ -316,7 +314,7 @@ class _BoxingClearState extends State<BoxingClear> {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('background.png'),
+                image: AssetImage('boxing_clear.png'),
                 fit: BoxFit.fill
             )
         ),
@@ -324,15 +322,14 @@ class _BoxingClearState extends State<BoxingClear> {
           padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
           child: Column(
             children: [
-              Text('Clear!', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),),
-              SizedBox(height: 20,),
-              Text('Score: $score', style: TextStyle(fontSize: 20, color: Colors.white),),
+              SizedBox(height: MediaQuery.of(context).size.height/3,),
+              Text('Score: $score', style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),),
               SizedBox(height: 30,),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TextButton(
-                    child: Image.asset('exit.png', height: 85,),
+                    child: Image.asset('exit.png', width: MediaQuery.of(context).size.width/2.2,),
                     onPressed: () {
                       SchedulerBinding.instance!.addPostFrameCallback((_) {
                         addScore();
@@ -344,7 +341,7 @@ class _BoxingClearState extends State<BoxingClear> {
                     },
                   ),
                   TextButton(
-                    child: Image.asset('restart.png', height: 85,),
+                    child: Image.asset('restart.png', width: MediaQuery.of(context).size.width/2.2,),
                     onPressed: () {
                       SchedulerBinding.instance!.addPostFrameCallback((_) {
                         addScore();
