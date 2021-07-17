@@ -54,6 +54,18 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   void initState() {
     super.initState();
     startGame();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]); //screen horizontally
+  }
+
+  @override
+  void dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
   }
 
   void startGame() {
@@ -64,12 +76,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         })
       },
     );
-  }
-
-  @override
-  void dispose(){
-    _streamController.close();
-    super.dispose();
   }
 
   void _gesture() {
