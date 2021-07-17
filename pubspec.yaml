@@ -119,6 +119,11 @@ flutter:
     - boxing_clear.png
     - feet.png
     - dino_back.png
+    - cloud.png
+    - cloud1.png
+    - cloud2.png
+    - sun.png
+    - dino_bg.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
