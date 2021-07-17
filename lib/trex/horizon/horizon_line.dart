@@ -8,7 +8,6 @@ import 'config.dart';
 
 class HorizonLine extends PositionComponent with HasGameRef<TRexGame> {
   late final dimensions = HorizonDimensions();
-  late final cloudDimensions = CloudConfig();
 
   late final _softSprite = Sprite(
     gameRef.spriteImage,

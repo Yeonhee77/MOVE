@@ -19,7 +19,7 @@ import 'horizon/config.dart';
 class Bg extends Component with HasGameRef {
   Vector2 size = Vector2.zero();
 
-  late final ui.Paint _paint = ui.Paint()..color = const ui.Color.fromARGB(255,162,209,221); //background color
+  late final ui.Paint _paint = ui.Paint()..color = const ui.Color.fromARGB(250, 0, 185, 165); //background color
 
   @override
   void render(ui.Canvas c) {
@@ -44,7 +44,7 @@ class TRexGame extends BaseGame {
   late final config = GameConfig();
 
   @override
-  ui.Color backgroundColor() => const ui.Color.fromARGB(255,162,209,221);
+  ui.Color backgroundColor() => const ui.Color.fromARGB(250, 0, 185, 165);
 
   final ui.Image spriteImage;
 
@@ -58,7 +58,7 @@ class TRexGame extends BaseGame {
   @override
   Future<void> onLoad() async {
     add(Bg());
-    //add(cloud);
+    add(cloud);
     add(horizon);
     add(tRex);
     add(gameOverPanel);
@@ -124,7 +124,6 @@ class TRexGame extends BaseGame {
     status = TRexGameStatus.playing;
     tRex.reset();
     horizon.reset();
-    cloud.reset();
     currentSpeed = config.speed;
     gameOverPanel.visible = false;
     timePlaying = 0.0;
@@ -145,8 +144,6 @@ class TRexGame extends BaseGame {
 
     if (playing) {
       timePlaying += dt;
-
-
 
       final obstacles = horizon.horizonLine.obstacleManager.children;
       final hasCollision = obstacles.isNotEmpty &&
