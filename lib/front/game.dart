@@ -15,8 +15,24 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp]); //screen vertically
+  }
+
+  @override
+  void dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
-    //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]); //screen vertically
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -36,30 +52,32 @@ class _GameState extends State<Game> {
             ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
-                child: Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       SizedBox(height: 30,),
-                      TextButton(
-                        onPressed: () {
-                          if(widget.bluetoothServices != null)
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper(bluetoothServices: widget.bluetoothServices)));
-                        },
-                        child: Image.asset('dinoButton.png', width: MediaQuery.of(context).size.width*0.7,),
+                      Flexible(
+                        child: TextButton(
+                          onPressed: () {
+                            if(widget.bluetoothServices != null)
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper(bluetoothServices: widget.bluetoothServices)));
+                          },
+                          child: Image.asset('dinoButton.png', width: MediaQuery.of(context).size.width*0.7,),
+                        ),
                       ),
                       SizedBox(height: 5,),
-                      TextButton(
-                        onPressed: () {
-                          if(widget.bluetoothServices != null)
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
-                        },
-                        child: Image.asset('boxButton.png', width: MediaQuery.of(context).size.width*0.7,),
+                      Flexible(
+                        child: TextButton(
+                          onPressed: () {
+                            if(widget.bluetoothServices != null)
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
+                          },
+                          child: Image.asset('boxButton.png', width: MediaQuery.of(context).size.width*0.7,),
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
           );
         }
         )

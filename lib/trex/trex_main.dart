@@ -22,7 +22,6 @@ class TRexGameWrapper extends StatefulWidget {
 
 class _TRexGameWrapperState extends State<TRexGameWrapper> {
   /*--------bluetooth-------*/
-  final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   bool splashGone = false;
   TRexGame ? game;
@@ -33,6 +32,18 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   void initState() {
     super.initState();
     startGame();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]); //screen horizontally
+  }
+
+  @override
+  void dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
   }
 
   void startGame() {
@@ -43,12 +54,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         })
       },
     );
-  }
-
-  @override
-  void dispose(){
-    _streamController.close();
-    super.dispose();
   }
 
   void _gesture() {
@@ -88,7 +93,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-              margin: EdgeInsets.only(top: 25, right: 5),
+              margin: EdgeInsets.only(top: 20, right: 5),
               width: 100,
               height: 100,
               color: Color.fromARGB(255,230, 255, 255),
@@ -124,8 +129,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    //SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]); //screen horizontally
-
     _gesture();
     game!.onAction(gesture_num);
     score = game!.returnScore();

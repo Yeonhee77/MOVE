@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/data.dart';
 import 'package:move/front/home.dart';
@@ -39,11 +40,11 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  StreamController<String> dataController = new StreamController();
-
   @override
   void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]); //screen vertically
+
     flutterBlue.connectedDevices
         .asStream()
         .listen((List<BluetoothDevice> devices) {
@@ -59,13 +60,15 @@ class _MyHomePageState extends State<MyHomePage> {
     flutterBlue.startScan();
   }
 
-  Future dataState(BluetoothCharacteristic characteristic) async {
-    characteristic.value.listen((value) {
-      readValues[characteristic.uuid] = value;
-    });
-    await characteristic.setNotifyValue(true);
-
-    setnum(characteristic);
+  @override
+  void dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
   }
 
   ListView _buildListViewOfDevices() {

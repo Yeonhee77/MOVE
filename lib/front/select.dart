@@ -21,8 +21,25 @@ class Select extends StatefulWidget {
 
 class _SelectState extends State<Select> {
   @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp]); //screen vertically
+  }
+
+  @override
+  void dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]); //screen vertically
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -41,41 +58,45 @@ class _SelectState extends State<Select> {
                 fit: BoxFit.fill
             )
         ),
-        child: Flexible(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextButton(
-                  onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Training(bluetoothServices: widget.bluetoothServices)));
-                  },
-                  child: Image.asset('hwButton.png', width: MediaQuery.of(context).size.width*0.7,),
+                Flexible(
+                  child: TextButton(
+                    onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Training(bluetoothServices: widget.bluetoothServices)));
+                    },
+                    child: Image.asset('hwButton.png', width: MediaQuery.of(context).size.width*0.7,),
+                  ),
                 ),
                 SizedBox(
                   height: 5,
                 ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices)));
-                  },
-                  child: Image.asset('gameButton.png', width: MediaQuery.of(context).size.width*0.7,),
+                Flexible(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices)));
+                    },
+                    child: Image.asset('gameButton.png', width: MediaQuery.of(context).size.width*0.7,),
+                  ),
                 ),
                 SizedBox(
                   height: 5,
                 ),
-                TextButton(
-                  onPressed: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices)));
-                  },
-                  child: Image.asset('reabButton.png', width: MediaQuery.of(context).size.width*0.7,)
+                Flexible(
+                  child: TextButton(
+                    onPressed: () {
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices)));
+                    },
+                    child: Image.asset('reabButton.png', width: MediaQuery.of(context).size.width*0.7,)
+                  ),
                 ),
               ],
             ),
           ),
         ),
-      ),
     );
   }
 }

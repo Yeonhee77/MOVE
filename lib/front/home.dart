@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/select.dart';
@@ -25,6 +26,7 @@ class _HomeState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]); //screen vertically
 
     FirebaseFirestore.instance
         .collection('user')
@@ -47,8 +49,19 @@ class _HomeState extends State<Homepage> {
   }
 
   @override
+  void dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
-    //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]); //screen vertically
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
