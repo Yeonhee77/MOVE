@@ -11,13 +11,13 @@ class HorizonLine extends PositionComponent with HasGameRef<TRexGame> {
 
   late final _softSprite = Sprite(
     gameRef.spriteImage,
-    srcPosition: Vector2(2.0, 104.0),
+    srcPosition: Vector2(2.0, 105.0),
     srcSize: Vector2(dimensions.width, dimensions.height),
   );
 
   late final _bumpySprite = Sprite(
     gameRef.spriteImage,
-    srcPosition: Vector2(2.0 + dimensions.width, 104.0),
+    srcPosition: Vector2(2.0 + dimensions.width, 105.0),
     srcSize: Vector2(dimensions.width, dimensions.height),
   );
 
@@ -78,7 +78,7 @@ class HorizonLine extends PositionComponent with HasGameRef<TRexGame> {
 class HorizonGround extends SpriteComponent {
   HorizonGround(Sprite sprite, HorizonDimensions dimensions)
       : super(
-          size: Vector2(dimensions.width, 140),
+          size: Vector2(dimensions.width, 145),
           sprite: sprite,
         );
 }

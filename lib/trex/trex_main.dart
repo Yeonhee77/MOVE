@@ -7,7 +7,7 @@ import 'package:move/home_page.dart';
 import 'package:move/trex/game.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'game.dart';
@@ -124,26 +124,21 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
 
   Widget scoreBox(BuildContext buildContext, TRexGame game) {
     return Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-              margin: EdgeInsets.only(top: 25, right: 5),
-              width: 100,
-              height: 30,
-              color: Color.fromARGB(0, 23, 173, 148),
-              child: Center(
-                child: Text('Score : $score', style: TextStyle(color: Colors.black, fontSize: 16, decoration: TextDecoration.none)),
-              )
-          )
-        ]
-    );
+            margin: EdgeInsets.all(30.0),
+            child: SizedBox(
+                child: Text('Score : $score', style: GoogleFonts.russoOne(color: Colors.white, fontSize: 30, decoration: TextDecoration.none))),
+          ),
+             ]);
   }
 
   Widget exitBox(BuildContext buildContext, TRexGame game) {
     return Container(
         width: 100,
         height: 100,
-        margin: EdgeInsets.only(top: 17),
+        margin: EdgeInsets.only(top: 17.0),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
