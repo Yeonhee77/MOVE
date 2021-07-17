@@ -84,7 +84,7 @@ class TRexGame extends BaseGame with TapDetector {
   late TRexGameStatus status = TRexGameStatus.waiting;
   late double currentSpeed = 0.0;
   late double timePlaying = 0.0;
-  late int score = -1;
+  late int score = 0;
 
   bool get playing => status == TRexGameStatus.playing;
   bool get gameOver => status == TRexGameStatus.gameOver;
