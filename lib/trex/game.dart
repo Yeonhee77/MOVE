@@ -14,6 +14,9 @@ import 'package:move/trex/t_rex/t_rex.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'collision/collision_utils.dart';
 import 'horizon/clouds.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'horizon/config.dart';
 
 class Bg extends Component with HasGameRef {
@@ -82,15 +85,17 @@ class TRexGame extends BaseGame {
   bool get gameOver => status == TRexGameStatus.gameOver;
 
   var result;
+  late int final_score = 0;
+  late int temp = 0;
 
   //bluetooth services
   final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
 
+
   @override
   void dispose(){
     _streamController.close();
-
   }
 
   void onAction(int gesture_num) {
@@ -98,15 +103,31 @@ class TRexGame extends BaseGame {
       restart();
     }
 
-    if(gesture_num == 2) {
+    if(gesture_num == 2 && !gameOver) {
       this.score += 1;
       tRex.startJump(currentSpeed);
     }
   }
 
   int returnScore() {
+    this.final_score = this.score;
     return this.score;
   }
+
+  int getFinalScore() {
+    if (gameOver)
+      return this.final_score;
+    else
+      return -1;
+  }
+
+  //
+  // int getFinalScore() {
+  //   if (gameOver)
+  //     return this.final_score;
+  //   else
+  //     return -1;
+  // }
 
   void startGame() {
     tRex.status = TRexStatus.running;
@@ -130,6 +151,7 @@ class TRexGame extends BaseGame {
     gameOverPanel.visible = false;
     timePlaying = 0.0;
     this.score = 0;
+    this.final_score = 0;
   }
 
   @override

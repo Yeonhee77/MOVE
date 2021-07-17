@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/home_page.dart';
 import 'package:move/trex/game.dart';
+import 'package:move/trex/game_over/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -20,6 +21,7 @@ class TRexGameWrapper extends StatefulWidget {
   @override
   _TRexGameWrapperState createState() => _TRexGameWrapperState();
 }
+enum TRexGameStatus { playing, waiting, gameOver }
 
 class _TRexGameWrapperState extends State<TRexGameWrapper> {
   /*--------bluetooth-------*/
@@ -28,12 +30,22 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   TRexGame? game;
   String gesture = "";
 
-  num score = -1;
+  num score = 0;
   num dino = 0;
   num boxing = 0;
   num jumpingJack = 0;
   num crossJack = 0;
+  num final_score = 0;
+  num temp = 0;
   double avg = 0;
+
+  // state
+  late TRexGameStatus status = TRexGameStatus.waiting;
+  late double currentSpeed = 0.0;
+  late double timePlaying = 0.0;
+
+  bool get playing => status == TRexGameStatus.playing;
+  bool get gameOver => status == TRexGameStatus.gameOver;
 
   @override
   void initState() {
@@ -95,7 +107,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     sub.cancel();
   }
 
-  Future<void> addScore(int score) async{
+  Future<void> addScore() async{
     FirebaseFirestore.instance
         .collection('user')
         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -109,14 +121,14 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       });
     });
 
-    if(score > dino) {
-      avg = (score + boxing + jumpingJack + crossJack)/4;
+    if(final_score > dino) {
+      avg = (final_score + boxing + jumpingJack + crossJack)/4;
 
       FirebaseFirestore.instance
           .collection('user')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
-        'score': score,
+        'dino': final_score - 1,
         'avg': double.parse(avg.toStringAsFixed(2)),
       });
     }
@@ -151,6 +163,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
               Flexible(
                 child: TextButton(
                   onPressed: () {
+                    addScore();
                     Navigator.pop(context);
                   },
                   child: Image.asset('dinoExit.png', height: 50,),
@@ -164,8 +177,16 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   @override
   Widget build(BuildContext context) {
     _gesture();
-    game!.onAction(gesture_num);
+
     score = game!.returnScore();
+    final_score = game!.getFinalScore();
+
+    if(final_score != -1) {
+      print('Fi score : $final_score');
+      addScore();
+    }
+
+    game!.onAction(gesture_num);
 
     if (game == null) {
       return const Center(
