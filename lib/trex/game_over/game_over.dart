@@ -18,6 +18,8 @@ class GameOverPanel extends BaseComponent with HasGameRef<TRexGame> {
   GameOverText gameOverText;
   GameOverRestart gameOverRestart;
 
+  late final Paint _paint = Paint()..color = const Color.fromARGB(100, 0, 0, 0); //background color
+
   @override
   Future<void>? onLoad() {
     addChild(gameOverText);
@@ -29,6 +31,8 @@ class GameOverPanel extends BaseComponent with HasGameRef<TRexGame> {
   @override
   void renderTree(Canvas canvas) {
     if (visible) {
+      final rect = Rect.fromLTWH(0, 0, gameRef.size.x, gameRef.size.y);
+        canvas.drawRect(rect, _paint);
       super.renderTree(canvas);
     }
   }

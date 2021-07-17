@@ -123,6 +123,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   }
 
   Widget scoreBox(BuildContext buildContext, TRexGame game) {
+    bool visible = true;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
         children: [
