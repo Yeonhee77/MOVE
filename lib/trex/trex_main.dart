@@ -127,9 +127,9 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-              margin: EdgeInsets.only(top: 20, right: 5),
+              margin: EdgeInsets.only(top: 25, right: 5),
               width: 100,
-              height: 100,
+              height: 30,
               color: Color.fromARGB(250, 0, 185, 165),
               child: Center(
                 child: Text('Score : $score', style: TextStyle(color: Colors.black, fontSize: 16, decoration: TextDecoration.none)),
@@ -174,7 +174,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     }
     else
     return Container(
-      color: Color.fromARGB(250, 0, 185, 165),
       constraints: const BoxConstraints.expand(),
       child: GameWidget(
             game: game!,
