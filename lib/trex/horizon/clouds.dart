@@ -54,7 +54,7 @@ class HorizonCloud extends SpriteComponent {
     : super(
         size: Vector2(600, 60),  //cloud sprite size
         sprite: sprite,
-        position: Vector2(25, 15)
+        position: Vector2(25, 50)
   );
 }
 
