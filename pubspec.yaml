@@ -117,6 +117,10 @@ flutter:
     - num4.png
     - num5.png
     - boxing_clear.png
+    - cloud.png
+    - cloud1.png
+    - cloud2.png
+    - sun.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

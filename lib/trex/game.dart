@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:move/trex/game_over/config.dart';
 import 'package:move/trex/horizon/horizon.dart';
 import 'package:move/trex/game_config.dart';
@@ -18,7 +19,7 @@ import 'horizon/config.dart';
 class Bg extends Component with HasGameRef {
   Vector2 size = Vector2.zero();
 
-  late final ui.Paint _paint = ui.Paint()..color = const ui.Color.fromARGB(255,230, 255, 255); //background color
+  late final ui.Paint _paint = ui.Paint()..color = const ui.Color.fromARGB(250, 0, 185, 165); //background color
 
   @override
   void render(ui.Canvas c) {
@@ -44,7 +45,7 @@ class TRexGame extends BaseGame {
   late final config = GameConfig();
 
   @override
-  ui.Color backgroundColor() => const ui.Color.fromARGB(255,230, 255, 255);
+  ui.Color backgroundColor() => const ui.Color.fromARGB(250, 0, 185, 165);
 
   final ui.Image spriteImage;
   //final ui.Image exitImage;
@@ -53,7 +54,8 @@ class TRexGame extends BaseGame {
   late final tRex = TRex();
   late final horizon = Horizon();
   late final gameOverPanel = GameOverPanel(spriteImage, GameOverConfig());
-   late final cloud = Cloud(spriteImage);
+  late final cloud = Cloud();
+  SpriteComponent sun = SpriteComponent();
 
   @override
   Future<void> onLoad() async {
@@ -62,7 +64,12 @@ class TRexGame extends BaseGame {
     add(horizon);
     add(tRex);
     add(gameOverPanel);
-    //add(gameOverExit);
+    sun
+      ..sprite = await loadSprite('sun.png')
+      ..size = Vector2(40.0, 30.0)
+      ..x = 475
+      ..y = 65;
+    add(sun);
   }
 
   // state
