@@ -23,6 +23,7 @@ class _BoxingStartState extends State<BoxingStart> {
   final Stream<int> stream2 = Stream.periodic(Duration(milliseconds: 1500),  (int x) => x);
 
   List<String> random = ['Punch', 'Uppercut'];
+  List<String> image = ['punch.png', 'uppercut.png'];
   String gesture = "";
   // ignore: non_constant_identifier_names
   String ran_gesture = "";
@@ -139,13 +140,13 @@ class _BoxingStartState extends State<BoxingStart> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('tutorial_background.png'),
+                  image: AssetImage('boxing_back.png'),
                   fit: BoxFit.fill
               )
           ),
           child: Column(
             children: [
-              SizedBox(height: 30,),
+              // SizedBox(height: 30,),
               Row(children: [
                 IconButton(
                     onPressed: () {
@@ -163,15 +164,16 @@ class _BoxingStartState extends State<BoxingStart> {
                   builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                     var ran = Random().nextInt(2);
                     ran_gesture = random[ran];
-                    return Text(ran_gesture);
+                    return Image.asset(image[ran]);
                   }
               ),
-              SizedBox(height: 20),
+              // SizedBox(height: 20),
               Container(
-                width: MediaQuery.of(context).size.width*0.5,
-                height: MediaQuery.of(context).size.height*0.4 + 4,
+                width: MediaQuery.of(context).size.width*0.45,
+                height: MediaQuery.of(context).size.height*0.3 + 4,
                 decoration: BoxDecoration(
                   border: Border.all(
+                    color: Colors.white,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.all(
@@ -184,53 +186,48 @@ class _BoxingStartState extends State<BoxingStart> {
                       decoration: BoxDecoration(
                           color: Colors.transparent
                       ),
-                      height: MediaQuery.of(context).size.height*0.4 / 20 * (20-jar),
+                      height: MediaQuery.of(context).size.height*0.3 / 20 * (20-jar),
                     ),
                     Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          colors: [const Color(0xffFFEED9), const Color(0xffF1E4A0)],
+                          colors: [const Color(0xffEA592B), const Color(0xffF6EA13)],
                         ),
                         borderRadius: BorderRadius.all(
                             Radius.circular(10) // POINT
                         ),
                       ),
-                      height: MediaQuery.of(context).size.height*0.4 / 20 * jar,
+                      height: MediaQuery.of(context).size.height*0.45 / 20 * jar,
                     )
                   ],
                 ),
               ),
-              SizedBox(height: 20),
               Container(
-                height: 100,
+                height: 200,
                 width: MediaQuery.of(context).size.width,
                 child:
                 StreamBuilder<int>(
                     stream: stream2,
                     builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                       if(ran_gesture == 'Punch')
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Image.asset('dino_n.png', width: 100,),
-                          ],
+                        return Align(
+                            alignment: FractionalOffset(0.8, 1.0),
+                            child: Image.asset('dino_n.png', width: 150,)
                         );
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Transform.rotate(
-                              angle: 0.5,
-                              child: Image.asset('dino_j.png', width: 100,),
-                            ),
-                          ],
+                        return Align(
+                          alignment: FractionalOffset(0.8, 1.0),
+                          child: Transform.rotate(
+                            angle: 0.5,
+                            child: Image.asset('dino_j.png', width: 150,),
+                          ),
                         );
                     }
                 ),
               ),
-              Text('횟수: $count 개', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-              Text('점수: $correct 개', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+              // Text('횟수: $count 개', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+              // Text('점수: $correct 개', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
             ],
           ),
         )

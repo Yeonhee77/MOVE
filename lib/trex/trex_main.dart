@@ -29,6 +29,8 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   bool splashGone = false;
   TRexGame? game;
   int score = -1;
+  int gesture_num = 0;
+  String gesture = "";
 
   @override
   void initState() {
@@ -111,6 +113,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         child: Text("Loading"),
       );
     }
+    else
     return Container(
       color: Colors.white,
       constraints: const BoxConstraints.expand(),
@@ -123,5 +126,4 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       ),
     );
   }
-
 }

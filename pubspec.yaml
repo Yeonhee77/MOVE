@@ -102,6 +102,9 @@ flutter:
     - start_start.png
     - dino_j.png
     - dino_n.png
+    - boxing_back.png
+    - punch.png
+    - uppercut.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
