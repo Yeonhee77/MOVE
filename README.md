@@ -33,7 +33,7 @@ In this pandemic situation where people can't go out freely due to the COVID-19,
 ### To do in the future
 * Add more gestures to the model
 * Add more items for exercise, game, and rehabilitation
-* Modify the animation effects (Live, Lottie, etc.)
+* Modify the animation effects (Rive, Lottie, etc.)
 * Conduct user test to get feedback
 * Officially release the app
 
