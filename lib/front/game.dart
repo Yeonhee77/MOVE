@@ -95,29 +95,17 @@ class _GameState extends State<Game> {
                   ),
                 ),
                 SizedBox(height: 5,),
-                TextButton(
-                  onPressed: () {
-                    if (widget.bluetoothServices != null)
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (context) =>
-                          BoxingStart(
-                              bluetoothServices: widget.bluetoothServices)));
-                  },
-                  child: Image.asset('boxButton.png', width: MediaQuery
-                      .of(context)
-                      .size
-                      .width * 0.7,),
-                ),
-                SizedBox(height: 5,),
-                TextButton(
-                  onPressed: () {
-                    // if(widget.bluetoothServices != null)
-                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
-                  },
-                  child: Image.asset('fishing.png', width: MediaQuery
-                      .of(context)
-                      .size
-                      .width * 0.7,),
+                Flexible(
+                  child: TextButton(
+                    onPressed: () {
+                      // if(widget.bluetoothServices != null)
+                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
+                    },
+                    child: Image.asset('fishing.png', width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.7,),
+                  ),
                 ),
               ],
             ),
