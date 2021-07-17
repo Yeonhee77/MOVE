@@ -39,6 +39,7 @@ class TRexGame extends BaseGame {
 
   TRexGame( {
     required this.spriteImage,
+    //required this.exitImage,
   }) : super();
 
   late final config = GameConfig();
@@ -47,6 +48,7 @@ class TRexGame extends BaseGame {
   ui.Color backgroundColor() => const ui.Color.fromARGB(250, 255, 255, 255);
 
   final ui.Image spriteImage;
+  //final ui.Image exitImage;
 
   /// children
   late final tRex = TRex();
@@ -61,7 +63,7 @@ class TRexGame extends BaseGame {
     add(Bg());
     back
       ..sprite = await loadSprite('dino_bg.png')
-      ..size = Vector2(700, 375)
+      ..size = Vector2(650, 375)
       ..x = 0
       ..y = 0;
     add(back);

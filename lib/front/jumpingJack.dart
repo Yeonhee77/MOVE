@@ -61,18 +61,17 @@ class _JumpingjackState extends State<Jumpingjack> {
                     child:Column(
                       children: [
                         Row(children: [
-                          IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))
+                          IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                         ],),
-                        SizedBox(height: 120,),
-                        Text("마이크로 칩을 손목에 부착해주세요",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 60,),
                         Image.asset('snap.png',height: 200,),
                         //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         SizedBox(height: 30,),
-                        // Text(gesture_name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        Text("Please attach the chip",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
+                        Text("to your Wrist",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
                         Row(
                           children: [
-                            SizedBox(width: 230,),
+                            SizedBox(width: 70,),
                             TextButton(
                               style: TextButton.styleFrom(
                                 primary: Colors.black,
@@ -81,7 +80,7 @@ class _JumpingjackState extends State<Jumpingjack> {
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => Tutorial2(bluetoothServices: widget.bluetoothServices)));
                               },
-                              child: Image.asset('next.png',height: 30,),
+                              child: Image.asset('ok.png'),
                             ),
                           ],
                         )
@@ -115,7 +114,7 @@ class _JumpingjackState extends State<Jumpingjack> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('tutorial_background.png'),
+                  image: AssetImage('tutorial1_background.png'),
                   fit: BoxFit.fill
               )
           ),

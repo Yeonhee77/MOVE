@@ -50,10 +50,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - bluewhite.png
-    - Dino.png
-    - Fish.jpg
-    - Pump.jpg
     - sprite.png
     - squat_1.png
     - squat_2.png
@@ -75,19 +71,20 @@ flutter:
     - 3.png
     - 4.png
     - 5.png
-    - 6.png
-    - 7.png
     - moveButton.png
     - connect.png
     - logo.png
     - boxButton.png
     - dinoButton.png
+    - dinoExit.png
     - gameButton.png
     - hwButton.png
     - reabButton.png
-    - crossjack_1.png
-    - crossjack_2.png
-    - tutorial_background.png
+    - jumpingButton.png
+    - crossButton.png
+    - squatButton.png
+    - cross_1.png
+    - cross_2.png
     - snap.png
     - finish.png
     - logo.png
@@ -98,6 +95,28 @@ flutter:
     - start_3.png
     - start_start.png
     - dinoExit.png
+    - dino_j.png
+    - dino_n.png
+    - boxing_back.png
+    - punch.png
+    - uppercut.png
+    - bridge.png
+    - crunch.png
+    - dumbbell.png
+    - plank.png
+    - pushUp.png
+    - fishing.png
+    - tutorial1_background.png
+    - tutorial2_background.png
+    - ok.png
+    - jumping.gif
+    - cross.gif
+    - num1.png
+    - num2.png
+    - num3.png
+    - num4.png
+    - num5.png
+    - boxing_clear.png
     - cloud.png
     - cloud1.png
     - cloud2.png

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/data.dart';
 import 'package:move/front/home.dart';
@@ -39,11 +40,11 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  StreamController<String> dataController = new StreamController();
-
   @override
   void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]); //screen vertically
+
     flutterBlue.connectedDevices
         .asStream()
         .listen((List<BluetoothDevice> devices) {
@@ -59,13 +60,15 @@ class _MyHomePageState extends State<MyHomePage> {
     flutterBlue.startScan();
   }
 
-  Future dataState(BluetoothCharacteristic characteristic) async {
-    characteristic.value.listen((value) {
-      readValues[characteristic.uuid] = value;
-    });
-    await characteristic.setNotifyValue(true);
-
-    setnum(characteristic);
+  @override
+  void dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
   }
 
   ListView _buildListViewOfDevices() {
@@ -105,10 +108,20 @@ class _MyHomePageState extends State<MyHomePage> {
                             duration: Duration(seconds: 5),
                           )
                       );
+                      showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
                       try {
                         await device.connect();
                       } catch (e) {
                         if (e != 'already_connected') {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
                           throw e;
                         }
                       } finally {
@@ -184,6 +197,8 @@ class _MyHomePageState extends State<MyHomePage> {
       _bleServices();
       SchedulerBinding.instance!.addPostFrameCallback((_) {
         Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.pop(context);
         Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
       });
     }
@@ -191,40 +206,32 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) => WillPopScope(
-    onWillPop: () {
-      Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-      return Future.value(false);
-    },
-    child: Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        title: Text("Connect",textAlign: TextAlign.center,style: TextStyle(color: Colors.indigo),),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back,color: Colors.indigo,),
-          onPressed: () {
-            Navigator.pop(context);
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-          },
+  Widget build(BuildContext context) => Scaffold(
+    extendBodyBehindAppBar: true,
+    appBar: AppBar(
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      centerTitle: true,
+      title: Text("Connect",textAlign: TextAlign.center,style: TextStyle(color: Colors.indigo),),
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back,color: Colors.indigo,),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+    ),
+    body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('background.png'),
+                fit: BoxFit.fill
+            )
         ),
-      ),
-      body: Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('background.png'),
-                  fit: BoxFit.fill
-              )
-          ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
-            child: _buildView(),
-          )
-      ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+          child: _buildView(),
+        )
     ),
   );
 }

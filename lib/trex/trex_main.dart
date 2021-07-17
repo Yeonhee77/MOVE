@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/data.dart';
 import 'package:move/home_page.dart';
-import 'package:move/front/game.dart';
 import 'package:move/trex/game.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
-import 'package:flutter/services.dart';
-import 'package:move/front/select.dart';
 import 'game.dart';
 
 class TRexGameWrapper extends StatefulWidget {
@@ -23,17 +23,34 @@ class TRexGameWrapper extends StatefulWidget {
 
 class _TRexGameWrapperState extends State<TRexGameWrapper> {
   /*--------bluetooth-------*/
-  final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   bool splashGone = false;
-  TRexGame ? game;
+  TRexGame? game;
+  String gesture = "";
 
-  int score = 0;
+  num score = -1;
+  num dino = 0;
+  num boxing = 0;
+  num jumpingJack = 0;
+  num crossJack = 0;
+  double avg = 0;
 
   @override
   void initState() {
     super.initState();
     startGame();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]); //screen horizontally
+  }
+
+  @override
+  void dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
   }
 
   void startGame() {
@@ -44,12 +61,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         })
       },
     );
-  }
-
-  @override
-  void dispose(){
-    _streamController.close();
-    super.dispose();
   }
 
   void _gesture() {
@@ -84,6 +95,33 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     sub.cancel();
   }
 
+  Future<void> addScore(int score) async{
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((doc) {
+      setState(() {
+        dino = doc.get('dino');
+        boxing = doc.get('boxing');
+        jumpingJack = doc.get('jumpingJack');
+        crossJack = doc.get('crossJack');
+      });
+    });
+
+    if(score > dino) {
+      avg = (score + boxing + jumpingJack + crossJack)/4;
+
+      FirebaseFirestore.instance
+          .collection('user')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        'score': score,
+        'avg': double.parse(avg.toStringAsFixed(2)),
+      });
+    }
+  }
+
   Widget scoreBox(BuildContext buildContext, TRexGame game) {
     return Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -92,6 +130,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
               margin: EdgeInsets.only(top: 25, right: 5),
               width: 100,
               height: 30,
+              color: Color.fromARGB(0, 23, 173, 148),
               child: Center(
                 child: Text('Score : $score', style: TextStyle(color: Colors.black, fontSize: 16, decoration: TextDecoration.none)),
               )
@@ -102,23 +141,23 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
 
   Widget exitBox(BuildContext buildContext, TRexGame game) {
     return Container(
-      margin: EdgeInsets.only(top: 17),
-      width: 100,
-      height: 100,
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Flexible(
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Select(bluetoothServices: widget.bluetoothServices)));
-                },
-                child: Image.asset('dinoExit.png', height: 50,),
+        width: 100,
+        height: 100,
+        margin: EdgeInsets.only(top: 17),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Image.asset('dinoExit.png', height: 50,),
+                ),
               ),
-            ),
-          ]
-      ),
+            ]
+        ),
     );
   }
 
@@ -133,17 +172,17 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         child: Text("Loading"),
       );
     }
+    else
     return Container(
       constraints: const BoxConstraints.expand(),
       child: GameWidget(
-        game: game!,
-        overlayBuilderMap: {
-          'Score' : scoreBox,
-          'Exit' : exitBox
-        },
-        initialActiveOverlays: ['Score', 'Exit'],
-      ),
+            game: game!,
+            overlayBuilderMap: {
+              'Score' : scoreBox,
+              'Exit' : exitBox,
+            },
+            initialActiveOverlays: ['Score', 'Exit'],
+          ),
     );
   }
-
 }

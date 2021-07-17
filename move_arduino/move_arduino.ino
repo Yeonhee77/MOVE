@@ -347,8 +347,6 @@ void loop()
 
           if (String(GESTURES[maxIndex]).equals("PUNCH")) result = 1;
           else if (String(GESTURES[maxIndex]).equals("UPPERCUT")) result = 2;
-//          else if (String(GESTURES[maxIndex]).equals("squat")) result = 3;
-//          else if (String(GESTURES[maxIndex]).equals("dumbbell")) result = 4;
 
           dataProviderTxChar.writeValue((byte)result);
 

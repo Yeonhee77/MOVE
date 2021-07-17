@@ -22,6 +22,7 @@ class GameOverPanel extends BaseComponent with HasGameRef<TRexGame> {
   Future<void>? onLoad() {
     addChild(gameOverText);
     addChild(gameOverRestart);
+    //addChild(gameOverExit);
     return super.onLoad();
   }
 
@@ -76,6 +77,29 @@ class GameOverRestart extends SpriteComponent {
   void onGameResize(Vector2 gameSize) {
     super.onGameResize(gameSize);
     y = gameSize.y / 2 - 20;
-    x = (gameSize.x / 2) - config.restartWidth / 2;
+    x = (gameSize.x / 2) - config.restartWidth / 2; //game over button
+  }
+}
+
+class GameOverExit extends SpriteComponent {
+  GameOverExit(
+      Image exitImage,
+      this.config,
+      ) : super(
+    size: Vector2(config.restartWidth, config.restartHeight),
+    sprite: Sprite(
+      exitImage,
+      srcPosition: Vector2(1532.0, 18.0),
+      srcSize: Vector2(config.restartWidth, config.restartHeight),
+    ),
+  );
+
+  final GameOverConfig config;
+
+  @override
+  void onGameResize(Vector2 gameSize) {
+    super.onGameResize(gameSize);
+    y = gameSize.y / 2 - 20;
+    x = (gameSize.x / 2) - config.restartWidth;
   }
 }
