@@ -133,7 +133,7 @@ class _CrossjackstartState extends State<Crossjackstart> {
                               ];
                             }
                             else {
-                              if (count >= 15) {
+                              if (count >= 40) {
                                 score = ((correct/count)*100);
                                 wrong = count -correct;
                                 tutorial = <Widget>[
@@ -233,7 +233,7 @@ class _CrossjackstartState extends State<Crossjackstart> {
                                       Center(child:
                                       Image.asset('cross.gif', height: 400,
                                         width: 300,),),
-                                      Text("Count: " + (count/15).toStringAsFixed(0),style: TextStyle(color: Colors.white),),
+                                      Text("Count: " + (count/2).toStringAsFixed(0),style: TextStyle(color: Colors.white),),
                                       Text("Achievement rate: " + ((count/40)*100).toStringAsFixed(0) + '%',style: TextStyle(color: Colors.white),),
                                     ];
                                     break;
