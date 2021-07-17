@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:move/data.dart';
 import 'package:move/home_page.dart';
 import 'package:move/trex/game.dart';
 import 'package:move/trex/game_over/config.dart';
@@ -11,6 +11,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
+import 'package:flutter/services.dart';
+
 import 'game.dart';
 
 class TRexGameWrapper extends StatefulWidget {
@@ -25,6 +27,7 @@ enum TRexGameStatus { playing, waiting, gameOver }
 
 class _TRexGameWrapperState extends State<TRexGameWrapper> {
   /*--------bluetooth-------*/
+  final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   bool splashGone = false;
   TRexGame? game;
@@ -51,18 +54,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   void initState() {
     super.initState();
     startGame();
-    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]); //screen horizontally
-  }
-
-  @override
-  void dispose(){
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    super.dispose();
   }
 
   void startGame() {
@@ -73,6 +64,12 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         })
       },
     );
+  }
+
+  @override
+  void dispose(){
+    _streamController.close();
+    super.dispose();
   }
 
   void _gesture() {

@@ -38,11 +38,10 @@ class Bg extends Component with HasGameRef {
 
 enum TRexGameStatus { playing, waiting, gameOver }
 
-class TRexGame extends BaseGame {
+class TRexGame extends BaseGame with TapDetector {
 
   TRexGame( {
     required this.spriteImage,
-    //required this.exitImage,
   }) : super();
 
   late final config = GameConfig();
@@ -51,7 +50,6 @@ class TRexGame extends BaseGame {
   ui.Color backgroundColor() => const ui.Color.fromARGB(250, 255, 255, 255);
 
   final ui.Image spriteImage;
-  //final ui.Image exitImage;
 
   /// children
   late final tRex = TRex();
@@ -86,7 +84,7 @@ class TRexGame extends BaseGame {
   late TRexGameStatus status = TRexGameStatus.waiting;
   late double currentSpeed = 0.0;
   late double timePlaying = 0.0;
-  late int score = 0;
+  late int score = -1;
 
   bool get playing => status == TRexGameStatus.playing;
   bool get gameOver => status == TRexGameStatus.gameOver;
