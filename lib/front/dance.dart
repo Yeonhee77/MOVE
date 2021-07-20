@@ -19,17 +19,15 @@ class Dance extends StatefulWidget {
 
 class _DanceState extends State<Dance> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
-  final Stream<int> stream = Stream.periodic(Duration(milliseconds: 500),  (int x) => x);
+  final Stream<int> stream = Stream.periodic(Duration(milliseconds: 1000),  (int x) => x);
 
-  List<String> random = ['←', '→', '↑', '↓'];
+  List<String> random = ['up.png', 'down.png', 'left.png', 'right.png'];
   String gesture = "";
   // ignore: non_constant_identifier_names
   String ran_gesture = "";
   // ignore: non_constant_identifier_names
   int gesture_num = 0;
-  int count = -1;
   int correct = 0;
-  int jar = 0;
 
   @override
   void dispose(){
@@ -68,19 +66,16 @@ class _DanceState extends State<Dance> {
         gesture_num = int.parse(gesture[1]);
       });
     });
-    count++;
 
     // if(ran_gesture == 'Punch') {
       if(gesture_num == 1) {
         gesture_num = 0;
         correct += 1;
-        jar++;
       }
     // }else if(ran_gesture == 'Uppercut') {
       if(gesture_num == 2) {
         gesture_num = 0;
         correct += 1;
-        jar++;
       }
     // }
 
@@ -95,7 +90,7 @@ class _DanceState extends State<Dance> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('background.png'),
+                  image: AssetImage('tutorial1_background.png'),
                   fit: BoxFit.fill
               )
           ),
@@ -118,14 +113,14 @@ class _DanceState extends State<Dance> {
                   builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                     var ran = Random().nextInt(4);
                     ran_gesture = random[ran];
-                    return GlowText(
-                      random[ran],
-                      style: TextStyle(fontSize: 40, color: Colors.purpleAccent, fontWeight: FontWeight.bold),
-                    );
-                    // return Text(random[ran], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),);
-                    // return Image.asset(image[ran]);
+                    // return GlowText(
+                    //   random[ran],
+                    //   style: TextStyle(fontSize: 40, color: Colors.purpleAccent, fontWeight: FontWeight.bold),
+                    // );
+                    return Image.asset(random[ran]);
                   }
               ),
+
             ],
           ),
         )
