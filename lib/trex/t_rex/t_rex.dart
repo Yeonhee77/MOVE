@@ -163,7 +163,7 @@ class RunningTRex extends TRexStateAnimatedComponent {
     Image spriteImage,
     TRexConfig config,
   ) : super(
-          showFor: [TRexStatus.running, TRexStatus.intro],
+          showFor: [TRexStatus.running],
           spriteImage: spriteImage,
           size: Vector2(80.0, 90.0),
           config: config,
@@ -178,14 +178,14 @@ class WaitingTRex extends TRexStateAnimatedComponent { //change to animate
           spriteImage: spriteImage,
           size: Vector2(80.0, 90.0),
           config: config,
-          frames: [Vector2(96.0, 12.0), Vector2(96.0, 12.0)]
+          frames: [Vector2(1425.0, 2.0), Vector2(1425.0, 2.0)]
         );
 }
 
 class JumpingTRex extends TRexStateAnimatedComponent { //change to animate
   JumpingTRex(Image spriteImage, TRexConfig config)
       : super(
-          showFor: [TRexStatus.jumping, TRexStatus.intro],
+          showFor: [TRexStatus.jumping],
           spriteImage: spriteImage,
           size: Vector2(80.0, 90.0),
           config: config,
@@ -196,7 +196,7 @@ class JumpingTRex extends TRexStateAnimatedComponent { //change to animate
 class SurprisedTRex extends TRexStateAnimatedComponent { //change to animate
   SurprisedTRex(Image spriteImage, TRexConfig config)
       : super(
-          showFor: [TRexStatus.crashed, TRexStatus.intro],
+          showFor: [TRexStatus.crashed],
           spriteImage: spriteImage,
           size: Vector2(80.0, 90.0),
           config: config,

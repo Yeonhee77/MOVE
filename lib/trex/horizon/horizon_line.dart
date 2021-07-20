@@ -1,4 +1,5 @@
 import 'package:flame/components.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:move/trex/obstacle/obstacle.dart';
 
 import '../game.dart';
@@ -10,13 +11,13 @@ class HorizonLine extends PositionComponent with HasGameRef<TRexGame> {
 
   late final _softSprite = Sprite(
     gameRef.spriteImage,
-    srcPosition: Vector2(2.0, 104.0),
+    srcPosition: Vector2(2.0, 105.0),
     srcSize: Vector2(dimensions.width, dimensions.height),
   );
 
   late final _bumpySprite = Sprite(
     gameRef.spriteImage,
-    srcPosition: Vector2(2.0 + dimensions.width, 104.0),
+    srcPosition: Vector2(2.0 + dimensions.width, 105.0),
     srcSize: Vector2(dimensions.width, dimensions.height),
   );
 
@@ -24,10 +25,9 @@ class HorizonLine extends PositionComponent with HasGameRef<TRexGame> {
   late final firstGround = HorizonGround(_softSprite, dimensions);
   late final secondGround = HorizonGround(_bumpySprite, dimensions);
   late final thirdGround = HorizonGround(_softSprite, dimensions);
+ // late final cloudGround = HorizonGround(cloudSprite, dimensions);
 
   // children
-  late final CloudManager cloudManager =
-      CloudManager(horizonConfig: HorizonConfig());
   late final ObstacleManager obstacleManager = ObstacleManager(dimensions);
 
   @override
@@ -35,7 +35,6 @@ class HorizonLine extends PositionComponent with HasGameRef<TRexGame> {
     addChild(firstGround);
     addChild(secondGround);
     addChild(thirdGround);
-    addChild(cloudManager);
     addChild(obstacleManager);
     super.onMount();
   }
@@ -69,7 +68,6 @@ class HorizonLine extends PositionComponent with HasGameRef<TRexGame> {
   }
 
   void reset() {
-    cloudManager.reset();
     obstacleManager.reset();
 
     firstGround.x = 0.0;
@@ -80,7 +78,7 @@ class HorizonLine extends PositionComponent with HasGameRef<TRexGame> {
 class HorizonGround extends SpriteComponent {
   HorizonGround(Sprite sprite, HorizonDimensions dimensions)
       : super(
-          size: Vector2(dimensions.width, dimensions.height),
+          size: Vector2(dimensions.width, 145),
           sprite: sprite,
         );
 }

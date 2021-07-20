@@ -1,95 +1,68 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
+import 'package:flutter/material.dart';
+import 'package:move/trex/game_over/config.dart';
 import '../custom/util.dart';
 import '../game.dart';
 import 'config.dart';
 
-class Cloud extends SpriteComponent {
-  Cloud({
-    required this.config,
-    required Image spriteImage,
-  })  : cloudGap = getRandomNum(
-          config.minCloudGap,
-          config.maxCloudGap,
-        ),
-        super(
-          sprite: Sprite(
-            spriteImage,
-            srcPosition: Vector2(764.0, 20.0), //changed
-            srcSize: Vector2(90.0, 33.0), //changed
-          ),
-        );
+class Cloud extends PositionComponent with HasGameRef<TRexGame> {
+  late final cloudSprite = Sprite(
+    gameRef.spriteImage,
+    srcPosition: Vector2(530.0, 10.0),
+    srcSize: Vector2(420, 50),
+  );
 
-  final CloudConfig config;
-  final double cloudGap;
+  late final cloudSprite1 = Sprite(
+    gameRef.spriteImage,
+    srcPosition: Vector2(530.0, 10.0),
+    srcSize: Vector2(420, 50),
+  );
+
+  late final cloudGround = HorizonCloud(cloudSprite);
+  late final cloudGround1 = HorizonCloud1(cloudSprite1);
 
   @override
-  void update(double dt) {
-    super.update(dt);
-    if (shouldRemove) {
-      return;
-    }
-    x -= (parent as CloudManager).cloudSpeed.ceil() * 50 * dt;
-
-    if (!isVisible) {
-      remove();
-    }
-  }
-
-  bool get isVisible {
-    return x + config.width > 0;
+  void onMount() {
+    addChild(cloudGround);
+    addChild(cloudGround1);
+    super.onMount();
   }
 
   @override
   void onGameResize(Vector2 gameSize) {
     super.onGameResize(gameSize);
-    y = ((absolutePosition.y / 2 - (config.maxSkyLevel - config.minSkyLevel)) +
-            getRandomNum(config.minSkyLevel, config.maxSkyLevel)) -
-        absoluteParentPosition.y;
+    y = gameSize.y * 0.2;
   }
-}
-
-class CloudManager extends PositionComponent with HasGameRef<TRexGame> {
-  CloudManager({
-    required this.horizonConfig,
-  });
-
-  final HorizonConfig horizonConfig;
-  late final CloudConfig cloudConfig = CloudConfig();
-
-  void addCloud() {
-    final cloud = Cloud(
-      config: cloudConfig,
-      spriteImage: gameRef.spriteImage,
-    );
-    cloud.x = gameRef.size.x + cloudConfig.width + 10;
-    cloud.y = ((absolutePosition.y / 2 -
-                (cloudConfig.maxSkyLevel - cloudConfig.minSkyLevel)) +
-            getRandomNum(cloudConfig.minSkyLevel, cloudConfig.maxSkyLevel)) -
-        absolutePosition.y;
-    addChild(cloud);
-  }
-
-  double get cloudSpeed =>
-      horizonConfig.bgCloudSpeed / 1000 * gameRef.currentSpeed;
 
   @override
   void update(double dt) {
     super.update(dt);
-    final int numClouds = children.length;
-    if (numClouds > 0) {
-      final lastCloud = children.last as Cloud;
-      if (numClouds < horizonConfig.maxClouds &&
-          (gameRef.size.x / 2 - lastCloud.x) > lastCloud.cloudGap) {
-        addCloud();
-      }
-    } else {
-      addCloud();
-    }
+    if (cloudGround.x <= -600) cloudGround.x = 600;
+    else cloudGround.x -= 0.75;
+
+    if(cloudGround1.x <= -600) cloudGround1.x = 600;
+    else cloudGround1.x -= 0.75;
+
   }
 
-  void reset() {
-    clearChildren();
-  }
+}
+
+class HorizonCloud extends SpriteComponent {
+  HorizonCloud(Sprite sprite)
+    : super(
+        size: Vector2(600, 60),  //cloud sprite size
+        sprite: sprite,
+        position: Vector2(25, 50)
+  );
+}
+
+class HorizonCloud1 extends SpriteComponent {
+  HorizonCloud1(Sprite sprite)
+      : super(
+      size: Vector2(600, 60),  //cloud sprite size
+      sprite: sprite,
+      position: Vector2(600, 15)
+  );
 }

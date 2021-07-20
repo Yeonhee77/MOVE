@@ -48,7 +48,7 @@ class _JumpingstartState extends State<Jumpingstart> {
     super.dispose();
   }
 
-  Future<void> addScore() async{
+  Future<void> addScore(double score) async{
     FirebaseFirestore.instance
         .collection('user')
         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -69,7 +69,7 @@ class _JumpingstartState extends State<Jumpingstart> {
           .collection('user')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
-        'jumpingJack': jumpingJack + score,
+        'jumpingJack': double.parse(score.toStringAsFixed(2)),
         'avg': double.parse(avg.toStringAsFixed(2)),
       });
     }
@@ -153,7 +153,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                           // foreground
                                         ),
                                         onPressed: () {
-                                          addScore();
+                                          addScore(score);
                                           Navigator.pop(context);
                                           Navigator.pop(context);
                                           Navigator.pop(context);
@@ -167,7 +167,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                           // foreground
                                         ),
                                         onPressed: () {
-                                          addScore();
+                                          addScore(score);
                                           Navigator.pop(context);
                                         },
                                         child: Image.asset('restart.png',height: 72,),
