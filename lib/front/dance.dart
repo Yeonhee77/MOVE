@@ -7,6 +7,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'dart:math';
 import 'package:flutter_glow/flutter_glow.dart';
+import 'package:just_audio/just_audio.dart';
 
 class Dance extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
@@ -31,8 +32,18 @@ class _DanceState extends State<Dance> {
   int correct = 0;
   int jar = 0;
 
+  late AudioPlayer player;
+
+  @override
+  void initState() {
+    super.initState();
+    player = AudioPlayer();
+  }
+
+
   @override
   void dispose(){
+    player.dispose();
     super.dispose();
   }
 
@@ -125,6 +136,13 @@ class _DanceState extends State<Dance> {
                     // return Text(random[ran], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),);
                     // return Image.asset(image[ran]);
                   }
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await player.setAsset('assets/audios/BBaBBaBBa.mp3');
+                  player.play();
+                },
+                child: Text('Play music!'),
               ),
             ],
           ),
