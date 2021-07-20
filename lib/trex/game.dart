@@ -14,6 +14,7 @@ import 'package:move/trex/t_rex/t_rex.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'collision/collision_utils.dart';
 import 'horizon/clouds.dart';
+import 'package:just_audio/just_audio.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -51,6 +52,8 @@ class TRexGame extends BaseGame with TapDetector {
 
   final ui.Image spriteImage;
 
+  late AudioPlayer player;
+
   /// children
   late final tRex = TRex();
   late final horizon = Horizon();
@@ -61,6 +64,7 @@ class TRexGame extends BaseGame with TapDetector {
 
   @override
   Future<void> onLoad() async {
+    player = AudioPlayer();
     add(Bg());
     back
       ..sprite = await loadSprite('dino_bg.png')
@@ -101,6 +105,12 @@ class TRexGame extends BaseGame with TapDetector {
   @override
   void dispose(){
     _streamController.close();
+    player.dispose();
+  }
+
+  Future<void> soundPlay() async {
+    await player.setAsset('assets/audio/jump.mp3');
+    player.play();
   }
 
   void onAction(int gesture_num) {
@@ -110,6 +120,7 @@ class TRexGame extends BaseGame with TapDetector {
 
     if(gesture_num == 2 && !gameOver) {
       this.score += 1;
+      soundPlay();
       tRex.startJump(currentSpeed);
     }
   }
