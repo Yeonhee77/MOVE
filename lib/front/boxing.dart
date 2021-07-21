@@ -253,7 +253,7 @@ class _BoxingState extends State<Boxing> {
                         ),
                       ),
                       height: MediaQuery.of(context).size.height*0.3 / 15 * jar,
-                    )
+                    ),
                   ],
                 ),
               ),

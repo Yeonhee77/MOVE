@@ -131,6 +131,15 @@ flutter:
     - left.png
     - right.png
     - BBaBBaBBa.mp3
+    - up(motion).png
+    - down(motion).png
+    - left(motion).png
+    - right(motion).png
+    - up(grey).png
+    - down(grey).png
+    - left(grey).png
+    - right(grey).png
+    - dance_back.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
