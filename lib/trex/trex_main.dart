@@ -2,10 +2,9 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/data.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:move/home_page.dart';
 import 'package:move/trex/game.dart';
-import 'package:move/trex/game_over/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,10 +49,14 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   bool get playing => status == TRexGameStatus.playing;
   bool get gameOver => status == TRexGameStatus.gameOver;
 
+  // BGM
+  late AudioPlayer bgm = AudioPlayer();
+
   @override
   void initState() {
     super.initState();
     startGame();
+    playBGM();
     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]); //screen horizontally
   }
 
@@ -66,6 +69,12 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       DeviceOrientation.portraitDown,
     ]);
     super.dispose();
+    bgm.dispose();
+  }
+
+  Future<void> playBGM() async {
+    await bgm.setAsset('assets/audio/bgm.mp3');
+    bgm.play();
   }
 
   void startGame() {

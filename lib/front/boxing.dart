@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:just_audio/just_audio.dart';
 import 'dart:math';
 
 import 'home.dart';
@@ -110,6 +111,10 @@ class _BoxingState extends State<Boxing> {
   final Stream<int> stream = Stream.periodic(Duration(milliseconds: 1500),  (int x) => x);
   final Stream<int> stream2 = Stream.periodic(Duration(milliseconds: 1500),  (int x) => x);
 
+  // Sound
+  late AudioPlayer punchSound = AudioPlayer();
+  late AudioPlayer bgm = AudioPlayer();
+
   List<String> random = ['Punch', 'Uppercut'];
   List<String> image = ['punch.png', 'uppercut.png'];
   String gesture = "";
@@ -122,8 +127,26 @@ class _BoxingState extends State<Boxing> {
   int jar = 0;
 
   @override
+  void initState() {
+    super.initState();
+    playBGM();
+  }
+
+  @override
   void dispose(){
     super.dispose();
+    punchSound.dispose();
+    bgm.dispose();
+  }
+
+  Future<void> playPunch() async {
+    await punchSound.setAsset('assets/audio/punch.mp3');
+    punchSound.play();
+  }
+
+  Future<void> playBGM() async {
+    await bgm.setAsset('assets/audio/bgm.mp3');
+    bgm.play();
   }
 
   ListView _buildConnectDeviceView() {
@@ -162,12 +185,14 @@ class _BoxingState extends State<Boxing> {
 
     if(ran_gesture == 'Punch') {
       if(gesture_num == 1) {
+        playPunch();
         gesture_num = 0;
         correct += 1;
         jar++;
       }
     }else if(ran_gesture == 'Uppercut') {
       if(gesture_num == 2) {
+        playPunch();
         gesture_num = 0;
         correct += 1;
         jar++;

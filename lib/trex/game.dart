@@ -52,7 +52,7 @@ class TRexGame extends BaseGame with TapDetector {
 
   final ui.Image spriteImage;
 
-  late AudioPlayer player;
+  late AudioPlayer jumpSound = AudioPlayer();
 
   /// children
   late final tRex = TRex();
@@ -64,7 +64,6 @@ class TRexGame extends BaseGame with TapDetector {
 
   @override
   Future<void> onLoad() async {
-    player = AudioPlayer();
     add(Bg());
     back
       ..sprite = await loadSprite('dino_bg.png')
@@ -105,12 +104,12 @@ class TRexGame extends BaseGame with TapDetector {
   @override
   void dispose(){
     _streamController.close();
-    player.dispose();
+    jumpSound.dispose();
   }
 
-  Future<void> soundPlay() async {
-    await player.setAsset('assets/audio/jump.mp3');
-    player.play();
+  Future<void> playJump() async {
+    await jumpSound.setAsset('assets/audio/jump.mp3');
+    jumpSound.play();
   }
 
   void onAction(int gesture_num) {
@@ -119,8 +118,8 @@ class TRexGame extends BaseGame with TapDetector {
     }
 
     if(gesture_num == 2 && !gameOver) {
+      playJump();
       this.score += 1;
-      soundPlay();
       tRex.startJump(currentSpeed);
     }
   }
@@ -136,14 +135,6 @@ class TRexGame extends BaseGame with TapDetector {
     else
       return -1;
   }
-
-  //
-  // int getFinalScore() {
-  //   if (gameOver)
-  //     return this.final_score;
-  //   else
-  //     return -1;
-  // }
 
   void startGame() {
     tRex.status = TRexStatus.running;
