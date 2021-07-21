@@ -54,6 +54,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
 
   Future<void> playBGM() async {
     await bgm.setAsset('assets/audio/bgm.mp3');
+    bgm.setLoopMode(LoopMode.one);
     bgm.play();
   }
 

@@ -133,6 +133,7 @@ class _BoxingState extends State<Boxing> {
 
   Future<void> startBGM() async {
     await bgmSound.setAsset('assets/audio/bgm.mp3');
+    bgmSound.setLoopMode(LoopMode.one);
     bgmSound.play();
   }
 
