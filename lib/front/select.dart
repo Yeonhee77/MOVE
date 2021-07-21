@@ -91,7 +91,7 @@ class _SelectState extends State<Select> {
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => Dance(bluetoothServices: widget.bluetoothServices)));
                       },
-                      child: Image.asset('reabButton.png', width: MediaQuery.of(context).size.width*0.7,)
+                      child: Image.asset('danceButton.png', width: MediaQuery.of(context).size.width*0.7,)
                   ),
                 ),
                 SizedBox(

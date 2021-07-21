@@ -30,7 +30,6 @@ dependencies:
   flutter_blue: ^0.8.0
   flame: 1.0.0-rc9
   google_fonts: ^2.1.0
-  flutter_glow: ^0.2.0
   just_audio: ^0.9.2
 
   # The following adds the Cupertino Icons font to your application.
@@ -140,6 +139,7 @@ flutter:
     - left(grey).png
     - right(grey).png
     - dance_back.png
+    - danceButton.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
