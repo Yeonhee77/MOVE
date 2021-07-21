@@ -42,7 +42,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   num final_score = 0;
   num temp = 0;
   double avg = 0;
-
   late AudioPlayer player2 = AudioPlayer();
   // state
   late TRexGameStatus status = TRexGameStatus.waiting;
@@ -77,7 +76,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-
     player2.dispose();
     super.dispose();
   }
@@ -153,36 +151,36 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
 
   Widget scoreBox(BuildContext buildContext, TRexGame game) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             margin: EdgeInsets.all(30.0),
             child: SizedBox(
                 child: Text('Score : $score', style: GoogleFonts.russoOne(color: Colors.white, fontSize: 30, decoration: TextDecoration.none))),
           ),
-             ]);
+        ]);
   }
 
   Widget exitBox(BuildContext buildContext, TRexGame game) {
     return Container(
-        width: 100,
-        height: 100,
-        margin: EdgeInsets.only(top: 17.0),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Flexible(
-                child: TextButton(
-                  onPressed: () {
-                    addScore();
-                    Navigator.pop(context);
-                  },
-                  child: Image.asset('dinoExit.png', height: 50,),
-                ),
+      width: 100,
+      height: 100,
+      margin: EdgeInsets.only(top: 17.0),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              child: TextButton(
+                onPressed: () {
+                  addScore();
+                  Navigator.pop(context);
+                },
+                child: Image.asset('dinoExit.png', height: 50,),
               ),
-            ]
-        ),
+            ),
+          ]
+      ),
     );
   }
 
@@ -206,16 +204,16 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       );
     }
     else
-    return Container(
-      constraints: const BoxConstraints.expand(),
-      child: GameWidget(
-            game: game!,
-            overlayBuilderMap: {
-              'Score' : scoreBox,
-              'Exit' : exitBox,
-            },
-            initialActiveOverlays: ['Score', 'Exit'],
-          ),
-    );
+      return Container(
+        constraints: const BoxConstraints.expand(),
+        child: GameWidget(
+          game: game!,
+          overlayBuilderMap: {
+            'Score' : scoreBox,
+            'Exit' : exitBox,
+          },
+          initialActiveOverlays: ['Score', 'Exit'],
+        ),
+      );
   }
 }

@@ -152,6 +152,10 @@ flutter:
     - assets/audio/punch.mp3
     - finish.json
     - super_great.png
+    - bgm.mp3
+    - jump.mp3
+    - punch.mp3
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/data.dart';
 import 'package:move/front/home.dart';
 
 String gesture = "";
@@ -22,7 +21,6 @@ class MyHomePage extends StatefulWidget {
 
 
 class _MyHomePageState extends State<MyHomePage> {
-  final Move move = Move(gesture_num);
   final FlutterBlue flutterBlue = FlutterBlue.instance;
   // ignore: deprecated_member_use
 

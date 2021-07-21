@@ -29,10 +29,12 @@ class _BoxingStartState extends State<BoxingStart> {
   // ignore: non_constant_identifier_names
   int gesture_num = 0;
 
+
   @override
   void dispose(){
     super.dispose();
   }
+
 
   ListView _buildConnectDeviceView() {
     return ListView(
@@ -121,7 +123,6 @@ class _BoxingState extends State<Boxing> {
   int count = -1;
   int correct = 0;
   int jar = 0;
-
   late AudioPlayer player = AudioPlayer();
   late AudioPlayer player2 = AudioPlayer();
 
@@ -275,7 +276,7 @@ class _BoxingState extends State<Boxing> {
                         ),
                       ),
                       height: MediaQuery.of(context).size.height*0.3 / 15 * jar,
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -396,42 +397,42 @@ class _BoxingClearState extends State<BoxingClear> {
             )
         ),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
-          child: Column(
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height/3,),
-              Text('Score: $score', style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),),
-              SizedBox(height: 30,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextButton(
-                    child: Image.asset('exit.png', width: MediaQuery.of(context).size.width/2.2,),
-                    onPressed: () {
-                      SchedulerBinding.instance!.addPostFrameCallback((_) {
-                        addScore();
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: widget.bluetoothServices)));
-                      });
-                    },
-                  ),
-                  TextButton(
-                    child: Image.asset('restart.png', width: MediaQuery.of(context).size.width/2.2,),
-                    onPressed: () {
-                      SchedulerBinding.instance!.addPostFrameCallback((_) {
-                        addScore();
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ],
-          )
+            padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+            child: Column(
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height/3,),
+                Text('Score: $score', style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),),
+                SizedBox(height: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      child: Image.asset('exit.png', width: MediaQuery.of(context).size.width/2.2,),
+                      onPressed: () {
+                        SchedulerBinding.instance!.addPostFrameCallback((_) {
+                          addScore();
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: widget.bluetoothServices)));
+                        });
+                      },
+                    ),
+                    TextButton(
+                      child: Image.asset('restart.png', width: MediaQuery.of(context).size.width/2.2,),
+                      onPressed: () {
+                        SchedulerBinding.instance!.addPostFrameCallback((_) {
+                          addScore();
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            )
         ),
       ),
     );
