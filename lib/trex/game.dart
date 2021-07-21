@@ -114,7 +114,7 @@ class TRexGame extends BaseGame with TapDetector {
   }
 
   void onAction(int gesture_num) {
-    if (gameOver) {
+    if (gameOver && gesture_num == 2) {
       restart();
       //게임오버 음악 넣기
     }
@@ -158,6 +158,8 @@ class TRexGame extends BaseGame with TapDetector {
     status = TRexGameStatus.gameOver;
     tRex.status = TRexStatus.crashed;
     currentSpeed = 0.0;
+    this.score = 0;
+    this.final_score = 0;
   }
 
   void restart() {
@@ -167,8 +169,6 @@ class TRexGame extends BaseGame with TapDetector {
     currentSpeed = config.speed;
     gameOverPanel.visible = false;
     timePlaying = 0.0;
-    this.score = 0;
-    this.final_score = 0;
   }
 
   @override

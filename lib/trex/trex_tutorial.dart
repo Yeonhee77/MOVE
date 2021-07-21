@@ -55,11 +55,11 @@ class _TrexTutorialState extends State<TrexTutorial> {
                                 IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                               ],),
                               SizedBox(height: 60,),
-                              Image.asset('feet.png',height: 200,),
+                              Image.asset('snap.png',height: 200,),
                               //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                               SizedBox(height: 30,),
                               Text("Please attach the chip",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
-                              Text("to your ankle",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
+                              Text("to your wrist",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
                               Row(
                                 children: [
                                   SizedBox(width: 70,),
