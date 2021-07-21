@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -67,6 +69,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin{
   AnimationController? _controller;
   Animation<double>? _animation;
 
+  @override
   void initState() {
     _controller = AnimationController(duration: Duration(seconds: 2), value: 0.1, vsync: this);
 
@@ -93,22 +96,32 @@ class _LoginState extends State<Login> with TickerProviderStateMixin{
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ScaleTransition(
-                    scale: _animation!,
-                    child: Image.asset('logo.png', width: 250,)
-                ),
-                SizedBox(height: 30),
-                OutlinedButton(
-                  child: Text('Google Login',
-                    style: GoogleFonts.mcLaren(
-                      fontSize: 32,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,),
+                Text('Welcome',
+                style: GoogleFonts.russoOne(
+                  fontSize: 50,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,),),
+                SizedBox(height: 75),
+                Container(
+                  width: 195.0,
+                  height: 45.0,
+                  child: OutlinedButton(
+                    child: Text('LOGIN',
+                      style: GoogleFonts.russoOne(
+                        fontSize: 23,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      primary: Colors.white,
+                      backgroundColor: Color.fromARGB(255, 38, 32, 107),
+                      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0)))
+                    ),
+                    onPressed: () {
+                      signInWithGoogle();
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
+                    },
                   ),
-                  onPressed: () {
-                    signInWithGoogle();
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
-                  },
                 ),
               ],
             ),]
