@@ -148,8 +148,8 @@ flutter:
     - assets/images/dino_bg.png
     - assets/audio/jump.mp3
     - assets/audio/bgm.mp3
-    - assets/audio/bgm_exercise.mp3
     - assets/audio/punch.mp3
+    - assets/audio/bgm_ex.mp3
     - finish.json
     - super_great.png
     - bgm.mp3
@@ -168,6 +168,7 @@ flutter:
     - tabletennis.png
     - papapa.png
     - dino_Exit.png
+    - dinoHungry.png
 
 
   # To add assets to your application, add an assets section, like this:
