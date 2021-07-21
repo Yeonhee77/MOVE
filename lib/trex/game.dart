@@ -16,10 +16,6 @@ import 'collision/collision_utils.dart';
 import 'horizon/clouds.dart';
 import 'package:just_audio/just_audio.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'horizon/config.dart';
-
 class Bg extends Component with HasGameRef {
   Vector2 size = Vector2.zero();
 
@@ -51,8 +47,6 @@ class TRexGame extends BaseGame with TapDetector {
   ui.Color backgroundColor() => const ui.Color.fromARGB(250, 255, 255, 255);
 
   final ui.Image spriteImage;
-
-  late AudioPlayer jumpSound = AudioPlayer();
 
   /// children
   late final tRex = TRex();
@@ -100,16 +94,18 @@ class TRexGame extends BaseGame with TapDetector {
   final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
 
+  // Sound
+  late AudioPlayer jumpSound = AudioPlayer();
+
+  Future<void> playJump() async {
+    await jumpSound.setAsset('assets/audio/jump.mp3');
+    jumpSound.play();
+  }
 
   @override
   void dispose(){
     _streamController.close();
     jumpSound.dispose();
-  }
-
-  Future<void> playJump() async {
-    await jumpSound.setAsset('assets/audio/jump.mp3');
-    jumpSound.play();
   }
 
   void onAction(int gesture_num) {

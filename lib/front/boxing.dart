@@ -111,10 +111,6 @@ class _BoxingState extends State<Boxing> {
   final Stream<int> stream = Stream.periodic(Duration(milliseconds: 1500),  (int x) => x);
   final Stream<int> stream2 = Stream.periodic(Duration(milliseconds: 1500),  (int x) => x);
 
-  // Sound
-  late AudioPlayer punchSound = AudioPlayer();
-  late AudioPlayer bgm = AudioPlayer();
-
   List<String> random = ['Punch', 'Uppercut'];
   List<String> image = ['punch.png', 'uppercut.png'];
   String gesture = "";
@@ -126,27 +122,31 @@ class _BoxingState extends State<Boxing> {
   int correct = 0;
   int jar = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    playBGM();
-  }
-
-  @override
-  void dispose(){
-    super.dispose();
-    punchSound.dispose();
-    bgm.dispose();
-  }
+  // Sound
+  late AudioPlayer punchSound = AudioPlayer();
+  late AudioPlayer bgmSound = AudioPlayer();
 
   Future<void> playPunch() async {
     await punchSound.setAsset('assets/audio/punch.mp3');
     punchSound.play();
   }
 
-  Future<void> playBGM() async {
-    await bgm.setAsset('assets/audio/bgm.mp3');
-    bgm.play();
+  Future<void> startBGM() async {
+    await bgmSound.setAsset('assets/audio/bgm.mp3');
+    bgmSound.play();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startBGM();
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    punchSound.dispose();
+    bgmSound.dispose();
   }
 
   ListView _buildConnectDeviceView() {

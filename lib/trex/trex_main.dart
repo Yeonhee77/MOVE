@@ -52,11 +52,16 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   // BGM
   late AudioPlayer bgm = AudioPlayer();
 
+  Future<void> playBGM() async {
+    await bgm.setAsset('assets/audio/bgm.mp3');
+    bgm.play();
+  }
+
   @override
   void initState() {
     super.initState();
-    startGame();
     playBGM();
+    startGame();
     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]); //screen horizontally
   }
 
@@ -70,11 +75,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     ]);
     super.dispose();
     bgm.dispose();
-  }
-
-  Future<void> playBGM() async {
-    await bgm.setAsset('assets/audio/bgm.mp3');
-    bgm.play();
   }
 
   void startGame() {
