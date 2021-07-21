@@ -71,7 +71,7 @@ class _HomeState extends State<Homepage> {
         backgroundColor: Colors.transparent,
         actions: <Widget> [
           IconButton(
-            icon: Icon(Icons.add),
+            icon: Icon(Icons.bluetooth),
             color: Colors.indigo,
             onPressed: () {
               SchedulerBinding.instance!.addPostFrameCallback((_) {

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:just_audio/just_audio.dart';
 import 'dart:math';
 
 import 'home.dart';
@@ -28,10 +29,12 @@ class _BoxingStartState extends State<BoxingStart> {
   // ignore: non_constant_identifier_names
   int gesture_num = 0;
 
+
   @override
   void dispose(){
     super.dispose();
   }
+
 
   ListView _buildConnectDeviceView() {
     return ListView(
@@ -120,9 +123,27 @@ class _BoxingState extends State<Boxing> {
   int count = -1;
   int correct = 0;
   int jar = 0;
+  late AudioPlayer player = AudioPlayer();
+  late AudioPlayer player2 = AudioPlayer();
+
+  Future<void> soundPlay() async {
+    await player.setAsset('assets/audio/punch.mp3');
+    player.play();
+  }
+  Future<void> bgmPlay() async {
+    await player2.setAsset('assets/audio/bgm.mp3');
+    player2.play();
+  }
+
+  @override
+  void initState() {
+    bgmPlay();
+  }
 
   @override
   void dispose(){
+    player.dispose();
+    player2.dispose();
     super.dispose();
   }
 
@@ -165,12 +186,14 @@ class _BoxingState extends State<Boxing> {
         gesture_num = 0;
         correct += 1;
         jar++;
+        soundPlay();
       }
     }else if(ran_gesture == 'Uppercut') {
       if(gesture_num == 2) {
         gesture_num = 0;
         correct += 1;
         jar++;
+        soundPlay();
       }
     }
 

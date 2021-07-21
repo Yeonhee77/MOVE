@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:move/front/home.dart';
 
 class Jumpingstart extends StatefulWidget {
@@ -42,8 +43,20 @@ class _JumpingstartState extends State<Jumpingstart> {
     yield 4;
   })();
 
+  late AudioPlayer player = AudioPlayer();
+  Future<void> bgmPlay() async {
+    await player.setAsset('assets/audio/bgm_exercise.mp3');
+    player.play();
+  }
+
+  @override
+  void initState() {
+    bgmPlay();
+  }
+
   @override
   void dispose(){
+    player.dispose();
     // _streamController.close();
     super.dispose();
   }
