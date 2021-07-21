@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:move/data.dart';
+// import 'package:move/data.dart';
 import 'package:move/home_page.dart';
 import 'package:move/trex/game.dart';
 import 'package:move/trex/game_over/config.dart';
