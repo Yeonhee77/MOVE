@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:lottie/lottie.dart';
 import 'package:move/front/home.dart';
 
 class Crossjackstart extends StatefulWidget {
@@ -82,8 +83,8 @@ class _CrossjackstartState extends State<Crossjackstart> {
           .collection('user')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
-        'crossJack': double.parse(score.toStringAsFixed(2)),
-        'avg': double.parse(avg.toStringAsFixed(2)),
+        'crossJack': double.parse(score.toStringAsFixed(0)),
+        'avg': double.parse(avg.toStringAsFixed(0)),
       });
     }
   }
@@ -150,12 +151,27 @@ class _CrossjackstartState extends State<Crossjackstart> {
                                 score = ((correct/count)*100);
                                 wrong = count -correct;
                                 tutorial = <Widget>[
-                                  Image.asset('finish.png',height: 120,),
-                                  SizedBox(height: 100,),
-
-                                  Text("Score: " + score.toStringAsFixed(2), style: TextStyle(fontSize: 40,color: Colors.white),),
+                                  Stack(
+                                    children: [
+                                      Lottie.asset(
+                                        'assets/finish.json',
+                                        repeat: true,
+                                        reverse: false,
+                                        animate: true,
+                                        height: 300,
+                                        width: 300,
+                                      ),
+                                      Column(
+                                        children: [
+                                          SizedBox(width: 300, height:120),
+                                          Image.asset('finish1.png'),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Text("Score: " + score.toStringAsFixed(0), style: TextStyle(fontSize: 40,color: Colors.white),),
                                   Text("Correct: " + correct.toString(),style: TextStyle(fontSize: 30,color: Colors.white),),
-                                  Text("Wrong: " + wrong.toString(), style: TextStyle(fontSize: 30,color: Colors.white),),
+                                  //Text("Wrong: " + wrong.toString(), style: TextStyle(fontSize: 30,color: Colors.white),),
                                   SizedBox(height: 80,),
 
                                   Center(child: Row(
@@ -301,7 +317,7 @@ class _CrossjackstartState extends State<Crossjackstart> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('tutorial2_background.png'),
+                  image: AssetImage('tutorial1_background.png'),
                   fit: BoxFit.fill
               )
           ),

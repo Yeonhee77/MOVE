@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
 import 'package:move/front/crossJack.dart';
@@ -7,6 +8,7 @@ import 'package:move/front/jumpingJack.dart';
 import 'package:move/front/crossjack_page.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/squat.dart';
+import 'package:move/home_page.dart';
 
 class Training extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
@@ -48,6 +50,12 @@ class _TrainingState extends State<Training> {
                       onPressed: () {
                         if(widget.bluetoothServices != null)
                           Navigator.push(context, MaterialPageRoute(builder: (context) => Jumpingjack(bluetoothServices: widget.bluetoothServices)));
+                        if (widget.bluetoothServices == null)
+                          SchedulerBinding.instance!.addPostFrameCallback((_) {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                          });
                       },
                       child: Image.asset('jumpingButton.png', width: MediaQuery.of(context).size.width*0.7,),
                     ),
@@ -56,6 +64,12 @@ class _TrainingState extends State<Training> {
                       onPressed: () {
                         if(widget.bluetoothServices != null)
                           Navigator.push(context, MaterialPageRoute(builder: (context) => Crossjack(bluetoothServices: widget.bluetoothServices)));
+                        if (widget.bluetoothServices == null)
+                          SchedulerBinding.instance!.addPostFrameCallback((_) {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                          });
                       },
                       child: Image.asset('crossButton.png', width: MediaQuery.of(context).size.width*0.7,),
                     ),
@@ -64,6 +78,12 @@ class _TrainingState extends State<Training> {
                       onPressed: () {
                         if(widget.bluetoothServices != null)
                           Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
+                        if (widget.bluetoothServices == null)
+                          SchedulerBinding.instance!.addPostFrameCallback((_) {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                          });
                       },
                       child: Image.asset('squatButton.png', width: MediaQuery.of(context).size.width*0.7,),
                     ),

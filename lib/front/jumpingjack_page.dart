@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:move/front/home.dart';
+import 'package:lottie/lottie.dart';
 
 class Jumpingstart extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
@@ -82,8 +83,8 @@ class _JumpingstartState extends State<Jumpingstart> {
           .collection('user')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
-        'jumpingJack': double.parse(score.toStringAsFixed(2)),
-        'avg': double.parse(avg.toStringAsFixed(2)),
+        'jumpingJack': double.parse(score.toStringAsFixed(0)),
+        'avg': double.parse(avg.toStringAsFixed(0)),
       });
     }
   }
@@ -146,16 +147,32 @@ class _JumpingstartState extends State<Jumpingstart> {
                               ];
                             }
                             else {
-                              if (count >= 80) {
+                              if (count >= 20) {
                                 score = ((correct/count)*100);
                                 wrong = count -correct;
                                 tutorial = <Widget>[
-                                  Image.asset('finish.png',height: 120,),
-                                  SizedBox(height: 100,),
+                                  Stack(
+                                    children: [
+                                      Lottie.asset(
+                                        'assets/finish.json',
+                                        repeat: true,
+                                        reverse: false,
+                                        animate: true,
+                                        height: 300,
+                                        width: 300,
+                                      ),
+                                      Column(
+                                        children: [
+                                          SizedBox(width: 300, height:120),
+                                          Image.asset('finish1.png'),
+                                        ],
+                                      ),
+                                      ],
+                                  ),
 
-                                  Text("Score: " + score.toStringAsFixed(2), style: TextStyle(fontSize: 40,color: Colors.white),),
+                                  Text("Score: " + score.toStringAsFixed(0), style: TextStyle(fontSize: 40,color: Colors.white),),
                                   Text("Correct: " + correct.toString(),style: TextStyle(fontSize: 30,color: Colors.white),),
-                                  Text("Wrong: " + wrong.toString(), style: TextStyle(fontSize: 30,color: Colors.white),),
+                                  //Text("Wrong: " + wrong.toString(), style: TextStyle(fontSize: 30,color: Colors.white),),
                                   SizedBox(height: 80,),
 
                                   Center(child: Row(
@@ -249,7 +266,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                         width: 300,),),
                                       //Text("값: " + gesture_num.toString(),style: TextStyle(color: Colors.white),),
                                       Text("Count: " + (count/4).toStringAsFixed(0),style: TextStyle(color: Colors.white),),
-                                      Text("Achievement rate: " + ((count/80)*100).toStringAsFixed(0) + '%',style: TextStyle(color: Colors.white),),
+                                      Text("Achievement rate: " + ((count/20)*100).toStringAsFixed(0) + '%',style: TextStyle(color: Colors.white),),
                                     ];
                                     break;
                                 }
@@ -303,7 +320,7 @@ class _JumpingstartState extends State<Jumpingstart> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('tutorial2_background.png'),
+                  image: AssetImage('tutorial1_background.png'),
                   fit: BoxFit.fill
               )
           ),
