@@ -31,6 +31,7 @@ class _JumpingstartState extends State<Jumpingstart> {
   num jumpingJack = 0;
   num crossJack = 0;
   double avg = 0;
+  int set = 5;
 
   final Stream<int> _bids = (() async* {
     yield 0;
@@ -147,7 +148,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                               ];
                             }
                             else {
-                              if (count >= 20) {
+                              if (count >= set*4) {
                                 score = ((correct/count)*100);
                                 wrong = count -correct;
                                 tutorial = <Widget>[
@@ -171,7 +172,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                   ),
 
                                   Text("Score: " + score.toStringAsFixed(0), style: TextStyle(fontSize: 40,color: Colors.white),),
-                                  Text("Correct: " + correct.toString(),style: TextStyle(fontSize: 30,color: Colors.white),),
+                                  //Text("Correct: " + correct.toString(),style: TextStyle(fontSize: 30,color: Colors.white),),
                                   //Text("Wrong: " + wrong.toString(), style: TextStyle(fontSize: 30,color: Colors.white),),
                                   SizedBox(height: 80,),
 
@@ -259,14 +260,41 @@ class _JumpingstartState extends State<Jumpingstart> {
                                           Navigator.pop(context);
                                         }, icon: Icon(Icons.arrow_back,color: Colors.white))
                                       ],),
-                                      flag ? Image.asset('correct.png',height: 80,):Container(height: 80,),
+                                      Row(
+                                        children: [
+                                          SizedBox(width: 100,),
+                                          Stack(
+                                            children: [
+                                              Image.asset("super_great.png",height:120,width: 150,),
+                                              Column(
+                                                children: [
+                                                  SizedBox(height: 33,width: 150,),
+                                                  Text((count/4).toStringAsFixed(0),style: TextStyle(color: Colors.white, fontSize: 30,fontWeight: FontWeight.bold),),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            children: [
+                                              SizedBox(height: 30),
+                                              Row(
+                                                children: [
+                                                      Text(" / ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30, color: Colors.white),),
+                                                      Text(set.toString(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30, color: Colors.white),),
+                                                    ],
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                      //flag ? Image.asset('correct.png',height: 80,):Container(height: 80,),
                                       //Text("맞은 횟수: " + correct.toString(),style: TextStyle(color: Colors.white),),
                                       Center(child:
                                       Image.asset('jumping.gif', height: 400,
                                         width: 300,),),
                                       //Text("값: " + gesture_num.toString(),style: TextStyle(color: Colors.white),),
-                                      Text("Count: " + (count/4).toStringAsFixed(0),style: TextStyle(color: Colors.white),),
-                                      Text("Achievement rate: " + ((count/20)*100).toStringAsFixed(0) + '%',style: TextStyle(color: Colors.white),),
+                                      Text("Done: " + (correct/4).toStringAsFixed(0),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold, fontSize: 20),),
+                                      //Text("Achievement rate: " + ((count/(set*4))*100).toStringAsFixed(0) + '%',style: TextStyle(color: Colors.white),),
                                     ];
                                     break;
                                 }
@@ -320,7 +348,7 @@ class _JumpingstartState extends State<Jumpingstart> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('tutorial1_background.png'),
+                  image: AssetImage('tutorial2_background.png'),
                   fit: BoxFit.fill
               )
           ),

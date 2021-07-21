@@ -229,7 +229,13 @@ class _SquatstartState extends State<Squatstart> {
                                           Navigator.pop(context);
                                         }, icon: Icon(Icons.arrow_back,color: Colors.white))
                                       ],),
-                                      flag ? Image.asset('correct.png',height: 80,):Container(height: 80,),
+                                      Stack(
+                                        children: [
+                                          Image.asset("super_great.png",height:120,width: 120,),
+                                          Text(count.toString()),
+                                        ],
+                                      ),
+                                      //flag ? Image.asset('correct.png',height: 80,):Container(height: 80,),
                                       Center(child:
                                       Image.asset('squat_3.gif', height: 400,
                                         width: 300,),),
