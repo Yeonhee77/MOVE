@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/front/mypage.dart';
+import 'package:move/home_page.dart';
 import 'package:move/trex/trex_main.dart';
 import 'package:flutter/services.dart';
 import 'package:move/trex/trex_tutorial.dart';
@@ -72,6 +74,12 @@ class _GameState extends State<Game> {
                             builder: (context) =>
                                 TrexTutorial(bluetoothServices: widget
                                     .bluetoothServices)));
+                      if (widget.bluetoothServices == null)
+                        SchedulerBinding.instance!.addPostFrameCallback((_) {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                        });
                     },
                     child: Image.asset('dinoButton.png', width: MediaQuery
                         .of(context)
@@ -88,6 +96,12 @@ class _GameState extends State<Game> {
                             builder: (context) =>
                                 BoxingStart(bluetoothServices: widget
                                     .bluetoothServices)));
+                      if (widget.bluetoothServices == null)
+                        SchedulerBinding.instance!.addPostFrameCallback((_) {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                        });
                     },
                     child: Image.asset('boxButton.png', width: MediaQuery
                         .of(context)
@@ -114,7 +128,6 @@ class _GameState extends State<Game> {
         );
       },
       ),
-
     );
   }
 }

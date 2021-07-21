@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:move/data.dart';
 import 'package:move/home_page.dart';
 import 'package:move/trex/game.dart';
@@ -42,6 +43,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   num temp = 0;
   double avg = 0;
 
+  late AudioPlayer player2 = AudioPlayer();
   // state
   late TRexGameStatus status = TRexGameStatus.waiting;
   late double currentSpeed = 0.0;
@@ -50,9 +52,19 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   bool get playing => status == TRexGameStatus.playing;
   bool get gameOver => status == TRexGameStatus.gameOver;
 
+  Future<void> soundPlaybgm() async {
+    await player2.setAsset('assets/audio/bgm.mp3');
+    player2.play();
+  }
+  Future<void> soundPausebgm() async {
+    await player2.setAsset('assets/audio/bgm.mp3');
+    player2.pause();
+  }
+
   @override
   void initState() {
     super.initState();
+    soundPlaybgm();
     startGame();
     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]); //screen horizontally
   }
@@ -65,6 +77,8 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
+    player2.dispose();
     super.dispose();
   }
 
