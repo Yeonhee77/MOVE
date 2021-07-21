@@ -8,8 +8,6 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:just_audio/just_audio.dart';
 import 'dart:math';
 
-import 'home.dart';
-
 class BoxingStart extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
   BoxingStart({this.bluetoothServices});
@@ -123,27 +121,33 @@ class _BoxingState extends State<Boxing> {
   int count = -1;
   int correct = 0;
   int jar = 0;
-  late AudioPlayer player = AudioPlayer();
-  late AudioPlayer player2 = AudioPlayer();
 
-  Future<void> soundPlay() async {
-    await player.setAsset('assets/audio/punch.mp3');
-    player.play();
+  // Sound
+  late AudioPlayer punchSound = AudioPlayer();
+  late AudioPlayer bgmSound = AudioPlayer();
+
+  Future<void> playPunch() async {
+    await punchSound.setAsset('assets/audio/punch.mp3');
+    punchSound.play();
   }
-  Future<void> bgmPlay() async {
-    await player2.setAsset('assets/audio/bgm.mp3');
-    player2.play();
+
+  Future<void> startBGM() async {
+    await bgmSound.setAsset('assets/audio/bgm.mp3');
+    bgmSound.setLoopMode(LoopMode.one);
+    bgmSound.play();
   }
 
   @override
   void initState() {
-    bgmPlay();
+    super.initState();
+    startBGM();
   }
 
   @override
   void dispose(){
-    player.dispose();
-    player2.dispose();
+    super.dispose();
+    punchSound.dispose();
+    bgmSound.dispose();
     super.dispose();
   }
 
@@ -186,14 +190,14 @@ class _BoxingState extends State<Boxing> {
         gesture_num = 0;
         correct += 1;
         jar++;
-        soundPlay();
+        playPunch();
       }
     }else if(ran_gesture == 'Uppercut') {
       if(gesture_num == 2) {
         gesture_num = 0;
         correct += 1;
         jar++;
-        soundPlay();
+        playPunch();
       }
     }
 

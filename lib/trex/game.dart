@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:move/trex/game_over/config.dart';
 import 'package:move/trex/horizon/horizon.dart';
 import 'package:move/trex/game_config.dart';
@@ -15,10 +14,6 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'collision/collision_utils.dart';
 import 'horizon/clouds.dart';
 import 'package:just_audio/just_audio.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'horizon/config.dart';
 
 class Bg extends Component with HasGameRef {
   Vector2 size = Vector2.zero();
@@ -101,7 +96,6 @@ class TRexGame extends BaseGame with TapDetector {
   final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
 
-
   @override
   void dispose(){
     _streamController.close();
@@ -116,7 +110,6 @@ class TRexGame extends BaseGame with TapDetector {
   void onAction(int gesture_num) {
     if (gameOver && gesture_num == 2) {
       restart();
-      //게임오버 음악 넣기
     }
 
     if(gesture_num == 2 && !gameOver) {
@@ -137,14 +130,6 @@ class TRexGame extends BaseGame with TapDetector {
     else
       return -1;
   }
-
-  //
-  // int getFinalScore() {
-  //   if (gameOver)
-  //     return this.final_score;
-  //   else
-  //     return -1;
-  // }
 
   void startGame() {
     tRex.status = TRexStatus.running;
