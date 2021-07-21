@@ -162,24 +162,21 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   Widget exitBox(BuildContext buildContext, TRexGame game) {
     return Container(
       width: 100,
-      height: 100,
-      margin: EdgeInsets.only(top: 17.0),
+      height: 90,
       child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Flexible(
-              child: TextButton(
-                onPressed: () {
-                  addScore();
-                  Navigator.pop(context);
-                },
-                child: Image.asset('dinoExit.png', height: 50,),
-              ),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            child: TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+              child: Image.asset('dino_Exit.png', height: 30,),
             ),
-          ]
-      ),
-    );
+          ),
+        ],
+      ),);
   }
 
   @override
