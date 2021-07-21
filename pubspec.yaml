@@ -155,6 +155,18 @@ flutter:
     - bgm.mp3
     - jump.mp3
     - punch.mp3
+    - bluetooth.png
+    - user.png
+    - buffett.png
+    - hurdle.png
+    - badminton.png
+    - cheerup.png
+    - rollin.png
+    - jumprope.png
+    - kick.png
+    - taekwondo.png
+    - tabletennis.png
+    - papapa.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

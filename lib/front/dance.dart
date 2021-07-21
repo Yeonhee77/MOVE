@@ -39,6 +39,7 @@ class _DanceState extends State<Dance> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        title: Text('Dance', style: TextStyle(color: Colors.white),),
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.transparent,
@@ -74,41 +75,41 @@ class _DanceState extends State<Dance> {
                                 Bba(bluetoothServices: widget
                                     .bluetoothServices)));
                     },
-                    child: Image.asset('dinoButton.png', width: MediaQuery
+                    child: Image.asset('papapa.png', width: MediaQuery
                         .of(context)
                         .size
-                        .width * 0.7,),
+                        .width * 0.9,),
                   ),
                 ),
                 // SizedBox(height: 5,),
-                // Flexible(
-                //   child: TextButton(
-                //     onPressed: () {
-                //       if (widget.bluetoothServices != null)
-                //         Navigator.push(context, MaterialPageRoute(
-                //             builder: (context) =>
-                //                 BoxingStart(bluetoothServices: widget
-                //                     .bluetoothServices)));
-                //     },
-                //     child: Image.asset('boxButton.png', width: MediaQuery
-                //         .of(context)
-                //         .size
-                //         .width * 0.7,),
-                //   ),
-                // ),
+                Flexible(
+                  child: TextButton(
+                    onPressed: () {
+                      if (widget.bluetoothServices != null)
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                                BoxingStart(bluetoothServices: widget
+                                    .bluetoothServices)));
+                    },
+                    child: Image.asset('rollin.png', width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.9,),
+                  ),
+                ),
                 // SizedBox(height: 5,),
-                // Flexible(
-                //   child: TextButton(
-                //     onPressed: () {
-                //       // if(widget.bluetoothServices != null)
-                //       //   Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
-                //     },
-                //     child: Image.asset('fishing.png', width: MediaQuery
-                //         .of(context)
-                //         .size
-                //         .width * 0.7,),
-                //   ),
-                // ),
+                Flexible(
+                  child: TextButton(
+                    onPressed: () {
+                      // if(widget.bluetoothServices != null)
+                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
+                    },
+                    child: Image.asset('cheerup.png', width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.9,),
+                  ),
+                ),
               ],
             ),
           ),
