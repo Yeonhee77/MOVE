@@ -70,20 +70,24 @@ class _HomeState extends State<Homepage> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         actions: <Widget> [
-          IconButton(
-            icon: Icon(Icons.bluetooth),
-            color: Colors.indigo,
-            onPressed: () {
-              SchedulerBinding.instance!.addPostFrameCallback((_) {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
-              });
-            },
+          Container(
+            width: 60,
+            child: TextButton(
+              onPressed: () {
+                SchedulerBinding.instance!.addPostFrameCallback((_) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                });
+              },
+              child: Image.asset('bluetooth.png'),
+            ),
           ),
-          IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Mypage()));},
-            icon: Icon(Icons.person),
-            color: Colors.indigo,
+          Container(
+            width: 60,
+            child: TextButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Mypage()));},
+              child: Image.asset('user.png'),
+            ),
           ),
         ],
       ),
@@ -109,7 +113,7 @@ class _HomeState extends State<Homepage> {
                       'Ranking',
                       style: TextStyle(
                         fontSize: 32,
-                        color: Colors.indigo,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),),
                   ),
@@ -131,12 +135,13 @@ class _HomeState extends State<Homepage> {
                                   child: Container(
                                     width: MediaQuery.of(context).size.width*0.8,
                                     decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.8),
                                         borderRadius: BorderRadius.circular(20),
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          colors: [const Color(0xffFFEED9), const Color(0xffF1E4A0)],
-                                        ),
+                                        // gradient: LinearGradient(
+                                        //   begin: Alignment.topCenter,
+                                        //   end: Alignment.bottomCenter,
+                                        //   colors: [const Color(0xffFFEED9), const Color(0xffF1E4A0)],
+                                        // ),
                                         boxShadow: [
                                           BoxShadow(
                                             color: Colors.indigo.withOpacity(0.15),
@@ -146,27 +151,24 @@ class _HomeState extends State<Homepage> {
                                           )
                                         ]
                                     ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                      child: ListTile(
-                                        title: Text(name[index], style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black54),),
-                                        subtitle: Text(total[index], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.indigo),),
-                                        leading: Container(
-                                          width: 120,
-                                          child: Row(
-                                            children: [
-                                              Image.asset('$num.png', width: 50),
-                                              SizedBox(width: 10,),
-                                              Container(
-                                                width: 50,
-                                                child: CircleAvatar(
-                                                  radius: 30,
-                                                  backgroundImage: NetworkImage(photo[index]),
-                                                  backgroundColor: Colors.transparent,
-                                                ),
+                                    child: ListTile(
+                                      title: Text(name[index], style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black54),),
+                                      subtitle: Text(total[index], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.indigo),),
+                                      leading: Container(
+                                        width: 120,
+                                        child: Row(
+                                          children: [
+                                            Image.asset('$num.png', width: 50),
+                                            SizedBox(width: 10,),
+                                            Container(
+                                              width: 50,
+                                              child: CircleAvatar(
+                                                radius: 30,
+                                                backgroundImage: NetworkImage(photo[index]),
+                                                backgroundColor: Colors.transparent,
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -181,7 +183,7 @@ class _HomeState extends State<Homepage> {
                   SizedBox(height: 10,),
                   Center(
                     child: Container(
-                      width: MediaQuery.of(context).size.width*0.6,
+                      width: MediaQuery.of(context).size.width*0.8,
                       child: TextButton(
                           onPressed: () {
                             Navigator.push(context,
