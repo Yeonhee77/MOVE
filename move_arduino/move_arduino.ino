@@ -39,13 +39,13 @@ limitations under the License.
 #include "model.h"
 
 // Values from Tiny Motion Trainer
-#define MOTION_THRESHOLD 0.2
-#define CAPTURE_DELAY 500 // This is now in milliseconds
-#define NUM_SAMPLES 50
+#define MOTION_THRESHOLD 0.3
+#define CAPTURE_DELAY 50 // This is now in milliseconds
+#define NUM_SAMPLES 10
 
 // Array to map gesture index to a name
 const char *GESTURES[] = {
-    "PUNCH", "UPPERCUT"
+    "JUMP", "PUNCH"
 };
 
 
@@ -345,8 +345,8 @@ void loop()
 
            // If the gestures is "PUNCH" print 1, "UPPERCUT" print 2
 
-          if (String(GESTURES[maxIndex]).equals("PUNCH")) result = 1;
-          else if (String(GESTURES[maxIndex]).equals("UPPERCUT")) result = 2;
+          if (String(GESTURES[maxIndex]).equals("JUMP")) result = 1;
+          else if (String(GESTURES[maxIndex]).equals("PUNCH")) result = 2;
 
           dataProviderTxChar.writeValue((byte)result);
 
