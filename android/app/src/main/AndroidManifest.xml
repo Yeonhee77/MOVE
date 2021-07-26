@@ -2,7 +2,7 @@
     package="com.example.bluetooth_test">
    <application
         android:label="Move!"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/move_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -169,6 +169,8 @@ flutter:
     - papapa.png
     - dino_Exit.png
     - dinoHungry.png
+    - move_icon.png
+
 
 
   # To add assets to your application, add an assets section, like this:
