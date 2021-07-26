@@ -45,7 +45,7 @@ limitations under the License.
 
 // Array to map gesture index to a name
 const char *GESTURES[] = {
-    "PUNCH", "UPPERCUT"
+    "JUMP", "PUNCH"
 };
 
 
@@ -345,8 +345,8 @@ void loop()
 
            // If the gestures is "PUNCH" print 1, "UPPERCUT" print 2
 
-          if (String(GESTURES[maxIndex]).equals("PUNCH")) result = 1;
-          else if (String(GESTURES[maxIndex]).equals("UPPERCUT")) result = 2;
+          if (String(GESTURES[maxIndex]).equals("JUMP")) result = 1;
+          else if (String(GESTURES[maxIndex]).equals("PUNCH")) result = 2;
 
           dataProviderTxChar.writeValue((byte)result);
 
