@@ -8,8 +8,6 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:just_audio/just_audio.dart';
 import 'dart:math';
 
-import 'home.dart';
-
 class BoxingStart extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
   BoxingStart({this.bluetoothServices});
@@ -55,7 +53,7 @@ class _BoxingStartState extends State<BoxingStart> {
                         //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         SizedBox(height: 30,),
                         Text("Please attach the chip",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
-                        Text("to your Wrist",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
+                        Text("to your wrist",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
                         Row(
                           children: [
                             SizedBox(width: 70,),
@@ -123,27 +121,33 @@ class _BoxingState extends State<Boxing> {
   int count = -1;
   int correct = 0;
   int jar = 0;
-  late AudioPlayer player = AudioPlayer();
-  late AudioPlayer player2 = AudioPlayer();
 
-  Future<void> soundPlay() async {
-    await player.setAsset('assets/audio/punch.mp3');
-    player.play();
+  // Sound
+  late AudioPlayer punchSound = AudioPlayer();
+  late AudioPlayer bgmSound = AudioPlayer();
+
+  Future<void> playPunch() async {
+    await punchSound.setAsset('assets/audio/punch.mp3');
+    punchSound.play();
   }
-  Future<void> bgmPlay() async {
-    await player2.setAsset('assets/audio/bgm.mp3');
-    player2.play();
+
+  Future<void> startBGM() async {
+    await bgmSound.setAsset('assets/audio/bgm.mp3');
+    bgmSound.setLoopMode(LoopMode.one);
+    bgmSound.play();
   }
 
   @override
   void initState() {
-    bgmPlay();
+    super.initState();
+    startBGM();
   }
 
   @override
   void dispose(){
-    player.dispose();
-    player2.dispose();
+    super.dispose();
+    punchSound.dispose();
+    bgmSound.dispose();
     super.dispose();
   }
 
@@ -182,18 +186,18 @@ class _BoxingState extends State<Boxing> {
     count++;
 
     if(ran_gesture == 'Punch') {
-      if(gesture_num == 1) {
-        gesture_num = 0;
-        correct += 1;
-        jar++;
-        soundPlay();
-      }
-    }else if(ran_gesture == 'Uppercut') {
       if(gesture_num == 2) {
         gesture_num = 0;
         correct += 1;
         jar++;
-        soundPlay();
+        playPunch();
+      }
+    }else if(ran_gesture == 'Uppercut') {
+      if(gesture_num == 1) {
+        gesture_num = 0;
+        correct += 1;
+        jar++;
+        playPunch();
       }
     }
 
@@ -397,42 +401,42 @@ class _BoxingClearState extends State<BoxingClear> {
             )
         ),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
-          child: Column(
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height/3,),
-              Text('Score: $score', style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),),
-              SizedBox(height: 30,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextButton(
-                    child: Image.asset('exit.png', width: MediaQuery.of(context).size.width/2.2,),
-                    onPressed: () {
-                      SchedulerBinding.instance!.addPostFrameCallback((_) {
-                        addScore();
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: widget.bluetoothServices)));
-                      });
-                    },
-                  ),
-                  TextButton(
-                    child: Image.asset('restart.png', width: MediaQuery.of(context).size.width/2.2,),
-                    onPressed: () {
-                      SchedulerBinding.instance!.addPostFrameCallback((_) {
-                        addScore();
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ],
-          )
+            padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+            child: Column(
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height/3,),
+                Text('Score: $score', style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),),
+                SizedBox(height: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      child: Image.asset('exit.png', width: MediaQuery.of(context).size.width/2.2,),
+                      onPressed: () {
+                        SchedulerBinding.instance!.addPostFrameCallback((_) {
+                          addScore();
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: widget.bluetoothServices)));
+                        });
+                      },
+                    ),
+                    TextButton(
+                      child: Image.asset('restart.png', width: MediaQuery.of(context).size.width/2.2,),
+                      onPressed: () {
+                        SchedulerBinding.instance!.addPostFrameCallback((_) {
+                          addScore();
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            )
         ),
       ),
     );

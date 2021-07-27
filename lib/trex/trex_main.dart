@@ -3,10 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:move/data.dart';
 import 'package:move/home_page.dart';
 import 'package:move/trex/game.dart';
-import 'package:move/trex/game_over/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,7 +40,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   num final_score = 0;
   num temp = 0;
   double avg = 0;
-  late AudioPlayer player2 = AudioPlayer();
+
   // state
   late TRexGameStatus status = TRexGameStatus.waiting;
   late double currentSpeed = 0.0;
@@ -51,19 +49,19 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   bool get playing => status == TRexGameStatus.playing;
   bool get gameOver => status == TRexGameStatus.gameOver;
 
-  Future<void> soundPlaybgm() async {
-    await player2.setAsset('assets/audio/bgm.mp3');
-    player2.play();
-  }
-  Future<void> soundPausebgm() async {
-    await player2.setAsset('assets/audio/bgm.mp3');
-    player2.pause();
+  // BGM
+  late AudioPlayer bgm = AudioPlayer();
+
+  Future<void> playBGM() async {
+    await bgm.setAsset('assets/audio/bgm.mp3');
+    bgm.setLoopMode(LoopMode.one);
+    bgm.play();
   }
 
   @override
   void initState() {
     super.initState();
-    soundPlaybgm();
+    playBGM();
     startGame();
     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]); //screen horizontally
   }
@@ -76,7 +74,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    player2.dispose();
+    bgm.dispose();
     super.dispose();
   }
 
@@ -151,37 +149,34 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
 
   Widget scoreBox(BuildContext buildContext, TRexGame game) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             margin: EdgeInsets.all(30.0),
             child: SizedBox(
                 child: Text('Score : $score', style: GoogleFonts.russoOne(color: Colors.white, fontSize: 30, decoration: TextDecoration.none))),
           ),
-             ]);
+        ]);
   }
 
   Widget exitBox(BuildContext buildContext, TRexGame game) {
     return Container(
-        width: 100,
-        height: 100,
-        margin: EdgeInsets.only(top: 17.0),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Flexible(
-                child: TextButton(
-                  onPressed: () {
-                    addScore();
-                    Navigator.pop(context);
-                  },
-                  child: Image.asset('dinoExit.png', height: 50,),
-                ),
-              ),
-            ]
-        ),
-    );
+      width: 100,
+      height: 90,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            child: TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+              child: Image.asset('dino_Exit.png', height: 30,),
+            ),
+          ),
+        ],
+      ),);
   }
 
   @override
@@ -204,16 +199,16 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       );
     }
     else
-    return Container(
-      constraints: const BoxConstraints.expand(),
-      child: GameWidget(
-            game: game!,
-            overlayBuilderMap: {
-              'Score' : scoreBox,
-              'Exit' : exitBox,
-            },
-            initialActiveOverlays: ['Score', 'Exit'],
-          ),
-    );
+      return Container(
+        constraints: const BoxConstraints.expand(),
+        child: GameWidget(
+          game: game!,
+          overlayBuilderMap: {
+            'Score' : scoreBox,
+            'Exit' : exitBox,
+          },
+          initialActiveOverlays: ['Score', 'Exit'],
+        ),
+      );
   }
 }

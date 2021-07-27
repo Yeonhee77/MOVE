@@ -1,22 +1,25 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
+import 'package:flutter/gestures.dart';
 import 'package:move/trex/game.dart';
 
 import 'config.dart';
 
 class GameOverPanel extends BaseComponent with HasGameRef<TRexGame> {
   GameOverPanel(
-    Image spriteImage,
-    GameOverConfig config,
-  )   : gameOverText = GameOverText(spriteImage, config),
+      Image spriteImage,
+      GameOverConfig config,
+      )   : gameOverText = GameOverText(spriteImage, config),
         gameOverRestart = GameOverRestart(spriteImage, config),
+        gameOverExit = GameOverExit(spriteImage, config),
         super();
 
   bool visible = false;
 
   GameOverText gameOverText;
   GameOverRestart gameOverRestart;
+  GameOverExit gameOverExit;
 
   late final Paint _paint = Paint()..color = const Color.fromARGB(75, 0, 0, 0); //background color
 
@@ -32,7 +35,7 @@ class GameOverPanel extends BaseComponent with HasGameRef<TRexGame> {
   void renderTree(Canvas canvas) {
     if (visible) {
       final rect = Rect.fromLTWH(0, 0, gameRef.size.x, gameRef.size.y);
-        canvas.drawRect(rect, _paint);
+      canvas.drawRect(rect, _paint);
       super.renderTree(canvas);
     }
   }
@@ -41,16 +44,16 @@ class GameOverPanel extends BaseComponent with HasGameRef<TRexGame> {
 class GameOverText extends SpriteComponent {
   GameOverText(Image spriteImage, this.config)
       : super(
-          size: Vector2(config.textWidth, config.textHeight),
-          sprite: Sprite(
-            spriteImage,
-            srcPosition: Vector2(1183.0, 30.0),
-            srcSize: Vector2(
-              config.textWidth,
-              config.textHeight,
-            ),
-          ),
-        );
+    size: Vector2(config.textWidth, config.textHeight),
+    sprite: Sprite(
+      spriteImage,
+      srcPosition: Vector2(1121.0, 4.0),
+      srcSize: Vector2(
+        config.textWidth,
+        config.textHeight,
+      ),
+    ),
+  );
 
   final GameOverConfig config;
 
@@ -64,16 +67,16 @@ class GameOverText extends SpriteComponent {
 
 class GameOverRestart extends SpriteComponent {
   GameOverRestart(
-    Image spriteImage,
-    this.config,
-  ) : super(
-          size: Vector2(config.restartWidth, config.restartHeight),
-          sprite: Sprite(
-            spriteImage,
-            srcPosition: Vector2(1650.0, 18.0),
-            srcSize: Vector2(config.restartWidth, config.restartHeight),
-          ),
-        );
+      Image spriteImage,
+      this.config,
+      ) : super(
+    size: Vector2(config.restartWidth, config.restartHeight),
+    sprite: Sprite(
+      spriteImage,
+      srcPosition: Vector2(1645.0, 23.0),
+      srcSize: Vector2(config.restartWidth, config.restartHeight),
+    ),
+  );
 
   final GameOverConfig config;
 
@@ -104,6 +107,7 @@ class GameOverExit extends SpriteComponent {
   void onGameResize(Vector2 gameSize) {
     super.onGameResize(gameSize);
     y = gameSize.y / 2 - 20;
-    x = (gameSize.x / 2) - config.restartWidth;
+    x = (gameSize.x / 2) - config.restartWidth; //game exit button
   }
+
 }

@@ -23,9 +23,9 @@ class TRex extends PositionComponent with HasGameRef<TRexGame> {
   // ref to children
   late final WaitingTRex idleDino = WaitingTRex(gameRef.spriteImage, config);
   late final RunningTRex runningDino =
-      RunningTRex(gameRef.spriteImage, config);
+  RunningTRex(gameRef.spriteImage, config);
   late final JumpingTRex jumpingTRex =
-      JumpingTRex(gameRef.spriteImage, config);
+  JumpingTRex(gameRef.spriteImage, config);
   late final SurprisedTRex surprisedTRex = SurprisedTRex(
     gameRef.spriteImage,
     config,
@@ -119,13 +119,13 @@ class TRexStateStillComponent extends SpriteComponent with TRexStateVisibility, 
     required TRexConfig config,
     required Vector2 srcPosition,
   }) : super(
-          size: Vector2(config.width, config.height),
-          sprite: Sprite(
-            spriteImage,
-            srcPosition: srcPosition,
-            srcSize: Vector2(config.width, config.height),
-          ),
-        ) {
+    size: Vector2(config.width, config.height),
+    sprite: Sprite(
+      spriteImage,
+      srcPosition: srcPosition,
+      srcSize: Vector2(config.width, config.height),
+    ),
+  ) {
     this.showFor = showFor;
     debugMode = true;
     addShape(HitboxRectangle());
@@ -141,65 +141,65 @@ class TRexStateAnimatedComponent extends SpriteAnimationComponent
     required Vector2 size,
     required List<Vector2> frames,
   }) : super(
-          size: size, //,
-          animation: SpriteAnimation.spriteList(
-            frames
-                .map((vector) => Sprite(
-                      spriteImage,
-                      srcSize: Vector2(config.width, config.height),
-                      srcPosition: vector,
-                    ))
-                .toList(),
-            stepTime: 0.2,
-            loop: true,
-          ),
-        ) {
+    size: size, //,
+    animation: SpriteAnimation.spriteList(
+      frames
+          .map((vector) => Sprite(
+        spriteImage,
+        srcSize: Vector2(config.width, config.height),
+        srcPosition: vector,
+      ))
+          .toList(),
+      stepTime: 0.2,
+      loop: true,
+    ),
+  ) {
     this.showFor = showFor;
   }
 }
 
 class RunningTRex extends TRexStateAnimatedComponent {
   RunningTRex(
-    Image spriteImage,
-    TRexConfig config,
-  ) : super(
-          showFor: [TRexStatus.running],
-          spriteImage: spriteImage,
-          size: Vector2(80.0, 90.0),
-          config: config,
-          frames: [Vector2(96.0, 12.0), Vector2(185.0, 12.0)], //바꿈
-        );
+      Image spriteImage,
+      TRexConfig config,
+      ) : super(
+    showFor: [TRexStatus.running],
+    spriteImage: spriteImage,
+    size: Vector2(75.0, 90.0),
+    config: config,
+    frames: [Vector2(96.0, 12.0), Vector2(185.0, 12.0)], //바꿈
+  );
 }
 
 class WaitingTRex extends TRexStateAnimatedComponent { //change to animate
   WaitingTRex(Image spriteImage, TRexConfig config)
       : super(
-          showFor: [TRexStatus.waiting, TRexStatus.intro],
-          spriteImage: spriteImage,
-          size: Vector2(80.0, 90.0),
-          config: config,
-          frames: [Vector2(1425.0, 2.0), Vector2(1425.0, 2.0)]
-        );
+      showFor: [TRexStatus.waiting, TRexStatus.intro],
+      spriteImage: spriteImage,
+      size: Vector2(75.0, 90.0),
+      config: config,
+      frames: [Vector2(1430.0, 2.0), Vector2(1430.0, 2.0)]
+  );
 }
 
 class JumpingTRex extends TRexStateAnimatedComponent { //change to animate
   JumpingTRex(Image spriteImage, TRexConfig config)
       : super(
-          showFor: [TRexStatus.jumping],
-          spriteImage: spriteImage,
-          size: Vector2(80.0, 90.0),
-          config: config,
-          frames: [Vector2(1425.0, 2.0), Vector2(1425.0, 2.0)],
-        );
+    showFor: [TRexStatus.jumping],
+    spriteImage: spriteImage,
+    size: Vector2(75.0, 90.0),
+    config: config,
+    frames: [Vector2(1430.0, 2.0), Vector2(1430.0, 2.0)],
+  );
 }
 
 class SurprisedTRex extends TRexStateAnimatedComponent { //change to animate
   SurprisedTRex(Image spriteImage, TRexConfig config)
       : super(
-          showFor: [TRexStatus.crashed],
-          spriteImage: spriteImage,
-          size: Vector2(80.0, 90.0),
-          config: config,
-          frames: [Vector2(273.0, 12.0), Vector2(273.0, 12.0)]
-        );
+      showFor: [TRexStatus.crashed],
+      spriteImage: spriteImage,
+      size: Vector2(75.0, 90.0),
+      config: config,
+      frames: [Vector2(273.0, 12.0), Vector2(273.0, 12.0)]
+  );
 }

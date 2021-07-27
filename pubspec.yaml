@@ -126,12 +126,53 @@ flutter:
     - assets/images/cloud2.png
     - assets/images/sun.png
     - assets/images/dino_bg.png
+    - up.png
+    - down.png
+    - left.png
+    - right.png
+    - assets/audios/BBaBBaBBa.mp3
+    - up(motion).png
+    - down(motion).png
+    - left(motion).png
+    - right(motion).png
+    - up(grey).png
+    - down(grey).png
+    - left(grey).png
+    - right(grey).png
+    - dance_back.png
+    - danceButton.png
+    - assets/images/cloud.png
+    - assets/images/cloud1.png
+    - assets/images/cloud2.png
+    - assets/images/sun.png
+    - assets/images/dino_bg.png
     - assets/audio/jump.mp3
     - assets/audio/bgm.mp3
-    - assets/audio/bgm_exercise.mp3
     - assets/audio/punch.mp3
+    - assets/audio/bgm_ex.mp3
     - finish.json
     - super_great.png
+    - assets/audio/bgm.mp3
+    - assets/audio/jump.mp3
+    - assets/audio/punch.mp3
+    - bluetooth.png
+    - user.png
+    - buffett.png
+    - hurdle.png
+    - badminton.png
+    - cheerup.png
+    - rollin.png
+    - jumprope.png
+    - kick.png
+    - taekwondo.png
+    - tabletennis.png
+    - papapa.png
+    - dino_Exit.png
+    - dinoHungry.png
+    - move_icon.png
+
+
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

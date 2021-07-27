@@ -46,8 +46,10 @@ class _JumpingstartState extends State<Jumpingstart> {
   })();
 
   late AudioPlayer player = AudioPlayer();
+
   Future<void> bgmPlay() async {
-    await player.setAsset('assets/audio/bgm_exercise.mp3');
+    await player.setAsset('assets/audio/bgm_ex.mp3');
+    player.setLoopMode(LoopMode.one);
     player.play();
   }
 

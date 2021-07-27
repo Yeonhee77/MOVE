@@ -24,6 +24,7 @@ class _TrainingState extends State<Training> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
+          title: Text('Home Workout', style: TextStyle(color: Colors.white),),
           centerTitle: true,
           elevation: 0.0,
           backgroundColor: Colors.transparent,
@@ -57,9 +58,9 @@ class _TrainingState extends State<Training> {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
                           });
                       },
-                      child: Image.asset('jumpingButton.png', width: MediaQuery.of(context).size.width*0.7,),
+                      child: Image.asset('jumpingButton.png', width: MediaQuery.of(context).size.width*0.9,),
                     ),
-                    SizedBox(height: 5,),
+                    // SizedBox(height: 5,),
                     TextButton(
                       onPressed: () {
                         if(widget.bluetoothServices != null)
@@ -71,9 +72,9 @@ class _TrainingState extends State<Training> {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
                           });
                       },
-                      child: Image.asset('crossButton.png', width: MediaQuery.of(context).size.width*0.7,),
+                      child: Image.asset('crossButton.png', width: MediaQuery.of(context).size.width*0.9,),
                     ),
-                    SizedBox(height: 5,),
+                    // SizedBox(height: 5,),
                     TextButton(
                       onPressed: () {
                         if(widget.bluetoothServices != null)
@@ -85,47 +86,61 @@ class _TrainingState extends State<Training> {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
                           });
                       },
-                      child: Image.asset('squatButton.png', width: MediaQuery.of(context).size.width*0.7,),
+                      child: Image.asset('squatButton.png', width: MediaQuery.of(context).size.width*0.9,),
                     ),
-                    SizedBox(height: 5,),
+                    // SizedBox(height: 5,),
                     TextButton(
                       onPressed: () {
                         // if(widget.bluetoothServices != null)
                         //   Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
                       },
-                      child: Image.asset('crunch.png', width: MediaQuery.of(context).size.width*0.7,),
+                      child: Image.asset('crunch.png', width: MediaQuery.of(context).size.width*0.9,),
                     ),
-                    SizedBox(height: 5,),
+                    // SizedBox(height: 5,),
                     TextButton(
                       onPressed: () {
                         // if(widget.bluetoothServices != null)
                         //   Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
                       },
-                      child: Image.asset('dumbbell.png', width: MediaQuery.of(context).size.width*0.7,),
+                      child: Image.asset('dumbbell.png', width: MediaQuery.of(context).size.width*0.9,),
                     ),
-                    SizedBox(height: 5,),
+                    // SizedBox(height: 5,),
                     TextButton(
                       onPressed: () {
                         // if(widget.bluetoothServices != null)
                         //   Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
                       },
-                      child: Image.asset('plank.png', width: MediaQuery.of(context).size.width*0.7,),
+                      child: Image.asset('plank.png', width: MediaQuery.of(context).size.width*0.9,),
                     ),
-                    SizedBox(height: 5,),
+                    // SizedBox(height: 5,),
                     TextButton(
                       onPressed: () {
                         // if(widget.bluetoothServices != null)
                         //   Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
                       },
-                      child: Image.asset('pushUp.png', width: MediaQuery.of(context).size.width*0.7,),
+                      child: Image.asset('pushUp.png', width: MediaQuery.of(context).size.width*0.9,),
                     ),
-                    SizedBox(height: 5,),
+                    // SizedBox(height: 5,),
                     TextButton(
                       onPressed: () {
                         // if(widget.bluetoothServices != null)
                         //   Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
                       },
-                      child: Image.asset('bridge.png', width: MediaQuery.of(context).size.width*0.7,),
+                      child: Image.asset('bridge.png', width: MediaQuery.of(context).size.width*0.9,),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        // if(widget.bluetoothServices != null)
+                        //   Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
+                      },
+                      child: Image.asset('buffett.png', width: MediaQuery.of(context).size.width*0.9,),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        // if(widget.bluetoothServices != null)
+                        //   Navigator.push(context, MaterialPageRoute(builder: (context) => Squat(bluetoothServices: widget.bluetoothServices)));
+                      },
+                      child: Image.asset('hurdle.png', width: MediaQuery.of(context).size.width*0.9,),
                     ),
                   ],
                 ),

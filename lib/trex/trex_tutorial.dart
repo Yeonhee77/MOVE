@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:move/trex/dinoCondition.dart';
 import 'package:move/trex/trex_main.dart';
 
 class TrexTutorial extends StatefulWidget {
@@ -55,11 +56,11 @@ class _TrexTutorialState extends State<TrexTutorial> {
                                 IconButton(onPressed:(){Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.white,))
                               ],),
                               SizedBox(height: 60,),
-                              Image.asset('feet.png',height: 200,),
+                              Image.asset('snap.png',height: 200,),
                               //Text("값:" + gesture_num.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                               SizedBox(height: 30,),
                               Text("Please attach the chip",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
-                              Text("to your ankle",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
+                              Text("to your wrist",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),),
                               Row(
                                 children: [
                                   SizedBox(width: 70,),
@@ -70,7 +71,7 @@ class _TrexTutorialState extends State<TrexTutorial> {
                                     ),
                                     onPressed: () {
                                       Navigator.pop(context);
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper(bluetoothServices: widget.bluetoothServices)));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => DinoCondition(bluetoothServices: widget.bluetoothServices)));
                                     },
                                     child: Image.asset('ok.png'),
                                   ),
