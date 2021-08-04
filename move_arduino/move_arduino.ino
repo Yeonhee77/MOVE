@@ -39,8 +39,8 @@ limitations under the License.
 #include "model.h"
 
 // Values from Tiny Motion Trainer
-#define MOTION_THRESHOLD 0.3
-#define CAPTURE_DELAY 50 // This is now in milliseconds
+#define MOTION_THRESHOLD 0.25
+#define CAPTURE_DELAY 100 // This is now in milliseconds
 #define NUM_SAMPLES 10
 
 // Array to map gesture index to a name
