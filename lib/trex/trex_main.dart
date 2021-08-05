@@ -182,16 +182,14 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   @override
   Widget build(BuildContext context) {
     _gesture();
-
-    score = game!.returnScore();
-    final_score = game!.getFinalScore();
-
-    if(final_score != -1) {
-      print('Fi score : $final_score');
-      addScore();
-    }
-
     game!.onAction(gesture_num);
+    score = game!.returnScore();
+    //final_score = game!.getFinalScore();
+
+    // if(final_score != -1) {
+    //   print('Fi score : $final_score');
+    //   addScore();
+    // }
 
     if (game == null) {
       return const Center(

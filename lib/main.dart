@@ -13,7 +13,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
-    debugShowCheckedModeBanner: false,
+    debugShowCheckedModeBanner : false,
     theme: ThemeData(
       primarySwatch: Colors.deepPurple,
     ),

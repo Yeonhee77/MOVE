@@ -113,8 +113,8 @@ class TRexGame extends BaseGame with TapDetector {
     }
 
     if(gesture_num == 1 && !gameOver) {
-      this.score += 1;
       soundPlay();
+      this.score += 1;
       tRex.startJump(currentSpeed);
     }
   }

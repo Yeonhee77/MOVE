@@ -71,7 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ListView _buildListViewOfDevices() {
     // ignore: deprecated_member_use
-
     List<Container> containers = [];
     for (BluetoothDevice device in devicesList) {
       containers.add(
@@ -102,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       flutterBlue.stopScan();
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Shake your controller!'),
+                            content: Text('Connecting...'),
                             duration: Duration(seconds: 5),
                           )
                       );
@@ -192,13 +191,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildView() {
     if (connectedDevice != null) {
-      _bleServices();
-      SchedulerBinding.instance!.addPostFrameCallback((_) {
+      //_bleServices();
+      //SchedulerBinding.instance!.addPostFrameCallback((_) {
         Navigator.pop(context);
         Navigator.pop(context);
         Navigator.pop(context);
         Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-      });
+     // });
     }
     return _buildListViewOfDevices();
   }

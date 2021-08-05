@@ -172,9 +172,15 @@ flutter:
     - assets/audio/bgm_ex.mp3
     - finish.json
     - super_great.png
+<<<<<<< HEAD
     - bgm.mp3
     - jump.mp3
     - punch.mp3
+=======
+    - assets/audio/bgm.mp3
+    - assets/audio/jump.mp3
+    - assets/audio/punch.mp3
+>>>>>>> 4c1585e8aa8a4595aba3e77e1d27ec01b734c02f
     - bluetooth.png
     - user.png
     - buffett.png
