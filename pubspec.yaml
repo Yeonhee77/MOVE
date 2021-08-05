@@ -146,6 +146,26 @@ flutter:
     - assets/images/cloud2.png
     - assets/images/sun.png
     - assets/images/dino_bg.png
+    - up.png
+    - down.png
+    - left.png
+    - right.png
+    - assets/audios/BBaBBaBBa.mp3
+    - up(motion).png
+    - down(motion).png
+    - left(motion).png
+    - right(motion).png
+    - up(grey).png
+    - down(grey).png
+    - left(grey).png
+    - right(grey).png
+    - dance_back.png
+    - danceButton.png
+    - assets/images/cloud.png
+    - assets/images/cloud1.png
+    - assets/images/cloud2.png
+    - assets/images/sun.png
+    - assets/images/dino_bg.png
     - assets/audio/jump.mp3
     - assets/audio/bgm.mp3
     - assets/audio/punch.mp3
@@ -170,7 +190,8 @@ flutter:
     - dino_Exit.png
     - dinoHungry.png
     - move_icon.png
-
+    - image1.png
+    - image2.png
 
 
   # To add assets to your application, add an assets section, like this:
