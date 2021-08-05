@@ -40,7 +40,7 @@ limitations under the License.
 
 // Values from Tiny Motion Trainer
 #define MOTION_THRESHOLD 0.2
-#define CAPTURE_DELAY 50 // This is now in milliseconds
+#define CAPTURE_DELAY 500 // This is now in milliseconds
 #define NUM_SAMPLES 10
 
 // Array to map gesture index to a name
