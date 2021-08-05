@@ -4,7 +4,7 @@ import 'package:move/trex/collision/collision_box.dart';
 class TRexConfig {
   final double gravity = 1;
 
-  final double initialJumpVelocity = -15.0;
+  final double initialJumpVelocity = -15.5;
   final double introDuration = 1500.0;
   final double maxJumpHeight = 30.0;
   final double minJumpHeight = 30.0;

@@ -36,8 +36,8 @@ limitations under the License.
 #include "model.h"
 
 // Values from Tiny Motion Trainer
-#define MOTION_THRESHOLD 0.2
-#define CAPTURE_DELAY 50 // This is now in milliseconds
+#define MOTION_THRESHOLD 0.25
+#define CAPTURE_DELAY 100 // This is now in milliseconds
 #define NUM_SAMPLES 10
 
 // Array to map gesture index to a name
@@ -86,16 +86,16 @@ byte tensorArena[tensorArenaSize];
 ************************************************************************/
 bool useMagnetometer = false; // Can be toggled with BLE (disableMagnetometerRx)
 
-void LedRed()  //BLE disconnecte
+void LedRed()  //BLE disconnected
 {
-  digitalWrite(LEDR, LOW);
-  digitalWrite(LEDB, HIGH);
+  digitalWrite(LEDR, LOW);  
+  digitalWrite(LEDB, HIGH); 
 }
 
 void LedBlue()   //BLE connected
 {
-  digitalWrite(LEDR, HIGH);
-  digitalWrite(LEDB, LOW);
+  digitalWrite(LEDR, HIGH); //digital pin on
+  digitalWrite(LEDB, LOW);  //digital pin off
 }
 
 /************************************************************************
