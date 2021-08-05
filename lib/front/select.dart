@@ -47,7 +47,8 @@ class _SelectState extends State<Select> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: BackButton(
-            color: Colors.indigo
+            color: Colors.indigo,
+            onPressed: () {Navigator.pop(context);},
         ),
       ),
       body: Container(
