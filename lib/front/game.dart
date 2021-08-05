@@ -44,6 +44,10 @@ class _GameState extends State<Game> {
         title: Text('Game', style: TextStyle(color: Colors.white),),
         centerTitle: true,
         elevation: 0.0,
+        leading: BackButton(
+          color: Colors.white,
+          onPressed: () {Navigator.pop(context);},
+        ),
         backgroundColor: Colors.transparent,
       ),
       body: LayoutBuilder(builder: (context, constraints) {
