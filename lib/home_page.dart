@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       flutterBlue.stopScan();
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Connecting...'),
+                            content: Text('Shake your controller!'),
                             duration: Duration(seconds: 5),
                           )
                       );
@@ -191,13 +191,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildView() {
     if (connectedDevice != null) {
-      //_bleServices();
-      //SchedulerBinding.instance!.addPostFrameCallback((_) {
+      _bleServices();
+      SchedulerBinding.instance!.addPostFrameCallback((_) {
         Navigator.pop(context);
         Navigator.pop(context);
         Navigator.pop(context);
         Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
-     // });
+      });
     }
     return _buildListViewOfDevices();
   }
