@@ -134,6 +134,8 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       });
     });
 
+    // print("DINO SCORE - " + dino.toString());
+
     if(score > dino) {
       avg = (score + boxing + jumpingJack + crossJack)/4;
 
