@@ -134,14 +134,14 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       });
     });
 
-    if(final_score > dino) {
-      avg = (final_score + boxing + jumpingJack + crossJack)/4;
+    if(score > dino) {
+      avg = (score + boxing + jumpingJack + crossJack)/4;
 
       FirebaseFirestore.instance
           .collection('user')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
-        'dino': final_score - 1,
+        'dino': score,
         'avg': double.parse(avg.toStringAsFixed(2)),
       });
     }
@@ -169,6 +169,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
           Flexible(
             child: TextButton(
               onPressed: () {
+                addScore();
                 Navigator.pop(context);
                 Navigator.pop(context);
               },
@@ -185,11 +186,6 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
     game!.onAction(gesture_num);
     score = game!.returnScore();
     //final_score = game!.getFinalScore();
-
-    // if(final_score != -1) {
-    //   print('Fi score : $final_score');
-    //   addScore();
-    // }
 
     if (game == null) {
       return const Center(

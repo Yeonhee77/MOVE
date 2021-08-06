@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       flutterBlue.stopScan();
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Connecting...'),
+                            content: Text('Shake your controller!'),
                             duration: Duration(seconds: 5),
                           )
                       );
