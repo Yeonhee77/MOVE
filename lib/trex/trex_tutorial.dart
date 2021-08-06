@@ -71,7 +71,7 @@ class _TrexTutorialState extends State<TrexTutorial> {
                                     ),
                                     onPressed: () {
                                       Navigator.pop(context);
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => DinoCondition(bluetoothServices: widget.bluetoothServices)));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => TRexGameWrapper(bluetoothServices: widget.bluetoothServices)));
                                     },
                                     child: Image.asset('ok.png'),
                                   ),

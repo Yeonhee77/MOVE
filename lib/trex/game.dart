@@ -89,7 +89,6 @@ class TRexGame extends BaseGame with TapDetector {
   bool get gameOver => status == TRexGameStatus.gameOver;
 
   var result;
-  late int final_score = 0;
   late int temp = 0;
 
   //bluetooth services
@@ -113,20 +112,19 @@ class TRexGame extends BaseGame with TapDetector {
     }
 
     if(gesture_num == 1 && !gameOver) {
-      this.score += 1;
       soundPlay();
+      this.score += 1;
       tRex.startJump(currentSpeed);
     }
   }
 
   int returnScore() {
-    this.final_score = this.score;
     return this.score;
   }
 
   int getFinalScore() {
     if (gameOver)
-      return this.final_score;
+      return this.score;
     else
       return -1;
   }
@@ -144,7 +142,6 @@ class TRexGame extends BaseGame with TapDetector {
     tRex.status = TRexStatus.crashed;
     currentSpeed = 0.0;
     this.score = 0;
-    this.final_score = 0;
   }
 
   void restart() {
@@ -154,6 +151,7 @@ class TRexGame extends BaseGame with TapDetector {
     currentSpeed = config.speed;
     gameOverPanel.visible = false;
     timePlaying = 0.0;
+    this.score = 0;
   }
 
   @override

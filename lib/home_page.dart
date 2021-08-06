@@ -71,7 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ListView _buildListViewOfDevices() {
     // ignore: deprecated_member_use
-
     List<Container> containers = [];
     for (BluetoothDevice device in devicesList) {
       containers.add(
