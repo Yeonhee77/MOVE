@@ -19,7 +19,7 @@ class BoxingStart extends StatefulWidget {
 class _BoxingStartState extends State<BoxingStart> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   final Stream<int> stream = Stream.periodic(Duration(milliseconds: 1500),  (int x) => x);
-  final Stream<int> stream2 = Stream.periodic(Duration(milliseconds: 1500),  (int x) => x);
+  var timeRan = Random().nextInt(1500) + 900;
 
   String gesture = "";
   // ignore: non_constant_identifier_names
@@ -239,15 +239,20 @@ class _BoxingState extends State<Boxing> {
                   child: _buildConnectDeviceView()
               ),
               SizedBox(height: 40),
-              StreamBuilder<int>(
-                  stream: stream,
-                  builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+              FutureBuilder(
+              future: Future.delayed(Duration(milliseconds: Random().nextInt(1500) + 900)),
+                builder: (c, s) {
+                  if(s.connectionState == ConnectionState.done) {
                     var ran = Random().nextInt(2);
                     ran_gesture = random[ran];
                     return Image.asset(image[ran]);
                   }
+                  return Container(
+                    height: MediaQuery.of(context).size.height*0.193,
+                  );
+                },
               ),
-              // SizedBox(height: 20),
+              SizedBox(height: 20),
               Container(
                 width: MediaQuery.of(context).size.width*0.45,
                 height: MediaQuery.of(context).size.height*0.3 + 4,
@@ -352,6 +357,8 @@ class _BoxingClearState extends State<BoxingClear> {
       setState(() {
         print('boxing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
         print(doc.get('boxing'));
+        print('score~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+        print(widget.score);
         dino = doc.get('dino');
         boxing = doc.get('boxing');
         jumpingJack = doc.get('jumpingJack');
