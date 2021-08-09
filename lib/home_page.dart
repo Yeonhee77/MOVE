@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text('Shake your controller!'),
-                            duration: Duration(seconds: 3),
+                            duration: Duration(seconds: 5),
                           )
                       );
                       showDialog(
