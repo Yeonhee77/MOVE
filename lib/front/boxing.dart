@@ -350,6 +350,8 @@ class _BoxingClearState extends State<BoxingClear> {
         .get()
         .then((doc) {
       setState(() {
+        print('boxing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+        print(doc.get('boxing'));
         dino = doc.get('dino');
         boxing = doc.get('boxing');
         jumpingJack = doc.get('jumpingJack');
@@ -364,7 +366,7 @@ class _BoxingClearState extends State<BoxingClear> {
           .collection('user')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
-        'boxing': widget.score,
+        'boxing': double.parse(widget.score.toStringAsFixed(0)),
         'avg': double.parse(avg.toStringAsFixed(2)),
       });
     }

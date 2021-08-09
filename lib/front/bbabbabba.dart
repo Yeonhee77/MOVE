@@ -40,6 +40,7 @@ class _BbaState extends State<Bba> {
 
   Future<void> soundPlaybgm() async {
     await player.setAsset('assets/audios/BBaBBaBBa.mp3');
+    player.setLoopMode(LoopMode.one);
     player.play();
   }
 
