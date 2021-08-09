@@ -32,13 +32,13 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   TRexGame? game;
   String gesture = "";
 
-  num score = 0;
-  num dino = 0;
-  num boxing = 0;
-  num jumpingJack = 0;
-  num crossJack = 0;
-  num final_score = 0;
-  num temp = 0;
+  int score = 0;
+  int dino = 0;
+  int boxing = 0;
+  int jumpingJack = 0;
+  int crossJack = 0;
+  int final_score = 0;
+  int temp = 0;
   double avg = 0;
 
   // state
@@ -126,16 +126,20 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((doc) {
-      setState(() {
-        dino = doc.get('dino');
-        boxing = doc.get('boxing');
-        jumpingJack = doc.get('jumpingJack');
-        crossJack = doc.get('crossJack');
-      });
+          if(mounted) {
+            setState(() {
+              dino = doc.get('dino');
+              boxing = doc.get('boxing');
+              jumpingJack = doc.get('jumpingJack');
+              crossJack = doc.get('crossJack');
+            });
+          }
     });
 
     if(score > dino) {
       avg = (score + boxing + jumpingJack + crossJack)/4;
+      print('score = $score');
+      print('dino = $dino');
 
       FirebaseFirestore.instance
           .collection('user')
@@ -180,6 +184,28 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       ),);
   }
 
+  Widget restartBox(BuildContext buildContext, TRexGame game) {
+    return Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            height: 90,
+            child: Flexible(
+              child: TextButton(
+                onPressed: () {
+                  addScore();
+                  //score = 0;
+                  game.restart();
+                },
+                child: Image.asset('dino_Restart.png', height: 30,),
+              ),
+            ),
+          ),
+        ],
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
     _gesture();
@@ -200,8 +226,9 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
           overlayBuilderMap: {
             'Score' : scoreBox,
             'Exit' : exitBox,
+            'Restart' : restartBox,
           },
-          initialActiveOverlays: ['Score', 'Exit'],
+          initialActiveOverlays: ['Score', 'Exit', 'Restart'],
         ),
       );
   }
