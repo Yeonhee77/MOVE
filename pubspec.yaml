@@ -32,6 +32,8 @@ dependencies:
   google_fonts: ^2.1.0
   just_audio: ^0.9.2
   lottie: ^1.1.0
+  camera: ^0.8.1+7
+  tflite: ^1.1.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -192,6 +194,7 @@ flutter:
     - move_icon.png
     - image1.png
     - image2.png
+    - assets/posenet_mv1_075_float_from_checkpoints.tflite
 
 
   # To add assets to your application, add an assets section, like this:

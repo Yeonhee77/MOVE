@@ -1,14 +1,19 @@
 import 'dart:async';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:move/reabilitation/pushed_pageY.dart';
 
 import 'home.dart';
 
 class Login extends StatefulWidget {
+  final List<CameraDescription> cameras;
+  Login(this.cameras);
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -119,7 +124,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin{
                     ),
                     onPressed: () {
                       signInWithGoogle();
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(cameras: widget.cameras)));
                     },
                   ),
                 ),
