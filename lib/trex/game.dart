@@ -45,9 +45,8 @@ class TRexGame extends BaseGame with TapDetector {
   ui.Color backgroundColor() => const ui.Color.fromARGB(250, 255, 255, 255);
 
   final ui.Image spriteImage;
-
   late AudioPlayer player;
-
+  //var scoreList = new List.filled(50, 0, growable: true);
 
   /// children
   late final tRex = TRex();
@@ -107,9 +106,10 @@ class TRexGame extends BaseGame with TapDetector {
   }
 
   void onAction(int gesture_num) {
-    if (gameOver && gesture_num == 1) {
-      restart();
-    }
+    // if (gameOver && gesture_num == 1) {
+    //   //insertScore();
+    //   restart();
+    // }
 
     if(gesture_num == 1 && !gameOver) {
       soundPlay();
@@ -117,6 +117,14 @@ class TRexGame extends BaseGame with TapDetector {
       tRex.startJump(currentSpeed);
     }
   }
+
+  // void insertScore() {
+  //   scoreList.add(this.score);
+  //   print('score : ');
+  //   print(this.score);
+  //   print('score list : ');
+  //   print(scoreList);
+  // }
 
   int returnScore() {
     return this.score;
@@ -153,6 +161,7 @@ class TRexGame extends BaseGame with TapDetector {
     timePlaying = 0.0;
     this.score = 0;
   }
+
 
   @override
   void update(double dt) {
