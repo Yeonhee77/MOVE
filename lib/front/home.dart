@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -7,11 +8,11 @@ import 'package:move/front/mypage.dart';
 import 'package:move/front/select.dart';
 
 import '../home_page.dart';
-import 'login.dart';
 
 class Homepage extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
-  Homepage({this.bluetoothServices});
+  final List<CameraDescription>? cameras;
+  Homepage({this.bluetoothServices, this.cameras});
 
   @override
   _HomeState createState() => _HomeState();
@@ -187,7 +188,7 @@ class _HomeState extends State<Homepage> {
                       child: TextButton(
                           onPressed: () {
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => Select(bluetoothServices: widget.bluetoothServices)));
+                                MaterialPageRoute(builder: (context) => Select(bluetoothServices: widget.bluetoothServices, cameras: widget.cameras)));
                           },
                           child: Image.asset('moveButton.png')
                       ),

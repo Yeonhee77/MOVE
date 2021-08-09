@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:move/front/mypage.dart';
 import 'package:move/front/game.dart';
 import 'package:move/front/training.dart';
+import 'package:move/reabilitation/pushed_pageY.dart';
 
 import '../home_page.dart';
 import 'dance.dart';
@@ -14,7 +16,8 @@ import 'login.dart';
 
 class Select extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
-  Select({this.bluetoothServices});
+  final List<CameraDescription>? cameras;
+  Select({this.bluetoothServices, this.cameras});
 
   @override
   _SelectState createState() => _SelectState();
@@ -102,6 +105,13 @@ class _SelectState extends State<Select> {
                   child: TextButton(
                     onPressed: () {
                       // Navigator.push(context, MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices)));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => PushedPageY(
+                          cameras: widget.cameras!,
+                          title: 'posenet',
+                        ),
+                      ),
+                      );
                     },
                     child: Image.asset('reabButton.png', width: MediaQuery.of(context).size.width*0.7,)
                   ),

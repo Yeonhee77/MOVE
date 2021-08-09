@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../main.dart';
 import 'login.dart';
 
 class Mypage extends StatefulWidget {
@@ -149,7 +150,10 @@ class _MypageState extends State<Mypage> {
                     child: Text('Sign Out'),
                     onPressed: () {
                       signOut();
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen()));
                     },
                   )
                   ],
