@@ -34,9 +34,9 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
 
   int score = 0;
   int dino = 0;
-  int boxing = 0;
-  int jumpingJack = 0;
-  int crossJack = 0;
+  double boxing = 0;
+  double jumpingJack = 0;
+  double crossJack = 0;
   int final_score = 0;
   int temp = 0;
   double avg = 0;
@@ -129,28 +129,33 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
           if(mounted) {
             setState(() {
               dino = doc.get('dino');
+              print(doc.get('dino'));
+              print('DINO SCORE - ' + dino.toString());
               boxing = doc.get('boxing');
               jumpingJack = doc.get('jumpingJack');
               crossJack = doc.get('crossJack');
             });
+
+            if(score > dino) {
+              avg = (score + boxing + jumpingJack + crossJack)/4;
+              print('score = $score');
+              print('dino = $dino');
+
+              updateScore();
+            }
           }
     });
 
-    // print("DINO SCORE - " + dino.toString());
+  }
 
-    if(score > dino) {
-      avg = (score + boxing + jumpingJack + crossJack)/4;
-      print('score = $score');
-      print('dino = $dino');
-
-      FirebaseFirestore.instance
-          .collection('user')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .update({
-        'dino': score,
-        'avg': double.parse(avg.toStringAsFixed(2)),
-      });
-    }
+  Future<void> updateScore() {
+    return FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({
+      'dino': score,
+      'avg': double.parse(avg.toStringAsFixed(2)),
+    });
   }
 
   Widget scoreBox(BuildContext buildContext, TRexGame game) {
