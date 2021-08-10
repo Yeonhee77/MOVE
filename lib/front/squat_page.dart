@@ -17,6 +17,7 @@ class _SquatstartState extends State<Squatstart> {
   String gesture = "";
   // ignore: non_constant_identifier_names
   int gesture_num = 0;
+  // ignore: non_constant_identifier_names
   int gesture_num2 = 0;
   int count =0;
   int correct = 0;

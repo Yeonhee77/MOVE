@@ -1,9 +1,6 @@
 import 'package:flame/components.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:move/trex/obstacle/obstacle.dart';
-
 import '../game.dart';
-import 'clouds.dart';
 import 'config.dart';
 
 class HorizonLine extends PositionComponent with HasGameRef<TRexGame> {

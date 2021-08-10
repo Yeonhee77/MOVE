@@ -19,11 +19,12 @@ class _CrossjackstartState extends State<Crossjackstart> {
   String gesture = "";
   // ignore: non_constant_identifier_names
   int gesture_num = 0;
+  // ignore: non_constant_identifier_names
   int gesture_num2 = 0;
   int count =0;
   int correct = 0;
   int wrong = 0;
-  double score = 0;
+  num score = 0;
   bool flag = false;
   List<Widget>? tutorial;
   num dino = 0;
@@ -53,6 +54,7 @@ class _CrossjackstartState extends State<Crossjackstart> {
   }
 
   @override
+  // ignore: must_call_super
   void initState() {
     bgmPlay();
   }
@@ -64,31 +66,37 @@ class _CrossjackstartState extends State<Crossjackstart> {
     super.dispose();
   }
 
-  Future<void> addScore(double score) async{
+  Future<void> addScore(num score) async{
     FirebaseFirestore.instance
         .collection('user')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((doc) {
-      setState(() {
-        dino = doc.get('dino');
-        boxing = doc.get('boxing');
-        jumpingJack = doc.get('jumpingJack');
-        crossJack = doc.get('crossJack');
-      });
+          if(mounted) {
+            setState(() {
+              dino = doc.get('dino');
+              boxing = doc.get('boxing');
+              jumpingJack = doc.get('jumpingJack');
+              crossJack = doc.get('crossJack');
+            });
+
+            if (score > crossJack) {
+              avg = (dino + boxing + jumpingJack + score) / 4;
+
+              updateScore();
+            }
+          }
+        });
+  }
+
+  Future<void> updateScore() {
+    return FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({
+      'crossJack': double.parse(score.toStringAsFixed(0)),
+      'avg': double.parse(avg.toStringAsFixed(0)),
     });
-
-    if(score > crossJack) {
-      avg = (dino + boxing + jumpingJack + score)/4;
-
-      FirebaseFirestore.instance
-          .collection('user')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .update({
-        'crossJack': double.parse(score.toStringAsFixed(0)),
-        'avg': double.parse(avg.toStringAsFixed(0)),
-      });
-    }
   }
 
   ListView _buildConnectDeviceView() {

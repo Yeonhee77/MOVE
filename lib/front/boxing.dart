@@ -8,7 +8,6 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:just_audio/just_audio.dart';
 import 'dart:math';
 
-import 'package:lottie/lottie.dart';
 
 class BoxingStart extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;

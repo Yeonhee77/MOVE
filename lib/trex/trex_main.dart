@@ -26,7 +26,6 @@ enum TRexGameStatus { playing, waiting, gameOver }
 
 class _TRexGameWrapperState extends State<TRexGameWrapper> {
   /*--------bluetooth-------*/
-  final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   bool splashGone = false;
   TRexGame? game;
@@ -37,9 +36,10 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   num boxing = 0;
   num jumpingJack = 0;
   num crossJack = 0;
+  // ignore: non_constant_identifier_names
   num final_score = 0;
   num temp = 0;
-  num avg = 0;
+  double avg = 0;
 
   // state
   late TRexGameStatus status = TRexGameStatus.waiting;

@@ -6,8 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:move/reabilitation/pushed_pageY.dart';
-
 import 'home.dart';
 
 class Login extends StatefulWidget {
@@ -33,7 +31,6 @@ class _LoginState extends State<Login> with TickerProviderStateMixin{
   Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
 
     final OAuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
@@ -72,13 +69,11 @@ class _LoginState extends State<Login> with TickerProviderStateMixin{
   }
 
   AnimationController? _controller;
-  Animation<double>? _animation;
 
   @override
   void initState() {
     _controller = AnimationController(duration: Duration(seconds: 2), value: 0.1, vsync: this);
 
-    _animation = CurvedAnimation(parent: _controller!, curve: Curves.bounceInOut);
 
     _controller!.forward();
     super.initState();

@@ -1,18 +1,11 @@
 import 'package:camera/camera.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:move/front/mypage.dart';
 import 'package:move/front/game.dart';
 import 'package:move/front/training.dart';
 import 'package:move/reabilitation/pushed_pageY.dart';
-
-import '../home_page.dart';
 import 'dance.dart';
-import 'login.dart';
 
 class Select extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;

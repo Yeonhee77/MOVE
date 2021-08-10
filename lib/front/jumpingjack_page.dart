@@ -19,11 +19,12 @@ class _JumpingstartState extends State<Jumpingstart> {
   String gesture = "";
   // ignore: non_constant_identifier_names
   int gesture_num = 0;
+  // ignore: non_constant_identifier_names
   int gesture_num2 = 0;
   int count =0;
   int correct = 0;
   int wrong = 0;
-  double score = 0;
+  num score = 0;
   bool flag = false;
   List<Widget>? tutorial;
   num dino = 0;
@@ -54,6 +55,7 @@ class _JumpingstartState extends State<Jumpingstart> {
   }
 
   @override
+  // ignore: must_call_super
   void initState() {
     bgmPlay();
   }
@@ -65,31 +67,37 @@ class _JumpingstartState extends State<Jumpingstart> {
     super.dispose();
   }
 
-  Future<void> addScore(double score) async{
+  Future<void> addScore(num score) async{
     FirebaseFirestore.instance
         .collection('user')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((doc) {
-      setState(() {
-        dino = doc.get('dino');
-        boxing = doc.get('boxing');
-        jumpingJack = doc.get('jumpingJack');
-        crossJack = doc.get('crossJack');
-      });
+          if(mounted) {
+            setState(() {
+              dino = doc.get('dino');
+              boxing = doc.get('boxing');
+              jumpingJack = doc.get('jumpingJack');
+              crossJack = doc.get('crossJack');
+            });
+
+            if(score > jumpingJack) {
+              avg = (dino + boxing + score + crossJack)/4;
+
+              updateScore();
+            }
+          }
     });
+  }
 
-    if(score > jumpingJack) {
-      avg = (dino + boxing + score + crossJack)/4;
-
-      FirebaseFirestore.instance
-          .collection('user')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .update({
-        'jumpingJack': double.parse(score.toStringAsFixed(0)),
-        'avg': double.parse(avg.toStringAsFixed(0)),
-      });
-    }
+  Future<void> updateScore() {
+    return FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({
+      'jumpingJack': double.parse(score.toStringAsFixed(0)),
+      'avg': double.parse(avg.toStringAsFixed(0)),
+    });
   }
 
   ListView _buildConnectDeviceView() {

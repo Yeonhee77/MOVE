@@ -30,19 +30,11 @@
           }
         },
         {
-<<<<<<< HEAD
           "client_id": "1073143112432-bnok7f5ol9s7v76crrs0t4r4orauab91.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.bluetooth_test",
             "certificate_hash": "aca3bfd25283ddf6c01d80f5f4b3e28df1f7b6b6"
-=======
-          "client_id": "1073143112432-74muq4okd3haamvrvs1gba2esg3uqmd0.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.bluetooth_test",
-            "certificate_hash": "d9361d8cd39732491bd400fd297b542faaaa75f0"
->>>>>>> fe3f43454790d8803606ab01d4442202a1e3f6cb
           }
         },
         {
