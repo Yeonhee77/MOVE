@@ -5,8 +5,6 @@ import 'package:flutter_blue/flutter_blue.dart';
 
 import 'package:move/front/crossJack.dart';
 import 'package:move/front/jumpingJack.dart';
-import 'package:move/front/crossjack_page.dart';
-import 'package:move/front/mypage.dart';
 import 'package:move/front/squat.dart';
 import 'package:move/home_page.dart';
 

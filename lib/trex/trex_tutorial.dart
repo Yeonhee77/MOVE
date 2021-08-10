@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/trex/dinoCondition.dart';
 import 'package:move/trex/trex_main.dart';
 
 class TrexTutorial extends StatefulWidget {

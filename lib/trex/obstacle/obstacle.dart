@@ -2,7 +2,6 @@ import 'dart:collection';
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:flame/geometry.dart';
 import 'package:move/trex/collision/collision_box.dart';
 import 'package:move/trex/custom/util.dart';
 import 'package:move/trex/horizon/config.dart';

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:move/front/squat_page.dart';
 import 'package:move/tutorial/tutorial1.dart';
 
 class Squat extends StatefulWidget {

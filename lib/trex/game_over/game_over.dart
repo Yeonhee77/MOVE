@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:flutter/gestures.dart';
 import 'package:move/trex/game.dart';
 
 import 'config.dart';

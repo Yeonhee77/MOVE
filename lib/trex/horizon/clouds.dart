@@ -1,11 +1,5 @@
-import 'dart:ui';
-
 import 'package:flame/components.dart';
-import 'package:flutter/material.dart';
-import 'package:move/trex/game_over/config.dart';
-import '../custom/util.dart';
 import '../game.dart';
-import 'config.dart';
 
 class Cloud extends PositionComponent with HasGameRef<TRexGame> {
   late final cloudSprite = Sprite(

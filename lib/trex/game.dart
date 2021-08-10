@@ -94,7 +94,6 @@ class TRexGame extends BaseGame with TapDetector {
   final StreamController<int> _streamController = StreamController<int>();
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
 
-  @override
   void dispose(){
     _streamController.close();
     player.dispose();
@@ -105,13 +104,13 @@ class TRexGame extends BaseGame with TapDetector {
     player.play();
   }
 
-  void onAction(int gesture_num) {
+  void onAction(int gestureNum) {
     // if (gameOver && gesture_num == 1) {
     //   //insertScore();
     //   restart();
     // }
 
-    if(gesture_num == 1 && !gameOver) {
+    if(gestureNum == 1 && !gameOver) {
       soundPlay();
       this.score += 1;
       tRex.startJump(currentSpeed);
