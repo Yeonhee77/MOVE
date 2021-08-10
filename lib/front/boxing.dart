@@ -8,6 +8,8 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:just_audio/just_audio.dart';
 import 'dart:math';
 
+import 'package:lottie/lottie.dart';
+
 class BoxingStart extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
   BoxingStart({this.bluetoothServices});
@@ -121,6 +123,7 @@ class _BoxingState extends State<Boxing> {
   int count = -1;
   int correct = 0;
   int jar = 0;
+  bool lottieCorrect = false;
 
   // Sound
   late AudioPlayer punchSound = AudioPlayer();
@@ -190,6 +193,7 @@ class _BoxingState extends State<Boxing> {
         gesture_num = 0;
         correct += 1;
         jar++;
+        lottieCorrect = true;
         playPunch();
       }
     }else if(ran_gesture == 'Uppercut') {
@@ -197,9 +201,11 @@ class _BoxingState extends State<Boxing> {
         gesture_num = 0;
         correct += 1;
         jar++;
+        lottieCorrect = true;
         playPunch();
       }
     }
+    lottieCorrect = false;
 
     if(jar == 15) {
       SchedulerBinding.instance!.addPostFrameCallback((_) {
@@ -240,7 +246,7 @@ class _BoxingState extends State<Boxing> {
               ),
               SizedBox(height: 40),
               FutureBuilder(
-              future: Future.delayed(Duration(milliseconds: Random().nextInt(1500) + 900)),
+              future: Future.delayed(Duration(milliseconds: Random().nextInt(800) + 500)),
                 builder: (c, s) {
                   if(s.connectionState == ConnectionState.done) {
                     var ran = Random().nextInt(2);
@@ -344,28 +350,29 @@ class _BoxingClearState extends State<BoxingClear> {
   double avg = 0;
 
   @override
-  void dispose(){
-    super.dispose();
-  }
+  void initState() {
+    super.initState();
 
-  Future<void> addScore() async{
     FirebaseFirestore.instance
         .collection('user')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((doc) {
       setState(() {
-        print('boxing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-        print(doc.get('boxing'));
-        print('score~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-        print(widget.score);
         dino = doc.get('dino');
         boxing = doc.get('boxing');
         jumpingJack = doc.get('jumpingJack');
         crossJack = doc.get('crossJack');
       });
     });
+  }
 
+  @override
+  void dispose(){
+    super.dispose();
+  }
+
+  Future<void> addScore() async{
     if(widget.score > boxing) {
       avg = (dino + widget.score + jumpingJack + crossJack)/4;
 

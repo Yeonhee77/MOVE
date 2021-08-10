@@ -196,6 +196,7 @@ flutter:
     - image1.png
     - image2.png
     - assets/posenet_mv1_075_float_from_checkpoints.tflite
+    - splash.json
 
 
   # To add assets to your application, add an assets section, like this:
