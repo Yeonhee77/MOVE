@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:move/front/game.dart';
 import 'package:move/front/training.dart';
-import 'package:move/reabilitation/pushed_pageY.dart';
 import 'dance.dart';
 
 class Select extends StatefulWidget {
