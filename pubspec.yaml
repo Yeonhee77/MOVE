@@ -129,7 +129,6 @@ flutter:
     - down.png
     - left.png
     - right.png
-    - assets/audios/BBaBBaBBa.mp3
     - up(motion).png
     - down(motion).png
     - left(motion).png
