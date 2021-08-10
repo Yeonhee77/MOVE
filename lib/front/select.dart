@@ -105,13 +105,13 @@ class _SelectState extends State<Select> {
                   child: TextButton(
                     onPressed: () {
                       // Navigator.push(context, MaterialPageRoute(builder: (context) => Game(bluetoothServices: widget.bluetoothServices)));
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => PushedPageY(
-                          cameras: widget.cameras!,
-                          title: 'posenet',
-                        ),
-                      ),
-                      );
+                      // Navigator.push(context, MaterialPageRoute(
+                      //   builder: (context) => PushedPageY(
+                      //     cameras: widget.cameras!,
+                      //     title: 'posenet',
+                      //   ),
+                      // ),
+                      //);
                     },
                     child: Image.asset('reabButton.png', width: MediaQuery.of(context).size.width*0.7,)
                   ),

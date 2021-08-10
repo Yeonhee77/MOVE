@@ -8,6 +8,8 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:just_audio/just_audio.dart';
 import 'dart:math';
 
+import 'package:lottie/lottie.dart';
+
 class BoxingStart extends StatefulWidget {
   final List<BluetoothService>? bluetoothServices;
   BoxingStart({this.bluetoothServices});
@@ -19,7 +21,7 @@ class BoxingStart extends StatefulWidget {
 class _BoxingStartState extends State<BoxingStart> {
   final Map<Guid, List<int>> readValues = new Map<Guid, List<int>>();
   final Stream<int> stream = Stream.periodic(Duration(milliseconds: 1500),  (int x) => x);
-  final Stream<int> stream2 = Stream.periodic(Duration(milliseconds: 1500),  (int x) => x);
+  var timeRan = Random().nextInt(1500) + 900;
 
   String gesture = "";
   // ignore: non_constant_identifier_names
@@ -121,6 +123,7 @@ class _BoxingState extends State<Boxing> {
   int count = -1;
   int correct = 0;
   int jar = 0;
+  bool lottieCorrect = false;
 
   // Sound
   late AudioPlayer punchSound = AudioPlayer();
@@ -190,6 +193,7 @@ class _BoxingState extends State<Boxing> {
         gesture_num = 0;
         correct += 1;
         jar++;
+        lottieCorrect = true;
         playPunch();
       }
     }else if(ran_gesture == 'Uppercut') {
@@ -197,9 +201,11 @@ class _BoxingState extends State<Boxing> {
         gesture_num = 0;
         correct += 1;
         jar++;
+        lottieCorrect = true;
         playPunch();
       }
     }
+    lottieCorrect = false;
 
     if(jar == 15) {
       SchedulerBinding.instance!.addPostFrameCallback((_) {
@@ -239,15 +245,20 @@ class _BoxingState extends State<Boxing> {
                   child: _buildConnectDeviceView()
               ),
               SizedBox(height: 40),
-              StreamBuilder<int>(
-                  stream: stream,
-                  builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+              FutureBuilder(
+              future: Future.delayed(Duration(milliseconds: Random().nextInt(800) + 500)),
+                builder: (c, s) {
+                  if(s.connectionState == ConnectionState.done) {
                     var ran = Random().nextInt(2);
                     ran_gesture = random[ran];
                     return Image.asset(image[ran]);
                   }
+                  return Container(
+                    height: MediaQuery.of(context).size.height*0.193,
+                  );
+                },
               ),
-              // SizedBox(height: 20),
+              SizedBox(height: 20),
               Container(
                 width: MediaQuery.of(context).size.width*0.45,
                 height: MediaQuery.of(context).size.height*0.3 + 4,
@@ -339,26 +350,29 @@ class _BoxingClearState extends State<BoxingClear> {
   double avg = 0;
 
   @override
-  void dispose(){
-    super.dispose();
-  }
+  void initState() {
+    super.initState();
 
-  Future<void> addScore() async{
     FirebaseFirestore.instance
         .collection('user')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((doc) {
       setState(() {
-        print('boxing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-        print(doc.get('boxing'));
         dino = doc.get('dino');
         boxing = doc.get('boxing');
         jumpingJack = doc.get('jumpingJack');
         crossJack = doc.get('crossJack');
       });
     });
+  }
 
+  @override
+  void dispose(){
+    super.dispose();
+  }
+
+  Future<void> addScore() async{
     if(widget.score > boxing) {
       avg = (dino + widget.score + jumpingJack + crossJack)/4;
 

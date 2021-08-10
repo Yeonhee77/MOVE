@@ -39,7 +39,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   num crossJack = 0;
   num final_score = 0;
   num temp = 0;
-  double avg = 0;
+  num avg = 0;
 
   // state
   late TRexGameStatus status = TRexGameStatus.waiting;
@@ -126,24 +126,24 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((doc) {
-      if(mounted) {
-        setState(() {
-          dino = doc.get('dino');
-          print(doc.get('dino'));
-          print('DINO SCORE - ' + dino.toString());
-          boxing = doc.get('boxing');
-          jumpingJack = doc.get('jumpingJack');
-          crossJack = doc.get('crossJack');
-        });
+          if(mounted) {
+            setState(() {
+              dino = doc.get('dino');
+              print(doc.get('dino'));
+              print('DINO SCORE - ' + dino.toString());
+              boxing = doc.get('boxing');
+              jumpingJack = doc.get('jumpingJack');
+              crossJack = doc.get('crossJack');
+            });
 
-        if(score > dino) {
-          avg = (score + boxing + jumpingJack + crossJack)/4;
-          print('score = $score');
-          print('dino = $dino');
+            if(score > dino) {
+              avg = (score + boxing + jumpingJack + crossJack)/4;
+              print('score = $score');
+              print('dino = $dino');
 
-          updateScore();
-        }
-      }
+              updateScore();
+            }
+          }
     });
 
   }

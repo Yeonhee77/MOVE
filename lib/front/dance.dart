@@ -69,11 +69,23 @@ class _DanceState extends State<Dance> {
                 Flexible(
                   child: TextButton(
                     onPressed: () {
-                      if (widget.bluetoothServices != null)
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) =>
-                                Bba(bluetoothServices: widget
-                                    .bluetoothServices)));
+                      AlertDialog(
+                        title: new Text("Note!"),
+                        content: new Text("This feature will be updated soon :)"),
+                        actions: <Widget>[
+                          new ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: new Text("Close"),
+                          ),
+                        ],
+                      );
+                      // if (widget.bluetoothServices != null)
+                      //   Navigator.push(context, MaterialPageRoute(
+                      //       builder: (context) =>
+                      //           Bba(bluetoothServices: widget
+                      //               .bluetoothServices)));
                     },
                     child: Image.asset('papapa.png', width: MediaQuery
                         .of(context)
@@ -85,11 +97,11 @@ class _DanceState extends State<Dance> {
                 Flexible(
                   child: TextButton(
                     onPressed: () {
-                      if (widget.bluetoothServices != null)
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) =>
-                                BoxingStart(bluetoothServices: widget
-                                    .bluetoothServices)));
+                      // if (widget.bluetoothServices != null)
+                      //   Navigator.push(context, MaterialPageRoute(
+                      //       builder: (context) =>
+                      //           BoxingStart(bluetoothServices: widget
+                      //               .bluetoothServices)));
                     },
                     child: Image.asset('rollin.png', width: MediaQuery
                         .of(context)

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bluetooth_test">
    <application
-        android:label="Move!"
+        android:label="MOVE!"
         android:icon="@mipmap/move_icon">
         <activity
             android:name=".MainActivity"
