@@ -150,7 +150,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                               ];
                             }
                             else {
-                              if (count >= set*4) {
+                              if (correct >= set*4) {
                                 score = ((correct/count)*100);
                                 wrong = count -correct;
                                 tutorial = <Widget>[
@@ -170,7 +170,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                           Image.asset('finish1.png'),
                                         ],
                                       ),
-                                      ],
+                                    ],
                                   ),
 
                                   Text("Score: " + score.toStringAsFixed(0), style: TextStyle(fontSize: 40,color: Colors.white),),
@@ -271,7 +271,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                               Column(
                                                 children: [
                                                   SizedBox(height: 33,width: 150,),
-                                                  Text((count/4).toStringAsFixed(0),style: TextStyle(color: Colors.white, fontSize: 30,fontWeight: FontWeight.bold),),
+                                                  Text((correct/4).toStringAsFixed(0),style: TextStyle(color: Colors.white, fontSize: 30,fontWeight: FontWeight.bold),),
                                                 ],
                                               ),
                                             ],
@@ -281,9 +281,9 @@ class _JumpingstartState extends State<Jumpingstart> {
                                               SizedBox(height: 30),
                                               Row(
                                                 children: [
-                                                      Text(" / ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30, color: Colors.white),),
-                                                      Text(set.toString(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30, color: Colors.white),),
-                                                    ],
+                                                  Text(" / ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30, color: Colors.white),),
+                                                  Text(set.toString(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30, color: Colors.white),),
+                                                ],
                                               ),
                                             ],
                                           )
@@ -295,7 +295,7 @@ class _JumpingstartState extends State<Jumpingstart> {
                                       Image.asset('jumping.gif', height: 400,
                                         width: 300,),),
                                       //Text("값: " + gesture_num.toString(),style: TextStyle(color: Colors.white),),
-                                      Text("Done: " + (correct/4).toStringAsFixed(0),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold, fontSize: 20),),
+                                      Text("Done: " + (count/4).toStringAsFixed(0),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold, fontSize: 20),),
                                       //Text("Achievement rate: " + ((count/(set*4))*100).toStringAsFixed(0) + '%',style: TextStyle(color: Colors.white),),
                                     ];
                                     break;
@@ -328,11 +328,11 @@ class _JumpingstartState extends State<Jumpingstart> {
         gesture_num2 = int.parse(gesture[1]);
       });
     },);
-    if(gesture_num == 2) {
+    if(gesture_num == 1) {
       flag = true;
       correct = correct +1;
     }
-    else if(gesture_num == 1) {
+    else if(gesture_num == 2) {
       flag = false;
     }
     if(gesture_num2 == 1 || gesture_num2 == 2) {
