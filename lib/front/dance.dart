@@ -68,25 +68,19 @@ class _DanceState extends State<Dance> {
                 SizedBox(height: 30,),
                 Flexible(
                   child: TextButton(
-                    onPressed: () {
-                      AlertDialog(
-                        title: new Text("Note!"),
-                        content: new Text("This feature will be updated soon :)"),
+                    onPressed: () => showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Note!'),
+                        content: const Text('This feature will be updated soon :)'),
                         actions: <Widget>[
-                          new ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: new Text("Close"),
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text('OK'),
                           ),
                         ],
-                      );
-                      // if (widget.bluetoothServices != null)
-                      //   Navigator.push(context, MaterialPageRoute(
-                      //       builder: (context) =>
-                      //           Bba(bluetoothServices: widget
-                      //               .bluetoothServices)));
-                    },
+                      ),
+                    ),
                     child: Image.asset('papapa.png', width: MediaQuery
                         .of(context)
                         .size
