@@ -1,11 +1,8 @@
 /* Copyright 2021 Google LLC
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
     https://www.apache.org/licenses/LICENSE-2.0
-
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,8 +36,8 @@ limitations under the License.
 #include "model.h"
 
 // Values from Tiny Motion Trainer
-#define MOTION_THRESHOLD 0.2
-#define CAPTURE_DELAY 500 // This is now in milliseconds
+#define MOTION_THRESHOLD 0.25
+#define CAPTURE_DELAY 100 // This is now in milliseconds
 #define NUM_SAMPLES 10
 
 // Array to map gesture index to a name
@@ -89,16 +86,16 @@ byte tensorArena[tensorArenaSize];
 ************************************************************************/
 bool useMagnetometer = false; // Can be toggled with BLE (disableMagnetometerRx)
 
-void LedRed()  //BLE disconnecte
+void LedRed()  //BLE disconnected
 {
-  digitalWrite(LEDR, LOW);
-  digitalWrite(LEDB, HIGH);
+  digitalWrite(LEDR, LOW);  
+  digitalWrite(LEDB, HIGH); 
 }
 
 void LedBlue()   //BLE connected
 {
-  digitalWrite(LEDR, HIGH);
-  digitalWrite(LEDB, LOW);
+  digitalWrite(LEDR, HIGH); //digital pin on
+  digitalWrite(LEDB, LOW);  //digital pin off
 }
 
 /************************************************************************

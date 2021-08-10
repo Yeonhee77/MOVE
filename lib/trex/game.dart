@@ -45,9 +45,8 @@ class TRexGame extends BaseGame with TapDetector {
   ui.Color backgroundColor() => const ui.Color.fromARGB(250, 255, 255, 255);
 
   final ui.Image spriteImage;
-
   late AudioPlayer player;
-
+  //var scoreList = new List.filled(50, 0, growable: true);
 
   /// children
   late final tRex = TRex();
@@ -89,7 +88,6 @@ class TRexGame extends BaseGame with TapDetector {
   bool get gameOver => status == TRexGameStatus.gameOver;
 
   var result;
-  late int final_score = 0;
   late int temp = 0;
 
   //bluetooth services
@@ -108,25 +106,33 @@ class TRexGame extends BaseGame with TapDetector {
   }
 
   void onAction(int gesture_num) {
-    if (gameOver && gesture_num == 1) {
-      restart();
-    }
+    // if (gameOver && gesture_num == 1) {
+    //   //insertScore();
+    //   restart();
+    // }
 
     if(gesture_num == 1 && !gameOver) {
-      this.score += 1;
       soundPlay();
+      this.score += 1;
       tRex.startJump(currentSpeed);
     }
   }
 
+  // void insertScore() {
+  //   scoreList.add(this.score);
+  //   print('score : ');
+  //   print(this.score);
+  //   print('score list : ');
+  //   print(scoreList);
+  // }
+
   int returnScore() {
-    this.final_score = this.score;
     return this.score;
   }
 
   int getFinalScore() {
     if (gameOver)
-      return this.final_score;
+      return this.score;
     else
       return -1;
   }
@@ -144,7 +150,6 @@ class TRexGame extends BaseGame with TapDetector {
     tRex.status = TRexStatus.crashed;
     currentSpeed = 0.0;
     this.score = 0;
-    this.final_score = 0;
   }
 
   void restart() {
@@ -154,7 +159,9 @@ class TRexGame extends BaseGame with TapDetector {
     currentSpeed = config.speed;
     gameOverPanel.visible = false;
     timePlaying = 0.0;
+    this.score = 0;
   }
+
 
   @override
   void update(double dt) {

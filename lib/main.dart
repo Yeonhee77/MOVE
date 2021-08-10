@@ -2,18 +2,29 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
 import '/front/login.dart';
+
+List<CameraDescription>? cameras;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    print('Error: $e.code\nError Message: $e.message');
+  }
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
-    debugShowCheckedModeBanner: false,
+    debugShowCheckedModeBanner : false,
     theme: ThemeData(
       primarySwatch: Colors.deepPurple,
     ),
@@ -40,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     _controller!.forward();
     super.initState();
     Timer(Duration(seconds: 3),
-            ()=> Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login())));
+            ()=> Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login(cameras!))));
   }
 
   @override

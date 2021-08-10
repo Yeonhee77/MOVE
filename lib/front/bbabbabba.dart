@@ -36,24 +36,25 @@ class _BbaState extends State<Bba> {
   int count = 0;
   bool flag = false;
 
-  late AudioPlayer player = AudioPlayer();
+  // late AudioPlayer player = AudioPlayer();
 
-  Future<void> soundPlaybgm() async {
-    await player.setAsset('assets/audios/BBaBBaBBa.mp3');
-    player.play();
-  }
+  // Future<void> soundPlaybgm() async {
+  //   await player.setAsset('assets/audios/BBaBBaBBa.mp3');
+  //   player.setLoopMode(LoopMode.one);
+  //   player.play();
+  // }
 
   @override
   void initState() {
     super.initState();
-    soundPlaybgm();
+    // soundPlaybgm();
     // player = AudioPlayer();
   }
 
 
   @override
   void dispose(){
-    player.dispose();
+    // player.dispose();
     super.dispose();
   }
 

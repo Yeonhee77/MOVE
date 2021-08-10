@@ -71,7 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ListView _buildListViewOfDevices() {
     // ignore: deprecated_member_use
-
     List<Container> containers = [];
     for (BluetoothDevice device in devicesList) {
       containers.add(
@@ -190,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Widget _buildView() {
+   Widget _buildView() {
     if (connectedDevice != null) {
       _bleServices();
       SchedulerBinding.instance!.addPostFrameCallback((_) {
@@ -200,8 +199,8 @@ class _MyHomePageState extends State<MyHomePage> {
         Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(bluetoothServices: bluetoothServices)));
       });
     }
-    return _buildListViewOfDevices();
-  }
+     return _buildListViewOfDevices();
+   }
 
   @override
   Widget build(BuildContext context) => Scaffold(

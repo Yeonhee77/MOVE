@@ -39,7 +39,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   num crossJack = 0;
   num final_score = 0;
   num temp = 0;
-  double avg = 0;
+  num avg = 0;
 
   // state
   late TRexGameStatus status = TRexGameStatus.waiting;
@@ -126,25 +126,36 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((doc) {
-      setState(() {
-        dino = doc.get('dino');
-        boxing = doc.get('boxing');
-        jumpingJack = doc.get('jumpingJack');
-        crossJack = doc.get('crossJack');
-      });
+          if(mounted) {
+            setState(() {
+              dino = doc.get('dino');
+              print(doc.get('dino'));
+              print('DINO SCORE - ' + dino.toString());
+              boxing = doc.get('boxing');
+              jumpingJack = doc.get('jumpingJack');
+              crossJack = doc.get('crossJack');
+            });
+
+            if(score > dino) {
+              avg = (score + boxing + jumpingJack + crossJack)/4;
+              print('score = $score');
+              print('dino = $dino');
+
+              updateScore();
+            }
+          }
     });
 
-    if(final_score > dino) {
-      avg = (final_score + boxing + jumpingJack + crossJack)/4;
+  }
 
-      FirebaseFirestore.instance
-          .collection('user')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .update({
-        'dino': final_score - 1,
-        'avg': double.parse(avg.toStringAsFixed(2)),
-      });
-    }
+  Future<void> updateScore() {
+    return FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({
+      'dino': score,
+      'avg': double.parse(avg.toStringAsFixed(2)),
+    });
   }
 
   Widget scoreBox(BuildContext buildContext, TRexGame game) {
@@ -169,6 +180,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
           Flexible(
             child: TextButton(
               onPressed: () {
+                addScore();
                 Navigator.pop(context);
                 Navigator.pop(context);
               },
@@ -179,19 +191,34 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
       ),);
   }
 
+  Widget restartBox(BuildContext buildContext, TRexGame game) {
+    return Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            height: 90,
+            child: Flexible(
+              child: TextButton(
+                onPressed: () {
+                  addScore();
+                  //score = 0;
+                  game.restart();
+                },
+                child: Image.asset('dino_Restart.png', height: 30,),
+              ),
+            ),
+          ),
+        ],
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
     _gesture();
-
-    score = game!.returnScore();
-    final_score = game!.getFinalScore();
-
-    if(final_score != -1) {
-      print('Fi score : $final_score');
-      addScore();
-    }
-
     game!.onAction(gesture_num);
+    score = game!.returnScore();
+    //final_score = game!.getFinalScore();
 
     if (game == null) {
       return const Center(
@@ -206,8 +233,9 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
           overlayBuilderMap: {
             'Score' : scoreBox,
             'Exit' : exitBox,
+            'Restart' : restartBox,
           },
-          initialActiveOverlays: ['Score', 'Exit'],
+          initialActiveOverlays: ['Score', 'Exit', 'Restart'],
         ),
       );
   }

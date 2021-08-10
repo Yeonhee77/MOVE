@@ -44,6 +44,10 @@ class _GameState extends State<Game> {
         title: Text('Game', style: TextStyle(color: Colors.white),),
         centerTitle: true,
         elevation: 0.0,
+        leading: BackButton(
+          color: Colors.white,
+          onPressed: () {Navigator.pop(context);},
+        ),
         backgroundColor: Colors.transparent,
       ),
       body: LayoutBuilder(builder: (context, constraints) {
@@ -116,6 +120,56 @@ class _GameState extends State<Game> {
                          Navigator.push(context, MaterialPageRoute(builder: (context) => FishingStart(bluetoothServices: widget.bluetoothServices)));
                     },
                     child: Image.asset('fishing.png', width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.9,),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // if(widget.bluetoothServices != null)
+                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
+                    },
+                    child: Image.asset('badminton.png', width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.9,),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // if(widget.bluetoothServices != null)
+                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
+                    },
+                    child: Image.asset('jumprope.png', width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.9,),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // if(widget.bluetoothServices != null)
+                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
+                    },
+                    child: Image.asset('kick.png', width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.9,),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // if(widget.bluetoothServices != null)
+                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
+                    },
+                    child: Image.asset('taekwondo.png', width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.9,),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // if(widget.bluetoothServices != null)
+                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => BoxingStart(bluetoothServices: widget.bluetoothServices)));
+                    },
+                    child: Image.asset('tabletennis.png', width: MediaQuery
                         .of(context)
                         .size
                         .width * 0.9,),
